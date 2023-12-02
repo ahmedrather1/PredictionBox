@@ -1,5 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import KnnPage from "./KnnPage";
+import "bootstrap/dist/css/bootstrap.min.css";
+
 function App() {
   return (
     <Router>
