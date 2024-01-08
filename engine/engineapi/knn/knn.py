@@ -39,12 +39,22 @@ def basicknn():
 
     return (x_range_to_return.tolist(), y_pred.tolist())
 
-def customknn(file):
+def customknn(file, predictor, response):
 
     df = pd.read_csv(file)
-    X = df[['sepal.length']]
-    y = df['sepal.width']
 
+    try:
+        X = df[[predictor]]
+    except KeyError:
+        raise KeyError("Predictor doesn't exist!")
+
+    try:
+        y = df[[response]]
+    except KeyError:
+        raise KeyError("Response doesnt exist!")
+    
+    
+   
 
     kf = KFold(n_splits=5, shuffle=True, random_state=42)
     k_range = range(1, 31)
