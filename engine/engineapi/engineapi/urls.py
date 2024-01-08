@@ -16,7 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from api.views import callknn
+from api.views import callbasicknn
+from api.views import callcustomknn
 urlpatterns = [
-    path('call-knn/', callknn),
+    path('call-knn/', callbasicknn),
+    path('call-custom-knn/', callcustomknn),
 ]
