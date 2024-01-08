@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import GraphComponent from "./GraphComponent";
+import GraphComponent from "../common/GraphComponent";
+import PredictorResponseSelector from "../common/components/PredictorResponseSelector";
 import { Navbar, Container, Nav } from "react-bootstrap";
 import styled from "styled-components";
 import Papa from "papaparse";
@@ -69,17 +70,28 @@ function CustomKnnPage() {
   const [xrange, setXrange] = useState(null);
   const [ypred, setYpred] = useState(null);
 
-  // useEffect(() => {
-  //   fetch("http://127.0.0.1:8000/call-custom-knn/", {
-  //     method: "POST",
-  //   })
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       setYpred(data.ypred);
-  //       setXrange(data.xrange);
-  //     })
-  //     .catch((error) => console.error("Error fetching data:", error));
-  // }, []);
+  const [predictor, setPredictor] = useState(null);
+  const [response, setResponse] = useState(null);
+
+  useEffect(() => {
+    if (predictor && response) {
+      const formData = new FormData();
+      formData.append("csv-file", file);
+      formData.append("predictor", predictor);
+      formData.append("response", response);
+
+      fetch("http://127.0.0.1:8000/call-custom-knn/", {
+        method: "POST",
+        body: formData,
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          setYpred(data.ypred);
+          setXrange(data.xrange);
+        })
+        .catch((error) => console.error("Error fetching data:", error));
+    }
+  }, [predictor, response]);
 
   useEffect(() => {
     if (file) {
@@ -95,12 +107,6 @@ function CustomKnnPage() {
       setColumns(cols);
     }
   }, [fileData]);
-
-  // useEffect(() => {
-  //   if (columns) {
-
-  //   }
-  // }, [columns])
 
   const parseFile = async () => {
     await Papa.parse(file, {
@@ -120,13 +126,24 @@ function CustomKnnPage() {
     }
   };
 
+  const handleDataFromForm = (data) => {
+    console.log("fromparent", data);
+    setPredictor(data.predictor);
+    setResponse(data.response);
+  };
+
   const renderContent = () => {
     if (!file) {
       return <input type="file" onChange={handleFileChange} />;
     }
 
     if (columns) {
-      return <h1>{columns}</h1>;
+      return (
+        <PredictorResponseSelector
+          columns={columns}
+          sendDataToParent={handleDataFromForm}
+        />
+      );
     }
 
     if (xrange && ypred) {

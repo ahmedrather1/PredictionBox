@@ -25,7 +25,6 @@ def callcustomknn(request):
     except KeyError as e:
         errorMessage = str(e)
         return JsonResponse({'error': errorMessage}, status=400)
-    
     xrange = pred[0]
     ypred = pred[1]
     return JsonResponse({'xrange': xrange,'ypred': ypred})
