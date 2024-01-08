@@ -62,22 +62,24 @@ function Header() {
 
 // CustomKnnPage Component
 function CustomKnnPage() {
-  const [columns, setColumns] = useState([]);
+  const [columns, setColumns] = useState(null);
   const [file, setFile] = useState(null);
+  const [fileData, setFileData] = useState(null);
+
   const [xrange, setXrange] = useState(null);
   const [ypred, setYpred] = useState(null);
 
-  useEffect(() => {
-    fetch("http://127.0.0.1:8000/call-custom-knn/", {
-      method: "POST",
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setYpred(data.ypred);
-        setXrange(data.xrange);
-      })
-      .catch((error) => console.error("Error fetching data:", error));
-  }, []);
+  // useEffect(() => {
+  //   fetch("http://127.0.0.1:8000/call-custom-knn/", {
+  //     method: "POST",
+  //   })
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       setYpred(data.ypred);
+  //       setXrange(data.xrange);
+  //     })
+  //     .catch((error) => console.error("Error fetching data:", error));
+  // }, []);
 
   useEffect(() => {
     if (file) {
@@ -86,12 +88,27 @@ function CustomKnnPage() {
     }
   }, [file]);
 
+  useEffect(() => {
+    if (fileData) {
+      let sample = fileData[0];
+      let cols = Object.keys(sample);
+      setColumns(cols);
+    }
+  }, [fileData]);
+
+  // useEffect(() => {
+  //   if (columns) {
+
+  //   }
+  // }, [columns])
+
   const parseFile = async () => {
     await Papa.parse(file, {
       header: true,
       skipEmptyLines: true,
       complete: function (results) {
         console.log(results.data);
+        setFileData(results.data);
       },
     });
   };
@@ -106,6 +123,10 @@ function CustomKnnPage() {
   const renderContent = () => {
     if (!file) {
       return <input type="file" onChange={handleFileChange} />;
+    }
+
+    if (columns) {
+      return <h1>{columns}</h1>;
     }
 
     if (xrange && ypred) {
