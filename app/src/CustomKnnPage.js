@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import GraphComponent from "./GraphComponent";
 import { Navbar, Container, Nav } from "react-bootstrap";
 import styled from "styled-components";
+import Papa from "papaparse";
 
 const PageContainer = styled.div`
   display: flex;
@@ -61,6 +62,7 @@ function Header() {
 
 // CustomKnnPage Component
 function CustomKnnPage() {
+  const [columns, setColumns] = useState([]);
   const [file, setFile] = useState(null);
   const [xrange, setXrange] = useState(null);
   const [ypred, setYpred] = useState(null);
@@ -79,16 +81,26 @@ function CustomKnnPage() {
 
   useEffect(() => {
     if (file) {
-      // Handle file processing or upload here
+      parseFile();
       console.log("File ready for processing: ", file);
-      // TODO: Implement the logic to process or save the file
     }
   }, [file]);
 
-  const handleFileChange = (event) => {
-    // This will grab the first file
-    const uploadedFile = event.target.files[0];
-    setFile(uploadedFile);
+  const parseFile = async () => {
+    await Papa.parse(file, {
+      header: true,
+      skipEmptyLines: true,
+      complete: function (results) {
+        console.log(results.data);
+      },
+    });
+  };
+
+  const handleFileChange = async (event) => {
+    if (!file) {
+      const uploadedFile = event.target.files[0];
+      setFile(uploadedFile);
+    }
   };
 
   const renderContent = () => {
