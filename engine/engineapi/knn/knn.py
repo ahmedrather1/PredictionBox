@@ -39,11 +39,9 @@ def basicknn():
 
     return (x_range_to_return.tolist(), y_pred.tolist())
 
-def customknn():
+def customknn(file):
 
-    # Load Iris dataset
-    file_path = os.path.join(settings.KNN_DATASET_PATH, 'iris.csv')
-    df = pd.read_csv(file_path)
+    df = pd.read_csv(file)
     X = df[['sepal.length']]
     y = df['sepal.width']
 
