@@ -15,7 +15,10 @@ const ChartComponent = ({ bestPrediction }) => {
     headers.forEach((header, i) => {
       if (header === "Scatter") {
         console.log("got here");
-        genSeries[i - 1] = chartDataSets.scatter.options;
+        genSeries[i - 1] = {
+          ...chartDataSets.scatter.options,
+          type: "scatter",
+        };
       } else if (header === "Best Prediction") {
         genSeries[i - 1] = chartDataSets.bestPrediction.options;
       } else if (header === "Custom Prediction") {
@@ -51,7 +54,7 @@ const ChartComponent = ({ bestPrediction }) => {
     scatter: {
       type: "scatter",
       options: {
-        pointSize: 5,
+        pointSize: 1,
         color: "blue",
         visibleInLegend: showScatterPlot,
       },
