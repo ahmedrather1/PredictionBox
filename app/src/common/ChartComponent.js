@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Chart } from "react-google-charts";
 import { ToggleButton } from "react-bootstrap";
 
-const ChartComponent = ({ bestPrediction }) => {
+const ChartComponent = ({ bestPrediction, originalData }) => {
   // State for toggling the visibility
   const [showScatterPlot, setShowScatterPlot] = useState(true);
   const [showBestPrediction, setShowBestPrediction] = useState(true);
-  const [showCustomPrediction, setShowCustomPrediction] = useState(true);
+  const [showCustomPrediction, setShowCustomPrediction] = useState(false);
   const [combinedData, setCombinedData] = useState(null);
   const [customSeries, setCustomSeries] = useState(null);
 
@@ -43,7 +43,7 @@ const ChartComponent = ({ bestPrediction }) => {
     setCombinedData(updatedCombinedData);
   }, [showScatterPlot, showBestPrediction, showCustomPrediction]); // Re-run when toggles change
 
-  const scatterData = bestPrediction;
+  const scatterData = originalData;
 
   const bestPredictionData = bestPrediction;
 
@@ -103,6 +103,15 @@ const ChartComponent = ({ bestPrediction }) => {
       ...bestPredictionData.map((item) => item[0]),
       ...customPredictionData.map((item) => item[0]),
     ]);
+    console.log(
+      "SCATTER XVALS",
+      scatterData.map((item) => item[0])
+    );
+    console.log(
+      "BEST PREDICTION XVALS",
+      bestPredictionData.map((item) => item[0])
+    );
+
     console.log("allXValues", allXValues);
     // Convert the Set to an array and sort it
     const sortedXValues = Array.from(allXValues).sort((a, b) => a - b);
@@ -120,6 +129,10 @@ const ChartComponent = ({ bestPrediction }) => {
         );
       data.push(row);
     });
+
+    // if (showScatterPlot) {
+    //   let row = [x];
+    // }
 
     return data;
   };

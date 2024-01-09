@@ -70,6 +70,7 @@ function CustomKnnPage() {
 
   const [xrange, setXrange] = useState(null);
   const [ypred, setYpred] = useState(null);
+  const [originalData, setOriginalData] = useState(null);
 
   const [predictor, setPredictor] = useState(null);
   const [response, setResponse] = useState(null);
@@ -91,6 +92,7 @@ function CustomKnnPage() {
         .then((data) => {
           setYpred(data.ypred.map((element) => element[0]));
           setXrange(data.xrange);
+          setOriginalData(data.originalData);
         })
         .catch((error) => console.error("Error fetching data:", error));
     }
@@ -154,11 +156,14 @@ function CustomKnnPage() {
       return <input type="file" onChange={handleFileChange} />;
     }
 
-    if (bestPrediction) {
+    if (bestPrediction && originalData) {
       console.log("rendering bestPrediction");
       return (
         <GraphContainer>
-          <ChartComponent bestPrediction={bestPrediction} />
+          <ChartComponent
+            bestPrediction={bestPrediction}
+            originalData={originalData}
+          />
         </GraphContainer>
       );
     }

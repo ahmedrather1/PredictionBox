@@ -53,6 +53,20 @@ def customknn(file, predictor, response):
     except KeyError:
         raise KeyError("Response doesnt exist!")
     
+    print(y.to_numpy().transpose())
+    Xarr = X.to_numpy().transpose()[0]
+    yarr = y.to_numpy().transpose()[0]
+
+    # print("-------------------")
+    # print(Xarr)
+    # print("-------------------")
+
+    # print(yarr)
+    # print("-------------------")
+
+    original_data = np.vstack((Xarr, yarr)).T
+    # print(original_data)
+    
     
    
 
@@ -76,7 +90,8 @@ def customknn(file, predictor, response):
     x_range_to_return = np.linspace(min_value, max_value, 500) 
     y_pred = knn_final.predict(x_range)
 
+    # TODO process data here instead of frontend
 
-    return (x_range_to_return.tolist(), y_pred.tolist())
+    return (x_range_to_return.tolist(), y_pred.tolist(), original_data.tolist())
 
       

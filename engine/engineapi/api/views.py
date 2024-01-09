@@ -27,7 +27,8 @@ def callcustomknn(request):
         return JsonResponse({'error': errorMessage}, status=400)
     xrange = pred[0]
     ypred = pred[1]
-    return JsonResponse({'xrange': xrange,'ypred': ypred})
+    originalData = pred[2]
+    return JsonResponse({'xrange': xrange,'ypred': ypred, 'originalData': originalData})
 
 
 
