@@ -103,7 +103,13 @@ function CustomKnnPage() {
   useEffect(() => {
     if (fileData) {
       let sample = fileData[0];
-      let cols = Object.keys(sample);
+      let colsRaw = Object.keys(sample);
+      let cols = [];
+      colsRaw.forEach((col) => {
+        if (!isNaN(sample[col])) {
+          cols.push(col);
+        }
+      });
       setColumns(cols);
     }
   }, [fileData]);
@@ -137,20 +143,22 @@ function CustomKnnPage() {
       return <input type="file" onChange={handleFileChange} />;
     }
 
+    if (xrange && ypred) {
+      console.log("rendering graph");
+      console.log(xrange);
+      return (
+        <GraphContainer>
+          <GraphComponent xValues={xrange} yValues={ypred} />
+        </GraphContainer>
+      );
+    }
+
     if (columns) {
       return (
         <PredictorResponseSelector
           columns={columns}
           sendDataToParent={handleDataFromForm}
         />
-      );
-    }
-
-    if (xrange && ypred) {
-      return (
-        <GraphContainer>
-          <GraphComponent xValues={xrange} yValues={ypred} />
-        </GraphContainer>
       );
     }
 
