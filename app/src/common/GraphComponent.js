@@ -21,7 +21,7 @@ function GraphComponent({ xValues, yValues }) {
     datasets: [
       {
         label: "Prediction",
-        data: yValues,
+        data: yValues.map((element) => element[0]),
         fill: false,
         backgroundColor: "red",
         borderColor: "red",

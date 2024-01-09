@@ -70,8 +70,8 @@ def customknn(file, predictor, response):
 
     knn_final = KNeighborsRegressor(n_neighbors=best_k)
     knn_final.fit(X, y)
-    min_value = X['sepal.length'].min()  # Extract the scalar minimum value
-    max_value = X['sepal.length'].max()  
+    min_value = X[predictor].min()  # Extract the scalar minimum value
+    max_value = X[predictor].max()  
     x_range = np.linspace(X.min(), X.max(), 500)  # 500 points for a smooth curve
     x_range_to_return = np.linspace(min_value, max_value, 500) 
     y_pred = knn_final.predict(x_range)

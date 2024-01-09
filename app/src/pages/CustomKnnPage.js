@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import GraphComponent from "./GraphComponent";
+import GraphComponent from "../common/GraphComponent";
+import PredictorResponseSelector from "../common/components/PredictorResponseSelector";
 import { Navbar, Container, Nav } from "react-bootstrap";
 import styled from "styled-components";
 import Papa from "papaparse";
@@ -62,22 +63,35 @@ function Header() {
 
 // CustomKnnPage Component
 function CustomKnnPage() {
-  const [columns, setColumns] = useState([]);
+  const [columns, setColumns] = useState(null);
   const [file, setFile] = useState(null);
+  const [fileData, setFileData] = useState(null);
+
   const [xrange, setXrange] = useState(null);
   const [ypred, setYpred] = useState(null);
 
+  const [predictor, setPredictor] = useState(null);
+  const [response, setResponse] = useState(null);
+
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/call-custom-knn/", {
-      method: "POST",
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setYpred(data.ypred);
-        setXrange(data.xrange);
+    if (predictor && response) {
+      const formData = new FormData();
+      formData.append("csv-file", file);
+      formData.append("predictor", predictor);
+      formData.append("response", response);
+
+      fetch("http://127.0.0.1:8000/call-custom-knn/", {
+        method: "POST",
+        body: formData,
       })
-      .catch((error) => console.error("Error fetching data:", error));
-  }, []);
+        .then((response) => response.json())
+        .then((data) => {
+          setYpred(data.ypred);
+          setXrange(data.xrange);
+        })
+        .catch((error) => console.error("Error fetching data:", error));
+    }
+  }, [predictor, response]);
 
   useEffect(() => {
     if (file) {
@@ -86,12 +100,27 @@ function CustomKnnPage() {
     }
   }, [file]);
 
+  useEffect(() => {
+    if (fileData) {
+      let sample = fileData[0];
+      let colsRaw = Object.keys(sample);
+      let cols = [];
+      colsRaw.forEach((col) => {
+        if (!isNaN(sample[col])) {
+          cols.push(col);
+        }
+      });
+      setColumns(cols);
+    }
+  }, [fileData]);
+
   const parseFile = async () => {
     await Papa.parse(file, {
       header: true,
       skipEmptyLines: true,
       complete: function (results) {
         console.log(results.data);
+        setFileData(results.data);
       },
     });
   };
@@ -103,16 +132,33 @@ function CustomKnnPage() {
     }
   };
 
+  const handleDataFromForm = (data) => {
+    console.log("fromparent", data);
+    setPredictor(data.predictor);
+    setResponse(data.response);
+  };
+
   const renderContent = () => {
     if (!file) {
       return <input type="file" onChange={handleFileChange} />;
     }
 
     if (xrange && ypred) {
+      console.log("rendering graph");
+      console.log(xrange);
       return (
         <GraphContainer>
           <GraphComponent xValues={xrange} yValues={ypred} />
         </GraphContainer>
+      );
+    }
+
+    if (columns) {
+      return (
+        <PredictorResponseSelector
+          columns={columns}
+          sendDataToParent={handleDataFromForm}
+        />
       );
     }
 
