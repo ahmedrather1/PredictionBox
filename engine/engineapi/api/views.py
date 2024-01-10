@@ -3,8 +3,8 @@ from rest_framework.decorators import api_view
 from rest_framework.parsers import MultiPartParser
 
 from knn.knn import basicknn
-from knn.knn import bestknn
-from knn.knn import customKnn
+from knn.knn import sampleKnnFullPrediction
+from knn.knn import customKnnFullPrediction
 
 def callbasicknn(request):
     pred = basicknn()
@@ -13,7 +13,7 @@ def callbasicknn(request):
     return JsonResponse({'xrange': xrange,'ypred': ypred})
 
 @api_view(['POST'])
-def callBestKnn(request):
+def callSampleKnn(request):
 
     file = request.FILES.get('csv-file')
     predictor = request.data.get('predictor')
@@ -22,7 +22,7 @@ def callBestKnn(request):
         return JsonResponse({'error': 'No file uploaded'}, status=400)
 
     try:
-        pred = bestknn(file, predictor, response)
+        pred = sampleKnnFullPrediction(file, predictor, response)
     except KeyError as e:
         errorMessage = str(e)
         return JsonResponse({'error': errorMessage}, status=400)
@@ -42,7 +42,7 @@ def callCustomKnn(request):
     customK = request.data.get('customK')
 
     try:
-        pred = customKnn(file, predictor, response, customFolds, maxK, customK )
+        pred = customKnnFullPrediction(file, predictor, response, customFolds, maxK, customK )
     except Exception as e:
         errorMessage = str(e)
         return JsonResponse({'error': errorMessage}, status=400)
