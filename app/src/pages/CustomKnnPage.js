@@ -4,6 +4,7 @@ import PredictorResponseSelector from "../common/components/PredictorResponseSel
 import { Navbar, Container, Nav } from "react-bootstrap";
 import styled from "styled-components";
 import Papa from "papaparse";
+import ChartComponent from "../common/ChartComponent";
 
 const PageContainer = styled.div`
   display: flex;
@@ -69,9 +70,12 @@ function CustomKnnPage() {
 
   const [xrange, setXrange] = useState(null);
   const [ypred, setYpred] = useState(null);
+  const [originalData, setOriginalData] = useState(null);
 
   const [predictor, setPredictor] = useState(null);
   const [response, setResponse] = useState(null);
+
+  const [bestPrediction, setBestPrediction] = useState(null);
 
   useEffect(() => {
     if (predictor && response) {
@@ -86,12 +90,21 @@ function CustomKnnPage() {
       })
         .then((response) => response.json())
         .then((data) => {
-          setYpred(data.ypred);
+          setYpred(data.ypred.map((element) => element[0]));
           setXrange(data.xrange);
+          setOriginalData(data.originalData);
         })
         .catch((error) => console.error("Error fetching data:", error));
     }
   }, [predictor, response]);
+
+  useEffect(() => {
+    if (xrange && ypred) {
+      let prediction = xrange.map((e, i) => [e, ypred[i]]);
+      console.log(prediction);
+      setBestPrediction(prediction);
+    }
+  }, [xrange, ypred]);
 
   useEffect(() => {
     if (file) {
@@ -143,12 +156,14 @@ function CustomKnnPage() {
       return <input type="file" onChange={handleFileChange} />;
     }
 
-    if (xrange && ypred) {
-      console.log("rendering graph");
-      console.log(xrange);
+    if (bestPrediction && originalData) {
+      console.log("rendering bestPrediction");
       return (
         <GraphContainer>
-          <GraphComponent xValues={xrange} yValues={ypred} />
+          <ChartComponent
+            bestPrediction={bestPrediction}
+            originalData={originalData}
+          />
         </GraphContainer>
       );
     }
