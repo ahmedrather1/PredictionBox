@@ -84,7 +84,7 @@ function CustomKnnPage() {
       formData.append("predictor", predictor);
       formData.append("response", response);
 
-      fetch("http://127.0.0.1:8000/call-custom-knn/", {
+      fetch("http://127.0.0.1:8000/call-best-knn/", {
         method: "POST",
         body: formData,
       })
