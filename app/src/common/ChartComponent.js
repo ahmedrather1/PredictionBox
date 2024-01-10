@@ -20,9 +20,15 @@ const ChartComponent = ({ bestPrediction, originalData }) => {
           type: "scatter",
         };
       } else if (header === "Best Prediction") {
-        genSeries[i - 1] = chartDataSets.bestPrediction.options;
+        genSeries[i - 1] = {
+          ...chartDataSets.bestPrediction.options,
+          type: "line",
+        };
       } else if (header === "Custom Prediction") {
-        genSeries[i - 1] = chartDataSets.customPrediction.options;
+        genSeries[i - 1] = {
+          ...chartDataSets.customPrediction.options,
+          type: "line",
+        };
       }
     });
     setCustomSeries(genSeries);
@@ -117,10 +123,23 @@ const ChartComponent = ({ bestPrediction, originalData }) => {
     const sortedXValues = Array.from(allXValues).sort((a, b) => a - b);
     console.log("sortedXValues", sortedXValues);
 
+    if (showScatterPlot) {
+      sortedXValues.forEach((targetX) => {
+        let targetPoints = scatterData.filter((item) => item[0] === targetX);
+        targetPoints.forEach((targetPoint) => {
+          let row = [targetX];
+          row.push(targetPoint[1]);
+          if (showBestPrediction) row.push(null);
+          if (showCustomPrediction) row.push(null);
+          data.push(row);
+        });
+      });
+    }
+    console.log("DATASIZE", data.length);
+
     sortedXValues.forEach((x) => {
       let row = [x];
-      if (showScatterPlot)
-        row.push(scatterData.find((item) => item[0] === x)?.[1] ?? null);
+      if (showScatterPlot) row.push(null);
       if (showBestPrediction)
         row.push(bestPredictionData.find((item) => item[0] === x)?.[1] ?? null);
       if (showCustomPrediction)
@@ -129,10 +148,6 @@ const ChartComponent = ({ bestPrediction, originalData }) => {
         );
       data.push(row);
     });
-
-    // if (showScatterPlot) {
-    //   let row = [x];
-    // }
 
     return data;
   };
