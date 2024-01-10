@@ -39,7 +39,21 @@ def basicknn():
 
     return (x_range_to_return.tolist(), y_pred.tolist())
 
-def customKnn(file, predictor, response, customFold, maxK, customK ):
+def customKnn(file, predictor, response, customFolds, maxK, customK ):
+
+    try:
+        customFolds = int(customFolds)
+    except Exception:
+        customFolds = None
+    try:
+        maxK = int(maxK)
+    except Exception:
+        maxK = None    
+
+    try:
+        customK = int(customK)
+    except Exception:
+        customK = None   
 
     try:
         df = pd.read_csv(file)
@@ -57,17 +71,21 @@ def customKnn(file, predictor, response, customFold, maxK, customK ):
     except Exception as e:
         raise KeyError("Response doesnt exist!")
     
-    if not (customFold and maxK) and not customK:
+    if not (customFolds and maxK) and not customK:
         raise ValueError("You must provide either a customFold+maxK or a customK")
     
-    if (customFold or maxK) and customK:
-        raise ValueError("Either customFold XOR customK must be undefined")
+    if (customFolds  or maxK ) and customK :
+
+        print(customFolds)
+        print(maxK)
+        print(customK)
+
+        raise ValueError("Either customFolds XOR customK must be undefined")
     
-    if (customFold and maxK):
+    if (customFolds and maxK):
         try:
-            print(customFold)
-            intCustomFold = int(customFold)
-            kf = KFold(n_splits=intCustomFold, shuffle=True, random_state=42)
+            intCustomFolds = int(customFolds)
+            kf = KFold(n_splits=intCustomFolds, shuffle=True, random_state=42)
         except Exception as e:
             raise ValueError({"ValueError": str(e)})
         
