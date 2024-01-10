@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Chart } from "react-google-charts";
 import { ToggleButton } from "react-bootstrap";
 
-const ChartComponent = ({ bestPrediction, originalData }) => {
+const ChartComponent = ({ bestPrediction, originalData, customPrediction }) => {
   // State for toggling the visibility
   const [showScatterPlot, setShowScatterPlot] = useState(true);
   const [showBestPrediction, setShowBestPrediction] = useState(true);
@@ -53,7 +53,9 @@ const ChartComponent = ({ bestPrediction, originalData }) => {
 
   const bestPredictionData = bestPrediction;
 
-  const customPredictionData = bestPrediction;
+  const customPredictionData = customPrediction
+    ? customPrediction
+    : bestPrediction;
 
   // Chart data and options logic here
   const chartDataSets = {
@@ -180,6 +182,7 @@ const ChartComponent = ({ bestPrediction, originalData }) => {
         type="checkbox"
         variant="outline-success"
         checked={showCustomPrediction}
+        disabled={customPrediction ? false : true}
         onChange={(e) => setShowCustomPrediction(e.currentTarget.checked)}
       >
         Custom Prediction
