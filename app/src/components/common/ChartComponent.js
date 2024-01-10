@@ -2,11 +2,18 @@ import React, { useState, useEffect } from "react";
 import { Chart } from "react-google-charts";
 import { ToggleButton } from "react-bootstrap";
 
-const ChartComponent = ({ bestPrediction, originalData, customPrediction }) => {
+const ChartComponent = ({
+  bestPrediction,
+  originalData,
+  customPrediction,
+  showCustomPrediction,
+  setShowCustomPrediction,
+  predictor,
+  response,
+}) => {
   // State for toggling the visibility
   const [showScatterPlot, setShowScatterPlot] = useState(true);
   const [showBestPrediction, setShowBestPrediction] = useState(true);
-  const [showCustomPrediction, setShowCustomPrediction] = useState(false);
   const [combinedData, setCombinedData] = useState(null);
   const [customSeries, setCustomSeries] = useState(null);
 
@@ -37,6 +44,9 @@ const ChartComponent = ({ bestPrediction, originalData, customPrediction }) => {
   };
 
   useEffect(() => {
+    console.log("------------------predictor------------------", predictor);
+    console.log("------------------response------------------", response);
+
     const updatedCombinedData = getChartData(
       showScatterPlot,
       showBestPrediction,
@@ -196,10 +206,10 @@ const ChartComponent = ({ bestPrediction, originalData, customPrediction }) => {
         options={{
           series: customSeries,
           hAxis: {
-            title: "X Axis",
+            title: predictor,
           },
           vAxis: {
-            title: "Y Axis",
+            title: response,
           },
           interpolateNulls: true,
         }}

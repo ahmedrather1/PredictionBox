@@ -71,7 +71,7 @@ function CustomKnnPage() {
   const [customYPred, setCustomYPred] = useState(null);
 
   const [customPrediction, setCustomPrediction] = useState(null);
-
+  const [showCustomPrediction, setShowCustomPrediction] = useState(false);
   const inputFormSchema = {
     type: "object",
     title: "Custom Form", // Title at the top of the form
@@ -142,6 +142,7 @@ function CustomKnnPage() {
     if (customYPred) {
       let customPred = xrange.map((e, i) => [e, customYPred[i]]);
       setCustomPrediction(customPred);
+      setShowCustomPrediction(true);
     }
   }, [customYPred]);
 
@@ -191,6 +192,7 @@ function CustomKnnPage() {
   };
 
   const handleDataFromParameterInputForm = (data) => {
+    setShowCustomPrediction(false);
     console.log("fromform", data);
     setCustomYPred(null);
 
@@ -226,6 +228,10 @@ function CustomKnnPage() {
             bestPrediction={bestPrediction}
             originalData={originalData}
             customPrediction={customPrediction}
+            showCustomPrediction={showCustomPrediction}
+            setShowCustomPrediction={setShowCustomPrediction}
+            predictor={predictor}
+            response={response}
           />
           <CustomParameterInputForm
             onSubmit={handleDataFromParameterInputForm}
