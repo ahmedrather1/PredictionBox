@@ -8,8 +8,6 @@ from django.conf import settings
 import os
 
 def basicknn():
-
-    # Load Iris dataset
     file_path = os.path.join(settings.KNN_DATASET_PATH, 'iris.csv')
     df = pd.read_csv(file_path)
     X = df[['sepal.length']]
@@ -39,9 +37,7 @@ def basicknn():
 
     return (x_range_to_return.tolist(), y_pred.tolist())
 
-
-def customKnnModel(customFolds, maxK, customK ):
-
+def customKnnModel(X, y, customFolds, maxK, customK ):
     if (customFolds and maxK):
         try:
             intCustomFolds = int(customFolds)
@@ -71,7 +67,6 @@ def customKnnModel(customFolds, maxK, customK ):
     return knn_final
 
 def sampleKnnModel(X, y):
-
     kf = KFold(n_splits=5, shuffle=True, random_state=42)
     k_range = range(1, 31)
     k_scores = []
@@ -83,22 +78,16 @@ def sampleKnnModel(X, y):
 
     best_k = k_range[np.argmax(k_scores)]
     print(f"Best K value: {best_k}")
-
+    
     knn_final = KNeighborsRegressor(n_neighbors=best_k)
     return knn_final
 
 def getOriginalData(X, y):
-
-    
     print(y.to_numpy().transpose())
     Xarr = X.to_numpy().transpose()[0]
     yarr = y.to_numpy().transpose()[0]
     original_data = np.vstack((Xarr, yarr)).T
     return original_data    
-
-          
-
-    
 
 def customKnnFullPrediction(file, predictor, response, customFolds, maxK, customK ):
     try:
@@ -142,7 +131,7 @@ def customKnnFullPrediction(file, predictor, response, customFolds, maxK, custom
 
         raise ValueError("Either customFolds XOR customK must be undefined")
     
-    knn_final = customKnnModel(customFolds, maxK, customK)
+    knn_final = customKnnModel(X, y, customFolds, maxK, customK)
     knn_final.fit(X, y)
     min_value = X[predictor].min()  
     max_value = X[predictor].max()  
@@ -160,7 +149,42 @@ def customKnnFullPrediction(file, predictor, response, customFolds, maxK, custom
 
 
 def customKnnIndividualPrediction(file, predictor, response, customFolds, maxK, customK, xToPredict ):
-    knn_final = customKnnModel(file, predictor, response, customFolds, maxK, customK)
+    try:
+        customFolds = int(customFolds)
+    except Exception:
+        customFolds = None
+    try:
+        maxK = int(maxK)
+    except Exception:
+        maxK = None    
+
+    try:
+        customK = int(customK)
+    except Exception:
+        customK = None   
+
+    try:
+        df = pd.read_csv(file)
+    except Exception as e:
+        raise ValueError("file doesnt exist!")
+
+
+    try:
+        X = df[[predictor]]
+    except Exception as e:
+        raise KeyError("Predictor doesn't exist!")
+
+    try:
+        y = df[[response]]
+    except Exception as e:
+        raise KeyError("Response doesnt exist!")
+    
+    if not (customFolds and maxK) and not customK:
+        raise ValueError("You must provide either a customFold+maxK or a customK")
+    
+    knn_final = customKnnModel(X, y, customFolds, maxK, customK)
+    knn_final.fit(X, y)
+    xToPredict = float(xToPredict)
     predicted_y = knn_final.predict([[xToPredict]])
     return (predicted_y[0][0])
 
@@ -191,7 +215,21 @@ def sampleKnnFullPrediction(file, predictor, response):
 
 
 def sampleKnnIndividualPrediction(file, predictor, response, xToPredict ):
-    knn_final = sampleKnnModel(file, predictor, response)
+    df = pd.read_csv(file)
+
+    try:
+        X = df[[predictor]]
+    except KeyError:
+        raise KeyError("Predictor doesn't exist!")
+
+    try:
+        y = df[[response]]
+    except KeyError:
+        raise KeyError("Response doesnt exist!")
+    
+    knn_final = sampleKnnModel(X, y)
+    knn_final.fit(X, y)
+    xToPredict = float(xToPredict)
     predicted_y = knn_final.predict([[xToPredict]])
     return (predicted_y[0][0])
 

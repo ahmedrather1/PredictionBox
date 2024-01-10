@@ -17,11 +17,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from api.views import callbasicknn
-from api.views import callSampleKnn
-from api.views import callCustomKnn
+from api.views import callSampleKnnFull
+from api.views import callCustomKnnFull
+from api.views import callSampleKnnIndividual
+from api.views import callCustomKnnIndividual
+
 urlpatterns = [
     path('call-knn/', callbasicknn),
-    path('call-sample-knn/', callSampleKnn),
-    path('call-custom-knn/', callCustomKnn),
+    path('call-sample-knn/', callSampleKnnFull),
+    path('call-sample-knn/<str:xToPredict>/', callSampleKnnIndividual),
+    path('call-custom-knn/', callCustomKnnFull),
+    path('call-custom-knn/<str:xToPredict>/', callCustomKnnIndividual),
 
 ]
