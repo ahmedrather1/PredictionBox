@@ -123,18 +123,6 @@ const ChartComponent = ({ bestPrediction, originalData }) => {
     const sortedXValues = Array.from(allXValues).sort((a, b) => a - b);
     console.log("sortedXValues", sortedXValues);
 
-    if (showScatterPlot) {
-      sortedXValues.forEach((targetX) => {
-        let targetPoints = scatterData.filter((item) => item[0] === targetX);
-        targetPoints.forEach((targetPoint) => {
-          let row = [targetX];
-          row.push(targetPoint[1]);
-          if (showBestPrediction) row.push(null);
-          if (showCustomPrediction) row.push(null);
-          data.push(row);
-        });
-      });
-    }
     console.log("DATASIZE", data.length);
 
     sortedXValues.forEach((x) => {
@@ -148,6 +136,19 @@ const ChartComponent = ({ bestPrediction, originalData }) => {
         );
       data.push(row);
     });
+
+    if (showScatterPlot) {
+      sortedXValues.forEach((targetX) => {
+        let targetPoints = scatterData.filter((item) => item[0] === targetX);
+        targetPoints.forEach((targetPoint) => {
+          let row = [targetX];
+          row.push(targetPoint[1]);
+          if (showBestPrediction) row.push(null);
+          if (showCustomPrediction) row.push(null);
+          data.push(row);
+        });
+      });
+    }
 
     return data;
   };
@@ -197,6 +198,7 @@ const ChartComponent = ({ bestPrediction, originalData }) => {
           vAxis: {
             title: "Y Axis",
           },
+          interpolateNulls: true,
         }}
       />
     </div>
