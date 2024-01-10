@@ -3,7 +3,7 @@ import { Chart } from "react-google-charts";
 import { ToggleButton } from "react-bootstrap";
 
 const ChartComponent = ({
-  bestPrediction,
+  samplePrediction,
   originalData,
   customPrediction,
   showCustomPrediction,
@@ -13,22 +13,22 @@ const ChartComponent = ({
 }) => {
   // State for toggling the visibility
   const [showScatterPlot, setShowScatterPlot] = useState(true);
-  const [showBestPrediction, setShowBestPrediction] = useState(true);
+  const [showSamplePrediction, setShowSamplePrediction] = useState(true);
   const [combinedData, setCombinedData] = useState(null);
   const [customSeries, setCustomSeries] = useState(null);
 
   const generateSeries = (headers) => {
     let genSeries = {};
     headers.forEach((header, i) => {
-      if (header === "Scatter") {
+      if (header === "Original Data") {
         console.log("got here");
         genSeries[i - 1] = {
           ...chartDataSets.scatter.options,
           type: "scatter",
         };
-      } else if (header === "Best Prediction") {
+      } else if (header === "Sample Prediction") {
         genSeries[i - 1] = {
-          ...chartDataSets.bestPrediction.options,
+          ...chartDataSets.samplePrediction.options,
           type: "line",
         };
       } else if (header === "Custom Prediction") {
@@ -49,7 +49,7 @@ const ChartComponent = ({
 
     const updatedCombinedData = getChartData(
       showScatterPlot,
-      showBestPrediction,
+      showSamplePrediction,
       showCustomPrediction
     );
     console.log("---------------", updatedCombinedData);
@@ -57,15 +57,15 @@ const ChartComponent = ({
     generateSeries(headers);
 
     setCombinedData(updatedCombinedData);
-  }, [showScatterPlot, showBestPrediction, showCustomPrediction]); // Re-run when toggles change
+  }, [showScatterPlot, showSamplePrediction, showCustomPrediction]); // Re-run when toggles change
 
   const scatterData = originalData;
 
-  const bestPredictionData = bestPrediction;
+  const samplePredictionData = samplePrediction;
 
   const customPredictionData = customPrediction
     ? customPrediction
-    : bestPrediction;
+    : samplePrediction;
 
   // Chart data and options logic here
   const chartDataSets = {
@@ -77,12 +77,12 @@ const ChartComponent = ({
         visibleInLegend: showScatterPlot,
       },
     },
-    bestPrediction: {
+    samplePrediction: {
       type: "line",
       options: {
         lineWidth: 2,
         color: "red",
-        visibleInLegend: showBestPrediction,
+        visibleInLegend: showSamplePrediction,
       },
     },
     customPrediction: {
@@ -97,18 +97,18 @@ const ChartComponent = ({
 
   const getChartData = (
     showScatterPlot,
-    showBestPrediction,
+    showSamplePrediction,
     showCustomPrediction
   ) => {
     // Start with the header row
     let headers = ["x"];
 
-    if (showScatterPlot) headers.push("Scatter");
-    if (showBestPrediction) headers.push("Best Prediction");
+    if (showScatterPlot) headers.push("Original Data");
+    if (showSamplePrediction) headers.push("Sample Prediction");
     if (showCustomPrediction) headers.push("Custom Prediction");
 
-    if (!showScatterPlot && !showBestPrediction && !showCustomPrediction) {
-      headers = ["x", "Scatter"];
+    if (!showScatterPlot && !showSamplePrediction && !showCustomPrediction) {
+      headers = ["x", "Original Data"];
       let defaultRow = [0, 0];
       return [headers, defaultRow]; // Return only headers to display an empty chart
     }
@@ -118,7 +118,7 @@ const ChartComponent = ({
     // Create a list of all the x-values from all datasets
     const allXValues = new Set([
       ...scatterData.map((item) => item[0]),
-      ...bestPredictionData.map((item) => item[0]),
+      ...samplePredictionData.map((item) => item[0]),
       ...customPredictionData.map((item) => item[0]),
     ]);
     console.log(
@@ -127,7 +127,7 @@ const ChartComponent = ({
     );
     console.log(
       "BEST PREDICTION XVALS",
-      bestPredictionData.map((item) => item[0])
+      samplePredictionData.map((item) => item[0])
     );
 
     console.log("allXValues", allXValues);
@@ -140,8 +140,10 @@ const ChartComponent = ({
     sortedXValues.forEach((x) => {
       let row = [x];
       if (showScatterPlot) row.push(null);
-      if (showBestPrediction)
-        row.push(bestPredictionData.find((item) => item[0] === x)?.[1] ?? null);
+      if (showSamplePrediction)
+        row.push(
+          samplePredictionData.find((item) => item[0] === x)?.[1] ?? null
+        );
       if (showCustomPrediction)
         row.push(
           customPredictionData.find((item) => item[0] === x)?.[1] ?? null
@@ -155,7 +157,7 @@ const ChartComponent = ({
         targetPoints.forEach((targetPoint) => {
           let row = [targetX];
           row.push(targetPoint[1]);
-          if (showBestPrediction) row.push(null);
+          if (showSamplePrediction) row.push(null);
           if (showCustomPrediction) row.push(null);
           data.push(row);
         });
@@ -174,17 +176,17 @@ const ChartComponent = ({
         checked={showScatterPlot}
         onChange={(e) => setShowScatterPlot(e.currentTarget.checked)}
       >
-        Scatter Plot
+        Original Data
       </ToggleButton>
 
       <ToggleButton
-        id="toggle-best-prediction"
+        id="toggle-sample-prediction"
         type="checkbox"
         variant="outline-secondary"
-        checked={showBestPrediction}
-        onChange={(e) => setShowBestPrediction(e.currentTarget.checked)}
+        checked={showSamplePrediction}
+        onChange={(e) => setShowSamplePrediction(e.currentTarget.checked)}
       >
-        Best Prediction
+        Sample Prediction
       </ToggleButton>
 
       <ToggleButton

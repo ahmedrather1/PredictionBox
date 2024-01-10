@@ -60,21 +60,24 @@ function CustomKnnPage() {
   const [fileData, setFileData] = useState(null);
 
   const [xrange, setXrange] = useState(null);
-  const [ypred, setYpred] = useState(null);
   const [originalData, setOriginalData] = useState(null);
 
   const [predictor, setPredictor] = useState(null);
   const [response, setResponse] = useState(null);
 
-  const [bestPrediction, setBestPrediction] = useState(null);
+  const [ypred, setYpred] = useState(null);
+  const [samplePrediction, setSamplePrediction] = useState(null);
 
   const [customYPred, setCustomYPred] = useState(null);
-
   const [customPrediction, setCustomPrediction] = useState(null);
   const [showCustomPrediction, setShowCustomPrediction] = useState(false);
-  const inputFormSchema = {
+  const [customParameters, setCustomParameters] = useState(null);
+
+  const predictionInputFormSchema = {};
+
+  const CustomParameterInputFormSchema = {
     type: "object",
-    title: "Custom Form", // Title at the top of the form
+    title: "Custom Parameter Input",
     oneOf: [
       {
         title: "Option 1: Custom K Value", // Title for the first option
@@ -134,7 +137,7 @@ function CustomKnnPage() {
     if (xrange && ypred) {
       let prediction = xrange.map((e, i) => [e, ypred[i]]);
       console.log(prediction);
-      setBestPrediction(prediction);
+      setSamplePrediction(prediction);
     }
   }, [xrange, ypred]);
 
@@ -193,10 +196,13 @@ function CustomKnnPage() {
 
   const handleDataFromParameterInputForm = (data) => {
     setShowCustomPrediction(false);
-    console.log("fromform", data);
     setCustomYPred(null);
-
     setCustomPrediction(null);
+    setCustomParameters({
+      maxK: data.maxK,
+      customK: data.customK,
+      customFolds: data.customFolds,
+    });
     const formData = new FormData();
     formData.append("csv-file", file);
     formData.append("predictor", predictor);
@@ -221,11 +227,11 @@ function CustomKnnPage() {
       return <input type="file" onChange={handleFileChange} />;
     }
 
-    if (bestPrediction && originalData) {
+    if (samplePrediction && originalData) {
       return (
         <GraphContainer>
           <ChartComponent
-            bestPrediction={bestPrediction}
+            samplePrediction={samplePrediction}
             originalData={originalData}
             customPrediction={customPrediction}
             showCustomPrediction={showCustomPrediction}
@@ -235,7 +241,7 @@ function CustomKnnPage() {
           />
           <CustomParameterInputForm
             onSubmit={handleDataFromParameterInputForm}
-            schema={inputFormSchema}
+            schema={CustomParameterInputFormSchema}
           />
         </GraphContainer>
       );
