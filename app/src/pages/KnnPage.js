@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import GraphComponent from "../common/GraphComponent";
+import GraphComponent from "../components/common/GraphComponent";
 import { Navbar, Container, Nav } from "react-bootstrap";
 import styled from "styled-components";
 

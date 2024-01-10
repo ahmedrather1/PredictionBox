@@ -37,16 +37,12 @@ def callCustomKnn(request):
     file = request.FILES.get('csv-file')
     predictor = request.data.get('predictor')
     response = request.data.get('response')
-    customFold = request.data.get('customFold')
+    customFolds = request.data.get('customFolds')
     maxK = request.data.get('maxK')
     customK = request.data.get('customK')
 
-    print(customFold)
-    print(maxK)
-    print(customK)
-
     try:
-        pred = customKnn(file, predictor, response, customFold, maxK, customK )
+        pred = customKnn(file, predictor, response, customFolds, maxK, customK )
     except Exception as e:
         errorMessage = str(e)
         return JsonResponse({'error': errorMessage}, status=400)

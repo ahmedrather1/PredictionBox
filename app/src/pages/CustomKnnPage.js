@@ -1,20 +1,11 @@
 import React, { useEffect, useState } from "react";
-import GraphComponent from "../common/GraphComponent";
-import PredictorResponseSelector from "../common/components/PredictorResponseSelector";
+import GraphComponent from "../components/common/GraphComponent";
+import PredictorResponseSelector from "../components/common/PredictorResponseSelector";
 import { Navbar, Container, Nav } from "react-bootstrap";
 import styled from "styled-components";
 import Papa from "papaparse";
-import ChartComponent from "../common/ChartComponent";
-
-const PageContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh; // Full viewport height
-`;
-
-const Content = styled.div`
-  flex-grow: 1; // Allows the content to grow and fill the space
-`;
+import ChartComponent from "../components/common/ChartComponent";
+import CustomParameterInputForm from "../components/common/CustomParameterInputForm";
 
 // Styled components
 const StyledHeader = styled(Navbar)`
@@ -77,6 +68,47 @@ function CustomKnnPage() {
 
   const [bestPrediction, setBestPrediction] = useState(null);
 
+  const [customYPred, setCustomYPred] = useState(null);
+
+  const [customPrediction, setCustomPrediction] = useState(null);
+  const [showCustomPrediction, setShowCustomPrediction] = useState(false);
+  const inputFormSchema = {
+    type: "object",
+    title: "Custom Form", // Title at the top of the form
+    oneOf: [
+      {
+        title: "Option 1: Custom K Value", // Title for the first option
+        properties: {
+          customK: {
+            type: "integer",
+            title: "Custom K value",
+            minimum: 1,
+            maximum: originalData ? originalData.length : 0,
+          },
+        },
+        required: ["customK"],
+      },
+      {
+        title: "Option 2: Custom Folds and Maximum K", // Title for the second option
+        properties: {
+          maxK: {
+            type: "integer",
+            title: "Maximum K value",
+            minimum: 1,
+            maximum: originalData ? originalData.length : 0,
+          },
+          customFolds: {
+            type: "integer",
+            title: "Number of cross validation folds",
+            minimum: 1,
+            maximum: originalData ? originalData.length : 0,
+          },
+        },
+        required: ["maxK", "customFolds"],
+      },
+    ],
+  };
+
   useEffect(() => {
     if (predictor && response) {
       const formData = new FormData();
@@ -105,6 +137,14 @@ function CustomKnnPage() {
       setBestPrediction(prediction);
     }
   }, [xrange, ypred]);
+
+  useEffect(() => {
+    if (customYPred) {
+      let customPred = xrange.map((e, i) => [e, customYPred[i]]);
+      setCustomPrediction(customPred);
+      setShowCustomPrediction(true);
+    }
+  }, [customYPred]);
 
   useEffect(() => {
     if (file) {
@@ -145,10 +185,35 @@ function CustomKnnPage() {
     }
   };
 
-  const handleDataFromForm = (data) => {
+  const handleDataFromPredictorResponseSelector = (data) => {
     console.log("fromparent", data);
     setPredictor(data.predictor);
     setResponse(data.response);
+  };
+
+  const handleDataFromParameterInputForm = (data) => {
+    setShowCustomPrediction(false);
+    console.log("fromform", data);
+    setCustomYPred(null);
+
+    setCustomPrediction(null);
+    const formData = new FormData();
+    formData.append("csv-file", file);
+    formData.append("predictor", predictor);
+    formData.append("response", response);
+    formData.append("maxK", data.maxK);
+    formData.append("customK", data.customK);
+    formData.append("customFolds", data.customFolds);
+
+    fetch("http://127.0.0.1:8000/call-custom-knn/", {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setCustomYPred(data.ypred.map((element) => element[0]));
+      })
+      .catch((error) => console.error("Error fetching data:", error));
   };
 
   const renderContent = () => {
@@ -157,12 +222,20 @@ function CustomKnnPage() {
     }
 
     if (bestPrediction && originalData) {
-      console.log("rendering bestPrediction");
       return (
         <GraphContainer>
           <ChartComponent
             bestPrediction={bestPrediction}
             originalData={originalData}
+            customPrediction={customPrediction}
+            showCustomPrediction={showCustomPrediction}
+            setShowCustomPrediction={setShowCustomPrediction}
+            predictor={predictor}
+            response={response}
+          />
+          <CustomParameterInputForm
+            onSubmit={handleDataFromParameterInputForm}
+            schema={inputFormSchema}
           />
         </GraphContainer>
       );
@@ -172,7 +245,7 @@ function CustomKnnPage() {
       return (
         <PredictorResponseSelector
           columns={columns}
-          sendDataToParent={handleDataFromForm}
+          sendDataToParent={handleDataFromPredictorResponseSelector}
         />
       );
     }
