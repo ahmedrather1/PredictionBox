@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import GraphComponent from "../common/GraphComponent";
-import PredictorResponseSelector from "../common/components/PredictorResponseSelector";
+import GraphComponent from "../components/common/GraphComponent";
+import PredictorResponseSelector from "../components/common/PredictorResponseSelector";
 import { Navbar, Container, Nav } from "react-bootstrap";
 import styled from "styled-components";
 import Papa from "papaparse";
-import ChartComponent from "../common/ChartComponent";
+import ChartComponent from "../components/common/ChartComponent";
+import CustomParameterInputForm from "../components/common/CustomParameterInputForm";
 
 const PageContainer = styled.div`
   display: flex;
@@ -42,6 +43,38 @@ const GraphContainer = styled.div`
   flex: 0 0 40%; // The GraphComponent will take up 25% of the container width and will not grow or shrink
   // You can adjust the flex-basis percentage to control the width more precisely
 `;
+
+const inputFormSchema = {
+  type: "object",
+  title: "Custom Form", // Title at the top of the form
+  oneOf: [
+    {
+      title: "Option 1: Custom K Value", // Title for the first option
+      properties: {
+        customK: {
+          type: "integer",
+          title: "Custom K value",
+          minimum: 1,
+        },
+      },
+      required: ["customK"],
+    },
+    {
+      title: "Option 2: Custom Folds and Maximum K", // Title for the second option
+      properties: {
+        maxK: {
+          type: "integer",
+          title: "Maximum K value",
+        },
+        customFolds: {
+          type: "integer",
+          title: "Number of cross validation folds",
+        },
+      },
+      required: ["maxK", "customFolds"],
+    },
+  ],
+};
 
 // Header Component
 function Header() {
@@ -145,10 +178,32 @@ function CustomKnnPage() {
     }
   };
 
-  const handleDataFromForm = (data) => {
+  const handleDataFromPredictorResponseSelector = (data) => {
     console.log("fromparent", data);
     setPredictor(data.predictor);
     setResponse(data.response);
+  };
+
+  const handleDataFromParameterInputForm = (data) => {
+    console.log("fromform", data);
+
+    const formData = new FormData();
+    formData.append("csv-file", file);
+    formData.append("predictor", predictor);
+    formData.append("response", response);
+    formData.append("maxK", data.maxK);
+    formData.append("customK", data.customK);
+    formData.append("customFolds", data.customFolds);
+
+    fetch("http://127.0.0.1:8000/call-custom-knn/", {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("----------CUSTOM PREDICTION-------", data);
+      })
+      .catch((error) => console.error("Error fetching data:", error));
   };
 
   const renderContent = () => {
@@ -164,6 +219,10 @@ function CustomKnnPage() {
             bestPrediction={bestPrediction}
             originalData={originalData}
           />
+          <CustomParameterInputForm
+            onSubmit={handleDataFromParameterInputForm}
+            schema={inputFormSchema}
+          />
         </GraphContainer>
       );
     }
@@ -172,7 +231,7 @@ function CustomKnnPage() {
       return (
         <PredictorResponseSelector
           columns={columns}
-          sendDataToParent={handleDataFromForm}
+          sendDataToParent={handleDataFromPredictorResponseSelector}
         />
       );
     }
