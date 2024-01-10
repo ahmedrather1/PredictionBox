@@ -6,7 +6,7 @@ import {
 } from "@jsonforms/material-renderers";
 import { Button } from "react-bootstrap";
 
-const CustomParameterInputForm = ({ schema, onSubmit }) => {
+const CustomForm = ({ schema, onSubmit }) => {
   // State to hold form data
   const [data, setData] = React.useState({});
 
@@ -29,4 +29,4 @@ const CustomParameterInputForm = ({ schema, onSubmit }) => {
   );
 };
 
-export default CustomParameterInputForm;
+export default CustomForm;

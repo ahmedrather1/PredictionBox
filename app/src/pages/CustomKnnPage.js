@@ -5,7 +5,7 @@ import { Navbar, Container, Nav } from "react-bootstrap";
 import styled from "styled-components";
 import Papa from "papaparse";
 import ChartComponent from "../components/common/ChartComponent";
-import CustomParameterInputForm from "../components/common/CustomParameterInputForm";
+import CustomForm from "../components/common/CustomForm";
 
 // Styled components
 const StyledHeader = styled(Navbar)`
@@ -73,7 +73,34 @@ function CustomKnnPage() {
   const [showCustomPrediction, setShowCustomPrediction] = useState(false);
   const [customParameters, setCustomParameters] = useState(null);
 
-  const predictionInputFormSchema = {};
+  const PredictionInputFormSchema = {
+    type: "object",
+    title: "Custom Parameter Input",
+    oneOf: [
+      {
+        title: "Sample Model", // Title for the first option
+        properties: {
+          predictorSample: {
+            type: "integer",
+            title: "Predictor (X value)",
+            minimum: 1,
+          },
+        },
+        required: ["predictorSample"],
+      },
+      {
+        title: "Your Custom Model", // Title for the second option
+        properties: {
+          predictorCustom: {
+            type: "integer",
+            title: "Predictor (X value)",
+            minimum: 1,
+          },
+        },
+        required: ["predictorCustom"],
+      },
+    ],
+  };
 
   const CustomParameterInputFormSchema = {
     type: "object",
@@ -222,6 +249,10 @@ function CustomKnnPage() {
       .catch((error) => console.error("Error fetching data:", error));
   };
 
+  const handleDataFromPredictionForm = (data) => {
+    console.log(data);
+  };
+
   const renderContent = () => {
     if (!file) {
       return <input type="file" onChange={handleFileChange} />;
@@ -239,9 +270,13 @@ function CustomKnnPage() {
             predictor={predictor}
             response={response}
           />
-          <CustomParameterInputForm
+          <CustomForm
             onSubmit={handleDataFromParameterInputForm}
             schema={CustomParameterInputFormSchema}
+          />
+          <CustomForm
+            onSubmit={handleDataFromPredictionForm}
+            schema={PredictionInputFormSchema}
           />
         </GraphContainer>
       );
