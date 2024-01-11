@@ -9,6 +9,7 @@ import { CustomParameterInputFormSchema } from "../formSchemas/CustomParameterIn
 import { PredictionInputFormSchema } from "../formSchemas/PredictionInputFormSchema";
 import CustomParameterCard from "../components/common/CustomParameterCard";
 import IndividualPredictionCard from "../components/common/IndividualPredictionCard";
+import FileUploadComponent from "../components/common/FileUploadComponent";
 
 function CustomKnnPage() {
   // TODO too many usestates! use redux instead
@@ -126,7 +127,6 @@ function CustomKnnPage() {
   };
 
   const handleDataFromPredictorResponseSelector = (data) => {
-    console.log("fromparent", data);
     setPredictor(data.predictor);
     setResponse(data.response);
   };
@@ -206,7 +206,7 @@ function CustomKnnPage() {
 
   const renderContent = () => {
     if (!file) {
-      return <input type="file" onChange={handleFileChange} />;
+      return <FileUploadComponent onChange={handleFileChange} />;
     }
 
     if (samplePrediction && originalData) {
