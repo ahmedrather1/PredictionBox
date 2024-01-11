@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PredictorResponseSelector from "../components/common/PredictorResponseSelector";
-import { Navbar, Container, Nav } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import styled from "styled-components";
 import Papa from "papaparse";
 import ChartComponent from "../components/common/ChartComponent";
@@ -9,6 +9,7 @@ import { CustomParameterInputFormSchema } from "../formSchemas/CustomParameterIn
 import { PredictionInputFormSchema } from "../formSchemas/PredictionInputFormSchema";
 
 function CustomKnnPage() {
+  // TODO too many usestates! use redux instead
   const [columns, setColumns] = useState(null);
   const [file, setFile] = useState(null);
   const [fileData, setFileData] = useState(null);
@@ -202,31 +203,47 @@ function CustomKnnPage() {
 
     if (samplePrediction && originalData) {
       return (
-        <>
-          <ChartComponent
-            samplePrediction={samplePrediction}
-            originalData={originalData}
-            customPrediction={customPrediction}
-            showCustomPrediction={showCustomPrediction}
-            setShowCustomPrediction={setShowCustomPrediction}
-            predictor={predictor}
-            response={response}
-          />
-          <CustomForm
-            onSubmit={handleDataFromParameterInputForm}
-            schema={customParameterInputFormSchema}
-          />
-          <CustomForm
-            onSubmit={handleDataFromPredictionForm}
-            schema={predictionInputFormSchema}
-          />
-          {sampleIndividualPrediction && (
-            <h3>Sample Individual Prediction {sampleIndividualPrediction}</h3>
-          )}
-          {customIndividualPrediction && (
-            <h3>Custom Individual Prediction {customIndividualPrediction}</h3>
-          )}
-        </>
+        <Container>
+          <Row>
+            <Col xs={8}>
+              {" "}
+              <ChartComponent
+                samplePrediction={samplePrediction}
+                originalData={originalData}
+                customPrediction={customPrediction}
+                showCustomPrediction={showCustomPrediction}
+                setShowCustomPrediction={setShowCustomPrediction}
+                predictor={predictor}
+                response={response}
+              />
+            </Col>
+            <Col>
+              <div className="mb-3">
+                <CustomForm
+                  onSubmit={handleDataFromParameterInputForm}
+                  schema={customParameterInputFormSchema}
+                />
+              </div>
+              <div className="mb-3">
+                <CustomForm
+                  onSubmit={handleDataFromPredictionForm}
+                  schema={predictionInputFormSchema}
+                />
+              </div>
+
+              {sampleIndividualPrediction && (
+                <h3>
+                  Sample Individual Prediction {sampleIndividualPrediction}
+                </h3>
+              )}
+              {customIndividualPrediction && (
+                <h3>
+                  Custom Individual Prediction {customIndividualPrediction}
+                </h3>
+              )}
+            </Col>
+          </Row>
+        </Container>
       );
     }
 
