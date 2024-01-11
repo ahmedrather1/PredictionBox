@@ -72,7 +72,7 @@ def callCustomKnnIndividual(request):
     except Exception as e:
         errorMessage = str(e)
         return JsonResponse({'error': errorMessage}, status=400)
-    return JsonResponse({'predictedY': predictedY})
+    return JsonResponse({'predictedY': predictedY, 'xToPredict': xToPredict})
 
 @api_view(['POST'])
 def callSampleKnnIndividual(request):
@@ -89,4 +89,4 @@ def callSampleKnnIndividual(request):
         errorMessage = str(e)
         return JsonResponse({'error': errorMessage}, status=400)
 
-    return JsonResponse({'predictedY': predictedY})
+    return JsonResponse({'predictedY': predictedY, 'xToPredict': xToPredict })

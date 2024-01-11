@@ -175,7 +175,10 @@ function CustomKnnPage() {
       })
         .then((response) => response.json())
         .then((data) => {
-          setCustomIndividualPrediction(data.predictedY);
+          setCustomIndividualPrediction({
+            xToPredict: +parseFloat(data.xToPredict).toFixed(4),
+            predictedY: +parseFloat(data.predictedY).toFixed(4),
+          });
         })
         .catch((error) => console.error("Error fetching data:", error));
     }
@@ -190,7 +193,10 @@ function CustomKnnPage() {
       })
         .then((response) => response.json())
         .then((data) => {
-          setSampleIndividualPrediction(data.predictedY);
+          setSampleIndividualPrediction({
+            xToPredict: +parseFloat(data.xToPredict).toFixed(4),
+            predictedY: +parseFloat(data.predictedY).toFixed(4),
+          });
         })
         .catch((error) => console.error("Error fetching data:", error));
     }
@@ -229,6 +235,7 @@ function CustomKnnPage() {
             <Col>
               <div className="mb-3">
                 <Card>
+                  <Card.Title>Set Custom Parameters</Card.Title>
                   <Card.Body>
                     {" "}
                     <CustomForm
@@ -240,25 +247,59 @@ function CustomKnnPage() {
               </div>
               <div className="mb-3">
                 <Card>
+                  <Card.Title>Get a Prediction</Card.Title>
                   <Card.Body>
-                    <CustomForm
-                      onSubmit={handleDataFromPredictionForm}
-                      schema={predictionInputFormSchema}
-                    />
+                    <Container>
+                      <Row>
+                        <CustomForm
+                          onSubmit={handleDataFromPredictionForm}
+                          schema={predictionInputFormSchema}
+                        />
+                      </Row>
+                      <Row>
+                        <Col xs={6}>
+                          {sampleIndividualPrediction && (
+                            <Card>
+                              <Card.Title>
+                                Sample Individual Prediction
+                              </Card.Title>
+                              <Card.Body>
+                                <Row>
+                                  {" X = "}
+                                  {sampleIndividualPrediction.xToPredict}
+                                </Row>
+                                <Row>
+                                  {" Y = "}
+                                  {sampleIndividualPrediction.predictedY}
+                                </Row>
+                              </Card.Body>
+                            </Card>
+                          )}
+                        </Col>
+                        <Col xs={6}>
+                          {customIndividualPrediction && (
+                            <Card>
+                              <Card.Title>
+                                Custom Individual Prediction
+                              </Card.Title>
+                              <Card.Body>
+                                <Row>
+                                  {" X = "}
+                                  {customIndividualPrediction.xToPredict}
+                                </Row>
+                                <Row>
+                                  {" Y = "}
+                                  {customIndividualPrediction.predictedY}
+                                </Row>
+                              </Card.Body>
+                            </Card>
+                          )}
+                        </Col>
+                      </Row>
+                    </Container>
                   </Card.Body>
                 </Card>
               </div>
-
-              {sampleIndividualPrediction && (
-                <h3>
-                  Sample Individual Prediction {sampleIndividualPrediction}
-                </h3>
-              )}
-              {customIndividualPrediction && (
-                <h3>
-                  Custom Individual Prediction {customIndividualPrediction}
-                </h3>
-              )}
             </Col>
           </Row>
         </Container>
