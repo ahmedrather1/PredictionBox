@@ -214,25 +214,15 @@ function CustomKnnPage() {
         <Container fluid>
           <Row>
             <Col sm={8}>
-              <Card style={{ height: "70vh" }}>
-                <Card.Body
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    height: "100%",
-                  }}
-                >
-                  <ChartComponent
-                    samplePrediction={samplePrediction}
-                    originalData={originalData}
-                    customPrediction={customPrediction}
-                    showCustomPrediction={showCustomPrediction}
-                    setShowCustomPrediction={setShowCustomPrediction}
-                    predictor={predictor}
-                    response={response}
-                  />
-                </Card.Body>
-              </Card>
+              <ChartComponent
+                samplePrediction={samplePrediction}
+                originalData={originalData}
+                customPrediction={customPrediction}
+                showCustomPrediction={showCustomPrediction}
+                setShowCustomPrediction={setShowCustomPrediction}
+                predictor={predictor}
+                response={response}
+              />
             </Col>
             <Col>
               <div className="mb-3">
