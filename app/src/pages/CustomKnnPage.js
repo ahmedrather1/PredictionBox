@@ -67,11 +67,15 @@ function CustomKnnPage() {
 
   const [ypred, setYpred] = useState(null);
   const [samplePrediction, setSamplePrediction] = useState(null);
+  const [sampleIndividualPrediction, setSampleIndividualPrediction] =
+    useState(null);
 
   const [customYPred, setCustomYPred] = useState(null);
   const [customPrediction, setCustomPrediction] = useState(null);
   const [showCustomPrediction, setShowCustomPrediction] = useState(false);
   const [customParameters, setCustomParameters] = useState(null);
+  const [customIndividualPrediction, setCustomIndividualPrediction] =
+    useState(null);
 
   const PredictionInputFormSchema = {
     type: "object",
@@ -95,6 +99,7 @@ function CustomKnnPage() {
             type: "integer",
             title: "Predictor (X value)",
             minimum: 1,
+            readOnly: customParameters ? false : true,
           },
         },
         required: ["predictorCustom"],
@@ -250,7 +255,42 @@ function CustomKnnPage() {
   };
 
   const handleDataFromPredictionForm = (data) => {
-    console.log(data);
+    const formData = new FormData();
+    if (data.predictorCustom) {
+      formData.append("csv-file", file);
+      formData.append("predictor", predictor);
+      formData.append("response", response);
+      formData.append("maxK", customParameters.maxK);
+      formData.append("customK", customParameters.customK);
+      formData.append("customFolds", customParameters.customFolds);
+      formData.append("customFolds", customParameters.customFolds);
+      formData.append("xToPredict", data.predictorCustom);
+      console.log(formData);
+      fetch(`http://127.0.0.1:8000/call-custom-knn-individual/`, {
+        method: "POST",
+        body: formData,
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          setCustomIndividualPrediction(data.predictedY);
+        })
+        .catch((error) => console.error("Error fetching data:", error));
+    }
+    if (data.predictorSample) {
+      formData.append("csv-file", file);
+      formData.append("predictor", predictor);
+      formData.append("response", response);
+      formData.append("xToPredict", data.predictorSample);
+      fetch(`http://127.0.0.1:8000/call-sample-knn-individual/`, {
+        method: "POST",
+        body: formData,
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          setSampleIndividualPrediction(data.predictedY);
+        })
+        .catch((error) => console.error("Error fetching data:", error));
+    }
   };
 
   const renderContent = () => {
@@ -278,6 +318,12 @@ function CustomKnnPage() {
             onSubmit={handleDataFromPredictionForm}
             schema={PredictionInputFormSchema}
           />
+          {sampleIndividualPrediction && (
+            <h3>Sample Individual Prediction {sampleIndividualPrediction}</h3>
+          )}
+          {customIndividualPrediction && (
+            <h3>Custom Individual Prediction {customIndividualPrediction}</h3>
+          )}
         </GraphContainer>
       );
     }

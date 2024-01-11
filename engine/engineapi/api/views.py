@@ -53,7 +53,7 @@ def callCustomKnnFull(request):
     return JsonResponse({'xrange': xrange,'ypred': ypred, 'originalData': originalData})
 
 @api_view(['POST'])
-def callCustomKnnIndividual(request, xToPredict):
+def callCustomKnnIndividual(request):
 
     file = request.FILES.get('csv-file')
     predictor = request.data.get('predictor')
@@ -61,6 +61,7 @@ def callCustomKnnIndividual(request, xToPredict):
     customFolds = request.data.get('customFolds')
     maxK = request.data.get('maxK')
     customK = request.data.get('customK')
+    xToPredict = request.data.get('xToPredict')
 
     print(customFolds)
     print(maxK)
@@ -74,16 +75,17 @@ def callCustomKnnIndividual(request, xToPredict):
     return JsonResponse({'predictedY': predictedY})
 
 @api_view(['POST'])
-def callSampleKnnIndividual(request, xToPredict):
+def callSampleKnnIndividual(request):
     file = request.FILES.get('csv-file')
     predictor = request.data.get('predictor')
     response = request.data.get('response')
+    xToPredict = request.data.get('xToPredict')
     if not file:
         return JsonResponse({'error': 'No file uploaded'}, status=400)
 
     try:
         predictedY = sampleKnnIndividualPrediction(file, predictor, response, xToPredict)
-    except KeyError as e:
+    except Exception as e:
         errorMessage = str(e)
         return JsonResponse({'error': errorMessage}, status=400)
 

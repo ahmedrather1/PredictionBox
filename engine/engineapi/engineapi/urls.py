@@ -25,8 +25,8 @@ from api.views import callCustomKnnIndividual
 urlpatterns = [
     path('call-knn/', callbasicknn),
     path('call-sample-knn/', callSampleKnnFull),
-    path('call-sample-knn/<str:xToPredict>/', callSampleKnnIndividual),
+    path('call-sample-knn-individual/', callSampleKnnIndividual),
     path('call-custom-knn/', callCustomKnnFull),
-    path('call-custom-knn/<str:xToPredict>/', callCustomKnnIndividual),
+    path('call-custom-knn-individual/', callCustomKnnIndividual),
 
 ]
