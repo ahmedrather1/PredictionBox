@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import GraphComponent from "../components/common/GraphComponent";
 import PredictorResponseSelector from "../components/common/PredictorResponseSelector";
 import { Navbar, Container, Nav } from "react-bootstrap";
 import styled from "styled-components";
 import Papa from "papaparse";
 import ChartComponent from "../components/common/ChartComponent";
 import CustomForm from "../components/common/CustomForm";
+import { CustomParameterInputFormSchema } from "../formSchemas/CustomParameterInputFormSchema";
+import { PredictionInputFormSchema } from "../formSchemas/PredictionInputFormSchema";
 
-// CustomKnnPage Component
 function CustomKnnPage() {
   const [columns, setColumns] = useState(null);
   const [file, setFile] = useState(null);
@@ -31,72 +31,20 @@ function CustomKnnPage() {
   const [customIndividualPrediction, setCustomIndividualPrediction] =
     useState(null);
 
-  const PredictionInputFormSchema = {
-    type: "object",
-    title: "Custom Parameter Input",
-    oneOf: [
-      {
-        title: "Sample Model", // Title for the first option
-        properties: {
-          predictorSample: {
-            type: "integer",
-            title: "Predictor (X value)",
-            minimum: 1,
-          },
-        },
-        required: ["predictorSample"],
-      },
-      {
-        title: "Your Custom Model", // Title for the second option
-        properties: {
-          predictorCustom: {
-            type: "integer",
-            title: "Predictor (X value)",
-            minimum: 1,
-            readOnly: customParameters ? false : true,
-          },
-        },
-        required: ["predictorCustom"],
-      },
-    ],
-  };
+  const [predictionInputFormSchema, setPredictionInputFormSchema] =
+    useState(null);
+  const [customParameterInputFormSchema, setCustomParameterInputFormSchema] =
+    useState(null);
 
-  const CustomParameterInputFormSchema = {
-    type: "object",
-    title: "Custom Parameter Input",
-    oneOf: [
-      {
-        title: "Option 1: Custom K Value", // Title for the first option
-        properties: {
-          customK: {
-            type: "integer",
-            title: "Custom K value",
-            minimum: 1,
-            maximum: originalData ? originalData.length : 0,
-          },
-        },
-        required: ["customK"],
-      },
-      {
-        title: "Option 2: Custom Folds and Maximum K", // Title for the second option
-        properties: {
-          maxK: {
-            type: "integer",
-            title: "Maximum K value",
-            minimum: 1,
-            maximum: originalData ? originalData.length : 0,
-          },
-          customFolds: {
-            type: "integer",
-            title: "Number of cross validation folds",
-            minimum: 1,
-            maximum: originalData ? originalData.length : 0,
-          },
-        },
-        required: ["maxK", "customFolds"],
-      },
-    ],
-  };
+  useEffect(() => {
+    let schema = PredictionInputFormSchema(customParameters);
+    setPredictionInputFormSchema(schema);
+  }, [customParameters]);
+
+  useEffect(() => {
+    let schema = CustomParameterInputFormSchema(originalData);
+    setCustomParameterInputFormSchema(schema);
+  }, [originalData]);
 
   useEffect(() => {
     if (predictor && response) {
@@ -266,11 +214,11 @@ function CustomKnnPage() {
           />
           <CustomForm
             onSubmit={handleDataFromParameterInputForm}
-            schema={CustomParameterInputFormSchema}
+            schema={customParameterInputFormSchema}
           />
           <CustomForm
             onSubmit={handleDataFromPredictionForm}
-            schema={PredictionInputFormSchema}
+            schema={predictionInputFormSchema}
           />
           {sampleIndividualPrediction && (
             <h3>Sample Individual Prediction {sampleIndividualPrediction}</h3>
