@@ -5,7 +5,7 @@ import { Navbar, Container, Nav } from "react-bootstrap";
 import styled from "styled-components";
 import Papa from "papaparse";
 import ChartComponent from "../components/common/ChartComponent";
-import CustomParameterInputForm from "../components/common/CustomParameterInputForm";
+import CustomForm from "../components/common/CustomForm";
 
 // Styled components
 const StyledHeader = styled(Navbar)`
@@ -60,21 +60,56 @@ function CustomKnnPage() {
   const [fileData, setFileData] = useState(null);
 
   const [xrange, setXrange] = useState(null);
-  const [ypred, setYpred] = useState(null);
   const [originalData, setOriginalData] = useState(null);
 
   const [predictor, setPredictor] = useState(null);
   const [response, setResponse] = useState(null);
 
-  const [bestPrediction, setBestPrediction] = useState(null);
+  const [ypred, setYpred] = useState(null);
+  const [samplePrediction, setSamplePrediction] = useState(null);
+  const [sampleIndividualPrediction, setSampleIndividualPrediction] =
+    useState(null);
 
   const [customYPred, setCustomYPred] = useState(null);
-
   const [customPrediction, setCustomPrediction] = useState(null);
   const [showCustomPrediction, setShowCustomPrediction] = useState(false);
-  const inputFormSchema = {
+  const [customParameters, setCustomParameters] = useState(null);
+  const [customIndividualPrediction, setCustomIndividualPrediction] =
+    useState(null);
+
+  const PredictionInputFormSchema = {
     type: "object",
-    title: "Custom Form", // Title at the top of the form
+    title: "Custom Parameter Input",
+    oneOf: [
+      {
+        title: "Sample Model", // Title for the first option
+        properties: {
+          predictorSample: {
+            type: "integer",
+            title: "Predictor (X value)",
+            minimum: 1,
+          },
+        },
+        required: ["predictorSample"],
+      },
+      {
+        title: "Your Custom Model", // Title for the second option
+        properties: {
+          predictorCustom: {
+            type: "integer",
+            title: "Predictor (X value)",
+            minimum: 1,
+            readOnly: customParameters ? false : true,
+          },
+        },
+        required: ["predictorCustom"],
+      },
+    ],
+  };
+
+  const CustomParameterInputFormSchema = {
+    type: "object",
+    title: "Custom Parameter Input",
     oneOf: [
       {
         title: "Option 1: Custom K Value", // Title for the first option
@@ -116,7 +151,7 @@ function CustomKnnPage() {
       formData.append("predictor", predictor);
       formData.append("response", response);
 
-      fetch("http://127.0.0.1:8000/call-best-knn/", {
+      fetch("http://127.0.0.1:8000/call-sample-knn/", {
         method: "POST",
         body: formData,
       })
@@ -134,7 +169,7 @@ function CustomKnnPage() {
     if (xrange && ypred) {
       let prediction = xrange.map((e, i) => [e, ypred[i]]);
       console.log(prediction);
-      setBestPrediction(prediction);
+      setSamplePrediction(prediction);
     }
   }, [xrange, ypred]);
 
@@ -193,10 +228,13 @@ function CustomKnnPage() {
 
   const handleDataFromParameterInputForm = (data) => {
     setShowCustomPrediction(false);
-    console.log("fromform", data);
     setCustomYPred(null);
-
     setCustomPrediction(null);
+    setCustomParameters({
+      maxK: data.maxK,
+      customK: data.customK,
+      customFolds: data.customFolds,
+    });
     const formData = new FormData();
     formData.append("csv-file", file);
     formData.append("predictor", predictor);
@@ -216,16 +254,55 @@ function CustomKnnPage() {
       .catch((error) => console.error("Error fetching data:", error));
   };
 
+  const handleDataFromPredictionForm = (data) => {
+    const formData = new FormData();
+    if (data.predictorCustom) {
+      formData.append("csv-file", file);
+      formData.append("predictor", predictor);
+      formData.append("response", response);
+      formData.append("maxK", customParameters.maxK);
+      formData.append("customK", customParameters.customK);
+      formData.append("customFolds", customParameters.customFolds);
+      formData.append("customFolds", customParameters.customFolds);
+      formData.append("xToPredict", data.predictorCustom);
+      console.log(formData);
+      fetch(`http://127.0.0.1:8000/call-custom-knn-individual/`, {
+        method: "POST",
+        body: formData,
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          setCustomIndividualPrediction(data.predictedY);
+        })
+        .catch((error) => console.error("Error fetching data:", error));
+    }
+    if (data.predictorSample) {
+      formData.append("csv-file", file);
+      formData.append("predictor", predictor);
+      formData.append("response", response);
+      formData.append("xToPredict", data.predictorSample);
+      fetch(`http://127.0.0.1:8000/call-sample-knn-individual/`, {
+        method: "POST",
+        body: formData,
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          setSampleIndividualPrediction(data.predictedY);
+        })
+        .catch((error) => console.error("Error fetching data:", error));
+    }
+  };
+
   const renderContent = () => {
     if (!file) {
       return <input type="file" onChange={handleFileChange} />;
     }
 
-    if (bestPrediction && originalData) {
+    if (samplePrediction && originalData) {
       return (
         <GraphContainer>
           <ChartComponent
-            bestPrediction={bestPrediction}
+            samplePrediction={samplePrediction}
             originalData={originalData}
             customPrediction={customPrediction}
             showCustomPrediction={showCustomPrediction}
@@ -233,10 +310,20 @@ function CustomKnnPage() {
             predictor={predictor}
             response={response}
           />
-          <CustomParameterInputForm
+          <CustomForm
             onSubmit={handleDataFromParameterInputForm}
-            schema={inputFormSchema}
+            schema={CustomParameterInputFormSchema}
           />
+          <CustomForm
+            onSubmit={handleDataFromPredictionForm}
+            schema={PredictionInputFormSchema}
+          />
+          {sampleIndividualPrediction && (
+            <h3>Sample Individual Prediction {sampleIndividualPrediction}</h3>
+          )}
+          {customIndividualPrediction && (
+            <h3>Custom Individual Prediction {customIndividualPrediction}</h3>
+          )}
         </GraphContainer>
       );
     }
