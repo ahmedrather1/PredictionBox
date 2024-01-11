@@ -7,7 +7,7 @@ import ChartComponent from "../components/common/ChartComponent";
 import CustomForm from "../components/common/CustomForm";
 import { CustomParameterInputFormSchema } from "../formSchemas/CustomParameterInputFormSchema";
 import { PredictionInputFormSchema } from "../formSchemas/PredictionInputFormSchema";
-
+import CustomParameterCard from "../components/common/CustomParameterCard";
 function CustomKnnPage() {
   // TODO too many usestates! use redux instead
   const [columns, setColumns] = useState(null);
@@ -234,16 +234,10 @@ function CustomKnnPage() {
             </Col>
             <Col>
               <div className="mb-3">
-                <Card>
-                  <Card.Title>Set Custom Parameters</Card.Title>
-                  <Card.Body>
-                    {" "}
-                    <CustomForm
-                      onSubmit={handleDataFromParameterInputForm}
-                      schema={customParameterInputFormSchema}
-                    />
-                  </Card.Body>
-                </Card>
+                <CustomParameterCard
+                  onSubmit={handleDataFromParameterInputForm}
+                  schema={customParameterInputFormSchema}
+                />
               </div>
               <div className="mb-3">
                 <Card>
