@@ -126,6 +126,11 @@ function CustomKnnPage() {
     }
   };
 
+  const handleFileUpload = async (uploadedFile) => {
+    console.log("got here,", uploadedFile);
+    setFile(uploadedFile);
+  };
+
   const handleDataFromPredictorResponseSelector = (data) => {
     setPredictor(data.predictor);
     setResponse(data.response);
@@ -206,7 +211,7 @@ function CustomKnnPage() {
 
   const renderContent = () => {
     if (!file) {
-      return <FileUploadComponent onChange={handleFileChange} />;
+      return <FileUploadComponent onFileUpload={handleFileUpload} />;
     }
 
     if (samplePrediction && originalData) {

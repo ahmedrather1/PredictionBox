@@ -6,7 +6,7 @@ import {
 } from "@jsonforms/material-renderers";
 import { Button } from "react-bootstrap";
 
-// Define your JSON schema
+// Replace this component's implementation with CustomForm
 const schemaGen = (columns) => ({
   type: "object",
   properties: {
@@ -20,7 +20,7 @@ const schemaGen = (columns) => ({
     },
   },
 });
-// Define your UI schema
+
 const uiSchema = {
   type: "HorizontalLayout",
   elements: [
