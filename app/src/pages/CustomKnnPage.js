@@ -8,6 +8,8 @@ import CustomForm from "../components/common/CustomForm";
 import { CustomParameterInputFormSchema } from "../formSchemas/CustomParameterInputFormSchema";
 import { PredictionInputFormSchema } from "../formSchemas/PredictionInputFormSchema";
 import CustomParameterCard from "../components/common/CustomParameterCard";
+import IndividualPredictionCard from "../components/common/IndividualPredictionCard";
+
 function CustomKnnPage() {
   // TODO too many usestates! use redux instead
   const [columns, setColumns] = useState(null);
@@ -240,59 +242,12 @@ function CustomKnnPage() {
                 />
               </div>
               <div className="mb-3">
-                <Card>
-                  <Card.Title>Get a Prediction</Card.Title>
-                  <Card.Body>
-                    <Container>
-                      <Row>
-                        <CustomForm
-                          onSubmit={handleDataFromPredictionForm}
-                          schema={predictionInputFormSchema}
-                        />
-                      </Row>
-                      <Row>
-                        <Col xs={6}>
-                          {sampleIndividualPrediction && (
-                            <Card>
-                              <Card.Title>
-                                Sample Individual Prediction
-                              </Card.Title>
-                              <Card.Body>
-                                <Row>
-                                  {" X = "}
-                                  {sampleIndividualPrediction.xToPredict}
-                                </Row>
-                                <Row>
-                                  {" Y = "}
-                                  {sampleIndividualPrediction.predictedY}
-                                </Row>
-                              </Card.Body>
-                            </Card>
-                          )}
-                        </Col>
-                        <Col xs={6}>
-                          {customIndividualPrediction && (
-                            <Card>
-                              <Card.Title>
-                                Custom Individual Prediction
-                              </Card.Title>
-                              <Card.Body>
-                                <Row>
-                                  {" X = "}
-                                  {customIndividualPrediction.xToPredict}
-                                </Row>
-                                <Row>
-                                  {" Y = "}
-                                  {customIndividualPrediction.predictedY}
-                                </Row>
-                              </Card.Body>
-                            </Card>
-                          )}
-                        </Col>
-                      </Row>
-                    </Container>
-                  </Card.Body>
-                </Card>
+                <IndividualPredictionCard
+                  onSubmit={handleDataFromPredictionForm}
+                  schema={predictionInputFormSchema}
+                  sampleIndividualPrediction={sampleIndividualPrediction}
+                  customIndividualPrediction={customIndividualPrediction}
+                />
               </div>
             </Col>
           </Row>
