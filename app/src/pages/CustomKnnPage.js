@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PredictorResponseSelector from "../components/common/PredictorResponseSelector";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Card } from "react-bootstrap";
 import styled from "styled-components";
 import Papa from "papaparse";
 import ChartComponent from "../components/common/ChartComponent";
@@ -203,32 +203,44 @@ function CustomKnnPage() {
 
     if (samplePrediction && originalData) {
       return (
-        <Container>
+        <Container fluid>
           <Row>
-            <Col xs={8}>
-              {" "}
-              <ChartComponent
-                samplePrediction={samplePrediction}
-                originalData={originalData}
-                customPrediction={customPrediction}
-                showCustomPrediction={showCustomPrediction}
-                setShowCustomPrediction={setShowCustomPrediction}
-                predictor={predictor}
-                response={response}
-              />
+            <Col sm={8}>
+              <Card>
+                <Card.Body>
+                  <ChartComponent
+                    samplePrediction={samplePrediction}
+                    originalData={originalData}
+                    customPrediction={customPrediction}
+                    showCustomPrediction={showCustomPrediction}
+                    setShowCustomPrediction={setShowCustomPrediction}
+                    predictor={predictor}
+                    response={response}
+                  />
+                </Card.Body>
+              </Card>
             </Col>
             <Col>
               <div className="mb-3">
-                <CustomForm
-                  onSubmit={handleDataFromParameterInputForm}
-                  schema={customParameterInputFormSchema}
-                />
+                <Card>
+                  <Card.Body>
+                    {" "}
+                    <CustomForm
+                      onSubmit={handleDataFromParameterInputForm}
+                      schema={customParameterInputFormSchema}
+                    />
+                  </Card.Body>
+                </Card>
               </div>
               <div className="mb-3">
-                <CustomForm
-                  onSubmit={handleDataFromPredictionForm}
-                  schema={predictionInputFormSchema}
-                />
+                <Card>
+                  <Card.Body>
+                    <CustomForm
+                      onSubmit={handleDataFromPredictionForm}
+                      schema={predictionInputFormSchema}
+                    />
+                  </Card.Body>
+                </Card>
               </div>
 
               {sampleIndividualPrediction && (
