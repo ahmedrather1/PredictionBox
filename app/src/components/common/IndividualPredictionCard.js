@@ -10,8 +10,8 @@ const IndividualPredictionCard = ({
 }) => {
   return (
     <Card>
-      <Card.Title>Get a Prediction</Card.Title>
       <Card.Body>
+        <Card.Title>Get a Prediction</Card.Title>
         <Container>
           <Row>
             <CustomForm onSubmit={onSubmit} schema={schema} />
@@ -19,9 +19,11 @@ const IndividualPredictionCard = ({
           <Row>
             <Col xs={6}>
               {sampleIndividualPrediction && (
-                <Card>
-                  <Card.Title>Sample Individual Prediction</Card.Title>
+                <Card className="mt-2">
                   <Card.Body>
+                    <Card.Title style={{ fontSize: "12px" }}>
+                      Sample Model Prediction
+                    </Card.Title>
                     <Row>
                       {" X = "}
                       {sampleIndividualPrediction.xToPredict}
@@ -36,18 +38,24 @@ const IndividualPredictionCard = ({
             </Col>
             <Col xs={6}>
               {customIndividualPrediction && (
-                <Card>
-                  <Card.Title>Custom Individual Prediction</Card.Title>
-                  <Card.Body>
-                    <Row>
-                      {" X = "}
-                      {customIndividualPrediction.xToPredict}
-                    </Row>
-                    <Row>
-                      {" Y = "}
-                      {customIndividualPrediction.predictedY}
-                    </Row>
-                  </Card.Body>
+                <Card className="mt-2">
+                  <div style={{ justifyContent: "center" }}>
+                    <Card.Body>
+                      <Card.Title style={{ fontSize: "12px" }}>
+                        Custom Model Prediction
+                      </Card.Title>
+                      <Card.Text>
+                        <Row>
+                          {" X = "}
+                          {customIndividualPrediction.xToPredict}
+                        </Row>
+                        <Row>
+                          {" Y = "}
+                          {customIndividualPrediction.predictedY}
+                        </Row>
+                      </Card.Text>
+                    </Card.Body>
+                  </div>
                 </Card>
               )}
             </Col>

@@ -11,6 +11,7 @@ import CustomParameterCard from "../components/common/CustomParameterCard";
 import IndividualPredictionCard from "../components/common/IndividualPredictionCard";
 import FileUploadComponent from "../components/common/FileUploadComponent";
 import Header from "../components/common/Header";
+import KnnOptionsText from "../components/common/text/KnnOptionsText";
 
 function CustomKnnPage() {
   // TODO too many usestates! use redux instead
@@ -219,7 +220,7 @@ function CustomKnnPage() {
       return (
         <Container fluid>
           <Row>
-            <Col sm={8}>
+            <Col sm={8} className="mt-3">
               <ChartComponent
                 samplePrediction={samplePrediction}
                 originalData={originalData}
@@ -231,7 +232,7 @@ function CustomKnnPage() {
               />
             </Col>
             <Col>
-              <div className="mb-3">
+              <div className="mb-3 mt-3">
                 <CustomParameterCard
                   onSubmit={handleDataFromParameterInputForm}
                   schema={customParameterInputFormSchema}
@@ -246,6 +247,20 @@ function CustomKnnPage() {
                 />
               </div>
             </Col>
+          </Row>
+          <Row>
+            <Container>
+              <Col md={8}>
+                <Card className="mt-3 mb-4">
+                  <Card.Body>
+                    <Card.Title>
+                      Understanding Your KNN Sandbox Options
+                    </Card.Title>
+                    <KnnOptionsText />
+                  </Card.Body>
+                </Card>
+              </Col>
+            </Container>
           </Row>
         </Container>
       );

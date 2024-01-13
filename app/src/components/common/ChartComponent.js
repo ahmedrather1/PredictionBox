@@ -144,12 +144,13 @@ const ChartComponent = ({
   };
 
   return (
-    <Card style={{ height: "70vh" }}>
+    <Card style={{ height: "76vh" }}>
       <Card.Body
         style={{
           display: "flex",
           flexDirection: "column",
           height: "100%",
+          overflow: "auto",
         }}
       >
         <div
@@ -173,7 +174,7 @@ const ChartComponent = ({
           <ToggleButton
             id="toggle-sample-prediction"
             type="checkbox"
-            variant="outline-secondary"
+            variant="outline-danger"
             checked={showSamplePrediction}
             onChange={(e) => setShowSamplePrediction(e.currentTarget.checked)}
             style={{ margin: "10px" }}
@@ -239,6 +240,13 @@ const ChartComponent = ({
             data={combinedData}
             options={{
               title: `${predictor} vs ${response}`,
+              titleTextStyle: {
+                color: "black", // Title color
+                fontSize: 20, // Title font size
+                fontName: "Arial",
+                bold: true, // Title font weight (true for bold)
+                italic: false, // Title font style (true for italic)
+              },
               series: customSeries,
               hAxis: {
                 title: predictor,

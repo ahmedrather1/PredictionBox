@@ -8,7 +8,7 @@ function Header() {
     <>
       <Navbar expand="sm" style={{ backgroundColor: "#f2f2f2" }}>
         <Container>
-          <Navbar.Brand href="#home">ModelBox</Navbar.Brand>
+          <Navbar.Brand href="/">ModelBox</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
