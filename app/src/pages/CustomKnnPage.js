@@ -211,9 +211,9 @@ function CustomKnnPage() {
   };
 
   const renderContent = () => {
-    if (!file) {
-      return <FileUploadComponent onFileUpload={handleFileUpload} />;
-    }
+    // if (!file) {
+    //   return <FileUploadComponent onFileUpload={handleFileUpload} />;
+    // }
 
     if (samplePrediction && originalData) {
       return (
@@ -249,16 +249,26 @@ function CustomKnnPage() {
           </Row>
         </Container>
       );
-    }
-
-    if (columns) {
+    } else {
       return (
-        <PredictorResponseSelector
+        <FileUploadComponent
+          onFileUpload={handleFileUpload}
           columns={columns}
-          sendDataToParent={handleDataFromPredictorResponseSelector}
+          handleDataFromPredictorResponseSelector={
+            handleDataFromPredictorResponseSelector
+          }
         />
       );
     }
+
+    // if (columns) {
+    //   return (
+    //     <PredictorResponseSelector
+    //       columns={columns}
+    //       sendDataToParent={handleDataFromPredictorResponseSelector}
+    //     />
+    //   );
+    // }
 
     return <p>Loading data, please wait...</p>;
   };

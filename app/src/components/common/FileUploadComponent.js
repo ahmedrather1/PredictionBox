@@ -2,11 +2,17 @@ import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import CustomForm from "./CustomForm";
 import { DemoDataSelectorSchema } from "../../formSchemas/DemoDataSelectorSchema";
+import { PredictorResponseSelectorSchema } from "../../formSchemas/PredictorResponseSelectorSchema";
+
 import { fetchCsvFileAsBlob } from "../../utils/fetchCsvFileAsBlob";
 import AboutKnnText from "./text/AboutKnnText";
 import ChooseDataText from "./text/ChooseDataText";
 
-const FileUploadComponent = ({ onFileUpload }) => {
+const FileUploadComponent = ({
+  onFileUpload,
+  columns,
+  handleDataFromPredictorResponseSelector,
+}) => {
   const [currentFile, setCurrentFile] = useState(null);
   const [isDemoData, setIsDemoData] = useState(null);
 
@@ -42,7 +48,7 @@ const FileUploadComponent = ({ onFileUpload }) => {
     <Container>
       <Row>
         <Col md={8}>
-          <div className="mb-3">
+          <div className="mb-3 mt-3">
             <Card>
               <Card.Body>
                 <Card.Title className="text-center">
@@ -53,56 +59,86 @@ const FileUploadComponent = ({ onFileUpload }) => {
             </Card>
           </div>
         </Col>
-        <Col md={4}>
-          <Row>
-            <div className="mb-3">
-              <Card>
-                <Card.Body>
-                  <Card.Title className="text-center">
-                    Upload Your own File
-                  </Card.Title>
-                  <Container>
-                    <Row>
-                      <input type="file" onChange={handleFileChange} />
-                    </Row>
-                    <Row className="mt-3">
-                      <Button type="submit" onClick={handleSubmitUploadedFile}>
-                        Submit
-                      </Button>
-                    </Row>
-                  </Container>
-                </Card.Body>
-              </Card>
-            </div>
-          </Row>
-          <Row>
-            <div className="mb-3">
-              <Card>
-                <Card.Body>
-                  <Card.Title className="text-center">
-                    Choose Demo Data
-                  </Card.Title>
+        {!columns && (
+          <Col md={4}>
+            <Row>
+              <div className="mb-3 mt-3">
+                <Card>
+                  <Card.Body>
+                    <Card.Title className="text-center">
+                      Upload Your own File
+                    </Card.Title>
+                    <Container>
+                      <Row>
+                        <input
+                          type="file"
+                          className="mt-2"
+                          onChange={handleFileChange}
+                        />
+                      </Row>
+                      <Row className="mt-3">
+                        <Col md={3}>
+                          <Button
+                            type="submit"
+                            onClick={handleSubmitUploadedFile}
+                          >
+                            Submit
+                          </Button>
+                        </Col>
+                      </Row>
+                    </Container>
+                  </Card.Body>
+                </Card>
+              </div>
+            </Row>
+            <Row>
+              <div className="mb-3">
+                <Card>
+                  <Card.Body>
+                    <Card.Title className="text-center">
+                      Choose Demo Data
+                    </Card.Title>
 
+                    <CustomForm
+                      schema={DemoDataSelectorSchema()}
+                      onSubmit={handleSubmitDemoData}
+                    />
+                  </Card.Body>
+                </Card>
+              </div>
+            </Row>
+          </Col>
+        )}
+        {columns && (
+          <Col md={4}>
+            <div className="mb-3 mt-3">
+              <Card>
+                <Card.Body>
+                  <Card.Title>
+                    Choose Your Predictor (X variable) and Response (Y Variable)
+                  </Card.Title>
                   <CustomForm
-                    schema={DemoDataSelectorSchema()}
-                    onSubmit={handleSubmitDemoData}
+                    schema={PredictorResponseSelectorSchema(columns)}
+                    onSubmit={handleDataFromPredictorResponseSelector}
                   />
                 </Card.Body>
               </Card>
             </div>
-          </Row>
-        </Col>
+          </Col>
+        )}
       </Row>
-      <Row className="mt-3">
-        <Card>
-          <Card.Body>
-            <Card.Title className="text-center">
-              <strong> About the K Nearest Neighbors Algorithm</strong>
-            </Card.Title>
-            <AboutKnnText />
-          </Card.Body>
-        </Card>
-      </Row>
+      <div className="mb-3">
+        <Row className="mt-3">
+          <Card>
+            <Card.Body>
+              <Card.Title className="text-center">
+                <strong> About the K Nearest Neighbors Algorithm</strong>
+              </Card.Title>
+              <AboutKnnText />
+            </Card.Body>
+          </Card>
+        </Row>
+      </div>
     </Container>
   );
 };

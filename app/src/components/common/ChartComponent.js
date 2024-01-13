@@ -153,105 +153,102 @@ const ChartComponent = ({
         }}
       >
         <div
-          style={{ display: "flex", flexDirection: "column", height: "100%" }}
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            margin: "10px 0", // Adjust the margin as needed
+          }}
         >
-          <div
-            style={{
-              margin: "mt-6",
-            }}
+          <ToggleButton
+            id="toggle-scatter"
+            type="checkbox"
+            variant="outline-primary"
+            checked={showScatterPlot}
+            onChange={(e) => setShowScatterPlot(e.currentTarget.checked)}
+            style={{ margin: "10px" }}
           >
-            <ToggleButton
-              id="toggle-scatter"
-              type="checkbox"
-              variant="outline-primary"
-              checked={showScatterPlot}
-              onChange={(e) => setShowScatterPlot(e.currentTarget.checked)}
-              style={{ margin: "10px" }}
-            >
-              {showScatterPlot ? "Hide Original Data" : "Show Original Data"}
-            </ToggleButton>
-            <ToggleButton
-              id="toggle-sample-prediction"
-              type="checkbox"
-              variant="outline-secondary"
-              checked={showSamplePrediction}
-              onChange={(e) => setShowSamplePrediction(e.currentTarget.checked)}
-              style={{ margin: "10px" }}
-            >
-              {showSamplePrediction
-                ? "Hide Sample Prediction"
-                : "Show Sample Prediction"}
-            </ToggleButton>
+            {showScatterPlot ? "Hide Original Data" : "Show Original Data"}
+          </ToggleButton>
+          <ToggleButton
+            id="toggle-sample-prediction"
+            type="checkbox"
+            variant="outline-secondary"
+            checked={showSamplePrediction}
+            onChange={(e) => setShowSamplePrediction(e.currentTarget.checked)}
+            style={{ margin: "10px" }}
+          >
+            {showSamplePrediction
+              ? "Hide Sample Prediction"
+              : "Show Sample Prediction"}
+          </ToggleButton>
 
-            {customPrediction ? (
-              <ToggleButton
-                id="toggle-custom-prediction"
-                type="checkbox"
-                variant="outline-success"
-                checked={showCustomPrediction}
-                disabled={false}
-                onChange={(e) =>
-                  setShowCustomPrediction(e.currentTarget.checked)
-                }
-                style={{ margin: "10px" }}
-              >
-                {showCustomPrediction
-                  ? "Hide Custom Prediction"
-                  : "Show Custom Prediction"}
-              </ToggleButton>
-            ) : (
-              <OverlayTrigger
-                placement="right"
-                trigger="hover"
-                overlay={
-                  <Popover id={`popover-positioned-right`}>
-                    <Popover.Header as="h3">{`Set some custom parameters first!`}</Popover.Header>
-                    <Popover.Body>
-                      Use the <strong>Set Custom Parameters</strong> section
-                    </Popover.Body>
-                  </Popover>
-                }
-              >
-                <span>
-                  <ToggleButton
-                    id="toggle-custom-prediction"
-                    type="checkbox"
-                    variant="outline-success"
-                    checked={showCustomPrediction}
-                    disabled={true}
-                    onChange={(e) =>
-                      setShowCustomPrediction(e.currentTarget.checked)
-                    }
-                    style={{ margin: "10px" }}
-                  >
-                    {showCustomPrediction
-                      ? "Hide Custom Prediction"
-                      : "Show Custom Prediction"}
-                  </ToggleButton>
-                </span>
-              </OverlayTrigger>
-            )}
-          </div>
-          <div style={{ flexGrow: 1, width: "100%", height: "100%" }}>
-            <Chart
-              width="100%"
-              height="100%"
-              chartType="ComboChart"
-              loader={<div>Loading Chart</div>}
-              data={combinedData}
-              options={{
-                title: `${predictor} vs ${response}`,
-                series: customSeries,
-                hAxis: {
-                  title: predictor,
-                },
-                vAxis: {
-                  title: response,
-                },
-                interpolateNulls: true,
-              }}
-            />
-          </div>
+          {customPrediction ? (
+            <ToggleButton
+              id="toggle-custom-prediction"
+              type="checkbox"
+              variant="outline-success"
+              checked={showCustomPrediction}
+              disabled={false}
+              onChange={(e) => setShowCustomPrediction(e.currentTarget.checked)}
+              style={{ margin: "10px" }}
+            >
+              {showCustomPrediction
+                ? "Hide Custom Prediction"
+                : "Show Custom Prediction"}
+            </ToggleButton>
+          ) : (
+            <OverlayTrigger
+              placement="right"
+              trigger="hover"
+              overlay={
+                <Popover id={`popover-positioned-right`}>
+                  <Popover.Header as="h3">{`Set some custom parameters first!`}</Popover.Header>
+                  <Popover.Body>
+                    Use the <strong>Set Custom Parameters</strong> section
+                  </Popover.Body>
+                </Popover>
+              }
+            >
+              <span>
+                <ToggleButton
+                  id="toggle-custom-prediction"
+                  type="checkbox"
+                  variant="outline-success"
+                  checked={showCustomPrediction}
+                  disabled={true}
+                  onChange={(e) =>
+                    setShowCustomPrediction(e.currentTarget.checked)
+                  }
+                  style={{ margin: "10px" }}
+                >
+                  {showCustomPrediction
+                    ? "Hide Custom Prediction"
+                    : "Show Custom Prediction"}
+                </ToggleButton>
+              </span>
+            </OverlayTrigger>
+          )}
+        </div>
+        <div style={{ flexGrow: 1, width: "100%", height: "100%" }}>
+          <Chart
+            width="100%"
+            height="100%"
+            chartType="ComboChart"
+            loader={<div>Loading Chart</div>}
+            data={combinedData}
+            options={{
+              title: `${predictor} vs ${response}`,
+              series: customSeries,
+              hAxis: {
+                title: predictor,
+              },
+              vAxis: {
+                title: response,
+              },
+              interpolateNulls: true,
+            }}
+          />
         </div>
       </Card.Body>
     </Card>

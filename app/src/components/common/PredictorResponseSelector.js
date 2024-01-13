@@ -37,7 +37,6 @@ const uiSchema = {
   ],
 };
 
-// The component
 const PredictorResponseSelector = ({ columns, sendDataToParent }) => {
   const [data, setData] = useState({});
   const [error, setError] = useState("");
