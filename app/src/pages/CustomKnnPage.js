@@ -10,6 +10,7 @@ import { PredictionInputFormSchema } from "../formSchemas/PredictionInputFormSch
 import CustomParameterCard from "../components/common/CustomParameterCard";
 import IndividualPredictionCard from "../components/common/IndividualPredictionCard";
 import FileUploadComponent from "../components/common/FileUploadComponent";
+import Header from "../components/common/Header";
 
 function CustomKnnPage() {
   // TODO too many usestates! use redux instead
@@ -264,6 +265,7 @@ function CustomKnnPage() {
 
   return (
     <div>
+      <Header />
       <h3>K Nearest Neighbors</h3>
       <>{renderContent()}</>
     </div>

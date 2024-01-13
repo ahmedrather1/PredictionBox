@@ -39,8 +39,10 @@ const FileUploadComponent = ({ onFileUpload }) => {
         <Col md={8}>
           <div className="mb-3">
             <Card>
-              <Card.Title>About Knn</Card.Title>
-              <Card.Body> some text</Card.Body>
+              <Card.Body>
+                <Card.Title className="text-center">About Knn</Card.Title>
+                some text
+              </Card.Body>
             </Card>
           </div>
         </Col>
@@ -48,12 +50,20 @@ const FileUploadComponent = ({ onFileUpload }) => {
           <Row>
             <div className="mb-3">
               <Card>
-                <Card.Title>Upload Your own File</Card.Title>
                 <Card.Body>
-                  <input type="file" onChange={handleFileChange} />
-                  <Button type="submit" onClick={handleSubmitUploadedFile}>
-                    Submit
-                  </Button>
+                  <Card.Title className="text-center">
+                    Upload Your own File
+                  </Card.Title>
+                  <Container>
+                    <Row>
+                      <input type="file" onChange={handleFileChange} />
+                    </Row>
+                    <Row className="mt-3">
+                      <Button type="submit" onClick={handleSubmitUploadedFile}>
+                        Submit
+                      </Button>
+                    </Row>
+                  </Container>
                 </Card.Body>
               </Card>
             </div>
@@ -61,8 +71,11 @@ const FileUploadComponent = ({ onFileUpload }) => {
           <Row>
             <div className="mb-3">
               <Card>
-                <Card.Title>Choose Demo Data</Card.Title>
                 <Card.Body>
+                  <Card.Title className="text-center">
+                    Choose Demo Data
+                  </Card.Title>
+
                   <CustomForm
                     schema={DemoDataSelectorSchema()}
                     onSubmit={handleSubmitDemoData}
