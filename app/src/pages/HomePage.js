@@ -18,7 +18,12 @@ const HomePage = () => {
       <Header />
       <Container
         fluid
-        style={{ height: "100vh", display: "flex", flexDirection: "column" }}
+        style={{
+          height: "100vh",
+          display: "flex",
+          flexDirection: "column",
+          backgroundColor: "#f2f2f2",
+        }}
         className="mt-0 pt-0"
       >
         <Row
@@ -57,7 +62,7 @@ const HomePage = () => {
               />
               <Card.Body>
                 <Card.Title className="text-center">
-                  Sample Predictions
+                  <strong>Sample Predictions</strong>
                 </Card.Title>
                 <Card.Text className="text-center">
                   Upload your data and receive instant, insightful sample
@@ -82,7 +87,7 @@ const HomePage = () => {
               />
               <Card.Body>
                 <Card.Title className="text-center">
-                  Model Customization
+                  <strong>Model Customization</strong>
                 </Card.Title>
                 <Card.Text className="text-center">
                   Fine-tune the parameters of your chosen model for a tailored
@@ -107,7 +112,9 @@ const HomePage = () => {
                 className="mb-2"
               />
               <Card.Body>
-                <Card.Title className="text-center">More Models!</Card.Title>
+                <Card.Title className="text-center">
+                  <strong>More Models!</strong>
+                </Card.Title>
                 <Card.Text className="text-center">
                   Choose from a variety of models - KNN, SLR, MLR, Ridge, LASSO
                   - and dive deeper into your data's story. Not only can you use
@@ -119,6 +126,10 @@ const HomePage = () => {
             </Card>
           </Col>
         </Row>
+        <Row className="my-row">
+          <Col md={12}></Col>
+        </Row>
+        <Header />
       </Container>
     </>
   );

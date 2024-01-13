@@ -28,9 +28,21 @@
   color: #61dafb;
 }
 
-.card-title {
-  text-align: center;
-  /* Other styling like font-size, color, etc. */
+.btn-primary {
+  background-color: #6b9080;
+  border-color: #6b9080;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+  background-color: #3c5248;
+  border-color: #3c5248;
+}
+
+.btn-primary:focus:active {
+  background-color: #3c5248;
+  border-color: #3c5248;
 }
 
 @keyframes App-logo-spin {

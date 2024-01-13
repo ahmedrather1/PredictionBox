@@ -266,7 +266,6 @@ function CustomKnnPage() {
   return (
     <div>
       <Header />
-      <h3>K Nearest Neighbors</h3>
       <>{renderContent()}</>
     </div>
   );
