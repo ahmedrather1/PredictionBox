@@ -30,9 +30,14 @@ export class KnnGatewayController {
 
     try {
       const response = await lastValueFrom(
-        this.httpService.post('http://127.0.0.1:8000/call-sample-knn/', form, {
-          headers: form.getHeaders(),
-        }),
+        // TODO CHANGE THIS ASAP!!!! SET UP ENVIRONMENT VARS!!!!!
+        this.httpService.post(
+          'http://prediction-box-engine-env.eba-cqvymbxb.us-west-2.elasticbeanstalk.com/call-sample-knn/',
+          form,
+          {
+            headers: form.getHeaders(),
+          },
+        ),
       );
       res.send(response.data);
     } catch (error) {
@@ -59,9 +64,14 @@ export class KnnGatewayController {
 
     try {
       const response = await lastValueFrom(
-        this.httpService.post('http://127.0.0.1:8000/call-custom-knn/', form, {
-          headers: form.getHeaders(),
-        }),
+        // TODO CHANGE THIS ASAP!!!! SET UP ENVIRONMENT VARS!!!!!
+        this.httpService.post(
+          'http://prediction-box-engine-env.eba-cqvymbxb.us-west-2.elasticbeanstalk.com/call-custom-knn/',
+          form,
+          {
+            headers: form.getHeaders(),
+          },
+        ),
       );
       res.send(response.data);
     } catch (error) {
@@ -90,7 +100,8 @@ export class KnnGatewayController {
     try {
       const response = await lastValueFrom(
         this.httpService.post(
-          'http://127.0.0.1:8000/call-custom-knn-individual/',
+          // TODO CHANGE THIS ASAP!!!! SET UP ENVIRONMENT VARS!!!!!
+          'http://prediction-box-engine-env.eba-cqvymbxb.us-west-2.elasticbeanstalk.com/call-custom-knn-individual/',
           form,
           {
             headers: form.getHeaders(),
@@ -121,7 +132,9 @@ export class KnnGatewayController {
     try {
       const response = await lastValueFrom(
         this.httpService.post(
-          'http://127.0.0.1:8000/call-sample-knn-individual/',
+          // TODO CHANGE THIS ASAP!!!! SET UP ENVIRONMENT VARS!!!!!
+
+          'http://prediction-box-engine-env.eba-cqvymbxb.us-west-2.elasticbeanstalk.com/call-sample-knn-individual/',
           form,
           {
             headers: form.getHeaders(),
