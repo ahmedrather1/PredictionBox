@@ -24,7 +24,9 @@ const CustomForm = ({ schema, onSubmit }) => {
         cells={materialCells}
         onChange={({ data }) => setData(data)}
       />
-      <Button type="submit">Submit</Button>
+      <Button type="submit" className="mt-2">
+        Submit
+      </Button>
     </form>
   );
 };
