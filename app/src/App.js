@@ -5,21 +5,21 @@ import "./App.css";
 import HomePage from "./pages/HomePage";
 import styled from "styled-components";
 
-const StyledApp = styled.div`
-  background-color: #f2f2f2;
-  background-size: cover;
-`;
+// const StyledApp = styled.div`
+//   background-color: #f2f2f2;
+//   background-size: cover;
+// `;
 
 function App() {
   return (
-    <StyledApp>
+    <div className="app-container">
       <Router>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/knn" element={<CustomKnnPage />} />
         </Routes>
       </Router>
-    </StyledApp>
+    </div>
   );
 }
 

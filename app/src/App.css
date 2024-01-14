@@ -45,6 +45,20 @@
   border-color: #3c5248;
 }
 
+.app-container {
+  background-color: #f2f2f2; /* Your desired color */
+  min-height: 100vh; /* 100% of the viewport height */
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background-color: #f2f2f2; /* Replace #yourColor with your actual color hex code */
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
