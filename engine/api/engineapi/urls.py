@@ -16,14 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from api.views import callbasicknn
-from api.views import callSampleKnnFull
-from api.views import callCustomKnnFull
-from api.views import callSampleKnnIndividual
-from api.views import callCustomKnnIndividual
+from knn.views import callSampleKnnFull
+from knn.views import callCustomKnnFull
+from knn.views import callSampleKnnIndividual
+from knn.views import callCustomKnnIndividual
 
 urlpatterns = [
-    path('call-knn/', callbasicknn),
     path('call-sample-knn/', callSampleKnnFull),
     path('call-sample-knn-individual/', callSampleKnnIndividual),
     path('call-custom-knn/', callCustomKnnFull),
