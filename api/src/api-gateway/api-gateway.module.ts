@@ -1,7 +1,9 @@
 import { Module } from '@nestjs/common';
-import { ApiGatewayController } from './api-gateway.controller';
+import { KnnGatewayController } from './knn-gateway/knn-gateway.controller';
+import { HttpModule, HttpService } from '@nestjs/axios';
 
 @Module({
-  controllers: [ApiGatewayController]
+  imports: [HttpModule],
+  controllers: [KnnGatewayController],
 })
 export class ApiGatewayModule {}

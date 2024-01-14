@@ -1,5 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import * as multer from 'multer';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -9,6 +10,7 @@ async function bootstrap() {
     credentials: true,
     optionsSuccessStatus: 204,
   });
+  // app.use(multer().any());
   await app.listen(8080);
 }
 bootstrap();

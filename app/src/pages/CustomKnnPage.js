@@ -121,15 +121,7 @@ function CustomKnnPage() {
     });
   };
 
-  const handleFileChange = async (event) => {
-    if (!file) {
-      const uploadedFile = event.target.files[0];
-      setFile(uploadedFile);
-    }
-  };
-
   const handleFileUpload = async (uploadedFile) => {
-    console.log("got here,", uploadedFile);
     setFile(uploadedFile);
   };
 
@@ -212,10 +204,6 @@ function CustomKnnPage() {
   };
 
   const renderContent = () => {
-    // if (!file) {
-    //   return <FileUploadComponent onFileUpload={handleFileUpload} />;
-    // }
-
     if (samplePrediction && originalData) {
       return (
         <Container fluid>
@@ -275,17 +263,6 @@ function CustomKnnPage() {
         />
       );
     }
-
-    // if (columns) {
-    //   return (
-    //     <PredictorResponseSelector
-    //       columns={columns}
-    //       sendDataToParent={handleDataFromPredictorResponseSelector}
-    //     />
-    //   );
-    // }
-
-    return <p>Loading data, please wait...</p>;
   };
 
   return (
