@@ -16,6 +16,8 @@ def callbasicknn(request):
 
 @api_view(['POST'])
 def callSampleKnnFull(request):
+    print(request.headers)
+    print(request)
     file = request.FILES.get('csv-file')
     predictor = request.data.get('predictor')
     response = request.data.get('response')

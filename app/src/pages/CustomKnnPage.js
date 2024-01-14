@@ -59,7 +59,7 @@ function CustomKnnPage() {
       formData.append("predictor", predictor);
       formData.append("response", response);
 
-      fetch("http://127.0.0.1:8000/call-sample-knn/", {
+      fetch("http://localhost:8080/knn-gateway/call-sample-knn", {
         method: "POST",
         body: formData,
       })
@@ -121,15 +121,7 @@ function CustomKnnPage() {
     });
   };
 
-  const handleFileChange = async (event) => {
-    if (!file) {
-      const uploadedFile = event.target.files[0];
-      setFile(uploadedFile);
-    }
-  };
-
   const handleFileUpload = async (uploadedFile) => {
-    console.log("got here,", uploadedFile);
     setFile(uploadedFile);
   };
 
@@ -155,7 +147,7 @@ function CustomKnnPage() {
     formData.append("customK", data.customK);
     formData.append("customFolds", data.customFolds);
 
-    fetch("http://127.0.0.1:8000/call-custom-knn/", {
+    fetch("http://localhost:8080/knn-gateway/call-custom-knn", {
       method: "POST",
       body: formData,
     })
@@ -175,10 +167,9 @@ function CustomKnnPage() {
       formData.append("maxK", customParameters.maxK);
       formData.append("customK", customParameters.customK);
       formData.append("customFolds", customParameters.customFolds);
-      formData.append("customFolds", customParameters.customFolds);
       formData.append("xToPredict", data.predictorCustom);
       console.log(formData);
-      fetch(`http://127.0.0.1:8000/call-custom-knn-individual/`, {
+      fetch(`http://localhost:8080/knn-gateway/call-custom-knn-individual`, {
         method: "POST",
         body: formData,
       })
@@ -196,7 +187,7 @@ function CustomKnnPage() {
       formData.append("predictor", predictor);
       formData.append("response", response);
       formData.append("xToPredict", data.predictorSample);
-      fetch(`http://127.0.0.1:8000/call-sample-knn-individual/`, {
+      fetch(`http://localhost:8080/knn-gateway/call-sample-knn-individual`, {
         method: "POST",
         body: formData,
       })
@@ -212,10 +203,6 @@ function CustomKnnPage() {
   };
 
   const renderContent = () => {
-    // if (!file) {
-    //   return <FileUploadComponent onFileUpload={handleFileUpload} />;
-    // }
-
     if (samplePrediction && originalData) {
       return (
         <Container fluid>
@@ -275,17 +262,6 @@ function CustomKnnPage() {
         />
       );
     }
-
-    // if (columns) {
-    //   return (
-    //     <PredictorResponseSelector
-    //       columns={columns}
-    //       sendDataToParent={handleDataFromPredictorResponseSelector}
-    //     />
-    //   );
-    // }
-
-    return <p>Loading data, please wait...</p>;
   };
 
   return (
