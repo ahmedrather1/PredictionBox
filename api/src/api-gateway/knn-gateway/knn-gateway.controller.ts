@@ -78,7 +78,6 @@ export class KnnGatewayController {
     @UploadedFile() file: Express.Multer.File,
     @Res() res: Response,
   ) {
-    console.log(body);
     const form = new FormData();
     form.append('csv-file', file.buffer, file.originalname);
     form.append('predictor', body.predictor);
@@ -113,7 +112,6 @@ export class KnnGatewayController {
     @UploadedFile() file: Express.Multer.File,
     @Res() res: Response,
   ) {
-    console.log(body);
     const form = new FormData();
     form.append('csv-file', file.buffer, file.originalname);
     form.append('predictor', body.predictor);
