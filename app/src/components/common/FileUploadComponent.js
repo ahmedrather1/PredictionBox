@@ -8,6 +8,7 @@ import { fetchCsvFileAsBlob } from "../../utils/fetchCsvFileAsBlob";
 import AboutKnnText from "./text/AboutKnnText";
 import ChooseDataText from "./text/ChooseDataText";
 
+// TODO rename this component, it now does more than just file upload
 const FileUploadComponent = ({
   onFileUpload,
   columns,

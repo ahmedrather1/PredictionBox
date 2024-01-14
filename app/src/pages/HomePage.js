@@ -37,7 +37,7 @@ const HomePage = () => {
           >
             <div className="d-flex flex-column align-items-center">
               <h1>
-                <strong>ModelBox</strong>
+                <strong>PredictionBox</strong>
               </h1>
               <p>A Beginner-Friendly Machine Learning Sandbox</p>
               <Button variant="primary" onClick={redirectToKnnPage}>
@@ -129,7 +129,6 @@ const HomePage = () => {
         <Row className="my-row">
           <Col md={12}></Col>
         </Row>
-        <Header />
       </Container>
     </>
   );

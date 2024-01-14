@@ -254,7 +254,7 @@ function CustomKnnPage() {
                 <Card className="mt-3 mb-4">
                   <Card.Body>
                     <Card.Title>
-                      Understanding Your KNN Sandbox Options
+                      Understanding the KNN Custom Parameters
                     </Card.Title>
                     <KnnOptionsText />
                   </Card.Body>

@@ -4,11 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import HomePage from "./pages/HomePage";
 import styled from "styled-components";
-
-// const StyledApp = styled.div`
-//   background-color: #f2f2f2;
-//   background-size: cover;
-// `;
+import ComingSoonPage from "./pages/ComingSoonPage";
 
 function App() {
   return (
@@ -17,6 +13,10 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/knn" element={<CustomKnnPage />} />
+          <Route path="/slr" element={<ComingSoonPage />} />
+          <Route path="/mlr" element={<ComingSoonPage />} />
+          <Route path="/lasso" element={<ComingSoonPage />} />
+          <Route path="/ridge" element={<ComingSoonPage />} />
         </Routes>
       </Router>
     </div>

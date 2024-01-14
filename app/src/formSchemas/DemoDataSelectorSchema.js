@@ -4,7 +4,7 @@ export const DemoDataSelectorSchema = () => {
     properties: {
       Dataset: {
         type: "string",
-        enum: ["iris", "ToyotaCorollaPrices"],
+        enum: ["IrisPlant", "ToyotaCorollaPrices", "WineQuality", "NYHouses"],
       },
     },
   };
