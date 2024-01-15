@@ -15,7 +15,7 @@ import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-KNN_DATASET_PATH = os.path.join(BASE_DIR, 'knn')
+KNN_DATASET_PATH = os.path.join(BASE_DIR, 'knn/demoData')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-+e$^m+15_kdr^ct#6u1fnkj3sz53mdp4g^&^zi_^izijr9kozz
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['prediction-box-engine-env.eba-cqvymbxb.us-west-2.elasticbeanstalk.com']
+ALLOWED_HOSTS = ['prediction-box-engine-env.eba-cqvymbxb.us-west-2.elasticbeanstalk.com', '127.0.0.1']
 
 
 # Application definition
