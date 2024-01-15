@@ -77,6 +77,22 @@ const FileUploadComponent = ({
                 <Card>
                   <Card.Body>
                     <Card.Title className="text-center">
+                      Choose Demo Data
+                    </Card.Title>
+
+                    <CustomForm
+                      schema={DemoDataSelectorSchema()}
+                      onSubmit={handleSubmitDemoData}
+                    />
+                  </Card.Body>
+                </Card>
+              </div>
+            </Row>
+            <Row>
+              <div className="">
+                <Card>
+                  <Card.Body>
+                    <Card.Title className="text-center">
                       Upload Your own File
                     </Card.Title>
                     <Container>
@@ -98,22 +114,6 @@ const FileUploadComponent = ({
                         </Col>
                       </Row>
                     </Container>
-                  </Card.Body>
-                </Card>
-              </div>
-            </Row>
-            <Row>
-              <div className="mb-3">
-                <Card>
-                  <Card.Body>
-                    <Card.Title className="text-center">
-                      Choose Demo Data
-                    </Card.Title>
-
-                    <CustomForm
-                      schema={DemoDataSelectorSchema()}
-                      onSubmit={handleSubmitDemoData}
-                    />
                   </Card.Body>
                 </Card>
               </div>
