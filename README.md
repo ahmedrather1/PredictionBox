@@ -19,9 +19,11 @@ Welcome to PredictionBox, a dynamic machine learning sandbox tailored for data e
 
  **Frontend**: Developed with React, offering a responsive and interactive user interface.
  
-  **API Gateway**: Utilizes NestJS for efficient handling of requests between the frontend and the machine learning engine.
+  **PredictionBox API**: Utilizes NestJS for efficient handling of requests between the frontend and the machine learning engine.
   
   **Machine Learning Engine**: Powered by Python with the SciKit Learn library, known for its robustness and wide range of machine learning models. The Engine API has been developed using the Django framework.
+
+  **Deployment**: The PredictionBox API and the Machine Learning Engine are deployed on AWS Elastic Beanstalk, and the Frontend is deployed on AWS amplify.
 
 # Coming Soon
 
