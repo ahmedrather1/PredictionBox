@@ -38,10 +38,20 @@ const FileUploadComponent = ({
       let datasetName = data.Dataset;
       console.log(datasetName);
 
-      const dataset = await fetchCsvFileAsBlob(datasetName);
-      console.log(dataset);
-      setIsDemoData(true);
-      setCurrentFile(dataset);
+      try {
+        const response = await fetch(
+          // TODO CHANGE THIS ASAP!!!! SET UP ENVIRONMENT VARS!!!!!
+          `https://prediction-box-api-env.us-east-1.elasticbeanstalk.com/serve-demo-data/${datasetName}`
+          //`http://localhost:8080/serve-demo-data/${datasetName}`
+        );
+        const blob = await response.blob();
+
+        console.log(blob);
+        setIsDemoData(true);
+        setCurrentFile(blob);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
     }
   };
 

@@ -4,9 +4,10 @@ import { AppService } from './app.service';
 import { ApiGatewayModule } from './api-gateway/api-gateway.module';
 import { UserModule } from './user/user.module';
 import { DatabaseModule } from './database/database.module';
+import { DemoDataModule } from './demo-data/demo-data.module';
 
 @Module({
-  imports: [ApiGatewayModule, UserModule, DatabaseModule],
+  imports: [ApiGatewayModule, UserModule, DatabaseModule, DemoDataModule],
   controllers: [AppController],
   providers: [AppService],
 })
