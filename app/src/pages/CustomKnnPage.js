@@ -61,7 +61,7 @@ function CustomKnnPage() {
 
       fetch(
         // TODO CHANGE THIS ASAP!!!! SET UP ENVIRONMENT VARS!!!!!
-        "http://prediction-box-api-env.us-east-1.elasticbeanstalk.com/knn-gateway/call-sample-knn",
+        "https://prediction-box-api-env.us-east-1.elasticbeanstalk.com/knn-gateway/call-sample-knn",
         {
           method: "POST",
           body: formData,
@@ -153,7 +153,7 @@ function CustomKnnPage() {
 
     fetch(
       // TODO CHANGE THIS ASAP!!!! SET UP ENVIRONMENT VARS!!!!!
-      "http://prediction-box-api-env.us-east-1.elasticbeanstalk.com/knn-gateway/call-custom-knn",
+      "https://prediction-box-api-env.us-east-1.elasticbeanstalk.com/knn-gateway/call-custom-knn",
       {
         method: "POST",
         body: formData,
@@ -179,7 +179,7 @@ function CustomKnnPage() {
       console.log(formData);
       fetch(
         // TODO CHANGE THIS ASAP!!!! SET UP ENVIRONMENT VARS!!!!!
-        `http://prediction-box-api-env.us-east-1.elasticbeanstalk.com/knn-gateway/call-custom-knn-individual`,
+        `https://prediction-box-api-env.us-east-1.elasticbeanstalk.com/knn-gateway/call-custom-knn-individual`,
         {
           method: "POST",
           body: formData,
@@ -201,7 +201,7 @@ function CustomKnnPage() {
       formData.append("xToPredict", data.predictorSample);
       fetch(
         // TODO CHANGE THIS ASAP!!!! SET UP ENVIRONMENT VARS!!!!!
-        `http://prediction-box-api-env.us-east-1.elasticbeanstalk.com/knn-gateway/call-sample-knn-individual`,
+        `https://prediction-box-api-env.us-east-1.elasticbeanstalk.com/knn-gateway/call-sample-knn-individual`,
         {
           method: "POST",
           body: formData,
