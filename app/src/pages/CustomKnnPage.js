@@ -62,6 +62,7 @@ function CustomKnnPage() {
       fetch(
         // TODO CHANGE THIS ASAP!!!! SET UP ENVIRONMENT VARS!!!!!
         "https://prediction-box-api-env.us-east-1.elasticbeanstalk.com/knn-gateway/call-sample-knn",
+        // `http://localhost:8080/knn-gateway/call-sample-knn`,
         {
           method: "POST",
           body: formData,
@@ -154,6 +155,8 @@ function CustomKnnPage() {
     fetch(
       // TODO CHANGE THIS ASAP!!!! SET UP ENVIRONMENT VARS!!!!!
       "https://prediction-box-api-env.us-east-1.elasticbeanstalk.com/knn-gateway/call-custom-knn",
+      // `http://localhost:8080/knn-gateway/call-custom-knn`,
+
       {
         method: "POST",
         body: formData,
@@ -180,6 +183,8 @@ function CustomKnnPage() {
       fetch(
         // TODO CHANGE THIS ASAP!!!! SET UP ENVIRONMENT VARS!!!!!
         `https://prediction-box-api-env.us-east-1.elasticbeanstalk.com/knn-gateway/call-custom-knn-individual`,
+        // `http://localhost:8080/knn-gateway/call-custom-knn-individual`,
+
         {
           method: "POST",
           body: formData,
@@ -202,6 +207,8 @@ function CustomKnnPage() {
       fetch(
         // TODO CHANGE THIS ASAP!!!! SET UP ENVIRONMENT VARS!!!!!
         `https://prediction-box-api-env.us-east-1.elasticbeanstalk.com/knn-gateway/call-sample-knn-individual`,
+        //`http://localhost:8080/knn-gateway/call-sample-knn-individual`,
+
         {
           method: "POST",
           body: formData,
