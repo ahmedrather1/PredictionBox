@@ -41,7 +41,7 @@ const FileUploadComponent = ({
       try {
         const response = await fetch(
           // TODO CHANGE THIS ASAP!!!! SET UP ENVIRONMENT VARS!!!!!
-          `https://prediction-box-api-env.us-east-1.elasticbeanstalk.com/serve-demo-data/${datasetName}`
+          `https://api.predictionbox.xyz/serve-demo-data/${datasetName}`
           //`http://localhost:8080/serve-demo-data/${datasetName}`
         );
         const blob = await response.blob();
