@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-+e$^m+15_kdr^ct#6u1fnkj3sz53mdp4g^&^zi_^izijr9kozz
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['prediction-box-engine-env.eba-cqvymbxb.us-west-2.elasticbeanstalk.com', '127.0.0.1']
 
 
 # Application definition
