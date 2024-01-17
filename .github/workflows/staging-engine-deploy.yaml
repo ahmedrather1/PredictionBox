@@ -12,6 +12,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      - name: Change to engineapi directory
+        run: cd engine/engineapi
+
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
