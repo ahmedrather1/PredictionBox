@@ -2,7 +2,7 @@ name: Deploy engine to Elastic Beanstalk staging
 on:
   push:
     branches:
-      - feat/cicd
+      - staging
 
 jobs:
   deploy:
