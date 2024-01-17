@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-+e$^m+15_kdr^ct#6u1fnkj3sz53mdp4g^&^zi_^izijr9kozz
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['prediction-box-engine-env.eba-cqvymbxb.us-west-2.elasticbeanstalk.com',  'PredictionBox-engine-staging-env.us-east-1.elasticbeanstalk.com', 'k8s-appsam10-springbo-8ac850492a-128046676.us-east-1.elb.amazonaws.com', '172.31.10.77']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -127,3 +127,5 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOW_ALL_ORIGINS = True
+
+USE_X_FORWARDED_HOST = True
