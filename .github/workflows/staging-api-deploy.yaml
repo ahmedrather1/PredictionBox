@@ -16,7 +16,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: "16"
+          node-version: "18"
 
       - name: Change to API Directory
         run: cd api
@@ -39,5 +39,5 @@ jobs:
         run: |
           cd api
           pip install awsebcli
-          eb init -p nodejs $APPLICATION_NAME --region $AWS_REGION
+          eb init -p node.js $APPLICATION_NAME --region $AWS_REGION
           eb deploy $ENVIRONMENT_NAME
