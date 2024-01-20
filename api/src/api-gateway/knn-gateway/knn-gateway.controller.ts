@@ -86,7 +86,6 @@ export class KnnGatewayController {
 
     try {
       const response = await lastValueFrom(
-        // TODO CHANGE THIS ASAP!!!! SET UP ENVIRONMENT VARS!!!!!
         this.httpService.post(
           //'http://prediction-box-engine-env.eba-cqvymbxb.us-west-2.elasticbeanstalk.com/call-custom-knn/',
           this.ENGINE_URL + 'call-custom-knn/',
@@ -112,12 +111,10 @@ export class KnnGatewayController {
     @Res() res: Response,
   ) {
     const form = new FormData();
-    // Check if file properties are defined
     if (file && file.buffer && file.originalname) {
       form.append('csv-file', file.buffer, file.originalname);
     }
 
-    // Append body properties only if they are defined
     if (body?.predictor !== undefined) {
       form.append('predictor', body.predictor);
     }
@@ -140,7 +137,6 @@ export class KnnGatewayController {
     try {
       const response = await lastValueFrom(
         this.httpService.post(
-          // TODO CHANGE THIS ASAP!!!! SET UP ENVIRONMENT VARS!!!!!
           //'http://prediction-box-engine-env.eba-cqvymbxb.us-west-2.elasticbeanstalk.com/call-custom-knn-individual/',
           this.ENGINE_URL + 'call-custom-knn-individual/',
 
@@ -170,7 +166,6 @@ export class KnnGatewayController {
       form.append('csv-file', file.buffer, file.originalname);
     }
 
-    // Append other fields only if they are defined
     if (body?.predictor !== undefined) {
       form.append('predictor', body.predictor);
     }
@@ -184,8 +179,6 @@ export class KnnGatewayController {
     try {
       const response = await lastValueFrom(
         this.httpService.post(
-          // TODO CHANGE THIS ASAP!!!! SET UP ENVIRONMENT VARS!!!!!
-
           // 'http://prediction-box-engine-env.eba-cqvymbxb.us-west-2.elasticbeanstalk.com/call-sample-knn-individual/',
           this.ENGINE_URL + 'call-sample-knn-individual/',
           form,
