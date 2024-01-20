@@ -1,4 +1,4 @@
-name: Deploy engine to Elastic Beanstalk staging
+name: STAGING - Deploy engine to Elastic Beanstalk
 on:
   push:
     branches:
