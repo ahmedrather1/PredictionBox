@@ -2,7 +2,7 @@ name: PRODUCTION - Deploy engine to Elastic Beanstalk
 on:
   push:
     branches:
-      - feat/cicd-main
+      - main
 
 jobs:
   deploy:
