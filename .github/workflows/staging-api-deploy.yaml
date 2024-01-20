@@ -1,43 +1,62 @@
-name: Deploy api to Elastic Beanstalk staging
+name: STAGING - Deploy API to Elastic Beanstalk
 
 on:
   push:
     branches:
-      - feat/cicd
+      - feat/cicd-api-staging
 
 jobs:
-  deploy:
-    runs-on: ubuntu-latest
+  ci:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node: [16]
+    env:
+      NODE_ENV: "development"
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@master
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
+      - name: Setup node env
+        uses: actions/setup-node@v2.1.2
         with:
-          node-version: "18"
+          node-version: ${{ matrix.node }}
 
-      - name: Change to API Directory
-        run: cd api
+      - name: Cache node_modules
+        uses: actions/cache@v2
+        with:
+          path: api/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('api/**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
 
-      - name: Install Dependencies
-        run: npm install
-        working-directory: ./api
-
-      - name: Build
-        run: npm run build
-        working-directory: ./api
-
-      - name: Deploy to Elastic Beanstalk
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY_STRONG }}
-          AWS_REGION: "us-east-1"
-          APPLICATION_NAME: "PredictionBox-api-staging"
-          ENVIRONMENT_NAME: "PredictionBox-api-staging-env"
+      - name: Installing NPM
         run: |
           cd api
-          pip install awsebcli
-          eb init -p node.js $APPLICATION_NAME --region $AWS_REGION
-          eb deploy $ENVIRONMENT_NAME
+          npm install
+
+      - name: Building application
+        run: |
+          cd api
+          npm run build
+
+      - name: Generate deployment package
+        run: |
+          cd api
+          zip -r deploy.zip * .[^.]* -x "**node_modules**"
+
+      - name: Beanstalk Deploy for app
+        uses: einaregilsson/beanstalk-deploy@v16
+        with:
+          aws_access_key: ${{secrets.ACCESS_KEY_ID}}
+          aws_secret_key: ${{secrets.AWS_SECRET_KEY_STRONG}}
+          application_name: PredictionBox-api-STAGING
+          environment_name: PredictionBox-api-STAGING-env
+          region: us-east-1
+          deployment_package: api/deploy.zip
+
+      - name: Deployed!
+        run: echo App deployed to ELB
