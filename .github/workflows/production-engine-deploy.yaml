@@ -22,8 +22,8 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
           AWS_REGION: "us-east-1"
-          APPLICATION_NAME: "PredictionBox-engine-PRODUCTION"
-          ENVIRONMENT_NAME: "PredictionBox-engine-PRODUCTION-env"
+          APPLICATION_NAME: "PredictionBox-engine-PROD"
+          ENVIRONMENT_NAME: "PredictionBox-engine-PROD-env"
         run: |
           cd engine/engineapi
           pip install awsebcli
