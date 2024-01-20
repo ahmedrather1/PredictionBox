@@ -39,6 +39,7 @@ const FileUploadComponent = ({
       console.log(datasetName);
 
       try {
+        console.log(process.env.REACT_APP_API_URL);
         const response = await fetch(
           `${process.env.REACT_APP_API_URL}/serve-demo-data/${datasetName}`
         );
