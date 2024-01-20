@@ -51,7 +51,7 @@ jobs:
       - name: Beanstalk Deploy for app
         uses: einaregilsson/beanstalk-deploy@v16
         with:
-          aws_access_key: ${{secrets.ACCESS_KEY_ID}}
+          aws_access_key: ${{secrets.AWS_ACCESS_KEY_ID}}
           aws_secret_key: ${{secrets.AWS_SECRET_KEY_STRONG}}
           application_name: PredictionBox-api-STAGING
           environment_name: PredictionBox-api-STAGING-env
