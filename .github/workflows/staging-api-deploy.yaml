@@ -48,6 +48,19 @@ jobs:
           cd api
           zip -r deploy.zip * .[^.]* -x "**node_modules**"
 
+      - name: Get timestamp
+        uses: gerred/actions/current-time@master
+        id: current-time
+
+      - name: Run string replace
+        uses: frabert/replace-string-action@master
+        id: format-time
+        with:
+          pattern: '[:\.]+'
+          string: "${{ steps.current-time.outputs.time }}"
+          replace-with: "-"
+          flags: "g"
+
       - name: Beanstalk Deploy for app
         uses: einaregilsson/beanstalk-deploy@v16
         with:
@@ -56,6 +69,7 @@ jobs:
           application_name: PredictionBox-api-STAGING
           environment_name: PredictionBox-api-STAGING-env
           region: us-east-1
+          version_label: "PredictionBox-api-staging-${{ steps.format-time.outputs.replaced }}"
           deployment_package: api/deploy.zip
 
       - name: Deployed!
