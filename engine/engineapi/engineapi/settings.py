@@ -13,6 +13,10 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import os
 
+from dotenv import load_dotenv
+
+load_dotenv()  # Load environment variables from '.env' file
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 KNN_DATASET_PATH = os.path.join(BASE_DIR, 'knn/demoData')
@@ -21,12 +25,12 @@ KNN_DATASET_PATH = os.path.join(BASE_DIR, 'knn/demoData')
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-+e$^m+15_kdr^ct#6u1fnkj3sz53mdp4g^&^zi_^izijr9kozz'
+SECRET_KEY = os.environ.get('SECRET_KEY') 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG') == 'True'
 
-ALLOWED_HOSTS = ['prediction-box-engine-env.eba-cqvymbxb.us-west-2.elasticbeanstalk.com', '127.0.0.1']
+ALLOWED_HOSTS = [os.environ.get('PROD_HOST_URL') , '127.0.0.1', os.environ.get('STAGING_HOST_URL') ]
 
 
 # Application definition
@@ -127,3 +131,5 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOW_ALL_ORIGINS = True
+
+USE_X_FORWARDED_HOST = True
