@@ -2,7 +2,7 @@ name: STAGING - Deploy engine to Elastic Beanstalk
 on:
   push:
     branches:
-      - feat/cicd-api-staging
+      - staging
 
 jobs:
   deploy:
