@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from views import root_view
+from engineapi.views import root_view
 from knn.views import callSampleKnnFull
 from knn.views import callCustomKnnFull
 from knn.views import callSampleKnnIndividual
