@@ -59,15 +59,10 @@ function CustomKnnPage() {
       formData.append("predictor", predictor);
       formData.append("response", response);
 
-      fetch(
-        // TODO CHANGE THIS ASAP!!!! SET UP ENVIRONMENT VARS!!!!!
-        "https://api.predictionbox.xyz/knn-gateway/call-sample-knn",
-        // `http://localhost:8080/knn-gateway/call-sample-knn`,
-        {
-          method: "POST",
-          body: formData,
-        }
-      )
+      fetch(`${process.env.REACT_APP_API_URL}/knn-gateway/call-sample-knn`, {
+        method: "POST",
+        body: formData,
+      })
         .then((response) => response.json())
         .then((data) => {
           setYpred(data.ypred.map((element) => element[0]));
@@ -152,16 +147,10 @@ function CustomKnnPage() {
     formData.append("customK", data.customK);
     formData.append("customFolds", data.customFolds);
 
-    fetch(
-      // TODO CHANGE THIS ASAP!!!! SET UP ENVIRONMENT VARS!!!!!
-      "https://api.predictionbox.xyz/knn-gateway/call-custom-knn",
-      // `http://localhost:8080/knn-gateway/call-custom-knn`,
-
-      {
-        method: "POST",
-        body: formData,
-      }
-    )
+    fetch(`${process.env.REACT_APP_API_URL}/knn-gateway/call-custom-knn`, {
+      method: "POST",
+      body: formData,
+    })
       .then((response) => response.json())
       .then((data) => {
         setCustomYPred(data.ypred.map((element) => element[0]));
@@ -181,10 +170,7 @@ function CustomKnnPage() {
       formData.append("xToPredict", data.predictorCustom);
       console.log(formData);
       fetch(
-        // TODO CHANGE THIS ASAP!!!! SET UP ENVIRONMENT VARS!!!!!
-        `https://api.predictionbox.xyz/knn-gateway/call-custom-knn-individual`,
-        // `http://localhost:8080/knn-gateway/call-custom-knn-individual`,
-
+        `${process.env.REACT_APP_API_URL}/knn-gateway/call-custom-knn-individual`,
         {
           method: "POST",
           body: formData,
@@ -205,10 +191,7 @@ function CustomKnnPage() {
       formData.append("response", response);
       formData.append("xToPredict", data.predictorSample);
       fetch(
-        // TODO CHANGE THIS ASAP!!!! SET UP ENVIRONMENT VARS!!!!!
-        `https://api.predictionbox.xyz/knn-gateway/call-sample-knn-individual`,
-        //`http://localhost:8080/knn-gateway/call-sample-knn-individual`,
-
+        `${process.env.REACT_APP_API_URL}/knn-gateway/call-sample-knn-individual`,
         {
           method: "POST",
           body: formData,

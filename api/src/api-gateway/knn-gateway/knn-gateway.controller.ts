@@ -11,11 +11,20 @@ import { HttpService } from '@nestjs/axios';
 import { lastValueFrom } from 'rxjs';
 import { Response } from 'express';
 import * as FormData from 'form-data';
+import { ConfigService } from '@nestjs/config';
+import { Logger } from '@nestjs/common';
 
+// TODO CREATE A SERVICE FILE FOR THIS CONTROLLER
 @Controller('knn-gateway')
 export class KnnGatewayController {
-  constructor(private httpService: HttpService) {}
-
+  private ENGINE_URL: string;
+  constructor(
+    private httpService: HttpService,
+    private configService: ConfigService,
+  ) {
+    this.ENGINE_URL = this.configService.get<string>('ENGINE_URL');
+  }
+  const;
   @Post('call-sample-knn')
   @UseInterceptors(FileInterceptor('csv-file'))
   async forwardToCallSampleKnn(
@@ -24,15 +33,21 @@ export class KnnGatewayController {
     @Res() res: Response,
   ) {
     const form = new FormData();
-    form.append('csv-file', file.buffer, file.originalname);
-    form.append('predictor', body.predictor);
-    form.append('response', body.response);
+    if (file && file.buffer) {
+      form.append(
+        'csv-file',
+        file.buffer,
+        file.originalname || 'default-filename.csv',
+      );
+    }
+    if (body?.predictor !== undefined) form.append('predictor', body.predictor);
+    if (body?.response !== undefined) form.append('response', body.response);
 
     try {
       const response = await lastValueFrom(
-        // TODO CHANGE THIS ASAP!!!! SET UP ENVIRONMENT VARS!!!!!
         this.httpService.post(
-          'http://prediction-box-engine-env.eba-cqvymbxb.us-west-2.elasticbeanstalk.com/call-sample-knn/',
+          //'http://prediction-box-engine-env.eba-cqvymbxb.us-west-2.elasticbeanstalk.com/call-sample-knn/',
+          this.ENGINE_URL + 'call-sample-knn/',
           form,
           {
             headers: form.getHeaders(),
@@ -55,18 +70,25 @@ export class KnnGatewayController {
     @Res() res: Response,
   ) {
     const form = new FormData();
-    form.append('csv-file', file.buffer, file.originalname);
-    form.append('predictor', body.predictor);
-    form.append('response', body.response);
-    form.append('maxK', body.maxK);
-    form.append('customK', body.customK);
-    form.append('customFolds', body.customFolds);
+    if (file && file.buffer) {
+      form.append(
+        'csv-file',
+        file.buffer,
+        file.originalname || 'default-filename.csv',
+      );
+    }
+    if (body?.predictor !== undefined) form.append('predictor', body.predictor);
+    if (body?.response !== undefined) form.append('response', body.response);
+    if (body?.maxK !== undefined) form.append('maxK', body.maxK);
+    if (body?.customK !== undefined) form.append('customK', body.customK);
+    if (body?.customFolds !== undefined)
+      form.append('customFolds', body.customFolds);
 
     try {
       const response = await lastValueFrom(
-        // TODO CHANGE THIS ASAP!!!! SET UP ENVIRONMENT VARS!!!!!
         this.httpService.post(
-          'http://prediction-box-engine-env.eba-cqvymbxb.us-west-2.elasticbeanstalk.com/call-custom-knn/',
+          //'http://prediction-box-engine-env.eba-cqvymbxb.us-west-2.elasticbeanstalk.com/call-custom-knn/',
+          this.ENGINE_URL + 'call-custom-knn/',
           form,
           {
             headers: form.getHeaders(),
@@ -89,19 +111,35 @@ export class KnnGatewayController {
     @Res() res: Response,
   ) {
     const form = new FormData();
-    form.append('csv-file', file.buffer, file.originalname);
-    form.append('predictor', body.predictor);
-    form.append('response', body.response);
-    form.append('maxK', body.maxK);
-    form.append('customK', body.customK);
-    form.append('customFolds', body.customFolds);
-    form.append('xToPredict', body.xToPredict);
+    if (file && file.buffer && file.originalname) {
+      form.append('csv-file', file.buffer, file.originalname);
+    }
+
+    if (body?.predictor !== undefined) {
+      form.append('predictor', body.predictor);
+    }
+    if (body?.response !== undefined) {
+      form.append('response', body.response);
+    }
+    if (body?.maxK !== undefined) {
+      form.append('maxK', body.maxK);
+    }
+    if (body?.customK !== undefined) {
+      form.append('customK', body.customK);
+    }
+    if (body?.customFolds !== undefined) {
+      form.append('customFolds', body.customFolds);
+    }
+    if (body?.xToPredict !== undefined) {
+      form.append('xToPredict', body.xToPredict);
+    }
 
     try {
       const response = await lastValueFrom(
         this.httpService.post(
-          // TODO CHANGE THIS ASAP!!!! SET UP ENVIRONMENT VARS!!!!!
-          'http://prediction-box-engine-env.eba-cqvymbxb.us-west-2.elasticbeanstalk.com/call-custom-knn-individual/',
+          //'http://prediction-box-engine-env.eba-cqvymbxb.us-west-2.elasticbeanstalk.com/call-custom-knn-individual/',
+          this.ENGINE_URL + 'call-custom-knn-individual/',
+
           form,
           {
             headers: form.getHeaders(),
@@ -124,17 +162,25 @@ export class KnnGatewayController {
     @Res() res: Response,
   ) {
     const form = new FormData();
-    form.append('csv-file', file.buffer, file.originalname);
-    form.append('predictor', body.predictor);
-    form.append('response', body.response);
-    form.append('xToPredict', body.xToPredict);
+    if (file && file.buffer && file.originalname) {
+      form.append('csv-file', file.buffer, file.originalname);
+    }
+
+    if (body?.predictor !== undefined) {
+      form.append('predictor', body.predictor);
+    }
+    if (body?.response !== undefined) {
+      form.append('response', body.response);
+    }
+    if (body?.xToPredict !== undefined) {
+      form.append('xToPredict', body.xToPredict);
+    }
 
     try {
       const response = await lastValueFrom(
         this.httpService.post(
-          // TODO CHANGE THIS ASAP!!!! SET UP ENVIRONMENT VARS!!!!!
-
-          'http://prediction-box-engine-env.eba-cqvymbxb.us-west-2.elasticbeanstalk.com/call-sample-knn-individual/',
+          // 'http://prediction-box-engine-env.eba-cqvymbxb.us-west-2.elasticbeanstalk.com/call-sample-knn-individual/',
+          this.ENGINE_URL + 'call-sample-knn-individual/',
           form,
           {
             headers: form.getHeaders(),

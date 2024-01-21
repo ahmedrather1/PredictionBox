@@ -39,10 +39,9 @@ const FileUploadComponent = ({
       console.log(datasetName);
 
       try {
+        console.log(process.env.REACT_APP_API_URL);
         const response = await fetch(
-          // TODO CHANGE THIS ASAP!!!! SET UP ENVIRONMENT VARS!!!!!
-          `https://api.predictionbox.xyz/serve-demo-data/${datasetName}`
-          //`http://localhost:8080/serve-demo-data/${datasetName}`
+          `${process.env.REACT_APP_API_URL}/serve-demo-data/${datasetName}`
         );
         const blob = await response.blob();
 
