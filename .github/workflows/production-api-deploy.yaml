@@ -1,4 +1,4 @@
-name: STAGING - Deploy API to Elastic Beanstalk
+name: PRODUCTION - Deploy API to Elastic Beanstalk
 
 on:
   push:
