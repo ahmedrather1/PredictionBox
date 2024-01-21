@@ -3,7 +3,7 @@ name: STAGING - Deploy API to Elastic Beanstalk
 on:
   push:
     branches:
-      - feat/cicd-main
+      - main
 
 jobs:
   ci:
