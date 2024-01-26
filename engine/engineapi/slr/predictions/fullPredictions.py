@@ -1,7 +1,5 @@
 import pandas as pd
 import numpy as np
-from sklearn.neighbors import KNeighborsRegressor
-from sklearn.model_selection import cross_val_score, KFold
 from slr.utils import getOriginalData
 from slr.models.slrModel import sampleSlrModel
 from slr.models.customSlrModel import CustomSlrModel
