@@ -2,8 +2,8 @@ from django.http import JsonResponse, HttpResponseBadRequest
 from rest_framework.decorators import api_view
 from rest_framework.parsers import MultiPartParser
 
-from slr.predictions import sampleSlrFullPrediction
-from slr.predictions import customSlrFullPrediction
+from slr.predictions.fullPredictions import sampleSlrFullPrediction
+from slr.predictions.fullPredictions import customSlrFullPrediction
 
 @api_view(['POST'])
 def callSampleSlrFull(request):
