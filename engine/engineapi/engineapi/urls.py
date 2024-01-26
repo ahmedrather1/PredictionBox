@@ -22,10 +22,13 @@ from knn.views import callCustomKnnFull
 from knn.views import callSampleKnnIndividual
 from knn.views import callCustomKnnIndividual
 
+from slr.views import callSampleSlrFull
+
 urlpatterns = [
     path('', root_view),
     path('call-sample-knn/', callSampleKnnFull),
     path('call-sample-knn-individual/', callSampleKnnIndividual),
     path('call-custom-knn/', callCustomKnnFull),
     path('call-custom-knn-individual/', callCustomKnnIndividual),
+    path('call-sample-slr/', callSampleSlrFull),
 ]

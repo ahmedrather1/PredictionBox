@@ -1,3 +1,11 @@
 from django.db import models
 
-# Create your models here.
+import pandas as pd
+import numpy as np
+from sklearn.linear_model import LinearRegression
+
+
+def sampleSlrModel(X, y):
+    slr_model = LinearRegression()
+    slr_model.fit(X, y)
+    return slr_model
