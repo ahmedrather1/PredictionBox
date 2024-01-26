@@ -6,8 +6,6 @@ from slr.utils import getOriginalData
 from slr.models.slrModel import sampleSlrModel
 from slr.models.customSlrModel import CustomSlrModel
 
-
-
 def sampleSlrFullPrediction(file, predictor, response):
     df = pd.read_csv(file)
 

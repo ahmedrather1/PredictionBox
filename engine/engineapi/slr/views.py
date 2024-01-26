@@ -4,6 +4,7 @@ from rest_framework.parsers import MultiPartParser
 
 from slr.predictions.fullPredictions import sampleSlrFullPrediction
 from slr.predictions.fullPredictions import customSlrFullPrediction
+from slr.predictions.individualPredictions import sampleSlrIndividualPrediction
 
 @api_view(['POST'])
 def callSampleSlrFull(request):
@@ -42,4 +43,21 @@ def callCustomSlrFull(request):
     ypred = pred[1]
     originalData = pred[2]
     return JsonResponse({'xrange': xrange,'ypred': ypred, 'originalData': originalData})
+
+@api_view(['POST'])
+def callSampleSlrIndividual(request):
+    file = request.FILES.get('csv-file')
+    predictor = request.data.get('predictor')
+    response = request.data.get('response')
+    xToPredict = request.data.get('xToPredict')
+    if not file:
+        return JsonResponse({'error': 'No file uploaded'}, status=400)
+
+    try:
+        predictedY = sampleSlrIndividualPrediction(file, predictor, response, xToPredict)
+    except Exception as e:
+        errorMessage = str(e)
+        return JsonResponse({'error': errorMessage}, status=400)
+
+    return JsonResponse({'predictedY': predictedY, 'xToPredict': xToPredict })
 
