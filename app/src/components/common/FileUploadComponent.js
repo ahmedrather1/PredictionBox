@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import CustomForm from "./CustomForm";
-import { DemoDataSelectorSchema } from "../../formSchemas/DemoDataSelectorSchema";
-import { PredictorResponseSelectorSchema } from "../../formSchemas/PredictorResponseSelectorSchema";
+import { DemoDataSelectorSchema } from "../../formSchemas/common/DemoDataSelectorSchema";
+import { PredictorResponseSelectorSchema } from "../../formSchemas/common/PredictorResponseSelectorSchema";
 
 import { fetchCsvFileAsBlob } from "../../utils/fetchCsvFileAsBlob";
 import AboutKnnText from "./text/AboutKnnText";
@@ -13,6 +13,7 @@ const FileUploadComponent = ({
   onFileUpload,
   columns,
   handleDataFromPredictorResponseSelector,
+  GeneralInfoCard,
 }) => {
   const [currentFile, setCurrentFile] = useState(null);
   const [isDemoData, setIsDemoData] = useState(null);
@@ -139,14 +140,7 @@ const FileUploadComponent = ({
       </Row>
       <div className="mb-3">
         <Row className="mt-3">
-          <Card>
-            <Card.Body>
-              <Card.Title className="text-center">
-                <strong> About the K Nearest Neighbors Algorithm</strong>
-              </Card.Title>
-              <AboutKnnText />
-            </Card.Body>
-          </Card>
+          <GeneralInfoCard />
         </Row>
       </div>
     </Container>

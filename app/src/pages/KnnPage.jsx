@@ -1,4 +1,7 @@
 import ModelPage from "./ModelPage";
+import { KnnCustomParameterInputFormSchema } from "../formSchemas/Knn/KnnCustomParameterInputFormSchema";
+import KnnCustomParameterInfoCard from "../components/knn/infoCards/KnnCustomParameterInfoCard";
+import KnnGeneralInfoCard from "../components/knn/infoCards/KnnGeneralInfoCard";
 
 const Endpoints = {
   SAMPLE_MODEL_URL: "/knn-gateway/call-sample-knn",
@@ -18,6 +21,9 @@ function KnnPage() {
     <ModelPage
       Endpoints={Endpoints}
       PossibleCustomParams={PossibleCustomParams}
+      CustomParameterInputFormSchema={KnnCustomParameterInputFormSchema}
+      CustomParameterInfoCard={KnnCustomParameterInfoCard}
+      GeneralInfoCard={KnnGeneralInfoCard}
     />
   );
 }

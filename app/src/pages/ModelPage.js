@@ -2,15 +2,20 @@ import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import Papa from "papaparse";
 import ChartComponent from "../components/common/ChartComponent";
-import { CustomParameterInputFormSchema } from "../formSchemas/CustomParameterInputFormSchema";
-import { PredictionInputFormSchema } from "../formSchemas/PredictionInputFormSchema";
+import { PredictionInputFormSchema } from "../formSchemas/common/PredictionInputFormSchema";
 import CustomParameterCard from "../components/common/CustomParameterCard";
 import IndividualPredictionCard from "../components/common/IndividualPredictionCard";
 import FileUploadComponent from "../components/common/FileUploadComponent";
 import Header from "../components/common/Header";
 import KnnOptionsText from "../components/common/text/KnnOptionsText";
 
-function ModelPage({ Endpoints, PossibleCustomParams }) {
+function ModelPage({
+  Endpoints,
+  PossibleCustomParams,
+  CustomParameterInputFormSchema,
+  CustomParameterInfoCard,
+  GeneralInfoCard,
+}) {
   // TODO too many usestates! use redux instead
   const [columns, setColumns] = useState(null);
   const [file, setFile] = useState(null);
@@ -240,14 +245,7 @@ function ModelPage({ Endpoints, PossibleCustomParams }) {
           <Row>
             <Container>
               <Col md={8}>
-                <Card className="mt-3 mb-4">
-                  <Card.Body>
-                    <Card.Title>
-                      Understanding the KNN Custom Parameters
-                    </Card.Title>
-                    <KnnOptionsText />
-                  </Card.Body>
-                </Card>
+                <CustomParameterInfoCard />
               </Col>
             </Container>
           </Row>
@@ -261,6 +259,7 @@ function ModelPage({ Endpoints, PossibleCustomParams }) {
           handleDataFromPredictorResponseSelector={
             handleDataFromPredictorResponseSelector
           }
+          GeneralInfoCard={GeneralInfoCard}
         />
       );
     }

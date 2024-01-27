@@ -1,10 +1,10 @@
-export const CustomParameterInputFormSchema = (originalData) => {
+export const KnnCustomParameterInputFormSchema = (originalData) => {
   const schema = {
     type: "object",
     title: "Custom Parameter Input",
     oneOf: [
       {
-        title: "Option 1: Custom K Value", // Title for the first option
+        title: "Option 1: Custom K Value",
         properties: {
           customK: {
             type: "integer",
@@ -16,7 +16,7 @@ export const CustomParameterInputFormSchema = (originalData) => {
         required: ["customK"],
       },
       {
-        title: "Option 2: Custom Folds and Maximum K", // Title for the second option
+        title: "Option 2: Custom Folds and Maximum K",
         properties: {
           maxK: {
             type: "integer",
