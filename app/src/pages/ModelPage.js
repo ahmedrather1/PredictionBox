@@ -7,7 +7,7 @@ import CustomParameterCard from "../components/common/CustomParameterCard";
 import IndividualPredictionCard from "../components/common/IndividualPredictionCard";
 import FileUploadComponent from "../components/common/FileUploadComponent";
 import Header from "../components/common/Header";
-import KnnOptionsText from "../components/common/text/knn/KnnOptionsText";
+import KnnOptionsText from "../components/knn/text/KnnOptionsText";
 
 function ModelPage({
   Endpoints,

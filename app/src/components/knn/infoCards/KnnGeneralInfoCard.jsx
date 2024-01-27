@@ -1,5 +1,5 @@
 import React from "react";
-import AboutKnnText from "../../common/text/knn/AboutKnnText";
+import AboutKnnText from "../text/AboutKnnText";
 import GeneralInfoCard from "../../common/infoCards/GeneralInfoCard";
 
 const KnnGeneralInfoCard = () => {

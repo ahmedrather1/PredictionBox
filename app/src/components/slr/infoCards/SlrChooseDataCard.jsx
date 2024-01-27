@@ -1,6 +1,6 @@
 import React from "react";
 import ChooseDataCard from "../../common/infoCards/ChooseDataCard";
-import KnnChooseDataText from "../../common/text/knn/KnnChooseDataText";
+import KnnChooseDataText from "../../knn/text/KnnChooseDataText";
 
 const SlrChooseDataCard = () => {
   let title = "Choose your Data! SLR";
