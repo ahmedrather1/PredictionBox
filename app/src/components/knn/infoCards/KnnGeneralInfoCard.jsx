@@ -1,18 +1,10 @@
 import React from "react";
-import { Card } from "react-bootstrap";
 import AboutKnnText from "../../common/text/AboutKnnText";
+import GeneralInfoCard from "../../common/infoCards/GeneralInfoCard";
 
 const KnnGeneralInfoCard = () => {
-  return (
-    <Card>
-      <Card.Body>
-        <Card.Title className="text-center">
-          <strong> About the K Nearest Neighbors Algorithm</strong>
-        </Card.Title>
-        <AboutKnnText />
-      </Card.Body>
-    </Card>
-  );
+  let title = "About the K Nearest Neighbors Algorithm";
+  return <GeneralInfoCard title={title} Text={AboutKnnText} />;
 };
 
 export default KnnGeneralInfoCard;

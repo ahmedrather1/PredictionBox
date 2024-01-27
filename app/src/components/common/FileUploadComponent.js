@@ -4,10 +4,6 @@ import CustomForm from "./CustomForm";
 import { DemoDataSelectorSchema } from "../../formSchemas/common/DemoDataSelectorSchema";
 import { PredictorResponseSelectorSchema } from "../../formSchemas/common/PredictorResponseSelectorSchema";
 
-import { fetchCsvFileAsBlob } from "../../utils/fetchCsvFileAsBlob";
-import AboutKnnText from "./text/AboutKnnText";
-import ChooseDataText from "./text/ChooseDataText";
-
 // TODO rename this component, it now does more than just file upload
 const FileUploadComponent = ({
   onFileUpload,

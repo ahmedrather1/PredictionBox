@@ -1,18 +1,11 @@
 import React from "react";
-import { Card } from "react-bootstrap";
-import ChooseDataText from "../../common/text/ChooseDataText";
+import KnnOptionsText from "../../common/text/KnnOptionsText";
+import ChooseDataCard from "../../common/infoCards/ChooseDataCard";
+import KnnChooseDataText from "../../common/text/KnnChooseDataText";
 
 const KnnChooseDataCard = () => {
-  return (
-    <Card>
-      <Card.Body>
-        <Card.Title className="text-center">
-          <strong>Choose your Data!</strong>
-        </Card.Title>
-        <ChooseDataText />
-      </Card.Body>
-    </Card>
-  );
+  let title = "Choose your Data!";
+  return <ChooseDataCard title={title} Text={KnnChooseDataText} />;
 };
 
 export default KnnChooseDataCard;
