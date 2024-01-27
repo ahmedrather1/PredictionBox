@@ -14,6 +14,7 @@ const FileUploadComponent = ({
   columns,
   handleDataFromPredictorResponseSelector,
   GeneralInfoCard,
+  ChooseDataCard,
 }) => {
   const [currentFile, setCurrentFile] = useState(null);
   const [isDemoData, setIsDemoData] = useState(null);
@@ -60,14 +61,7 @@ const FileUploadComponent = ({
       <Row>
         <Col md={8}>
           <div className="mb-3 mt-3">
-            <Card>
-              <Card.Body>
-                <Card.Title className="text-center">
-                  <strong>Choose your Data!</strong>
-                </Card.Title>
-                <ChooseDataText />
-              </Card.Body>
-            </Card>
+            <ChooseDataCard />
           </div>
         </Col>
         {!columns && (

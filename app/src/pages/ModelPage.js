@@ -15,6 +15,7 @@ function ModelPage({
   CustomParameterInputFormSchema,
   CustomParameterInfoCard,
   GeneralInfoCard,
+  ChooseDataCard,
 }) {
   // TODO too many usestates! use redux instead
   const [columns, setColumns] = useState(null);
@@ -260,6 +261,7 @@ function ModelPage({
             handleDataFromPredictorResponseSelector
           }
           GeneralInfoCard={GeneralInfoCard}
+          ChooseDataCard={ChooseDataCard}
         />
       );
     }
