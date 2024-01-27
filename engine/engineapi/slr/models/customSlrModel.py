@@ -6,4 +6,4 @@ class CustomSlrModel(BaseEstimator, RegressorMixin):
         self.b1 = b1
 
     def predict(self, X):
-        return self.b0 + self.b1 * X
+        return self.b0 + (self.b1 * X)
