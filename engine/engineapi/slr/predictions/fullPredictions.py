@@ -39,12 +39,12 @@ def customSlrFullPrediction(file, predictor, response, b0, b1):
         raise KeyError("Response doesnt exist!")
 
     try:
-        b0int = int(b0)
+        b0int = float(b0)
     except Exception:
         raise ValueError("Invalid b0")
     
     try:
-        b1int = int(b1)
+        b1int = float(b1)
     except Exception:
         raise ValueError("Invalid b1")
     

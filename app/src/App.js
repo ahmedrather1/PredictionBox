@@ -5,6 +5,7 @@ import HomePage from "./pages/HomePage";
 import styled from "styled-components";
 import ComingSoonPage from "./pages/ComingSoonPage";
 import KnnPage from "./pages/KnnPage";
+import SlrPage from "./pages/SlrPage";
 
 function App() {
   return (
@@ -13,7 +14,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/knn" element={<KnnPage />} />
-          <Route path="/slr" element={<ComingSoonPage />} />
+          <Route path="/slr" element={<SlrPage />} />
           <Route path="/mlr" element={<ComingSoonPage />} />
           <Route path="/lasso" element={<ComingSoonPage />} />
           <Route path="/ridge" element={<ComingSoonPage />} />
