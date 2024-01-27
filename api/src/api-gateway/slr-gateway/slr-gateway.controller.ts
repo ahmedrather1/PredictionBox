@@ -10,11 +10,11 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { Response } from 'express';
 import { ApiGatewayService } from '../api-gateway.service';
 
-@Controller('knn-gateway')
-export class KnnGatewayController {
+@Controller('slr-gateway')
+export class SlrGatewayController {
   constructor(private ApiGatewayService: ApiGatewayService) {}
 
-  @Post('call-sample-knn')
+  @Post('call-sample-slr')
   @UseInterceptors(FileInterceptor('csv-file'))
   async forwardToCallSampleKnn(
     @Body() body: any,
@@ -25,7 +25,7 @@ export class KnnGatewayController {
       const data = await this.ApiGatewayService.forwardKnnRequest(
         file,
         body,
-        'call-sample-knn/',
+        'call-sample-slr/',
       );
       res.send(data);
     } catch (error) {
@@ -35,7 +35,7 @@ export class KnnGatewayController {
     }
   }
 
-  @Post('call-custom-knn')
+  @Post('call-custom-slr')
   @UseInterceptors(FileInterceptor('csv-file'))
   async forwardToCallCustomKnn(
     @Body() body: any,
@@ -46,7 +46,7 @@ export class KnnGatewayController {
       const data = await this.ApiGatewayService.forwardKnnRequest(
         file,
         body,
-        'call-custom-knn/',
+        'call-custom-slr/',
       );
       res.send(data);
     } catch (error) {
@@ -56,7 +56,7 @@ export class KnnGatewayController {
     }
   }
 
-  @Post('call-custom-knn-individual')
+  @Post('call-custom-slr-individual')
   @UseInterceptors(FileInterceptor('csv-file'))
   async forwardToCallCustomKnnIndividual(
     @Body() body: any,
@@ -67,7 +67,7 @@ export class KnnGatewayController {
       const data = await this.ApiGatewayService.forwardKnnRequest(
         file,
         body,
-        'call-custom-knn-individual/',
+        'call-custom-slr-individual/',
       );
       res.send(data);
     } catch (error) {
@@ -77,7 +77,7 @@ export class KnnGatewayController {
     }
   }
 
-  @Post('call-sample-knn-individual')
+  @Post('call-sample-slr-individual')
   @UseInterceptors(FileInterceptor('csv-file'))
   async forwardToCallSampleKnnIndividual(
     @Body() body: any,
@@ -88,7 +88,7 @@ export class KnnGatewayController {
       const data = await this.ApiGatewayService.forwardKnnRequest(
         file,
         body,
-        'call-sample-knn-individual/',
+        'call-sample-slr-individual/',
       );
       res.send(data);
     } catch (error) {
