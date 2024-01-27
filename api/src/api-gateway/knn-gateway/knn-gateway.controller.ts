@@ -9,7 +9,7 @@ import {
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Response } from 'express';
 import { ApiGatewayService } from '../api-gateway.service';
-// TODO CREATE A SERVICE FILE FOR THIS CONTROLLER
+
 @Controller('knn-gateway')
 export class KnnGatewayController {
   constructor(private ApiGatewayService: ApiGatewayService) {}
