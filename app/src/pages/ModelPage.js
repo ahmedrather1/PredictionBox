@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from "react";
-import PredictorResponseSelector from "../components/common/PredictorResponseSelector";
 import { Container, Row, Col, Card } from "react-bootstrap";
-import styled from "styled-components";
 import Papa from "papaparse";
 import ChartComponent from "../components/common/ChartComponent";
-import CustomForm from "../components/common/CustomForm";
 import { CustomParameterInputFormSchema } from "../formSchemas/CustomParameterInputFormSchema";
 import { PredictionInputFormSchema } from "../formSchemas/PredictionInputFormSchema";
 import CustomParameterCard from "../components/common/CustomParameterCard";
@@ -13,7 +10,7 @@ import FileUploadComponent from "../components/common/FileUploadComponent";
 import Header from "../components/common/Header";
 import KnnOptionsText from "../components/common/text/KnnOptionsText";
 
-function CustomKnnPage() {
+function ModelPage({ Endpoints, PossibleCustomParams }) {
   // TODO too many usestates! use redux instead
   const [columns, setColumns] = useState(null);
   const [file, setFile] = useState(null);
@@ -59,7 +56,7 @@ function CustomKnnPage() {
       formData.append("predictor", predictor);
       formData.append("response", response);
 
-      fetch(`${process.env.REACT_APP_API_URL}/knn-gateway/call-sample-knn`, {
+      fetch(`${process.env.REACT_APP_API_URL}${Endpoints.SAMPLE_MODEL_URL}`, {
         method: "POST",
         body: formData,
       })
@@ -76,7 +73,6 @@ function CustomKnnPage() {
   useEffect(() => {
     if (xrange && ypred) {
       let prediction = xrange.map((e, i) => [e, ypred[i]]);
-      console.log(prediction);
       setSamplePrediction(prediction);
     }
   }, [xrange, ypred]);
@@ -92,7 +88,6 @@ function CustomKnnPage() {
   useEffect(() => {
     if (file) {
       parseFile();
-      console.log("File ready for processing: ", file);
     }
   }, [file]);
 
@@ -134,20 +129,20 @@ function CustomKnnPage() {
     setShowCustomPrediction(false);
     setCustomYPred(null);
     setCustomPrediction(null);
-    setCustomParameters({
-      maxK: data.maxK,
-      customK: data.customK,
-      customFolds: data.customFolds,
+    let CustomParameters = {};
+    Object.entries(PossibleCustomParams).forEach(([key, value]) => {
+      CustomParameters[value] = data[value];
     });
+    setCustomParameters(CustomParameters);
     const formData = new FormData();
     formData.append("csv-file", file);
     formData.append("predictor", predictor);
     formData.append("response", response);
-    formData.append("maxK", data.maxK);
-    formData.append("customK", data.customK);
-    formData.append("customFolds", data.customFolds);
+    Object.entries(PossibleCustomParams).forEach(([key, value]) => {
+      formData.append(value, data[value]);
+    });
 
-    fetch(`${process.env.REACT_APP_API_URL}/knn-gateway/call-custom-knn`, {
+    fetch(`${process.env.REACT_APP_API_URL}${Endpoints.CUSTOM_MODEL_URL}`, {
       method: "POST",
       body: formData,
     })
@@ -164,13 +159,14 @@ function CustomKnnPage() {
       formData.append("csv-file", file);
       formData.append("predictor", predictor);
       formData.append("response", response);
-      formData.append("maxK", customParameters.maxK);
-      formData.append("customK", customParameters.customK);
-      formData.append("customFolds", customParameters.customFolds);
       formData.append("xToPredict", data.predictorCustom);
+      Object.entries(PossibleCustomParams).forEach(([key, value]) => {
+        formData.append(value, customParameters[value]);
+      });
+
       console.log(formData);
       fetch(
-        `${process.env.REACT_APP_API_URL}/knn-gateway/call-custom-knn-individual`,
+        `${process.env.REACT_APP_API_URL}${Endpoints.CUSTOM_INDIVIDUAL_PREDICTION_URL}`,
         {
           method: "POST",
           body: formData,
@@ -191,7 +187,7 @@ function CustomKnnPage() {
       formData.append("response", response);
       formData.append("xToPredict", data.predictorSample);
       fetch(
-        `${process.env.REACT_APP_API_URL}/knn-gateway/call-sample-knn-individual`,
+        `${process.env.REACT_APP_API_URL}${Endpoints.SAMPLE_INDIVIDUAL_PREDICTION_URL}`,
         {
           method: "POST",
           body: formData,
@@ -278,4 +274,4 @@ function CustomKnnPage() {
   );
 }
 
-export default CustomKnnPage;
+export default ModelPage;
