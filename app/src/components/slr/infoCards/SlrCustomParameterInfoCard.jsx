@@ -1,5 +1,5 @@
 import React from "react";
-import KnnOptionsText from "../../common/text/KnnOptionsText";
+import KnnOptionsText from "../../common/text/knn/KnnOptionsText";
 import CustomParameterInfoCard from "../../common/infoCards/CustomParameterInfoCard";
 
 const SlrCustomParameterInfoCard = () => {

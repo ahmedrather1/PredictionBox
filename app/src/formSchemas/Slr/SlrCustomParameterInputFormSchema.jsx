@@ -3,16 +3,16 @@ export const SlrCustomParameterInputFormSchema = () => {
     type: "object",
     title: "Custom Parameter Input",
     properties: {
-      beta0: {
+      b0: {
         type: "number",
         title: "Beta 0",
       },
-      beta1: {
+      b1: {
         type: "number",
         title: "Beta 1",
       },
     },
-    required: ["beta0", "beta1"],
+    required: ["b0", "b1"],
   };
   return schema;
 };

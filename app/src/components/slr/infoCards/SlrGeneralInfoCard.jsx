@@ -1,5 +1,5 @@
 import React from "react";
-import AboutKnnText from "../../common/text/AboutKnnText";
+import AboutKnnText from "../../common/text/knn/AboutKnnText";
 import GeneralInfoCard from "../../common/infoCards/GeneralInfoCard";
 
 const SlrGeneralInfoCard = () => {
