@@ -1,7 +1,7 @@
 import React from "react";
 
 // TODO use react listgroup stuff instead of html
-const ChooseDataText = () => {
+const KnnChooseDataText = () => {
   return (
     <p>
       You can either use the demo data provided in our simulator to see KNN
@@ -28,4 +28,4 @@ const ChooseDataText = () => {
   );
 };
 
-export default ChooseDataText;
+export default KnnChooseDataText;

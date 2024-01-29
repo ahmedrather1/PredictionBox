@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import CustomForm from "./CustomForm";
-import { DemoDataSelectorSchema } from "../../formSchemas/DemoDataSelectorSchema";
-import { PredictorResponseSelectorSchema } from "../../formSchemas/PredictorResponseSelectorSchema";
-
-import { fetchCsvFileAsBlob } from "../../utils/fetchCsvFileAsBlob";
-import AboutKnnText from "./text/AboutKnnText";
-import ChooseDataText from "./text/ChooseDataText";
+import { DemoDataSelectorSchema } from "../../formSchemas/common/DemoDataSelectorSchema";
+import { PredictorResponseSelectorSchema } from "../../formSchemas/common/PredictorResponseSelectorSchema";
 
 // TODO rename this component, it now does more than just file upload
 const FileUploadComponent = ({
   onFileUpload,
   columns,
   handleDataFromPredictorResponseSelector,
+  GeneralInfoCard,
+  ChooseDataCard,
 }) => {
   const [currentFile, setCurrentFile] = useState(null);
   const [isDemoData, setIsDemoData] = useState(null);
@@ -59,14 +57,7 @@ const FileUploadComponent = ({
       <Row>
         <Col md={8}>
           <div className="mb-3 mt-3">
-            <Card>
-              <Card.Body>
-                <Card.Title className="text-center">
-                  <strong>Choose your Data!</strong>
-                </Card.Title>
-                <ChooseDataText />
-              </Card.Body>
-            </Card>
+            <ChooseDataCard />
           </div>
         </Col>
         {!columns && (
@@ -139,14 +130,7 @@ const FileUploadComponent = ({
       </Row>
       <div className="mb-3">
         <Row className="mt-3">
-          <Card>
-            <Card.Body>
-              <Card.Title className="text-center">
-                <strong> About the K Nearest Neighbors Algorithm</strong>
-              </Card.Title>
-              <AboutKnnText />
-            </Card.Body>
-          </Card>
+          <GeneralInfoCard />
         </Row>
       </div>
     </Container>
