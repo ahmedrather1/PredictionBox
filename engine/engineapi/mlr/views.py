@@ -2,7 +2,7 @@ from django.http import JsonResponse, HttpResponseBadRequest
 from rest_framework.decorators import api_view
 from rest_framework.parsers import MultiPartParser
 
-from mlr.predictions.fullPredictions import sampleMlrFullPrediction
+from mlr.predictions.CoefficientAnalysis import sampleMlrFullPrediction
 
 
 @api_view(['POST'])
@@ -18,7 +18,7 @@ def callSampleMlrFull(request):
     except KeyError as e:
         errorMessage = str(e)
         return JsonResponse({'error': errorMessage}, status=400)
-    xrange = pred[0]
-    ypred = pred[1]
-    originalData = pred[2]
-    return JsonResponse({'xrange': xrange,'ypred': ypred, 'originalData': originalData})
+    # xrange = pred[0]
+    # ypred = pred[1]
+    # originalData = pred[2]
+    return JsonResponse({'xrange': "xrange",'ypred': 'ypred', 'originalData': 'originalData'})
