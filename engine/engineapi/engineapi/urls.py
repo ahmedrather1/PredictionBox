@@ -27,6 +27,8 @@ from slr.views import callCustomSlrFull
 from slr.views import callSampleSlrIndividual
 from slr.views import callCustomSlrIndividual
 
+from mlr.views import callSampleMlrFull
+
 urlpatterns = [
     path('', root_view),
     path('call-sample-knn/', callSampleKnnFull),
@@ -37,6 +39,6 @@ urlpatterns = [
     path('call-sample-slr-individual/', callSampleSlrIndividual),
     path('call-custom-slr/', callCustomSlrFull),
     path('call-custom-slr-individual/', callCustomSlrIndividual),
-
+    path('call-sample-mlr/', callSampleMlrFull),
 
 ]
