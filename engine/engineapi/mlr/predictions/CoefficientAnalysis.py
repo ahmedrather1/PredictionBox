@@ -14,6 +14,8 @@ def coefficientAnalysis(file, predictors, response):
 
     if response not in data.columns:
             raise KeyError("Invalid response")
+    if len(predictors) == 0:
+            raise KeyError("Invalid predictors array")
     for predictor in predictors:
         if predictor not in data.columns:
             raise KeyError("Invalid predictors array")
