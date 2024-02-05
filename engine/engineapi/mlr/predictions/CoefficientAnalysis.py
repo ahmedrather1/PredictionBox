@@ -6,14 +6,21 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 import statsmodels.api as sm
+import ast
 
-def sampleMlrFullPrediction(file, predictor, response):
+def coefficientAnalysis(file, predictors, response):
     data = pd.read_csv(file)
-    features = ['sepal.length', 'sepal.width', 'petal.width']  # Replace with your actual feature names
-    target = 'petal.length'  # Replace with your actual target name
+    predictors = ast.literal_eval(predictors)
 
-    X = data[features]
-    y = data[target]
+    if response not in data.columns:
+            raise KeyError("Invalid response")
+    for predictor in predictors:
+        if predictor not in data.columns:
+            raise KeyError("Invalid predictors array")
+
+
+    X = data[predictors]
+    y = data[response]
 
    # Standardize the features
     scaler = StandardScaler()
@@ -21,13 +28,20 @@ def sampleMlrFullPrediction(file, predictor, response):
 
     X_scaled_sm = sm.add_constant(X_scaled)
 
-    model_sm = sm.OLS(y, X_scaled_sm).fit()
-
+    model_sm = sm.OLS(y, X_scaled_sm)
+    model_sm.exog_names[:] = ["coef"] + predictors
+    model_sm = model_sm.fit()
     coefficients = model_sm.params
-    print("Coefficients:\n", coefficients)
 
     confidence_intervals = model_sm.conf_int()
-    print("\nConfidence Intervals:\n", confidence_intervals)
 
+    results = {}
+    for index, coef in coefficients.items():
+        lower, upper = confidence_intervals.loc[index]
+        results[index] = {
+            'coefficient': coef,
+            'lower': lower,
+            'upper': upper
+        }
 
-    print("\nModel Summary:\n", model_sm.summary())
+    return results

@@ -27,7 +27,7 @@ from slr.views import callCustomSlrFull
 from slr.views import callSampleSlrIndividual
 from slr.views import callCustomSlrIndividual
 
-from mlr.views import callSampleMlrFull
+from mlr.views import callCoefficientAnalysis
 
 urlpatterns = [
     path('', root_view),
@@ -39,6 +39,6 @@ urlpatterns = [
     path('call-sample-slr-individual/', callSampleSlrIndividual),
     path('call-custom-slr/', callCustomSlrFull),
     path('call-custom-slr-individual/', callCustomSlrIndividual),
-    path('call-sample-mlr/', callSampleMlrFull),
+    path('call-mlr-coefficient-analysis/', callCoefficientAnalysis),
 
 ]
