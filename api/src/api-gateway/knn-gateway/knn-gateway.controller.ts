@@ -22,7 +22,7 @@ export class KnnGatewayController {
     @Res() res: Response,
   ) {
     try {
-      const data = await this.ApiGatewayService.forwardKnnRequest(
+      const data = await this.ApiGatewayService.forwardRequest(
         file,
         body,
         'call-sample-knn/',
@@ -43,7 +43,7 @@ export class KnnGatewayController {
     @Res() res: Response,
   ) {
     try {
-      const data = await this.ApiGatewayService.forwardKnnRequest(
+      const data = await this.ApiGatewayService.forwardRequest(
         file,
         body,
         'call-custom-knn/',
@@ -64,7 +64,7 @@ export class KnnGatewayController {
     @Res() res: Response,
   ) {
     try {
-      const data = await this.ApiGatewayService.forwardKnnRequest(
+      const data = await this.ApiGatewayService.forwardRequest(
         file,
         body,
         'call-custom-knn-individual/',
@@ -85,7 +85,7 @@ export class KnnGatewayController {
     @Res() res: Response,
   ) {
     try {
-      const data = await this.ApiGatewayService.forwardKnnRequest(
+      const data = await this.ApiGatewayService.forwardRequest(
         file,
         body,
         'call-sample-knn-individual/',
