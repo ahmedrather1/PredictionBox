@@ -5,7 +5,7 @@ import numpy as np
 from sklearn.linear_model import LinearRegression
 
 
-def sampleMlrModel(X, y):
+def mlrModel(file, response_variable, predictor_variables):
     slr_model = LinearRegression()
     slr_model.fit(X, y)
     return slr_model
