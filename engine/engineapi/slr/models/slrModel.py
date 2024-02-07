@@ -4,7 +4,7 @@ import pandas as pd
 import numpy as np
 from sklearn.linear_model import LinearRegression
 
-
+# this is unnecessary, remove
 def sampleSlrModel(X, y):
     slr_model = LinearRegression()
     slr_model.fit(X, y)

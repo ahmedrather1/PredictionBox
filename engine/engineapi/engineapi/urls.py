@@ -29,6 +29,7 @@ from slr.views import callCustomSlrIndividual
 
 from mlr.views import callCoefficientAnalysis
 from mlr.views import callPartialRegressions
+from mlr.views import callMlrIndividualPrediction
 
 urlpatterns = [
     path('', root_view),
@@ -42,4 +43,5 @@ urlpatterns = [
     path('call-custom-slr-individual/', callCustomSlrIndividual),
     path('call-mlr-coefficient-analysis/', callCoefficientAnalysis),
     path('call-mlr-partial-regressions/', callPartialRegressions),
+    path('call-mlr-individual/', callMlrIndividualPrediction),
 ]
