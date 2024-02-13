@@ -6,6 +6,7 @@ import styled from "styled-components";
 import ComingSoonPage from "./pages/ComingSoonPage";
 import KnnPage from "./pages/KnnPage";
 import SlrPage from "./pages/SlrPage";
+import MlrPage from "./pages/MlrPage";
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/knn" element={<KnnPage />} />
           <Route path="/slr" element={<SlrPage />} />
-          <Route path="/mlr" element={<ComingSoonPage />} />
+          <Route path="/mlr" element={<MlrPage />} />
           <Route path="/lasso" element={<ComingSoonPage />} />
           <Route path="/ridge" element={<ComingSoonPage />} />
         </Routes>
