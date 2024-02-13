@@ -1,7 +1,8 @@
 import React from "react";
 import { Chart } from "react-google-charts";
+import { Card } from "react-bootstrap";
 
-const ForestPlotChart = () => {
+const ForestPlotChart = ({ coefInfo }) => {
   const data = [
     [
       { type: "string", label: "Variable" },
@@ -9,11 +10,11 @@ const ForestPlotChart = () => {
       { id: "i0", type: "number", role: "interval" },
       { id: "i1", type: "number", role: "interval" },
     ],
-    ["X1", 0.1, 0.01, 0.12], // [Variable, Estimate, Lower CI, Upper CI]
-    ["X2", 0.3, 0.2, 0.4],
-    ["X3", -0.2, -0.3, 0],
-    // Add more data points as needed
   ];
+
+  coefInfo.forEach((element) => data.push(element));
+
+  console.log("------fromforest-------", data);
 
   const options = {
     title: "Standardized Slope (ΔY/Δsd(X))",
@@ -38,14 +39,27 @@ const ForestPlotChart = () => {
   };
 
   return (
-    <Chart
-      chartType="ScatterChart"
-      width="100%"
-      height="400px"
-      data={data}
-      options={options}
-      loader={<div>Loading Chart</div>}
-    />
+    <Card style={{ height: "60vh" }}>
+      <Card.Body
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          height: "100%",
+          overflow: "auto",
+        }}
+      >
+        <div style={{ flexGrow: 1, width: "100%", height: "100%" }}>
+          <Chart
+            chartType="ScatterChart"
+            width="100%"
+            height="400px"
+            data={data}
+            options={options}
+            loader={<div>Loading Chart</div>}
+          />
+        </div>
+      </Card.Body>
+    </Card>
   );
 };
 

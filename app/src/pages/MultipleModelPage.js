@@ -99,9 +99,19 @@ function MultipleModelPage({
       )
         .then((response) => response.json())
         .then((data) => {
-          setYpred(data.ypred.map((element) => element[0]));
-          setXrange(data.xrange);
-          setOriginalData(data.originalData);
+          let coefInfo = data.result;
+          let predictorKeys = Object.keys(coefInfo);
+          let processedCoefInfo = predictorKeys
+            .filter((key) => key !== "coef")
+            .map((key) => {
+              return [
+                key,
+                parseFloat(coefInfo[key].coefficient),
+                parseFloat(coefInfo[key].lower),
+                parseFloat(coefInfo[key].upper),
+              ];
+            });
+          setCoefAnalysis(processedCoefInfo);
         })
         .catch((error) => console.error("Error fetching data:", error));
     }
@@ -290,8 +300,41 @@ function MultipleModelPage({
         </Container>
       );
     } else {
-      if (columns && response) {
-        return <ForestPlotChart />;
+      if (coefAnalysis) {
+        return (
+          <Container fluid>
+            <Row>
+              <Col sm={8} className="mt-3">
+                <ForestPlotChart coefInfo={coefAnalysis} />
+              </Col>
+              <Col>
+                <div className="mb-3 mt-3">
+                  <CustomParameterCard
+                    onSubmit={handleDataFromParameterInputForm}
+                    schema={customParameterInputFormSchema}
+                  />
+                </div>
+                <div className="mb-3">
+                  <IndividualPredictionCard
+                    onSubmit={handleDataFromPredictionForm}
+                    schema={predictionInputFormSchema}
+                    sampleIndividualPrediction={sampleIndividualPrediction}
+                    customIndividualPrediction={customIndividualPrediction}
+                  />
+                </div>
+              </Col>
+            </Row>
+            <Row>
+              <Container>
+                <Col md={8}>
+                  <CustomParameterInfoCard />
+                </Col>
+              </Container>
+            </Row>
+          </Container>
+        );
+
+        // return <ForestPlotChart coefInfo={coefAnalysis} />;
       } else {
         return (
           <MultipleModelFileUploadComponent
