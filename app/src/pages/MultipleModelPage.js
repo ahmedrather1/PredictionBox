@@ -8,6 +8,7 @@ import IndividualPredictionCard from "../components/common/IndividualPredictionC
 import MultipleModelFileUploadComponent from "../components/common/MultipleModelFileUploadComponent";
 import Header from "../components/common/Header";
 import KnnOptionsText from "../components/knn/text/KnnOptionsText";
+import ForestPlotChart from "../components/common/ForestChartComponent";
 
 function MultipleModelPage({
   Endpoints,
@@ -27,6 +28,8 @@ function MultipleModelPage({
 
   const [initialPredictors, setInitialPredictors] = useState(null);
   const [predictor, setPredictors] = useState(null);
+
+  const [coefAnalysis, setCoefAnalysis] = useState(null);
 
   const [response, setResponse] = useState(null);
 
@@ -288,7 +291,7 @@ function MultipleModelPage({
       );
     } else {
       if (columns && response) {
-        return columns;
+        return <ForestPlotChart />;
       } else {
         return (
           <MultipleModelFileUploadComponent
