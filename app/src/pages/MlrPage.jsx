@@ -6,7 +6,7 @@ import SlrChooseDataCard from "../components/slr/infoCards/SlrChooseDataCard";
 import MultipleModelPage from "./MultipleModelPage";
 
 const Endpoints = {
-  SAMPLE_MODEL_URL: "/mlr-gateway/call-mlr-coefficient-analysis",
+  COEFFICIENT_ANALYSIS_URL: "/mlr-gateway/call-mlr-coefficient-analysis",
   SAMPLE_INDIVIDUAL_PREDICTION_URL: "/mlr-gateway/call-mlr-partial-regressions",
   CUSTOM_MODEL_URL: "/mlr-gateway/call-mlr-individual",
   CUSTOM_INDIVIDUAL_PREDICTION_URL: "/slr-gateway/call-custom-slr-individual",

@@ -25,7 +25,9 @@ function MultipleModelPage({
   const [xrange, setXrange] = useState(null);
   const [originalData, setOriginalData] = useState(null);
 
-  const [predictor, setPredictor] = useState(null);
+  const [initialPredictors, setInitialPredictors] = useState(null);
+  const [predictor, setPredictors] = useState(null);
+
   const [response, setResponse] = useState(null);
 
   const [ypred, setYpred] = useState(null);
@@ -55,17 +57,43 @@ function MultipleModelPage({
     setCustomParameterInputFormSchema(schema);
   }, [originalData]);
 
+  //   useEffect(() => {
+  //     if (predictor && response) {
+  //       const formData = new FormData();
+  //       formData.append("csv-file", file);
+  //       formData.append("predictor", predictor);
+  //       formData.append("response", response);
+
+  //       fetch(`${process.env.REACT_APP_API_URL}${Endpoints.SAMPLE_MODEL_URL}`, {
+  //         method: "POST",
+  //         body: formData,
+  //       })
+  //         .then((response) => response.json())
+  //         .then((data) => {
+  //           setYpred(data.ypred.map((element) => element[0]));
+  //           setXrange(data.xrange);
+  //           setOriginalData(data.originalData);
+  //         })
+  //         .catch((error) => console.error("Error fetching data:", error));
+  //     }
+  //   }, [predictor, response]);
+
   useEffect(() => {
-    if (predictor && response) {
+    if (response && initialPredictors) {
       const formData = new FormData();
       formData.append("csv-file", file);
-      formData.append("predictor", predictor);
       formData.append("response", response);
+      formData.append("predictors", initialPredictors);
 
-      fetch(`${process.env.REACT_APP_API_URL}${Endpoints.SAMPLE_MODEL_URL}`, {
-        method: "POST",
-        body: formData,
-      })
+      console.log(initialPredictors);
+
+      fetch(
+        `${process.env.REACT_APP_API_URL}${Endpoints.COEFFICIENT_ANALYSIS_URL}`,
+        {
+          method: "POST",
+          body: formData,
+        }
+      )
         .then((response) => response.json())
         .then((data) => {
           setYpred(data.ypred.map((element) => element[0]));
@@ -74,7 +102,7 @@ function MultipleModelPage({
         })
         .catch((error) => console.error("Error fetching data:", error));
     }
-  }, [predictor, response]);
+  }, [response, initialPredictors]);
 
   useEffect(() => {
     if (xrange && ypred) {
@@ -126,9 +154,15 @@ function MultipleModelPage({
     setFile(uploadedFile);
   };
 
-  const handleDataFromPredictorResponseSelector = (data) => {
-    setPredictor(data.predictor);
+  const handleDataFromResponseSelector = (data) => {
+    setPredictors();
     setResponse(data.response);
+    const index = columns.indexOf(data.response);
+    let predictors = columns;
+    if (index > -1) {
+      predictors.splice(index, 1);
+    }
+    setInitialPredictors(predictors);
   };
 
   const handleDataFromParameterInputForm = (data) => {
@@ -253,17 +287,19 @@ function MultipleModelPage({
         </Container>
       );
     } else {
-      return (
-        <MultipleModelFileUploadComponent
-          onFileUpload={handleFileUpload}
-          columns={columns}
-          handleDataFromPredictorResponseSelector={
-            handleDataFromPredictorResponseSelector
-          }
-          GeneralInfoCard={GeneralInfoCard}
-          ChooseDataCard={ChooseDataCard}
-        />
-      );
+      if (columns && response) {
+        return columns;
+      } else {
+        return (
+          <MultipleModelFileUploadComponent
+            onFileUpload={handleFileUpload}
+            columns={columns}
+            handleDataFromResponseSelector={handleDataFromResponseSelector}
+            GeneralInfoCard={GeneralInfoCard}
+            ChooseDataCard={ChooseDataCard}
+          />
+        );
+      }
     }
   };
 

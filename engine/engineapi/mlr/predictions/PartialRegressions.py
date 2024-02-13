@@ -9,8 +9,8 @@ def partialRegressions(file, predictors, response):
 
     try:
         predictors = ast.literal_eval(predictors)
-    except Exception:
-        raise KeyError("Invalid predictors array")
+    except Exception as e:
+        raise KeyError("Invalid predictors array", e)
 
     if response not in data.columns:
             raise KeyError("Invalid response")

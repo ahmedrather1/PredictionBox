@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import CustomForm from "./CustomForm";
 import { DemoDataSelectorSchema } from "../../formSchemas/common/DemoDataSelectorSchema";
-import { PredictorResponseSelectorSchema } from "../../formSchemas/common/PredictorResponseSelectorSchema";
+import { ResponseSelectorSchema } from "../../formSchemas/common/ResponseSelectorSchema";
 
 // TODO rename this component, it now does more than just file upload
 const MultipleModelFileUploadComponent = ({
   onFileUpload,
   columns,
-  handleDataFromPredictorResponseSelector,
+  handleDataFromResponseSelector,
   GeneralInfoCard,
   ChooseDataCard,
 }) => {
@@ -111,22 +111,19 @@ const MultipleModelFileUploadComponent = ({
           </Col>
         )}
         {columns && (
-          //   <Col md={4}>
-          //     <div className="mb-3 mt-3">
-          //       <Card>
-          //         <Card.Body>
-          //           <Card.Title>
-          //             Choose Your Predictor (X variable) and Response (Y Variable)
-          //           </Card.Title>
-          //           <CustomForm
-          //             schema={PredictorResponseSelectorSchema(columns)}
-          //             onSubmit={handleDataFromPredictorResponseSelector}
-          //           />
-          //         </Card.Body>
-          //       </Card>
-          //     </div>
-          //   </Col>
-          <p>{columns}</p>
+          <Col md={4}>
+            <div className="mb-3 mt-3">
+              <Card>
+                <Card.Body>
+                  <Card.Title>Choose Your Response (Y Variable)</Card.Title>
+                  <CustomForm
+                    schema={ResponseSelectorSchema(columns)}
+                    onSubmit={handleDataFromResponseSelector}
+                  />
+                </Card.Body>
+              </Card>
+            </div>
+          </Col>
         )}
       </Row>
       <div className="mb-3">
