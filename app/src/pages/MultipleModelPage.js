@@ -9,11 +9,13 @@ import MultipleModelFileUploadComponent from "../components/common/MultipleModel
 import Header from "../components/common/Header";
 import KnnOptionsText from "../components/knn/text/KnnOptionsText";
 import ForestPlotChart from "../components/common/ForestChartComponent";
+import ChoosePredictorsCard from "../components/common/ChoosePredictorsCard";
 
 function MultipleModelPage({
   Endpoints,
   PossibleCustomParams,
   CustomParameterInputFormSchema,
+  ChoosePredictorsFormSchema,
   CustomParameterInfoCard,
   GeneralInfoCard,
   ChooseDataCard,
@@ -178,6 +180,11 @@ function MultipleModelPage({
     setInitialPredictors(predictors);
   };
 
+  const handleDataFromPredictorsSelectorForm = (data) => {
+    console.log("----------from model page----------");
+    console.log(data);
+  };
+
   const handleDataFromParameterInputForm = (data) => {
     setShowCustomPrediction(false);
     setCustomYPred(null);
@@ -309,9 +316,9 @@ function MultipleModelPage({
               </Col>
               <Col>
                 <div className="mb-3 mt-3">
-                  <CustomParameterCard
-                    onSubmit={handleDataFromParameterInputForm}
-                    schema={customParameterInputFormSchema}
+                  <ChoosePredictorsCard
+                    onSubmit={handleDataFromPredictorsSelectorForm}
+                    schema={ChoosePredictorsFormSchema(initialPredictors)}
                   />
                 </div>
                 <div className="mb-3">

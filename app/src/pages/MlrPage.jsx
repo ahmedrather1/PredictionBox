@@ -4,6 +4,7 @@ import SlrGeneralInfoCard from "../components/slr/infoCards/SlrGeneralInfoCard";
 import SlrChooseDataCard from "../components/slr/infoCards/SlrChooseDataCard";
 
 import MultipleModelPage from "./MultipleModelPage";
+import { ChoosePredictorsFormSchema } from "../formSchemas/Mlr/ChoosePredictorsFormSchema";
 
 const Endpoints = {
   COEFFICIENT_ANALYSIS_URL: "/mlr-gateway/call-mlr-coefficient-analysis",
@@ -23,6 +24,7 @@ function MlrPage() {
       Endpoints={Endpoints}
       PossibleCustomParams={PossibleCustomParams}
       CustomParameterInputFormSchema={SlrCustomParameterInputFormSchema}
+      ChoosePredictorsFormSchema={ChoosePredictorsFormSchema}
       CustomParameterInfoCard={SlrCustomParameterInfoCard}
       GeneralInfoCard={SlrGeneralInfoCard}
       ChooseDataCard={SlrChooseDataCard}
