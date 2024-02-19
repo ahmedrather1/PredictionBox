@@ -9,6 +9,7 @@ import MultipleModelFileUploadComponent from "../components/common/MultipleModel
 import Header from "../components/common/Header";
 import ForestPlotChart from "../components/common/ForestChartComponent";
 import ChoosePredictorsCard from "../components/common/ChoosePredictorsCard";
+import PartialRegressionsChartComponent from "../components/common/PartialRegressionsChartComponent";
 
 function MultipleModelPage({
   Endpoints,
@@ -300,80 +301,46 @@ function MultipleModelPage({
 
   const renderContent = () => {
     if (partialRegressions) {
-      // return <p>{partialRegressions}</p>;
-      // <Container fluid>
-      //   <Row>
-      //     <Col sm={8} className="mt-3">
-      //       <ChartComponent
-      //         samplePrediction={samplePrediction}
-      //         originalData={originalData}
-      //         customPrediction={customPrediction}
-      //         showCustomPrediction={showCustomPrediction}
-      //         setShowCustomPrediction={setShowCustomPrediction}
-      //         predictor={predictor}
-      //         response={response}
-      //       />
-      //     </Col>
-      //     <Col>
-      //       <div className="mb-3 mt-3">
-      //         <CustomParameterCard
-      //           onSubmit={handleDataFromParameterInputForm}
-      //           schema={customParameterInputFormSchema}
-      //         />
-      //       </div>
-      //       <div className="mb-3">
-      //         <IndividualPredictionCard
-      //           onSubmit={handleDataFromPredictionForm}
-      //           schema={predictionInputFormSchema}
-      //           sampleIndividualPrediction={sampleIndividualPrediction}
-      //           customIndividualPrediction={customIndividualPrediction}
-      //         />
-      //       </div>
-      //     </Col>
-      //   </Row>
-      //   <Row>
-      //     <Container>
-      //       <Col md={8}>
-      //         <CustomParameterInfoCard />
-      //       </Col>
-      //     </Container>
-      //   </Row>
-      // </Container>
+      return (
+        <Container fluid>
+          {Object.keys(partialRegressions).map((key) => {
+            const x = partialRegressions[key]["x"];
+            const y = partialRegressions[key]["y"];
+            return <PartialRegressionsChartComponent x={x} y={y} />;
+          })}
+        </Container>
+      );
+    } else if (coefAnalysis) {
+      return (
+        <Container fluid>
+          <Row>
+            <Col sm={8} className="mt-3">
+              <ForestPlotChart coefInfo={coefAnalysis} />
+            </Col>
+            <Col>
+              <div className="mb-3 mt-3">
+                <ChoosePredictorsCard
+                  onSubmit={handleDataFromPredictorsSelectorForm}
+                  schema={ChoosePredictorsFormSchema(initialPredictors)}
+                />
+              </div>
+              <div className="mb-3">
+                <PredictorSelectionInfoCard />
+              </div>
+            </Col>
+          </Row>
+        </Container>
+      );
     } else {
-      if (coefAnalysis) {
-        return (
-          <Container fluid>
-            <Row>
-              <Col sm={8} className="mt-3">
-                <ForestPlotChart coefInfo={coefAnalysis} />
-              </Col>
-              <Col>
-                <div className="mb-3 mt-3">
-                  <ChoosePredictorsCard
-                    onSubmit={handleDataFromPredictorsSelectorForm}
-                    schema={ChoosePredictorsFormSchema(initialPredictors)}
-                  />
-                </div>
-                <div className="mb-3">
-                  <PredictorSelectionInfoCard />
-                </div>
-              </Col>
-            </Row>
-          </Container>
-        );
-
-        // return <ForestPlotChart coefInfo={coefAnalysis} />;
-      } else {
-        return (
-          <MultipleModelFileUploadComponent
-            onFileUpload={handleFileUpload}
-            columns={columns}
-            handleDataFromResponseSelector={handleDataFromResponseSelector}
-            GeneralInfoCard={GeneralInfoCard}
-            ChooseDataCard={ChooseDataCard}
-          />
-        );
-      }
+      return (
+        <MultipleModelFileUploadComponent
+          onFileUpload={handleFileUpload}
+          columns={columns}
+          handleDataFromResponseSelector={handleDataFromResponseSelector}
+          GeneralInfoCard={GeneralInfoCard}
+          ChooseDataCard={ChooseDataCard}
+        />
+      );
     }
   };
 
