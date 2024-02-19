@@ -6,10 +6,14 @@ const PartialRegressionsChartComponent = ({
   raw,
   regressed,
   response,
-  xtitle,
+  predictorsAccountedFor,
+  predictor,
 }) => {
   const [combinedData, setCombinedData] = useState(null);
   const [customSeries, setCustomSeries] = useState(null);
+  const [xTitle, setXtitle] = useState("");
+  const [yTitle, setYtitle] = useState("");
+  const [title, setTitle] = useState("");
 
   const generateSeries = (headers) => {
     let genSeries = {};
@@ -30,6 +34,7 @@ const PartialRegressionsChartComponent = ({
   };
 
   useEffect(() => {
+    setTitles();
     const updatedCombinedData = getChartData();
     let headers = updatedCombinedData[0];
     generateSeries(headers);
@@ -54,8 +59,32 @@ const PartialRegressionsChartComponent = ({
     },
   };
 
+  const setTitles = () => {
+    let controlledPredictors = "";
+    predictorsAccountedFor.forEach((predictor) => {
+      controlledPredictors += predictor + " & ";
+    });
+    controlledPredictors = controlledPredictors.slice(0, -2);
+    let titleX = predictor + " | " + controlledPredictors;
+    let titleY = response + " | " + controlledPredictors;
+
+    let mainTitle =
+      "Partial Regression Plot for " +
+      response +
+      " and " +
+      predictor +
+      " controlling for " +
+      controlledPredictors;
+
+    setXtitle(titleX);
+    setYtitle(titleY);
+    setTitle(mainTitle);
+    setXtitle(titleX);
+    setYtitle(titleY);
+  };
+
   const getChartData = () => {
-    let headers = [xtitle];
+    let headers = [xTitle];
 
     headers.push("Raw");
     headers.push("Regressed");
@@ -118,20 +147,20 @@ const PartialRegressionsChartComponent = ({
             loader={<div>Loading Chart</div>}
             data={combinedData}
             options={{
-              title: `${response}`,
+              title: `${title}`,
               titleTextStyle: {
                 color: "black",
-                fontSize: 20,
+                fontSize: 12,
                 fontName: "Arial",
                 bold: true,
                 italic: false,
               },
               series: customSeries,
               hAxis: {
-                title: xtitle,
+                title: xTitle,
               },
               vAxis: {
-                title: response,
+                title: yTitle,
               },
               interpolateNulls: true,
             }}

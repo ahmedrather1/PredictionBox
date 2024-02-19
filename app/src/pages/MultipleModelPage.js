@@ -304,6 +304,9 @@ function MultipleModelPage({
       return (
         <Container fluid>
           {Object.keys(partialRegressions).map((key) => {
+            let predictorsAccountedFor = Object.keys(partialRegressions).filter(
+              (item) => item !== key
+            );
             const raw = partialRegressions[key]["raw"];
             const regressed = partialRegressions[key]["regressed"];
             return (
@@ -311,7 +314,8 @@ function MultipleModelPage({
                 raw={raw}
                 regressed={regressed}
                 response={response}
-                xtitle={response}
+                predictorsAccountedFor={predictorsAccountedFor}
+                predictor={key}
               />
             );
           })}
