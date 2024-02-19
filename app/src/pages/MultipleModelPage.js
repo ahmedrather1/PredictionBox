@@ -7,7 +7,6 @@ import CustomParameterCard from "../components/common/CustomParameterCard";
 import IndividualPredictionCard from "../components/common/IndividualPredictionCard";
 import MultipleModelFileUploadComponent from "../components/common/MultipleModelFileUploadComponent";
 import Header from "../components/common/Header";
-import KnnOptionsText from "../components/knn/text/KnnOptionsText";
 import ForestPlotChart from "../components/common/ForestChartComponent";
 import ChoosePredictorsCard from "../components/common/ChoosePredictorsCard";
 
@@ -30,6 +29,7 @@ function MultipleModelPage({
 
   const [initialPredictors, setInitialPredictors] = useState(null);
   const [predictor, setPredictors] = useState(null);
+  const [finalPredictors, setFinalPredictors] = useState(null);
 
   const [coefAnalysis, setCoefAnalysis] = useState(null);
 
@@ -62,35 +62,40 @@ function MultipleModelPage({
     setCustomParameterInputFormSchema(schema);
   }, [originalData]);
 
-  //   useEffect(() => {
-  //     if (predictor && response) {
-  //       const formData = new FormData();
-  //       formData.append("csv-file", file);
-  //       formData.append("predictor", predictor);
-  //       formData.append("response", response);
-
-  //       fetch(`${process.env.REACT_APP_API_URL}${Endpoints.SAMPLE_MODEL_URL}`, {
-  //         method: "POST",
-  //         body: formData,
-  //       })
-  //         .then((response) => response.json())
-  //         .then((data) => {
-  //           setYpred(data.ypred.map((element) => element[0]));
-  //           setXrange(data.xrange);
-  //           setOriginalData(data.originalData);
-  //         })
-  //         .catch((error) => console.error("Error fetching data:", error));
-  //     }
-  //   }, [predictor, response]);
+  useEffect(() => {
+    if (finalPredictors && response) {
+      // const formData = new FormData();
+      // formData.append("csv-file", file);
+      // formData.append("predictor", predictor);
+      // formData.append("response", response);
+      // fetch(`${process.env.REACT_APP_API_URL}${Endpoints.SAMPLE_MODEL_URL}`, {
+      //   method: "POST",
+      //   body: formData,
+      // })
+      //   .then((response) => response.json())
+      //   .then((data) => {
+      //     setYpred(data.ypred.map((element) => element[0]));
+      //     setXrange(data.xrange);
+      //     setOriginalData(data.originalData);
+      //   })
+      //   .catch((error) => console.error("Error fetching data:", error));
+    }
+    console.log("final predictors!", finalPredictors);
+  }, [finalPredictors, response]);
 
   useEffect(() => {
     if (response && initialPredictors) {
+      let predictorsRaw = [];
+      console.log(initialPredictors);
+      console.log(Object.keys(initialPredictors));
+      Object.keys(initialPredictors).forEach((key) => predictorsRaw.push(key));
+
+      console.log(predictorsRaw);
+
       const formData = new FormData();
       formData.append("csv-file", file);
       formData.append("response", response);
-      formData.append("predictors", initialPredictors);
-
-      console.log(initialPredictors);
+      formData.append("predictors", predictorsRaw);
 
       fetch(
         `${process.env.REACT_APP_API_URL}${Endpoints.COEFFICIENT_ANALYSIS_URL}`,
@@ -173,16 +178,32 @@ function MultipleModelPage({
     setPredictors();
     setResponse(data.response);
     const index = columns.indexOf(data.response);
-    let predictors = columns;
+    let predictorsRaw = columns;
     if (index > -1) {
-      predictors.splice(index, 1);
+      predictorsRaw.splice(index, 1);
     }
+    let predictors = {};
+    predictorsRaw.forEach((predictor) => {
+      predictors[predictor] = predictor.replace(/\./g, " ");
+    });
     setInitialPredictors(predictors);
   };
 
   const handleDataFromPredictorsSelectorForm = (data) => {
-    console.log("----------from model page----------");
-    console.log(data);
+    let chosenPredictorsRaw = Object.keys(data).filter(
+      (key) => data[key] === true
+    );
+    let chosenPredictors = [];
+
+    chosenPredictorsRaw.forEach((value) => {
+      const key = Object.keys(initialPredictors).find(
+        (key) => initialPredictors[key] === value
+      );
+      if (key) {
+        chosenPredictors.push(key);
+      }
+    });
+    setFinalPredictors(chosenPredictors);
   };
 
   const handleDataFromParameterInputForm = (data) => {

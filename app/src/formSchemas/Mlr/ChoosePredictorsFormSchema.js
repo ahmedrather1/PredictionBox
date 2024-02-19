@@ -1,5 +1,8 @@
-export const ChoosePredictorsFormSchema = (checkboxLabels) => {
-  console.log(checkboxLabels);
+export const ChoosePredictorsFormSchema = (checkboxLabelsObj) => {
+  let checkboxLabels = [];
+  Object.keys(checkboxLabelsObj).forEach((key) =>
+    checkboxLabels.push(checkboxLabelsObj[key])
+  );
   let props = {};
   checkboxLabels.forEach((label) => {
     console.log(label);
