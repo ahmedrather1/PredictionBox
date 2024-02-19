@@ -9,8 +9,6 @@ export const ChoosePredictorsFormSchema = (checkboxLabelsObj) => {
     props[label] = { type: "boolean" };
   });
 
-  console.log(props);
-
   const schema = {
     type: "object",
     title: "Checkbox Input",

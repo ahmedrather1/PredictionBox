@@ -7,6 +7,15 @@ import numpy as np
 
 import ast
 
+def remove_outliers(df, column):
+    Q1 = df[column].quantile(0.25)
+    Q3 = df[column].quantile(0.75)
+    IQR = Q3 - Q1
+    lower_bound = Q1 - 1.5 * IQR
+    upper_bound = Q3 + 1.5 * IQR
+    
+    return df[(df[column] >= lower_bound) & (df[column] <= upper_bound)]
+
 def partialRegressions(file, predictorsString, response):
     data = pd.read_csv(file)
 
@@ -16,12 +25,15 @@ def partialRegressions(file, predictorsString, response):
         raise KeyError("Invalid predictors array", e)
 
     if response not in data.columns:
-            raise KeyError("Invalid response")
+        raise KeyError("Invalid response")
     if len(predictors) == 0:
-            raise KeyError("Invalid predictors array: no predictors!")
+        raise KeyError("Invalid predictors array: no predictors!")
     for predictor in predictors:
         if predictor not in data.columns:
             raise KeyError("Invalid predictors array: " + predictor + " not in your dataset")
+        
+    for predictor in predictors + [response]:
+        data = remove_outliers(data, predictor)
     
     X = data[predictors]
     y = data[response]
@@ -41,9 +53,9 @@ def partialRegressions(file, predictorsString, response):
         yRaw = yResiduals.tolist()
 
         slrModel = sampleSlrModel(predictorResiduals2d, yResiduals)
-        minValue = X[predictor].min() 
-        maxValue = X[predictor].max()  
-        xRange = np.linspace(minValue, maxValue, 500).reshape(-1, 1)  
+        minValue = min(xRaw)
+        maxValue = max(xRaw) 
+        xRange = np.linspace(minValue, maxValue, 150).reshape(-1, 1)  
         yPred = slrModel.predict(xRange)
         
         partialRegressionsData[predictor] = {

@@ -304,9 +304,16 @@ function MultipleModelPage({
       return (
         <Container fluid>
           {Object.keys(partialRegressions).map((key) => {
-            const x = partialRegressions[key]["x"];
-            const y = partialRegressions[key]["y"];
-            return <PartialRegressionsChartComponent x={x} y={y} />;
+            const raw = partialRegressions[key]["raw"];
+            const regressed = partialRegressions[key]["regressed"];
+            return (
+              <PartialRegressionsChartComponent
+                raw={raw}
+                regressed={regressed}
+                response={response}
+                xtitle={response}
+              />
+            );
           })}
         </Container>
       );
