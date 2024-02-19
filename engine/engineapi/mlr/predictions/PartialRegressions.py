@@ -4,11 +4,11 @@ from sklearn.model_selection import train_test_split
 from statsmodels.api import OLS, add_constant
 import ast
 
-def partialRegressions(file, predictors, response):
+def partialRegressions(file, predictorsString, response):
     data = pd.read_csv(file)
 
     try:
-        predictors = ast.literal_eval(predictors)
+        predictors = predictorsString.split(',')
     except Exception as e:
         raise KeyError("Invalid predictors array", e)
 

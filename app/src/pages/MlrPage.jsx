@@ -9,7 +9,7 @@ import { ChoosePredictorsFormSchema } from "../formSchemas/Mlr/ChoosePredictorsF
 
 const Endpoints = {
   COEFFICIENT_ANALYSIS_URL: "/mlr-gateway/call-mlr-coefficient-analysis",
-  SAMPLE_INDIVIDUAL_PREDICTION_URL: "/mlr-gateway/call-mlr-partial-regressions",
+  PARTIAL_REGRESSIONS_URL: "/mlr-gateway/call-mlr-partial-regressions",
   CUSTOM_MODEL_URL: "/mlr-gateway/call-mlr-individual",
   CUSTOM_INDIVIDUAL_PREDICTION_URL: "/slr-gateway/call-custom-slr-individual",
 };

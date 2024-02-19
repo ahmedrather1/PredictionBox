@@ -28,6 +28,8 @@ function MultipleModelPage({
   const [xrange, setXrange] = useState(null);
   const [originalData, setOriginalData] = useState(null);
 
+  const [partialRegressions, setPartialRegressions] = useState(null);
+
   const [initialPredictors, setInitialPredictors] = useState(null);
   const [predictor, setPredictors] = useState(null);
   const [finalPredictors, setFinalPredictors] = useState(null);
@@ -65,24 +67,35 @@ function MultipleModelPage({
 
   useEffect(() => {
     if (finalPredictors && response) {
-      // const formData = new FormData();
-      // formData.append("csv-file", file);
-      // formData.append("predictor", predictor);
-      // formData.append("response", response);
-      // fetch(`${process.env.REACT_APP_API_URL}${Endpoints.SAMPLE_MODEL_URL}`, {
-      //   method: "POST",
-      //   body: formData,
-      // })
-      //   .then((response) => response.json())
-      //   .then((data) => {
-      //     setYpred(data.ypred.map((element) => element[0]));
-      //     setXrange(data.xrange);
-      //     setOriginalData(data.originalData);
-      //   })
-      //   .catch((error) => console.error("Error fetching data:", error));
+      const formData = new FormData();
+      formData.append("csv-file", file);
+      formData.append("predictors", finalPredictors);
+      formData.append("response", response);
+      fetch(
+        `${process.env.REACT_APP_API_URL}${Endpoints.PARTIAL_REGRESSIONS_URL}`,
+        {
+          method: "POST",
+          body: formData,
+        }
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          setPartialRegressions(data);
+          //setOriginalData(data.originalData);
+        })
+        .catch((error) => console.error("Error fetching data:", error));
     }
     console.log("final predictors!", finalPredictors);
   }, [finalPredictors, response]);
+
+  useEffect(() => {
+    if (partialRegressions) {
+      console.log(
+        "------------partial regressions---------------!",
+        partialRegressions
+      );
+    }
+  }, [partialRegressions]);
 
   useEffect(() => {
     if (response && initialPredictors) {
@@ -286,47 +299,46 @@ function MultipleModelPage({
   };
 
   const renderContent = () => {
-    if (samplePrediction && originalData) {
-      return (
-        <Container fluid>
-          <Row>
-            <Col sm={8} className="mt-3">
-              <ChartComponent
-                samplePrediction={samplePrediction}
-                originalData={originalData}
-                customPrediction={customPrediction}
-                showCustomPrediction={showCustomPrediction}
-                setShowCustomPrediction={setShowCustomPrediction}
-                predictor={predictor}
-                response={response}
-              />
-            </Col>
-            <Col>
-              <div className="mb-3 mt-3">
-                <CustomParameterCard
-                  onSubmit={handleDataFromParameterInputForm}
-                  schema={customParameterInputFormSchema}
-                />
-              </div>
-              <div className="mb-3">
-                <IndividualPredictionCard
-                  onSubmit={handleDataFromPredictionForm}
-                  schema={predictionInputFormSchema}
-                  sampleIndividualPrediction={sampleIndividualPrediction}
-                  customIndividualPrediction={customIndividualPrediction}
-                />
-              </div>
-            </Col>
-          </Row>
-          <Row>
-            <Container>
-              <Col md={8}>
-                <CustomParameterInfoCard />
-              </Col>
-            </Container>
-          </Row>
-        </Container>
-      );
+    if (partialRegressions) {
+      // return <p>{partialRegressions}</p>;
+      // <Container fluid>
+      //   <Row>
+      //     <Col sm={8} className="mt-3">
+      //       <ChartComponent
+      //         samplePrediction={samplePrediction}
+      //         originalData={originalData}
+      //         customPrediction={customPrediction}
+      //         showCustomPrediction={showCustomPrediction}
+      //         setShowCustomPrediction={setShowCustomPrediction}
+      //         predictor={predictor}
+      //         response={response}
+      //       />
+      //     </Col>
+      //     <Col>
+      //       <div className="mb-3 mt-3">
+      //         <CustomParameterCard
+      //           onSubmit={handleDataFromParameterInputForm}
+      //           schema={customParameterInputFormSchema}
+      //         />
+      //       </div>
+      //       <div className="mb-3">
+      //         <IndividualPredictionCard
+      //           onSubmit={handleDataFromPredictionForm}
+      //           schema={predictionInputFormSchema}
+      //           sampleIndividualPrediction={sampleIndividualPrediction}
+      //           customIndividualPrediction={customIndividualPrediction}
+      //         />
+      //       </div>
+      //     </Col>
+      //   </Row>
+      //   <Row>
+      //     <Container>
+      //       <Col md={8}>
+      //         <CustomParameterInfoCard />
+      //       </Col>
+      //     </Container>
+      //   </Row>
+      // </Container>
     } else {
       if (coefAnalysis) {
         return (

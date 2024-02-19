@@ -26,13 +26,13 @@ def callCoefficientAnalysis(request):
 @api_view(['POST'])
 def callPartialRegressions(request):
     file = request.FILES.get('csv-file')
-    predictors = request.data.get('predictors')
+    predictorsString = request.data.get('predictors')
     response = request.data.get('response')
     if not file:
         return JsonResponse({'error': 'No file uploaded'}, status=400)
 
     try:
-        results = partialRegressions(file, predictors, response)
+        results = partialRegressions(file, predictorsString, response)
     except KeyError as e:
         errorMessage = str(e)
         return JsonResponse({'error': errorMessage}, status=400)
