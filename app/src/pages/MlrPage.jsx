@@ -2,6 +2,7 @@ import { SlrCustomParameterInputFormSchema } from "../formSchemas/Slr/SlrCustomP
 import SlrCustomParameterInfoCard from "../components/slr/infoCards/SlrCustomParameterInfoCard";
 import SlrGeneralInfoCard from "../components/slr/infoCards/SlrGeneralInfoCard";
 import SlrChooseDataCard from "../components/slr/infoCards/SlrChooseDataCard";
+import MlrPredictorSelectionInfoCard from "../components/mlr/infoCards/PredictorSelectionInfoCard";
 
 import MultipleModelPage from "./MultipleModelPage";
 import { ChoosePredictorsFormSchema } from "../formSchemas/Mlr/ChoosePredictorsFormSchema";
@@ -28,6 +29,7 @@ function MlrPage() {
       CustomParameterInfoCard={SlrCustomParameterInfoCard}
       GeneralInfoCard={SlrGeneralInfoCard}
       ChooseDataCard={SlrChooseDataCard}
+      PredictorSelectionInfoCard={MlrPredictorSelectionInfoCard}
     />
   );
 }

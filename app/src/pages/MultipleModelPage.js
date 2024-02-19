@@ -18,6 +18,7 @@ function MultipleModelPage({
   CustomParameterInfoCard,
   GeneralInfoCard,
   ChooseDataCard,
+  PredictorSelectionInfoCard,
 }) {
   // TODO too many usestates! use redux instead
   const [columns, setColumns] = useState(null);
@@ -175,7 +176,6 @@ function MultipleModelPage({
   };
 
   const handleDataFromResponseSelector = (data) => {
-    setPredictors();
     setResponse(data.response);
     const index = columns.indexOf(data.response);
     let predictorsRaw = columns;
@@ -343,21 +343,9 @@ function MultipleModelPage({
                   />
                 </div>
                 <div className="mb-3">
-                  <IndividualPredictionCard
-                    onSubmit={handleDataFromPredictionForm}
-                    schema={predictionInputFormSchema}
-                    sampleIndividualPrediction={sampleIndividualPrediction}
-                    customIndividualPrediction={customIndividualPrediction}
-                  />
+                  <PredictorSelectionInfoCard />
                 </div>
               </Col>
-            </Row>
-            <Row>
-              <Container>
-                <Col md={8}>
-                  <CustomParameterInfoCard />
-                </Col>
-              </Container>
             </Row>
           </Container>
         );
