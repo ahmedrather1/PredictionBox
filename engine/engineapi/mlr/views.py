@@ -41,7 +41,7 @@ def callPartialRegressions(request):
 @api_view(['POST'])
 def callMlrIndividualPrediction(request):
     file = request.FILES.get('csv-file')
-    predictors = request.data.get('predictors')
+    predictorsString = request.data.get('predictors')
     response = request.data.get('response')
     dataPoint = request.data.get('datapoint')
     print(dataPoint)
@@ -49,7 +49,7 @@ def callMlrIndividualPrediction(request):
         return JsonResponse({'error': 'No file uploaded'}, status=400)
 
     try:
-        result = mlrIndividualPrediction(file, predictors, response, dataPointRaw=dataPoint)
+        result = mlrIndividualPrediction(file, predictorsString, response, dataPointRaw=dataPoint)
     except Exception as e:
         errorMessage = str(e)
         return JsonResponse({'error': errorMessage}, status=400)

@@ -3,11 +3,11 @@ from sklearn.linear_model import LinearRegression
 import ast
 import json
 
-def mlrIndividualPrediction(file, predictors, response, dataPointRaw):
+def mlrIndividualPrediction(file, predictorsString, response, dataPointRaw):
     data = pd.read_csv(file)
 
     try:
-        predictors = ast.literal_eval(predictors)
+        predictors = predictorsString.split(',')
     except Exception:
         raise KeyError("Invalid predictors array")
     

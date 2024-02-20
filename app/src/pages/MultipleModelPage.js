@@ -11,10 +11,11 @@ import ForestPlotChart from "../components/common/ForestChartComponent";
 import ChoosePredictorsCard from "../components/common/ChoosePredictorsCard";
 import PartialRegressionsChartComponent from "../components/common/PartialRegressionsChartComponent";
 import PaginationComponent from "../components/common/PaginationComponent";
+import MultipleParameterIndividualPredictionCard from "../components/common/MultipleParameterIndividualPredictionCard";
+import { MultipleParameterPredictionInputFormSchema } from "../components/common/MultipleParameterPredictionInputFormSchema";
 
 function MultipleModelPage({
   Endpoints,
-  PossibleCustomParams,
   CustomParameterInputFormSchema,
   ChoosePredictorsFormSchema,
   CustomParameterInfoCard,
@@ -35,6 +36,7 @@ function MultipleModelPage({
   const [initialPredictors, setInitialPredictors] = useState(null);
   const [predictor, setPredictors] = useState(null);
   const [finalPredictors, setFinalPredictors] = useState(null);
+  const [finalPredictorsObject, setFinalPredictorsObject] = useState(null);
 
   const [coefAnalysis, setCoefAnalysis] = useState(null);
 
@@ -49,8 +51,7 @@ function MultipleModelPage({
   const [customPrediction, setCustomPrediction] = useState(null);
   const [showCustomPrediction, setShowCustomPrediction] = useState(false);
   const [customParameters, setCustomParameters] = useState(null);
-  const [customIndividualPrediction, setCustomIndividualPrediction] =
-    useState(null);
+  const [individualPrediction, setIndividualPrediction] = useState(null);
 
   const [predictionInputFormSchema, setPredictionInputFormSchema] =
     useState(null);
@@ -61,9 +62,22 @@ function MultipleModelPage({
   const chartsPerPage = 1;
 
   useEffect(() => {
-    let schema = PredictionInputFormSchema(customParameters);
-    setPredictionInputFormSchema(schema);
-  }, [customParameters]);
+    if (finalPredictors) {
+      const index = columns.indexOf(response);
+      let predictorsRaw = finalPredictors;
+      if (index > -1) {
+        predictorsRaw.splice(index, 1);
+      }
+      let finalPredictorsObj = {};
+      predictorsRaw.forEach((predictor) => {
+        finalPredictorsObj[predictor] = predictor.replace(/\./g, " ");
+      });
+      setFinalPredictorsObject(finalPredictorsObj);
+      let schema =
+        MultipleParameterPredictionInputFormSchema(finalPredictorsObj);
+      setPredictionInputFormSchema(schema);
+    }
+  }, [finalPredictors]);
 
   useEffect(() => {
     let schema = CustomParameterInputFormSchema(originalData);
@@ -86,7 +100,6 @@ function MultipleModelPage({
         .then((response) => response.json())
         .then((data) => {
           setPartialRegressions(data);
-          //setOriginalData(data.originalData);
         })
         .catch((error) => console.error("Error fetching data:", error));
     }
@@ -224,99 +237,42 @@ function MultipleModelPage({
     setFinalPredictors(chosenPredictors);
   };
 
-  const handleDataFromParameterInputForm = (data) => {
-    setShowCustomPrediction(false);
-    setCustomYPred(null);
-    setCustomPrediction(null);
-    let CustomParameters = {};
-    Object.entries(PossibleCustomParams).forEach(([key, value]) => {
-      CustomParameters[value] = data[value];
-    });
-    setCustomParameters(CustomParameters);
-    const formData = new FormData();
-    formData.append("csv-file", file);
-    formData.append("predictor", predictor);
-    formData.append("response", response);
-    Object.entries(PossibleCustomParams).forEach(([key, value]) => {
-      formData.append(value, data[value]);
+  const handleDataFromPredictionForm = (data) => {
+    console.log("FROM PREDICTION FORM ------------ ", data);
+    let predictorsRaw = Object.keys(data);
+    let predictorsFull = {};
+
+    predictorsRaw.forEach((value) => {
+      const key = Object.keys(finalPredictorsObject).find(
+        (key) => finalPredictorsObject[key] === value
+      );
+      if (key) {
+        predictorsFull[key] = data[value];
+      }
     });
 
-    fetch(`${process.env.REACT_APP_API_URL}${Endpoints.CUSTOM_MODEL_URL}`, {
-      method: "POST",
-      body: formData,
-    })
+    const formData = new FormData();
+
+    formData.append("csv-file", file);
+    formData.append("predictors", finalPredictors);
+    formData.append("response", response);
+    formData.append("datapoint", JSON.stringify(predictorsFull));
+
+    console.log(formData);
+    fetch(
+      `${process.env.REACT_APP_API_URL}${Endpoints.INDIVIDUAL_PREDICTION_URL}`,
+      {
+        method: "POST",
+        body: formData,
+      }
+    )
       .then((response) => response.json())
       .then((data) => {
-        setCustomYPred(data.ypred.map((element) => element[0]));
+        setIndividualPrediction({
+          predictedY: +parseFloat(data.result).toFixed(4),
+        });
       })
       .catch((error) => console.error("Error fetching data:", error));
-  };
-
-  const handleDataFromPredictionForm = (data) => {
-    const formData = new FormData();
-    if (data.predictorCustom) {
-      formData.append("csv-file", file);
-      formData.append("predictor", predictor);
-      formData.append("response", response);
-      formData.append("xToPredict", data.predictorCustom);
-      Object.entries(PossibleCustomParams).forEach(([key, value]) => {
-        formData.append(value, customParameters[value]);
-      });
-
-      console.log(formData);
-      fetch(
-        `${process.env.REACT_APP_API_URL}${Endpoints.CUSTOM_INDIVIDUAL_PREDICTION_URL}`,
-        {
-          method: "POST",
-          body: formData,
-        }
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          setCustomIndividualPrediction({
-            xToPredict: +parseFloat(data.xToPredict).toFixed(4),
-            predictedY: +parseFloat(data.predictedY).toFixed(4),
-          });
-        })
-        .catch((error) => console.error("Error fetching data:", error));
-    }
-    if (data.predictorSample) {
-      formData.append("csv-file", file);
-      formData.append("predictor", predictor);
-      formData.append("response", response);
-      formData.append("xToPredict", data.predictorSample);
-      fetch(
-        `${process.env.REACT_APP_API_URL}${Endpoints.SAMPLE_INDIVIDUAL_PREDICTION_URL}`,
-        {
-          method: "POST",
-          body: formData,
-        }
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          setSampleIndividualPrediction({
-            xToPredict: +parseFloat(data.xToPredict).toFixed(4),
-            predictedY: +parseFloat(data.predictedY).toFixed(4),
-          });
-        })
-        .catch((error) => console.error("Error fetching data:", error));
-    }
-  };
-
-  const handleNext = () => {
-    console.log("Current Page before update:", currentPage);
-    setCurrentPage(currentPage + 1);
-    console.log(
-      Object.keys(partialRegressions).slice(currentPage, currentPage + 1)
-    );
-  };
-
-  const handlePrevious = () => {
-    console.log("Current Page before update:", currentPage);
-    setCurrentPage(currentPage - 1);
-    console.log(
-      Object.keys(partialRegressions).slice(currentPage, currentPage + 1)
-    );
   };
 
   const renderContent = () => {
@@ -326,7 +282,7 @@ function MultipleModelPage({
           <Row>
             <Col sm={8} className="mt-3">
               {Object.keys(partialRegressions)
-                .slice(currentPage, currentPage + 1)
+                .slice(currentPage, currentPage + chartsPerPage)
                 .map((key) => {
                   let predictorsAccountedFor = Object.keys(
                     partialRegressions
@@ -352,17 +308,11 @@ function MultipleModelPage({
             </Col>
             <Col>
               <div className="mb-3 mt-3">
-                <CustomParameterCard
-                  onSubmit={handleDataFromParameterInputForm}
-                  schema={customParameterInputFormSchema}
-                />
-              </div>
-              <div className="mb-3">
-                <IndividualPredictionCard
+                <MultipleParameterIndividualPredictionCard
                   onSubmit={handleDataFromPredictionForm}
                   schema={predictionInputFormSchema}
-                  sampleIndividualPrediction={sampleIndividualPrediction}
-                  customIndividualPrediction={customIndividualPrediction}
+                  individualPrediction={individualPrediction}
+                  response={response}
                 />
               </div>
             </Col>

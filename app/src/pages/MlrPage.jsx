@@ -10,20 +10,13 @@ import { ChoosePredictorsFormSchema } from "../formSchemas/Mlr/ChoosePredictorsF
 const Endpoints = {
   COEFFICIENT_ANALYSIS_URL: "/mlr-gateway/call-mlr-coefficient-analysis",
   PARTIAL_REGRESSIONS_URL: "/mlr-gateway/call-mlr-partial-regressions",
-  CUSTOM_MODEL_URL: "/mlr-gateway/call-mlr-individual",
-  CUSTOM_INDIVIDUAL_PREDICTION_URL: "/slr-gateway/call-custom-slr-individual",
-};
-
-const PossibleCustomParams = {
-  B0: "b0",
-  B1: "b1",
+  INDIVIDUAL_PREDICTION_URL: "/mlr-gateway/call-mlr-individual",
 };
 
 function MlrPage() {
   return (
     <MultipleModelPage
       Endpoints={Endpoints}
-      PossibleCustomParams={PossibleCustomParams}
       CustomParameterInputFormSchema={SlrCustomParameterInputFormSchema}
       ChoosePredictorsFormSchema={ChoosePredictorsFormSchema}
       CustomParameterInfoCard={SlrCustomParameterInfoCard}
