@@ -18,7 +18,7 @@ function MultipleModelPage({
   Endpoints,
   CustomParameterInputFormSchema,
   ChoosePredictorsFormSchema,
-  CustomParameterInfoCard,
+  FinalPlotsInfoCard,
   GeneralInfoCard,
   ChooseDataCard,
   PredictorSelectionInfoCard,
@@ -320,7 +320,7 @@ function MultipleModelPage({
           <Row>
             <Container>
               <Col md={8}>
-                <CustomParameterInfoCard />
+                <FinalPlotsInfoCard />
               </Col>
             </Container>
           </Row>

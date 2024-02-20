@@ -1,8 +1,8 @@
 import { SlrCustomParameterInputFormSchema } from "../formSchemas/Slr/SlrCustomParameterInputFormSchema";
-import SlrCustomParameterInfoCard from "../components/slr/infoCards/SlrCustomParameterInfoCard";
-import SlrGeneralInfoCard from "../components/slr/infoCards/SlrGeneralInfoCard";
-import SlrChooseDataCard from "../components/slr/infoCards/SlrChooseDataCard";
+import MlrGeneralInfoCard from "../components/mlr/infoCards/MlrGeneralInfoCard";
+import MlrChooseDataCard from "../components/mlr/infoCards/MlrChooseDataCard";
 import MlrPredictorSelectionInfoCard from "../components/mlr/infoCards/PredictorSelectionInfoCard";
+import MlrPartialRegressionInfoCard from "../components/mlr/infoCards/MlrPartialRegressionInfoCard";
 
 import MultipleModelPage from "./MultipleModelPage";
 import { ChoosePredictorsFormSchema } from "../formSchemas/Mlr/ChoosePredictorsFormSchema";
@@ -19,9 +19,9 @@ function MlrPage() {
       Endpoints={Endpoints}
       CustomParameterInputFormSchema={SlrCustomParameterInputFormSchema}
       ChoosePredictorsFormSchema={ChoosePredictorsFormSchema}
-      CustomParameterInfoCard={SlrCustomParameterInfoCard}
-      GeneralInfoCard={SlrGeneralInfoCard}
-      ChooseDataCard={SlrChooseDataCard}
+      FinalPlotsInfoCard={MlrPartialRegressionInfoCard}
+      GeneralInfoCard={MlrGeneralInfoCard}
+      ChooseDataCard={MlrChooseDataCard}
       PredictorSelectionInfoCard={MlrPredictorSelectionInfoCard}
     />
   );

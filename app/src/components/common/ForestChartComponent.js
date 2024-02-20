@@ -19,10 +19,10 @@ const ForestPlotChart = ({ coefInfo }) => {
   const options = {
     title: "Standardized Slope (ΔY/Δsd(X))",
     hAxis: {
-      title: "Standardized Slope",
+      title: "Variables",
     },
     vAxis: {
-      title: "Variables",
+      title: "Standardized Slope",
       minValue: -1,
       maxValue: 1,
     },
@@ -31,7 +31,6 @@ const ForestPlotChart = ({ coefInfo }) => {
       0: { type: "scatter", color: "red", pointSize: 5 },
     },
     intervals: { style: "bars", color: "black" },
-    // Customize the intervals here as needed
     interval: {
       i0: { style: "bars", lineWidth: 2, barWidth: 0 },
       i1: { style: "bars", lineWidth: 2, barWidth: 0 },
