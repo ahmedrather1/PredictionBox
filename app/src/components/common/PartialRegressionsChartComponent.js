@@ -14,6 +14,7 @@ const PartialRegressionsChartComponent = ({
   const [xTitle, setXtitle] = useState("");
   const [yTitle, setYtitle] = useState("");
   const [title, setTitle] = useState("");
+  console.log("rendering chart with key, ", predictor);
 
   const generateSeries = (headers) => {
     let genSeries = {};
@@ -40,7 +41,7 @@ const PartialRegressionsChartComponent = ({
     generateSeries(headers);
 
     setCombinedData(updatedCombinedData);
-  }, []);
+  }, [predictor]);
 
   const chartDataSets = {
     scatter: {
@@ -85,6 +86,7 @@ const PartialRegressionsChartComponent = ({
 
   const getChartData = () => {
     let headers = [xTitle];
+    console.log("in getchartdata ");
 
     headers.push("Raw");
     headers.push("Regressed");

@@ -56,6 +56,9 @@ function MultipleModelPage({
   const [customParameterInputFormSchema, setCustomParameterInputFormSchema] =
     useState(null);
 
+  const [currentPage, setCurrentPage] = useState(0);
+  const chartsPerPage = 1;
+
   useEffect(() => {
     let schema = PredictionInputFormSchema(customParameters);
     setPredictionInputFormSchema(schema);
@@ -299,28 +302,67 @@ function MultipleModelPage({
     }
   };
 
+  const handleNext = () => {
+    console.log("Current Page before update:", currentPage);
+    setCurrentPage(currentPage + 1);
+    console.log(
+      Object.keys(partialRegressions).slice(currentPage, currentPage + 1)
+    );
+  };
+
+  const handlePrevious = () => {
+    console.log("Current Page before update:", currentPage);
+    setCurrentPage(currentPage - 1);
+    console.log(
+      Object.keys(partialRegressions).slice(currentPage, currentPage + 1)
+    );
+  };
+
   const renderContent = () => {
     if (partialRegressions) {
       return (
         <Container fluid>
           <Row>
             <Col sm={8} className="mt-3">
-              {Object.keys(partialRegressions).map((key) => {
-                let predictorsAccountedFor = Object.keys(
-                  partialRegressions
-                ).filter((item) => item !== key);
-                const raw = partialRegressions[key]["raw"];
-                const regressed = partialRegressions[key]["regressed"];
-                return (
-                  <PartialRegressionsChartComponent
-                    raw={raw}
-                    regressed={regressed}
-                    response={response}
-                    predictorsAccountedFor={predictorsAccountedFor}
-                    predictor={key}
-                  />
-                );
-              })}
+              {Object.keys(partialRegressions)
+                .slice(currentPage, currentPage + 1)
+                .map((key) => {
+                  let predictorsAccountedFor = Object.keys(
+                    partialRegressions
+                  ).filter((item) => item !== key);
+                  const raw = partialRegressions[key]["raw"];
+                  const regressed = partialRegressions[key]["regressed"];
+                  return (
+                    <PartialRegressionsChartComponent
+                      raw={raw}
+                      regressed={regressed}
+                      response={response}
+                      predictorsAccountedFor={predictorsAccountedFor}
+                      predictor={key}
+                    />
+                  );
+                })}
+              <div>
+                <button onClick={handlePrevious} disabled={currentPage === 0}>
+                  Previous
+                </button>
+                <span>
+                  {" "}
+                  Page {currentPage + 1} of{" "}
+                  {Math.ceil(
+                    Object.keys(partialRegressions).length / chartsPerPage
+                  )}{" "}
+                </span>
+                <button
+                  onClick={handleNext}
+                  disabled={
+                    currentPage >=
+                    Object.keys(partialRegressions).length / chartsPerPage - 1
+                  }
+                >
+                  Next
+                </button>
+              </div>
             </Col>
             <Col>
               <div className="mb-3 mt-3">
