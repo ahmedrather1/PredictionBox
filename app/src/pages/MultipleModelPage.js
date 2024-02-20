@@ -303,22 +303,49 @@ function MultipleModelPage({
     if (partialRegressions) {
       return (
         <Container fluid>
-          {Object.keys(partialRegressions).map((key) => {
-            let predictorsAccountedFor = Object.keys(partialRegressions).filter(
-              (item) => item !== key
-            );
-            const raw = partialRegressions[key]["raw"];
-            const regressed = partialRegressions[key]["regressed"];
-            return (
-              <PartialRegressionsChartComponent
-                raw={raw}
-                regressed={regressed}
-                response={response}
-                predictorsAccountedFor={predictorsAccountedFor}
-                predictor={key}
-              />
-            );
-          })}
+          <Row>
+            <Col sm={8} className="mt-3">
+              {Object.keys(partialRegressions).map((key) => {
+                let predictorsAccountedFor = Object.keys(
+                  partialRegressions
+                ).filter((item) => item !== key);
+                const raw = partialRegressions[key]["raw"];
+                const regressed = partialRegressions[key]["regressed"];
+                return (
+                  <PartialRegressionsChartComponent
+                    raw={raw}
+                    regressed={regressed}
+                    response={response}
+                    predictorsAccountedFor={predictorsAccountedFor}
+                    predictor={key}
+                  />
+                );
+              })}
+            </Col>
+            <Col>
+              <div className="mb-3 mt-3">
+                <CustomParameterCard
+                  onSubmit={handleDataFromParameterInputForm}
+                  schema={customParameterInputFormSchema}
+                />
+              </div>
+              <div className="mb-3">
+                <IndividualPredictionCard
+                  onSubmit={handleDataFromPredictionForm}
+                  schema={predictionInputFormSchema}
+                  sampleIndividualPrediction={sampleIndividualPrediction}
+                  customIndividualPrediction={customIndividualPrediction}
+                />
+              </div>
+            </Col>
+          </Row>
+          <Row>
+            <Container>
+              <Col md={8}>
+                <CustomParameterInfoCard />
+              </Col>
+            </Container>
+          </Row>
         </Container>
       );
     } else if (coefAnalysis) {
