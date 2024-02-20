@@ -1,5 +1,4 @@
 import React from "react";
-// import SlrOptionsText from "../text/SlrOptionsText";
 import AboutMlrPartialRegression from "../text/AboutMlrPartialRegression";
 import CustomParameterInfoCard from "../../common/infoCards/CustomParameterInfoCard";
 

@@ -14,8 +14,6 @@ const ForestPlotChart = ({ coefInfo }) => {
 
   coefInfo.forEach((element) => data.push(element));
 
-  console.log("------fromforest-------", data);
-
   const options = {
     title: "Standardized Slope (ΔY/Δsd(X))",
     hAxis: {

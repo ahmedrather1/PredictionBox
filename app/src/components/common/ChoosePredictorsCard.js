@@ -1,6 +1,6 @@
 import React from "react";
-import { Card } from "react-bootstrap"; // Assuming you are using react-bootstrap
-import CustomForm from "./CustomForm"; // Adjust the import path as needed
+import { Card } from "react-bootstrap";
+import CustomForm from "./CustomForm";
 
 const ChoosePredictorsCard = ({ onSubmit, schema }) => {
   return (

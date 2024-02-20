@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import Papa from "papaparse";
-import ChartComponent from "../components/common/ChartComponent";
-import { PredictionInputFormSchema } from "../formSchemas/common/PredictionInputFormSchema";
-import CustomParameterCard from "../components/common/CustomParameterCard";
-import IndividualPredictionCard from "../components/common/IndividualPredictionCard";
 import MultipleModelFileUploadComponent from "../components/common/MultipleModelFileUploadComponent";
 import Header from "../components/common/Header";
 import ForestPlotChart from "../components/common/ForestChartComponent";
@@ -16,7 +12,6 @@ import { MultipleParameterPredictionInputFormSchema } from "../components/common
 
 function MultipleModelPage({
   Endpoints,
-  CustomParameterInputFormSchema,
   ChoosePredictorsFormSchema,
   FinalPlotsInfoCard,
   GeneralInfoCard,
@@ -28,13 +23,9 @@ function MultipleModelPage({
   const [file, setFile] = useState(null);
   const [fileData, setFileData] = useState(null);
 
-  const [xrange, setXrange] = useState(null);
-  const [originalData, setOriginalData] = useState(null);
-
   const [partialRegressions, setPartialRegressions] = useState(null);
 
   const [initialPredictors, setInitialPredictors] = useState(null);
-  const [predictor, setPredictors] = useState(null);
   const [finalPredictors, setFinalPredictors] = useState(null);
   const [finalPredictorsObject, setFinalPredictorsObject] = useState(null);
 
@@ -42,20 +33,9 @@ function MultipleModelPage({
 
   const [response, setResponse] = useState(null);
 
-  const [ypred, setYpred] = useState(null);
-  const [samplePrediction, setSamplePrediction] = useState(null);
-  const [sampleIndividualPrediction, setSampleIndividualPrediction] =
-    useState(null);
-
-  const [customYPred, setCustomYPred] = useState(null);
-  const [customPrediction, setCustomPrediction] = useState(null);
-  const [showCustomPrediction, setShowCustomPrediction] = useState(false);
-  const [customParameters, setCustomParameters] = useState(null);
   const [individualPrediction, setIndividualPrediction] = useState(null);
 
   const [predictionInputFormSchema, setPredictionInputFormSchema] =
-    useState(null);
-  const [customParameterInputFormSchema, setCustomParameterInputFormSchema] =
     useState(null);
 
   const [currentPage, setCurrentPage] = useState(0);
@@ -80,11 +60,6 @@ function MultipleModelPage({
   }, [finalPredictors]);
 
   useEffect(() => {
-    let schema = CustomParameterInputFormSchema(originalData);
-    setCustomParameterInputFormSchema(schema);
-  }, [originalData]);
-
-  useEffect(() => {
     if (finalPredictors && response) {
       const formData = new FormData();
       formData.append("csv-file", file);
@@ -103,26 +78,13 @@ function MultipleModelPage({
         })
         .catch((error) => console.error("Error fetching data:", error));
     }
-    console.log("final predictors!", finalPredictors);
   }, [finalPredictors, response]);
-
-  useEffect(() => {
-    if (partialRegressions) {
-      console.log(
-        "------------partial regressions---------------!",
-        partialRegressions
-      );
-    }
-  }, [partialRegressions]);
 
   useEffect(() => {
     if (response && initialPredictors) {
       let predictorsRaw = [];
-      console.log(initialPredictors);
-      console.log(Object.keys(initialPredictors));
-      Object.keys(initialPredictors).forEach((key) => predictorsRaw.push(key));
 
-      console.log(predictorsRaw);
+      Object.keys(initialPredictors).forEach((key) => predictorsRaw.push(key));
 
       const formData = new FormData();
       formData.append("csv-file", file);
@@ -157,21 +119,6 @@ function MultipleModelPage({
   }, [response, initialPredictors]);
 
   useEffect(() => {
-    if (xrange && ypred) {
-      let prediction = xrange.map((e, i) => [e, ypred[i]]);
-      setSamplePrediction(prediction);
-    }
-  }, [xrange, ypred]);
-
-  useEffect(() => {
-    if (customYPred) {
-      let customPred = xrange.map((e, i) => [e, customYPred[i]]);
-      setCustomPrediction(customPred);
-      setShowCustomPrediction(true);
-    }
-  }, [customYPred]);
-
-  useEffect(() => {
     if (file) {
       parseFile();
     }
@@ -196,7 +143,6 @@ function MultipleModelPage({
       header: true,
       skipEmptyLines: true,
       complete: function (results) {
-        console.log(results.data);
         setFileData(results.data);
       },
     });
@@ -238,7 +184,6 @@ function MultipleModelPage({
   };
 
   const handleDataFromPredictionForm = (data) => {
-    console.log("FROM PREDICTION FORM ------------ ", data);
     let predictorsRaw = Object.keys(data);
     let predictorsFull = {};
 
@@ -258,7 +203,6 @@ function MultipleModelPage({
     formData.append("response", response);
     formData.append("datapoint", JSON.stringify(predictorsFull));
 
-    console.log(formData);
     fetch(
       `${process.env.REACT_APP_API_URL}${Endpoints.INDIVIDUAL_PREDICTION_URL}`,
       {

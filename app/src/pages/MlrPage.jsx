@@ -1,4 +1,3 @@
-import { SlrCustomParameterInputFormSchema } from "../formSchemas/Slr/SlrCustomParameterInputFormSchema";
 import MlrGeneralInfoCard from "../components/mlr/infoCards/MlrGeneralInfoCard";
 import MlrChooseDataCard from "../components/mlr/infoCards/MlrChooseDataCard";
 import MlrPredictorSelectionInfoCard from "../components/mlr/infoCards/PredictorSelectionInfoCard";
@@ -17,7 +16,6 @@ function MlrPage() {
   return (
     <MultipleModelPage
       Endpoints={Endpoints}
-      CustomParameterInputFormSchema={SlrCustomParameterInputFormSchema}
       ChoosePredictorsFormSchema={ChoosePredictorsFormSchema}
       FinalPlotsInfoCard={MlrPartialRegressionInfoCard}
       GeneralInfoCard={MlrGeneralInfoCard}

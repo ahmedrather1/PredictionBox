@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Chart } from "react-google-charts";
-import { ToggleButton, OverlayTrigger, Popover, Card } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 
 const PartialRegressionsChartComponent = ({
   raw,

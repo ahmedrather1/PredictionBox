@@ -1,6 +1,6 @@
 import React from "react";
-import { Card, Container, Row, Col } from "react-bootstrap"; // Assuming you're using react-bootstrap
-import CustomForm from "./CustomForm"; // Adjust the import path as needed
+import { Card, Container, Row, Col } from "react-bootstrap";
+import CustomForm from "./CustomForm";
 
 const MultipleParameterIndividualPredictionCard = ({
   onSubmit,
