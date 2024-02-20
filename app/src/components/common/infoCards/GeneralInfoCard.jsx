@@ -1,6 +1,7 @@
 import React from "react";
 import { Card } from "react-bootstrap";
 
+// duplicated component with generalInfoCard, TODO fix this
 const GeneralInfoCard = ({ title, Text }) => {
   return (
     <Card>

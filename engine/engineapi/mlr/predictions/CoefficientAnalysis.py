@@ -7,9 +7,14 @@ from sklearn.linear_model import LinearRegression
 import statsmodels.api as sm
 import ast
 
-def coefficientAnalysis(file, predictors, response):
+def coefficientAnalysis(file, predictorsString, response):
+
     data = pd.read_csv(file)
-    predictors = ast.literal_eval(predictors)
+
+    try:
+        predictors = predictorsString.split(',')
+    except Exception as e:
+        raise KeyError("Invalid predictors array", e)
 
     if response not in data.columns:
             raise KeyError("Invalid response")

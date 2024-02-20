@@ -7,7 +7,6 @@ import {
 import { Button } from "react-bootstrap";
 
 const CustomForm = ({ schema, onSubmit }) => {
-  // State to hold form data
   const [data, setData] = React.useState({});
 
   const handleSubmit = (event) => {

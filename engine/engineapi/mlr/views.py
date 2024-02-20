@@ -11,13 +11,13 @@ from mlr.predictions.mlrIndividualPrediction import mlrIndividualPrediction
 @api_view(['POST'])
 def callCoefficientAnalysis(request):
     file = request.FILES.get('csv-file')
-    predictors = request.data.get('predictors')
+    predictorsString = request.data.get('predictors')
     response = request.data.get('response')
     if not file:
         return JsonResponse({'error': 'No file uploaded'}, status=400)
 
     try:
-        results = coefficientAnalysis(file, predictors, response)
+        results = coefficientAnalysis(file, predictorsString, response)
     except KeyError as e:
         errorMessage = str(e)
         return JsonResponse({'error': errorMessage}, status=400)
@@ -26,13 +26,13 @@ def callCoefficientAnalysis(request):
 @api_view(['POST'])
 def callPartialRegressions(request):
     file = request.FILES.get('csv-file')
-    predictors = request.data.get('predictors')
+    predictorsString = request.data.get('predictors')
     response = request.data.get('response')
     if not file:
         return JsonResponse({'error': 'No file uploaded'}, status=400)
 
     try:
-        results = partialRegressions(file, predictors, response)
+        results = partialRegressions(file, predictorsString, response)
     except KeyError as e:
         errorMessage = str(e)
         return JsonResponse({'error': errorMessage}, status=400)
@@ -41,7 +41,7 @@ def callPartialRegressions(request):
 @api_view(['POST'])
 def callMlrIndividualPrediction(request):
     file = request.FILES.get('csv-file')
-    predictors = request.data.get('predictors')
+    predictorsString = request.data.get('predictors')
     response = request.data.get('response')
     dataPoint = request.data.get('datapoint')
     print(dataPoint)
@@ -49,7 +49,7 @@ def callMlrIndividualPrediction(request):
         return JsonResponse({'error': 'No file uploaded'}, status=400)
 
     try:
-        result = mlrIndividualPrediction(file, predictors, response, dataPointRaw=dataPoint)
+        result = mlrIndividualPrediction(file, predictorsString, response, dataPointRaw=dataPoint)
     except Exception as e:
         errorMessage = str(e)
         return JsonResponse({'error': errorMessage}, status=400)
