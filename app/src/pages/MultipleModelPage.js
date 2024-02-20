@@ -10,6 +10,7 @@ import Header from "../components/common/Header";
 import ForestPlotChart from "../components/common/ForestChartComponent";
 import ChoosePredictorsCard from "../components/common/ChoosePredictorsCard";
 import PartialRegressionsChartComponent from "../components/common/PartialRegressionsChartComponent";
+import PaginationComponent from "../components/common/PaginationComponent";
 
 function MultipleModelPage({
   Endpoints,
@@ -342,27 +343,12 @@ function MultipleModelPage({
                     />
                   );
                 })}
-              <div>
-                <button onClick={handlePrevious} disabled={currentPage === 0}>
-                  Previous
-                </button>
-                <span>
-                  {" "}
-                  Page {currentPage + 1} of{" "}
-                  {Math.ceil(
-                    Object.keys(partialRegressions).length / chartsPerPage
-                  )}{" "}
-                </span>
-                <button
-                  onClick={handleNext}
-                  disabled={
-                    currentPage >=
-                    Object.keys(partialRegressions).length / chartsPerPage - 1
-                  }
-                >
-                  Next
-                </button>
-              </div>
+              <PaginationComponent
+                currentPage={currentPage}
+                itemCount={Object.keys(partialRegressions).length}
+                itemsPerPage={chartsPerPage}
+                onPageChange={setCurrentPage}
+              />
             </Col>
             <Col>
               <div className="mb-3 mt-3">
