@@ -10,11 +10,11 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { Response } from 'express';
 import { ApiGatewayService } from '../api-gateway.service';
 
-@Controller('slr-gateway')
-export class SlrGatewayController {
+@Controller('mlr-gateway')
+export class MlrGatewayController {
   constructor(private ApiGatewayService: ApiGatewayService) {}
 
-  @Post('call-sample-slr')
+  @Post('call-mlr-coefficient-analysis')
   @UseInterceptors(FileInterceptor('csv-file'))
   async forwardToCallSampleKnn(
     @Body() body: any,
@@ -25,7 +25,7 @@ export class SlrGatewayController {
       const data = await this.ApiGatewayService.forwardRequest(
         file,
         body,
-        'call-sample-slr/',
+        'call-mlr-coefficient-analysis/',
       );
       res.send(data);
     } catch (error) {
@@ -35,7 +35,7 @@ export class SlrGatewayController {
     }
   }
 
-  @Post('call-custom-slr')
+  @Post('call-mlr-partial-regressions')
   @UseInterceptors(FileInterceptor('csv-file'))
   async forwardToCallCustomKnn(
     @Body() body: any,
@@ -46,7 +46,7 @@ export class SlrGatewayController {
       const data = await this.ApiGatewayService.forwardRequest(
         file,
         body,
-        'call-custom-slr/',
+        'call-mlr-partial-regressions/',
       );
       res.send(data);
     } catch (error) {
@@ -56,7 +56,7 @@ export class SlrGatewayController {
     }
   }
 
-  @Post('call-custom-slr-individual')
+  @Post('call-mlr-individual')
   @UseInterceptors(FileInterceptor('csv-file'))
   async forwardToCallCustomKnnIndividual(
     @Body() body: any,
@@ -67,28 +67,7 @@ export class SlrGatewayController {
       const data = await this.ApiGatewayService.forwardRequest(
         file,
         body,
-        'call-custom-slr-individual/',
-      );
-      res.send(data);
-    } catch (error) {
-      res
-        .status(error.response?.status || 500)
-        .send(error.response?.data || error);
-    }
-  }
-
-  @Post('call-sample-slr-individual')
-  @UseInterceptors(FileInterceptor('csv-file'))
-  async forwardToCallSampleKnnIndividual(
-    @Body() body: any,
-    @UploadedFile() file: Express.Multer.File,
-    @Res() res: Response,
-  ) {
-    try {
-      const data = await this.ApiGatewayService.forwardRequest(
-        file,
-        body,
-        'call-sample-slr-individual/',
+        'call-mlr-individual/',
       );
       res.send(data);
     } catch (error) {

@@ -15,7 +15,7 @@ export class ApiGatewayService {
     this.ENGINE_URL = this.configService.get<string>('ENGINE_URL');
   }
 
-  async forwardKnnRequest(file: Express.Multer.File, body: any, endpoint) {
+  async forwardRequest(file: Express.Multer.File, body: any, endpoint) {
     const form = new FormData();
     this.appendFileToForm(form, file);
     Object.keys(body).forEach((key) => {

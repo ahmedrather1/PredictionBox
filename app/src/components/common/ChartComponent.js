@@ -158,7 +158,7 @@ const ChartComponent = ({
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            margin: "10px 0", // Adjust the margin as needed
+            margin: "10px 0",
           }}
         >
           <ToggleButton
@@ -241,11 +241,11 @@ const ChartComponent = ({
             options={{
               title: `${predictor} vs ${response}`,
               titleTextStyle: {
-                color: "black", // Title color
-                fontSize: 20, // Title font size
+                color: "black",
+                fontSize: 20,
                 fontName: "Arial",
-                bold: true, // Title font weight (true for bold)
-                italic: false, // Title font style (true for italic)
+                bold: true,
+                italic: false,
               },
               series: customSeries,
               hAxis: {

@@ -27,6 +27,10 @@ from slr.views import callCustomSlrFull
 from slr.views import callSampleSlrIndividual
 from slr.views import callCustomSlrIndividual
 
+from mlr.views import callCoefficientAnalysis
+from mlr.views import callPartialRegressions
+from mlr.views import callMlrIndividualPrediction
+
 urlpatterns = [
     path('', root_view),
     path('call-sample-knn/', callSampleKnnFull),
@@ -37,6 +41,7 @@ urlpatterns = [
     path('call-sample-slr-individual/', callSampleSlrIndividual),
     path('call-custom-slr/', callCustomSlrFull),
     path('call-custom-slr-individual/', callCustomSlrIndividual),
-
-
+    path('call-mlr-coefficient-analysis/', callCoefficientAnalysis),
+    path('call-mlr-partial-regressions/', callPartialRegressions),
+    path('call-mlr-individual/', callMlrIndividualPrediction),
 ]

@@ -2,15 +2,15 @@ import React from "react";
 import { Card } from "react-bootstrap";
 import CustomForm from "./CustomForm";
 
-const CustomParameterCard = ({ onSubmit, schema }) => {
+const ChoosePredictorsCard = ({ onSubmit, schema }) => {
   return (
     <Card>
       <Card.Body>
-        <Card.Title>Set Custom Parameters</Card.Title>
+        <Card.Title>Choose your Predictors </Card.Title>
         <CustomForm onSubmit={onSubmit} schema={schema} />
       </Card.Body>
     </Card>
   );
 };
 
-export default CustomParameterCard;
+export default ChoosePredictorsCard;
