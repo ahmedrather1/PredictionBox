@@ -180,28 +180,36 @@ function MultipleModelPage({
         chosenPredictors.push(key);
       }
     });
+    chosenPredictors.sort();
     setFinalPredictors(chosenPredictors);
   };
 
   const handleDataFromPredictionForm = (data) => {
     let predictorsRaw = Object.keys(data);
-    let predictorsFull = {};
+    let predictorsFullUnsorted = {};
 
     predictorsRaw.forEach((value) => {
       const key = Object.keys(finalPredictorsObject).find(
         (key) => finalPredictorsObject[key] === value
       );
       if (key) {
-        predictorsFull[key] = data[value];
+        predictorsFullUnsorted[key] = data[value];
       }
     });
+
+    let predictorsFullSorted = {};
+    let predictorsFullKeys = Object.keys(predictorsFullUnsorted).sort();
+
+    predictorsFullKeys.forEach(
+      (key) => (predictorsFullSorted[key] = predictorsFullUnsorted[key])
+    );
 
     const formData = new FormData();
 
     formData.append("csv-file", file);
     formData.append("predictors", finalPredictors);
     formData.append("response", response);
-    formData.append("datapoint", JSON.stringify(predictorsFull));
+    formData.append("datapoint", JSON.stringify(predictorsFullSorted));
 
     fetch(
       `${process.env.REACT_APP_API_URL}${Endpoints.INDIVIDUAL_PREDICTION_URL}`,
