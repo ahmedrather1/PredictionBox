@@ -3,14 +3,8 @@ import numpy as np
 from sklearn.neighbors import KNeighborsRegressor
 from sklearn.model_selection import cross_val_score, KFold
 from django.conf import settings
+from commonutils.utils.getOriginalData import getOriginalData
 import os
-
-def getOriginalData(X, y):
-    print(y.to_numpy().transpose())
-    Xarr = X.to_numpy().transpose()[0]
-    yarr = y.to_numpy().transpose()[0]
-    original_data = np.vstack((Xarr, yarr)).T
-    return original_data    
 
 def basicknn():
     file_path = os.path.join(settings.KNN_DATASET_PATH, 'iris.csv')
@@ -29,7 +23,6 @@ def basicknn():
         k_scores.append(scores.mean())
 
     best_k = k_range[np.argmax(k_scores)]
-    print(f"Best K value: {best_k}")
 
     knn_final = KNeighborsRegressor(n_neighbors=best_k)
     knn_final.fit(X, y)
@@ -53,7 +46,6 @@ def sampleKnnModel(X, y):
         k_scores.append(scores.mean())
 
     best_k = k_range[np.argmax(k_scores)]
-    print(f"Best K value: {best_k}")
     
     knn_final = KNeighborsRegressor(n_neighbors=best_k)
     return knn_final

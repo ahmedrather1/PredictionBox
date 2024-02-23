@@ -2,15 +2,6 @@ import pandas as pd
 import numpy as np
 from sklearn.neighbors import KNeighborsRegressor
 from sklearn.model_selection import cross_val_score, KFold
-import matplotlib.pyplot as plt
-
-
-def getOriginalData(X, y):
-    print(y.to_numpy().transpose())
-    Xarr = X.to_numpy().transpose()[0]
-    yarr = y.to_numpy().transpose()[0]
-    original_data = np.vstack((Xarr, yarr)).T
-    return original_data 
 
 def customKnnModel(X, y, customFolds, maxK, customK ):
     if (customFolds and maxK):
@@ -30,7 +21,6 @@ def customKnnModel(X, y, customFolds, maxK, customK ):
                 k_scores.append(scores.mean())
 
             best_k = k_range[np.argmax(k_scores)]
-            print(f"Best K value: {best_k}")
                 
         except Exception as e:
             raise ValueError({"ValueError": str(e)})
@@ -78,11 +68,6 @@ def customKnnFullPrediction(file, predictor, response, customFolds, maxK, custom
         raise ValueError("You must provide either a customFold+maxK or a customK")
     
     if (customFolds  or maxK ) and customK :
-
-        print(customFolds)
-        print(maxK)
-        print(customK)
-
         raise ValueError("Either customFolds XOR customK must be undefined")
     
     knn_final = customKnnModel(X, y, customFolds, maxK, customK)

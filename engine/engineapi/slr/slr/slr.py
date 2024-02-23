@@ -1,8 +1,7 @@
 import pandas as pd
 import numpy as np
 from slr.utils import getOriginalData
-from slr.models.slrModel import sampleSlrModel
-from slr.models.customSlrModel import CustomSlrModel
+from slr.slr.slrModel import sampleSlrModel
 
 def sampleSlrFullPrediction(file, predictor, response):
     df = pd.read_csv(file)
@@ -25,7 +24,7 @@ def sampleSlrFullPrediction(file, predictor, response):
     yPred = slrModel.predict(xRange)
     return (xRange.flatten().tolist(), yPred.tolist(), original_data.tolist())
 
-def customSlrFullPrediction(file, predictor, response, b0, b1):
+def sampleSlrIndividualPrediction(file, predictor, response, xToPredict):
     df = pd.read_csv(file)
 
     try:
@@ -37,21 +36,14 @@ def customSlrFullPrediction(file, predictor, response, b0, b1):
         y = df[[response]]
     except KeyError:
         raise KeyError("Response doesnt exist!")
+    
+    try:
+        xToPredict = float(xToPredict)
+    except Exception as e:
+        raise ValueError("Invalid X to predict")
+    
+    slrModel = sampleSlrModel(X, y)
 
-    try:
-        b0int = float(b0)
-    except Exception:
-        raise ValueError("Invalid b0")
-    
-    try:
-        b1int = float(b1)
-    except Exception:
-        raise ValueError("Invalid b1")
-    
-    original_data = getOriginalData(X, y)
-    customSlrModel = CustomSlrModel(b0=b0int, b1=b1int)
-    minValue = X[predictor].min() 
-    maxValue = X[predictor].max()  
-    xRange = np.linspace(minValue, maxValue, 500).reshape(-1, 1)  
-    yPred = customSlrModel.predict(xRange)
-    return (xRange.flatten().tolist(), yPred.tolist(), original_data.tolist())
+    predictedY = slrModel.predict([[xToPredict]])
+    return (predictedY[0][0])
+
