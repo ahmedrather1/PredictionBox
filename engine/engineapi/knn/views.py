@@ -1,17 +1,11 @@
 from django.http import JsonResponse
 from rest_framework.decorators import api_view
 
-from knn.sampleknn.sampleknn import basicknn
+from knn.sampleknn.basicknn import basicknn
 from knn.sampleknn.sampleknn import sampleKnnFullPrediction
 from knn.sampleknn.sampleknn import sampleKnnIndividualPrediction
 from knn.customknn.customknn import customKnnFullPrediction
 from knn.customknn.customknn import customKnnIndividualPrediction
-
-def callbasicknn():
-    pred = basicknn()
-    xrange = pred[0]
-    ypred = pred[1]
-    return JsonResponse({'xrange': xrange,'ypred': ypred})
 
 @api_view(['POST'])
 def callSampleKnnFull(request):
@@ -91,3 +85,10 @@ def callSampleKnnIndividual(request):
         return JsonResponse({'error': errorMessage}, status=400)
 
     return JsonResponse({'predictedY': predictedY, 'xToPredict': xToPredict })
+
+# this endpoint is unused but is the first endpoint of this project, here for the memories
+def callbasicknn():
+    pred = basicknn()
+    xrange = pred[0]
+    ypred = pred[1]
+    return JsonResponse({'xrange': xrange,'ypred': ypred})

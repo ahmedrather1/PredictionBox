@@ -1,6 +1,7 @@
 import pandas as pd
 from sklearn.linear_model import LinearRegression
 import json
+from commonutils.utils.RemoveOutliers import remove_outliers
 
 def mlrIndividualPrediction(file, predictorsString, response, dataPointRaw):
     data = pd.read_csv(file)
@@ -22,6 +23,9 @@ def mlrIndividualPrediction(file, predictorsString, response, dataPointRaw):
     for predictor in predictors:
         if predictor not in data.columns:
             raise KeyError("Invalid predictors array")
+        
+    for predictor in predictors + [response]:
+        data = remove_outliers(data, predictor)
 
     X = data[predictors]
     y = data[response]

@@ -34,20 +34,7 @@ def customSlrFullPrediction(file, predictor, response, b0, b1):
     yPred = customSlrModel.predict(xRange)
     return (xRange.flatten().tolist(), yPred.tolist(), original_data.tolist())
 
-def customSlrIndividualPrediction(file, predictor, response, b0, b1, xToPredict):
-    df = pd.read_csv(file)
-
-    # x and y currently not needed for this, remove later
-    try:
-        X = df[[predictor]]
-    except KeyError:
-        raise KeyError("Predictor doesn't exist!")
-
-    try:
-        y = df[[response]]
-    except KeyError:
-        raise KeyError("Response doesnt exist!")
-    
+def customSlrIndividualPrediction(file, predictor, response, b0, b1, xToPredict):    
     try:
         xToPredict = float(xToPredict)
     except Exception as e:
