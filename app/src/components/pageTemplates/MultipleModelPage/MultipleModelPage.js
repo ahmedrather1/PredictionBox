@@ -123,6 +123,7 @@ function MultipleModelPage({
     );
   };
 
+  // TODO extract into smaller components
   const renderContent = () => {
     if (partialRegressions) {
       return (

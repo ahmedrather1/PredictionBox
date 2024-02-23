@@ -74,7 +74,6 @@ export const callCustomModelIndividual = async (
     formData.append(value, customParameters[value]);
   });
 
-  console.log(formData);
   fetch(
     `${process.env.REACT_APP_API_URL}${Endpoints.CUSTOM_INDIVIDUAL_PREDICTION_URL}`,
     {
