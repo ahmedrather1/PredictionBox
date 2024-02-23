@@ -1,14 +1,13 @@
-from django.http import JsonResponse, HttpResponseBadRequest
+from django.http import JsonResponse
 from rest_framework.decorators import api_view
-from rest_framework.parsers import MultiPartParser
 
-from knn.knn import basicknn
-from knn.knn import sampleKnnFullPrediction
-from knn.knn import customKnnFullPrediction
-from knn.knn import customKnnIndividualPrediction
-from knn.knn import sampleKnnIndividualPrediction
+from knn.sampleknn.sampleknn import basicknn
+from knn.sampleknn.sampleknn import sampleKnnFullPrediction
+from knn.sampleknn.sampleknn import sampleKnnIndividualPrediction
+from knn.customknn.customknn import customKnnFullPrediction
+from knn.customknn.customknn import customKnnIndividualPrediction
 
-def callbasicknn(request):
+def callbasicknn():
     pred = basicknn()
     xrange = pred[0]
     ypred = pred[1]
