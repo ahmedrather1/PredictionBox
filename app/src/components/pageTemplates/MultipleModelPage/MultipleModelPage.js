@@ -8,7 +8,16 @@ import ChoosePredictorsCard from "../../common/ChoosePredictorsCard";
 import PartialRegressionsChartComponent from "../../chartComponents/PartialRegressionsChartComponent";
 import PaginationComponent from "../../common/PaginationComponent";
 import MultipleParameterIndividualPredictionCard from "../../individualPredictionCards/MultipleParameterIndividualPredictionCard";
-import { MultipleParameterPredictionInputFormSchema } from "../../../formSchemas/MultipleParameterPredictionInputFormSchema";
+import { parseFile, processFileColumns } from "../CommonUtils/ParseFile";
+import {
+  buildDataPoint,
+  callCoefficientAnalysis,
+  callIndividualPrediction,
+  callPartialRegressions,
+  generatePredictionFormSchema,
+  processAndSetFinalPredictors,
+  processAndSetInitialPredictors,
+} from "./MultipleModelPageUtils";
 
 function MultipleModelPage({
   Endpoints,
@@ -42,111 +51,52 @@ function MultipleModelPage({
   const chartsPerPage = 1;
 
   useEffect(() => {
-    if (finalPredictors) {
-      const index = columns.indexOf(response);
-      let predictorsRaw = finalPredictors;
-      if (index > -1) {
-        predictorsRaw.splice(index, 1);
-      }
-      let finalPredictorsObj = {};
-      predictorsRaw.forEach((predictor) => {
-        finalPredictorsObj[predictor] = predictor.replace(/\./g, " ");
-      });
-      setFinalPredictorsObject(finalPredictorsObj);
-      let schema =
-        MultipleParameterPredictionInputFormSchema(finalPredictorsObj);
-      setPredictionInputFormSchema(schema);
-    }
-  }, [finalPredictors]);
-
-  useEffect(() => {
-    if (finalPredictors && response) {
-      const formData = new FormData();
-      formData.append("csv-file", file);
-      formData.append("predictors", finalPredictors);
-      formData.append("response", response);
-      fetch(
-        `${process.env.REACT_APP_API_URL}${Endpoints.PARTIAL_REGRESSIONS_URL}`,
-        {
-          method: "POST",
-          body: formData,
-        }
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          setPartialRegressions(data);
-        })
-        .catch((error) => console.error("Error fetching data:", error));
-    }
-  }, [finalPredictors, response]);
-
-  useEffect(() => {
-    if (response && initialPredictors) {
-      let predictorsRaw = [];
-
-      Object.keys(initialPredictors).forEach((key) => predictorsRaw.push(key));
-
-      const formData = new FormData();
-      formData.append("csv-file", file);
-      formData.append("response", response);
-      formData.append("predictors", predictorsRaw);
-
-      fetch(
-        `${process.env.REACT_APP_API_URL}${Endpoints.COEFFICIENT_ANALYSIS_URL}`,
-        {
-          method: "POST",
-          body: formData,
-        }
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          let coefInfo = data.result;
-          let predictorKeys = Object.keys(coefInfo);
-          let processedCoefInfo = predictorKeys
-            .filter((key) => key !== "coef")
-            .map((key) => {
-              return [
-                key,
-                parseFloat(coefInfo[key].coefficient),
-                parseFloat(coefInfo[key].lower),
-                parseFloat(coefInfo[key].upper),
-              ];
-            });
-          setCoefAnalysis(processedCoefInfo);
-        })
-        .catch((error) => console.error("Error fetching data:", error));
-    }
-  }, [response, initialPredictors]);
-
-  useEffect(() => {
     if (file) {
-      parseFile();
+      parseFile(file, setFileData);
     }
   }, [file]);
 
   useEffect(() => {
     if (fileData) {
-      let sample = fileData[0];
-      let colsRaw = Object.keys(sample);
-      let cols = [];
-      colsRaw.forEach((col) => {
-        if (!isNaN(sample[col])) {
-          cols.push(col);
-        }
-      });
-      setColumns(cols);
+      processFileColumns(fileData, setColumns);
     }
   }, [fileData]);
 
-  const parseFile = async () => {
-    await Papa.parse(file, {
-      header: true,
-      skipEmptyLines: true,
-      complete: function (results) {
-        setFileData(results.data);
-      },
-    });
-  };
+  useEffect(() => {
+    if (response && initialPredictors) {
+      callCoefficientAnalysis(
+        file,
+        initialPredictors,
+        response,
+        setCoefAnalysis,
+        Endpoints
+      );
+    }
+  }, [response, initialPredictors]);
+
+  useEffect(() => {
+    if (finalPredictors) {
+      generatePredictionFormSchema(
+        columns,
+        response,
+        finalPredictors,
+        setFinalPredictorsObject,
+        setPredictionInputFormSchema
+      );
+    }
+  }, [finalPredictors]);
+
+  useEffect(() => {
+    if (finalPredictors && response) {
+      callPartialRegressions(
+        file,
+        finalPredictors,
+        response,
+        setPartialRegressions,
+        Endpoints
+      );
+    }
+  }, [finalPredictors, response]);
 
   const handleFileUpload = async (uploadedFile) => {
     setFile(uploadedFile);
@@ -154,77 +104,23 @@ function MultipleModelPage({
 
   const handleDataFromResponseSelector = (data) => {
     setResponse(data.response);
-    const index = columns.indexOf(data.response);
-    let predictorsRaw = columns;
-    if (index > -1) {
-      predictorsRaw.splice(index, 1);
-    }
-    let predictors = {};
-    predictorsRaw.forEach((predictor) => {
-      predictors[predictor] = predictor.replace(/\./g, " ");
-    });
-    setInitialPredictors(predictors);
+    processAndSetInitialPredictors(columns, data, setInitialPredictors);
   };
 
   const handleDataFromPredictorsSelectorForm = (data) => {
-    let chosenPredictorsRaw = Object.keys(data).filter(
-      (key) => data[key] === true
-    );
-    let chosenPredictors = [];
-
-    chosenPredictorsRaw.forEach((value) => {
-      const key = Object.keys(initialPredictors).find(
-        (key) => initialPredictors[key] === value
-      );
-      if (key) {
-        chosenPredictors.push(key);
-      }
-    });
-    chosenPredictors.sort();
-    setFinalPredictors(chosenPredictors);
+    processAndSetFinalPredictors(data, initialPredictors, setFinalPredictors);
   };
 
   const handleDataFromPredictionForm = (data) => {
-    let predictorsRaw = Object.keys(data);
-    let predictorsFullUnsorted = {};
-
-    predictorsRaw.forEach((value) => {
-      const key = Object.keys(finalPredictorsObject).find(
-        (key) => finalPredictorsObject[key] === value
-      );
-      if (key) {
-        predictorsFullUnsorted[key] = data[value];
-      }
-    });
-
-    let predictorsFullSorted = {};
-    let predictorsFullKeys = Object.keys(predictorsFullUnsorted).sort();
-
-    predictorsFullKeys.forEach(
-      (key) => (predictorsFullSorted[key] = predictorsFullUnsorted[key])
+    let predictorsFullSorted = buildDataPoint(data, finalPredictorsObject);
+    callIndividualPrediction(
+      file,
+      finalPredictors,
+      response,
+      predictorsFullSorted,
+      setIndividualPrediction,
+      Endpoints
     );
-
-    const formData = new FormData();
-
-    formData.append("csv-file", file);
-    formData.append("predictors", finalPredictors);
-    formData.append("response", response);
-    formData.append("datapoint", JSON.stringify(predictorsFullSorted));
-
-    fetch(
-      `${process.env.REACT_APP_API_URL}${Endpoints.INDIVIDUAL_PREDICTION_URL}`,
-      {
-        method: "POST",
-        body: formData,
-      }
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        setIndividualPrediction({
-          predictedY: +parseFloat(data.result).toFixed(4),
-        });
-      })
-      .catch((error) => console.error("Error fetching data:", error));
   };
 
   const renderContent = () => {
