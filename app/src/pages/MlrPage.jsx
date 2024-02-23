@@ -3,7 +3,7 @@ import MlrChooseDataCard from "../components/mlr/infoCards/MlrChooseDataCard";
 import MlrPredictorSelectionInfoCard from "../components/mlr/infoCards/PredictorSelectionInfoCard";
 import MlrPartialRegressionInfoCard from "../components/mlr/infoCards/MlrPartialRegressionInfoCard";
 
-import MultipleModelPage from "./MultipleModelPage";
+import MultipleModelPage from "../components/pageTemplates/MultipleModelPage/MultipleModelPage";
 import { ChoosePredictorsFormSchema } from "../formSchemas/Mlr/ChoosePredictorsFormSchema";
 
 const Endpoints = {

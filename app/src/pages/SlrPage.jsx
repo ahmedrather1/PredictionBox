@@ -1,4 +1,4 @@
-import ModelPage from "./ModelPage";
+import ModelPage from "../components/pageTemplates/ModelPage/ModelPage";
 import { SlrCustomParameterInputFormSchema } from "../formSchemas/Slr/SlrCustomParameterInputFormSchema";
 import SlrCustomParameterInfoCard from "../components/slr/infoCards/SlrCustomParameterInfoCard";
 import SlrGeneralInfoCard from "../components/slr/infoCards/SlrGeneralInfoCard";

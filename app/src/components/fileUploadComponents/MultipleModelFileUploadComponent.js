@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
-import CustomForm from "./CustomForm";
+import CustomForm from "../common/CustomForm";
 import { DemoDataSelectorSchema } from "../../formSchemas/common/DemoDataSelectorSchema";
-import { PredictorResponseSelectorSchema } from "../../formSchemas/common/PredictorResponseSelectorSchema";
+import { ResponseSelectorSchema } from "../../formSchemas/common/ResponseSelectorSchema";
 
 // TODO rename this component, it now does more than just file upload
-const FileUploadComponent = ({
+const MultipleModelFileUploadComponent = ({
   onFileUpload,
   columns,
-  handleDataFromPredictorResponseSelector,
+  handleDataFromResponseSelector,
   GeneralInfoCard,
   ChooseDataCard,
 }) => {
@@ -31,19 +31,15 @@ const FileUploadComponent = ({
   };
 
   const handleSubmitDemoData = async (data) => {
-    console.log(data);
     if (data.Dataset) {
       let datasetName = data.Dataset;
-      console.log(datasetName);
 
       try {
-        console.log(process.env.REACT_APP_API_URL);
         const response = await fetch(
           `${process.env.REACT_APP_API_URL}/serve-demo-data/${datasetName}`
         );
         const blob = await response.blob();
 
-        console.log(blob);
         setIsDemoData(true);
         setCurrentFile(blob);
       } catch (error) {
@@ -115,12 +111,10 @@ const FileUploadComponent = ({
             <div className="mb-3 mt-3">
               <Card>
                 <Card.Body>
-                  <Card.Title>
-                    Choose Your Predictor (X variable) and Response (Y Variable)
-                  </Card.Title>
+                  <Card.Title>Choose Your Response (Y Variable)</Card.Title>
                   <CustomForm
-                    schema={PredictorResponseSelectorSchema(columns)}
-                    onSubmit={handleDataFromPredictorResponseSelector}
+                    schema={ResponseSelectorSchema(columns)}
+                    onSubmit={handleDataFromResponseSelector}
                   />
                 </Card.Body>
               </Card>
@@ -137,4 +131,4 @@ const FileUploadComponent = ({
   );
 };
 
-export default FileUploadComponent;
+export default MultipleModelFileUploadComponent;

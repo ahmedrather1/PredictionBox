@@ -5,7 +5,6 @@ export const ChoosePredictorsFormSchema = (checkboxLabelsObj) => {
   );
   let props = {};
   checkboxLabels.forEach((label) => {
-    console.log(label);
     props[label] = { type: "boolean" };
   });
 
