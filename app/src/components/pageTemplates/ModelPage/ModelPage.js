@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import Papa from "papaparse";
-import ChartComponent from "../components/common/ChartComponent";
-import { PredictionInputFormSchema } from "../formSchemas/common/PredictionInputFormSchema";
-import CustomParameterCard from "../components/common/CustomParameterCard";
-import IndividualPredictionCard from "../components/common/IndividualPredictionCard";
-import FileUploadComponent from "../components/common/FileUploadComponent";
-import Header from "../components/common/Header";
-import KnnOptionsText from "../components/knn/text/KnnOptionsText";
+import ChartComponent from "../../chartComponents/ChartComponent";
+import { PredictionInputFormSchema } from "../../../formSchemas/common/PredictionInputFormSchema";
+import CustomParameterCard from "../../common/CustomParameterCard";
+import IndividualPredictionCard from "../../individualPredictionCards/IndividualPredictionCard";
+import FileUploadComponent from "../../fileUploadComponents/FileUploadComponent";
+import Header from "../../common/Header";
+import KnnOptionsText from "../../knn/text/KnnOptionsText";
 
 function ModelPage({
   Endpoints,

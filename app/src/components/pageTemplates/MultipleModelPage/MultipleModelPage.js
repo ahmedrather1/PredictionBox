@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import Papa from "papaparse";
-import MultipleModelFileUploadComponent from "../components/common/MultipleModelFileUploadComponent";
-import Header from "../components/common/Header";
-import ForestPlotChart from "../components/common/ForestChartComponent";
-import ChoosePredictorsCard from "../components/common/ChoosePredictorsCard";
-import PartialRegressionsChartComponent from "../components/common/PartialRegressionsChartComponent";
-import PaginationComponent from "../components/common/PaginationComponent";
-import MultipleParameterIndividualPredictionCard from "../components/common/MultipleParameterIndividualPredictionCard";
-import { MultipleParameterPredictionInputFormSchema } from "../components/common/MultipleParameterPredictionInputFormSchema";
+import MultipleModelFileUploadComponent from "../../fileUploadComponents/MultipleModelFileUploadComponent";
+import Header from "../../common/Header";
+import ForestPlotChart from "../../chartComponents/ForestChartComponent";
+import ChoosePredictorsCard from "../../common/ChoosePredictorsCard";
+import PartialRegressionsChartComponent from "../../chartComponents/PartialRegressionsChartComponent";
+import PaginationComponent from "../../common/PaginationComponent";
+import MultipleParameterIndividualPredictionCard from "../../individualPredictionCards/MultipleParameterIndividualPredictionCard";
+import { MultipleParameterPredictionInputFormSchema } from "../../../formSchemas/MultipleParameterPredictionInputFormSchema";
 
 function MultipleModelPage({
   Endpoints,

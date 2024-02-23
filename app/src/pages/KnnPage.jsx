@@ -1,4 +1,4 @@
-import ModelPage from "./ModelPage";
+import ModelPage from "../components/pageTemplates/ModelPage/ModelPage";
 import { KnnCustomParameterInputFormSchema } from "../formSchemas/Knn/KnnCustomParameterInputFormSchema";
 import KnnCustomParameterInfoCard from "../components/knn/infoCards/KnnCustomParameterInfoCard";
 import KnnGeneralInfoCard from "../components/knn/infoCards/KnnGeneralInfoCard";
