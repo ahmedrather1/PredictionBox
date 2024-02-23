@@ -7,7 +7,6 @@ export const MultipleParameterPredictionInputFormSchema = (
   );
   let props = {};
   checkboxLabels.forEach((label) => {
-    console.log(label);
     props[label] = { type: "number" };
   });
   const schema = {

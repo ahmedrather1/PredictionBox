@@ -1,11 +1,8 @@
 import pandas as pd
 import numpy as np
-from mlr.utils import getOriginalData
 from sklearn.preprocessing import StandardScaler
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression
 import statsmodels.api as sm
-import ast
+from commonutils.utils.RemoveOutliers import remove_outliers
 
 def coefficientAnalysis(file, predictorsString, response):
 
@@ -24,6 +21,8 @@ def coefficientAnalysis(file, predictorsString, response):
         if predictor not in data.columns:
             raise KeyError("Invalid predictors array")
 
+    for predictor in predictors + [response]:
+        data = remove_outliers(data, predictor)
 
     X = data[predictors]
     y = data[response]

@@ -1,11 +1,10 @@
 from django.http import JsonResponse, HttpResponseBadRequest
 from rest_framework.decorators import api_view
-from rest_framework.parsers import MultiPartParser
 
-from slr.predictions.fullPredictions import sampleSlrFullPrediction
-from slr.predictions.fullPredictions import customSlrFullPrediction
-from slr.predictions.individualPredictions import sampleSlrIndividualPrediction
-from slr.predictions.individualPredictions import customSlrIndividualPrediction
+from slr.slr.slr import sampleSlrFullPrediction
+from slr.slr.slr import sampleSlrIndividualPrediction
+from slr.customSlr.customSlr import customSlrIndividualPrediction
+from slr.customSlr.customSlr import customSlrFullPrediction
 
 
 @api_view(['POST'])

@@ -9,7 +9,6 @@ export class DemoDataController {
   async getDemoData(@Param('filename') filename: string, @Res() res: Response) {
     try {
       const filePath = path.join(process.cwd(), 'demoData', `${filename}.csv`);
-      console.log(filePath);
 
       if (fs.existsSync(filePath)) {
         res.status(HttpStatus.OK).sendFile(filePath);

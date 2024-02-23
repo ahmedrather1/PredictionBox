@@ -1,6 +1,6 @@
 import React from "react";
 import { Card, Container, Row, Col } from "react-bootstrap";
-import CustomForm from "./CustomForm";
+import CustomForm from "../common/CustomForm";
 
 const IndividualPredictionCard = ({
   onSubmit,
