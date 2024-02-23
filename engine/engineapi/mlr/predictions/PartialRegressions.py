@@ -2,17 +2,7 @@ import pandas as pd
 from slr.slr.slrModel import sampleSlrModel
 from statsmodels.api import OLS, add_constant
 import numpy as np
-
-import ast
-
-def remove_outliers(df, column):
-    Q1 = df[column].quantile(0.25)
-    Q3 = df[column].quantile(0.75)
-    IQR = Q3 - Q1
-    lower_bound = Q1 - 1.5 * IQR
-    upper_bound = Q3 + 1.5 * IQR
-    
-    return df[(df[column] >= lower_bound) & (df[column] <= upper_bound)]
+from commonutils.utils.RemoveOutliers import remove_outliers
 
 def partialRegressions(file, predictorsString, response):
     data = pd.read_csv(file)

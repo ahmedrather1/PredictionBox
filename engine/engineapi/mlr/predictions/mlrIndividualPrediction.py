@@ -1,6 +1,5 @@
 import pandas as pd
 from sklearn.linear_model import LinearRegression
-import ast
 import json
 
 def mlrIndividualPrediction(file, predictorsString, response, dataPointRaw):

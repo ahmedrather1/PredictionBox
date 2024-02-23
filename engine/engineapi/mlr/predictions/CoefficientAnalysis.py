@@ -2,7 +2,6 @@ import pandas as pd
 import numpy as np
 from sklearn.preprocessing import StandardScaler
 import statsmodels.api as sm
-import ast
 
 def coefficientAnalysis(file, predictorsString, response):
 
