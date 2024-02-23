@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
-import Papa from "papaparse";
 import ChartComponent from "../../chartComponents/ChartComponent";
 import { PredictionInputFormSchema } from "../../../formSchemas/common/PredictionInputFormSchema";
 import CustomParameterCard from "../../common/CustomParameterCard";
 import IndividualPredictionCard from "../../individualPredictionCards/IndividualPredictionCard";
 import FileUploadComponent from "../../fileUploadComponents/FileUploadComponent";
 import Header from "../../common/Header";
-import KnnOptionsText from "../../knn/text/KnnOptionsText";
+import { parseFile, processFileColumns } from "../CommonUtils/ParseFile";
+import {
+  callCustomModelFull,
+  callCustomModelIndividual,
+  callSampleModelFull,
+  callSampleModelIndividual,
+} from "./ModelPageUtils";
 
 function ModelPage({
   Endpoints,
@@ -17,7 +22,7 @@ function ModelPage({
   GeneralInfoCard,
   ChooseDataCard,
 }) {
-  // TODO too many usestates! use redux instead
+  // TODO use a reducer, too many usestates!
   const [columns, setColumns] = useState(null);
   const [file, setFile] = useState(null);
   const [fileData, setFileData] = useState(null);
@@ -46,33 +51,28 @@ function ModelPage({
     useState(null);
 
   useEffect(() => {
-    let schema = PredictionInputFormSchema(customParameters);
-    setPredictionInputFormSchema(schema);
-  }, [customParameters]);
+    if (file) {
+      parseFile(file, setFileData);
+    }
+  }, [file]);
 
   useEffect(() => {
-    let schema = CustomParameterInputFormSchema(originalData);
-    setCustomParameterInputFormSchema(schema);
-  }, [originalData]);
+    if (fileData) {
+      processFileColumns(fileData, setColumns);
+    }
+  }, [fileData]);
 
   useEffect(() => {
     if (predictor && response) {
-      const formData = new FormData();
-      formData.append("csv-file", file);
-      formData.append("predictor", predictor);
-      formData.append("response", response);
-
-      fetch(`${process.env.REACT_APP_API_URL}${Endpoints.SAMPLE_MODEL_URL}`, {
-        method: "POST",
-        body: formData,
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          setYpred(data.ypred.map((element) => element[0]));
-          setXrange(data.xrange);
-          setOriginalData(data.originalData);
-        })
-        .catch((error) => console.error("Error fetching data:", error));
+      callSampleModelFull(
+        file,
+        predictor,
+        response,
+        setYpred,
+        setXrange,
+        setOriginalData,
+        Endpoints
+      );
     }
   }, [predictor, response]);
 
@@ -84,43 +84,22 @@ function ModelPage({
   }, [xrange, ypred]);
 
   useEffect(() => {
+    let schema = CustomParameterInputFormSchema(originalData);
+    setCustomParameterInputFormSchema(schema);
+  }, [originalData]);
+
+  useEffect(() => {
+    let schema = PredictionInputFormSchema(customParameters);
+    setPredictionInputFormSchema(schema);
+  }, [customParameters]);
+
+  useEffect(() => {
     if (customYPred) {
       let customPred = xrange.map((e, i) => [e, customYPred[i]]);
       setCustomPrediction(customPred);
       setShowCustomPrediction(true);
     }
   }, [customYPred]);
-
-  useEffect(() => {
-    if (file) {
-      parseFile();
-    }
-  }, [file]);
-
-  useEffect(() => {
-    if (fileData) {
-      let sample = fileData[0];
-      let colsRaw = Object.keys(sample);
-      let cols = [];
-      colsRaw.forEach((col) => {
-        if (!isNaN(sample[col])) {
-          cols.push(col);
-        }
-      });
-      setColumns(cols);
-    }
-  }, [fileData]);
-
-  const parseFile = async () => {
-    await Papa.parse(file, {
-      header: true,
-      skipEmptyLines: true,
-      complete: function (results) {
-        console.log(results.data);
-        setFileData(results.data);
-      },
-    });
-  };
 
   const handleFileUpload = async (uploadedFile) => {
     setFile(uploadedFile);
@@ -131,7 +110,7 @@ function ModelPage({
     setResponse(data.response);
   };
 
-  const handleDataFromParameterInputForm = (data) => {
+  const handleDataFromParameterInputForm = async (data) => {
     setShowCustomPrediction(false);
     setCustomYPred(null);
     setCustomPrediction(null);
@@ -140,73 +119,40 @@ function ModelPage({
       CustomParameters[value] = data[value];
     });
     setCustomParameters(CustomParameters);
-    const formData = new FormData();
-    formData.append("csv-file", file);
-    formData.append("predictor", predictor);
-    formData.append("response", response);
-    Object.entries(PossibleCustomParams).forEach(([key, value]) => {
-      formData.append(value, data[value]);
-    });
 
-    fetch(`${process.env.REACT_APP_API_URL}${Endpoints.CUSTOM_MODEL_URL}`, {
-      method: "POST",
-      body: formData,
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setCustomYPred(data.ypred.map((element) => element[0]));
-      })
-      .catch((error) => console.error("Error fetching data:", error));
+    await callCustomModelFull(
+      file,
+      predictor,
+      response,
+      PossibleCustomParams,
+      setCustomYPred,
+      data,
+      Endpoints
+    );
   };
 
-  const handleDataFromPredictionForm = (data) => {
-    const formData = new FormData();
+  const handleDataFromPredictionForm = async (data) => {
     if (data.predictorCustom) {
-      formData.append("csv-file", file);
-      formData.append("predictor", predictor);
-      formData.append("response", response);
-      formData.append("xToPredict", data.predictorCustom);
-      Object.entries(PossibleCustomParams).forEach(([key, value]) => {
-        formData.append(value, customParameters[value]);
-      });
-
-      console.log(formData);
-      fetch(
-        `${process.env.REACT_APP_API_URL}${Endpoints.CUSTOM_INDIVIDUAL_PREDICTION_URL}`,
-        {
-          method: "POST",
-          body: formData,
-        }
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          setCustomIndividualPrediction({
-            xToPredict: +parseFloat(data.xToPredict).toFixed(4),
-            predictedY: +parseFloat(data.predictedY).toFixed(4),
-          });
-        })
-        .catch((error) => console.error("Error fetching data:", error));
+      await callCustomModelIndividual(
+        file,
+        predictor,
+        response,
+        data,
+        PossibleCustomParams,
+        setCustomIndividualPrediction,
+        customParameters,
+        Endpoints
+      );
     }
     if (data.predictorSample) {
-      formData.append("csv-file", file);
-      formData.append("predictor", predictor);
-      formData.append("response", response);
-      formData.append("xToPredict", data.predictorSample);
-      fetch(
-        `${process.env.REACT_APP_API_URL}${Endpoints.SAMPLE_INDIVIDUAL_PREDICTION_URL}`,
-        {
-          method: "POST",
-          body: formData,
-        }
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          setSampleIndividualPrediction({
-            xToPredict: +parseFloat(data.xToPredict).toFixed(4),
-            predictedY: +parseFloat(data.predictedY).toFixed(4),
-          });
-        })
-        .catch((error) => console.error("Error fetching data:", error));
+      await callSampleModelIndividual(
+        file,
+        predictor,
+        response,
+        data,
+        setSampleIndividualPrediction,
+        Endpoints
+      );
     }
   };
 
