@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 from sklearn.linear_model import RidgeCV
 from sklearn.preprocessing import StandardScaler
+from statsmodels.api import add_constant
 from commonutils.utils.RemoveOutliers import remove_outliers
 
 def partialRegressions(file, predictorsString, response):

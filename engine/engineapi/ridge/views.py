@@ -2,14 +2,15 @@ from django.http import JsonResponse, HttpResponseBadRequest
 from rest_framework.decorators import api_view
 from rest_framework.parsers import MultiPartParser
 
-from mlr.predictions.CoefficientAnalysis import coefficientAnalysis
-from mlr.predictions.PartialRegressions import partialRegressions
+from ridge.ridge.CoefficientAnalysis import coefficientAnalysis
+from ridge.ridge.PartialRegressions import partialRegressions
+from ridge.ridge.ridgeIndividualPrediction import ridgeIndividualPrediction
 
-from mlr.predictions.mlrIndividualPrediction import mlrIndividualPrediction
+# from mlr.predictions.mlrIndividualPrediction import mlrIndividualPrediction
 
 
 @api_view(['POST'])
-def callMlrCoefficientAnalysis(request):
+def callRidgeCoefficientAnalysis(request):
     file = request.FILES.get('csv-file')
     predictorsString = request.data.get('predictors')
     response = request.data.get('response')
@@ -24,7 +25,7 @@ def callMlrCoefficientAnalysis(request):
     return JsonResponse({'result': results})
 
 @api_view(['POST'])
-def callMlrPartialRegressions(request):
+def callRidgePartialRegressions(request):
     file = request.FILES.get('csv-file')
     predictorsString = request.data.get('predictors')
     response = request.data.get('response')
@@ -39,7 +40,7 @@ def callMlrPartialRegressions(request):
     return JsonResponse(results)
 
 @api_view(['POST'])
-def callMlrIndividualPrediction(request):
+def callRidgeIndividualPrediction(request):
     file = request.FILES.get('csv-file')
     predictorsString = request.data.get('predictors')
     response = request.data.get('response')
@@ -49,7 +50,7 @@ def callMlrIndividualPrediction(request):
         return JsonResponse({'error': 'No file uploaded'}, status=400)
 
     try:
-        result = mlrIndividualPrediction(file, predictorsString, response, dataPointRaw=dataPoint)
+        result = ridgeIndividualPrediction(file, predictorsString, response, dataPointRaw=dataPoint)
     except Exception as e:
         errorMessage = str(e)
         return JsonResponse({'error': errorMessage}, status=400)
