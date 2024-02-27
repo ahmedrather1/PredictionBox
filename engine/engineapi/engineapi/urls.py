@@ -35,6 +35,8 @@ from ridge.views import callRidgeCoefficientAnalysis
 from ridge.views import callRidgePartialRegressions
 from ridge.views import callRidgeIndividualPrediction
 
+from ridge.views import callRidgeCustomCoefficientAnalysis
+
 urlpatterns = [
     path('', root_view),
     path('call-sample-knn/', callSampleKnnFull),
@@ -51,4 +53,5 @@ urlpatterns = [
     path('call-ridge-coefficient-analysis/', callRidgeCoefficientAnalysis),
     path('call-ridge-partial-regressions/', callRidgePartialRegressions),
     path('call-ridge-individual/', callRidgeIndividualPrediction),
+    path('call-ridge-custom-coefficient-analysis/', callRidgeCustomCoefficientAnalysis),
 ]
