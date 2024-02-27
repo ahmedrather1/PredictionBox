@@ -9,6 +9,8 @@ import PartialRegressionsChartComponent from "../../chartComponents/PartialRegre
 import PaginationComponent from "../../common/PaginationComponent";
 import MultipleParameterIndividualPredictionCard from "../../individualPredictionCards/MultipleParameterIndividualPredictionCard";
 import { parseFile, processFileColumns } from "../CommonUtils/ParseFile";
+import PartialRegressionsCharts from "../../common/PartialRegressionsCharts";
+
 import {
   buildDataPoint,
   callCoefficientAnalysis,
@@ -130,24 +132,12 @@ function MultipleModelPage({
         <Container fluid>
           <Row>
             <Col sm={8} className="mt-3">
-              {Object.keys(partialRegressions)
-                .slice(currentPage, currentPage + chartsPerPage)
-                .map((key) => {
-                  let predictorsAccountedFor = Object.keys(
-                    partialRegressions
-                  ).filter((item) => item !== key);
-                  const raw = partialRegressions[key]["raw"];
-                  const regressed = partialRegressions[key]["regressed"];
-                  return (
-                    <PartialRegressionsChartComponent
-                      raw={raw}
-                      regressed={regressed}
-                      response={response}
-                      predictorsAccountedFor={predictorsAccountedFor}
-                      predictor={key}
-                    />
-                  );
-                })}
+              <PartialRegressionsCharts
+                partialRegressions={partialRegressions}
+                currentPage={currentPage}
+                chartsPerPage={chartsPerPage}
+                response={response}
+              />
               <PaginationComponent
                 currentPage={currentPage}
                 itemCount={Object.keys(partialRegressions).length}

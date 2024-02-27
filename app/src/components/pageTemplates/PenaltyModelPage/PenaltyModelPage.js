@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Container, Row, Col, Card } from "react-bootstrap";
+import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import Papa from "papaparse";
 import MultipleModelFileUploadComponent from "../../fileUploadComponents/MultipleModelFileUploadComponent";
 import Header from "../../common/Header";
 import CustomForestPlotChart from "../../chartComponents/CustomForestChartComponent";
 import ChoosePredictorsCard from "../../common/ChoosePredictorsCard";
-import PartialRegressionsChartComponent from "../../chartComponents/PartialRegressionsChartComponent";
 import PaginationComponent from "../../common/PaginationComponent";
 import MultipleParameterIndividualPredictionCard from "../../individualPredictionCards/MultipleParameterIndividualPredictionCard";
 import { parseFile, processFileColumns } from "../CommonUtils/ParseFile";
@@ -20,6 +19,7 @@ import {
 } from "./PenaltyModelPageUtils";
 import ChooseAlphaCard from "../../common/ChooseAlphaCard";
 import { AlphaSelectorInputFormSchema } from "../../../formSchemas/AlphaSelectorInputFormSchema";
+import PartialRegressionsCharts from "../../common/PartialRegressionsCharts";
 
 function PenaltyModelPage({
   Endpoints,
@@ -37,8 +37,11 @@ function PenaltyModelPage({
 
   const [showCustomCoefs, setShowCustomCoefs] = useState(false);
   const [customCoefs, setCustomCoefs] = useState(null);
+
   const [alphaVal, setAlphaVal] = useState(null);
   const [partialRegressions, setPartialRegressions] = useState(null);
+
+  const [showCustomModel, setShowCustomModel] = useState(false);
 
   const [initialPredictors, setInitialPredictors] = useState(null);
   const [finalPredictors, setFinalPredictors] = useState(null);
@@ -154,31 +157,21 @@ function PenaltyModelPage({
     );
   };
 
-  // TODO extract into smaller components
   const renderContent = () => {
     if (partialRegressions) {
       return (
         <Container fluid>
           <Row>
             <Col sm={8} className="mt-3">
-              {Object.keys(partialRegressions)
-                .slice(currentPage, currentPage + chartsPerPage)
-                .map((key) => {
-                  let predictorsAccountedFor = Object.keys(
-                    partialRegressions
-                  ).filter((item) => item !== key);
-                  const raw = partialRegressions[key]["raw"];
-                  const regressed = partialRegressions[key]["regressed"];
-                  return (
-                    <PartialRegressionsChartComponent
-                      raw={raw}
-                      regressed={regressed}
-                      response={response}
-                      predictorsAccountedFor={predictorsAccountedFor}
-                      predictor={key}
-                    />
-                  );
-                })}
+              <PartialRegressionsCharts
+                partialRegressions={partialRegressions}
+                currentPage={currentPage}
+                chartsPerPage={chartsPerPage}
+                response={response}
+                setShowCustomModel={setShowCustomModel}
+                showCustomModel={showCustomModel}
+                variant={"RIDGE"}
+              />
               <PaginationComponent
                 currentPage={currentPage}
                 itemCount={Object.keys(partialRegressions).length}
@@ -187,6 +180,12 @@ function PenaltyModelPage({
               />
             </Col>
             <Col>
+              <div className="mt-3">
+                <ChooseAlphaCard
+                  onSubmit={handleDataFromAlphaSelectorForm}
+                  schema={AlphaSelectorInputFormSchema()}
+                />
+              </div>
               <div className="mb-3 mt-3">
                 <MultipleParameterIndividualPredictionCard
                   onSubmit={handleDataFromPredictionForm}
