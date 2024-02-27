@@ -27,7 +27,6 @@ def coefficientAnalysis(file, predictorsString, response):
     X = data[predictors]
     y = data[response]
 
-   # Standardize the features
     scaler = StandardScaler()
     X_scaled = scaler.fit_transform(X)
 

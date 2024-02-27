@@ -27,9 +27,17 @@ from slr.views import callCustomSlrFull
 from slr.views import callSampleSlrIndividual
 from slr.views import callCustomSlrIndividual
 
-from mlr.views import callCoefficientAnalysis
-from mlr.views import callPartialRegressions
+from mlr.views import callMlrCoefficientAnalysis
+from mlr.views import callMlrPartialRegressions
 from mlr.views import callMlrIndividualPrediction
+
+from ridge.views import callRidgeCoefficientAnalysis
+from ridge.views import callRidgePartialRegressions
+from ridge.views import callRidgeIndividualPrediction
+
+from ridge.views import callRidgeCustomCoefficientAnalysis
+from ridge.views import callRidgeCustomPartialRegressions
+from ridge.views import callRidgeCustomIndividualPrediction
 
 urlpatterns = [
     path('', root_view),
@@ -41,7 +49,13 @@ urlpatterns = [
     path('call-sample-slr-individual/', callSampleSlrIndividual),
     path('call-custom-slr/', callCustomSlrFull),
     path('call-custom-slr-individual/', callCustomSlrIndividual),
-    path('call-mlr-coefficient-analysis/', callCoefficientAnalysis),
-    path('call-mlr-partial-regressions/', callPartialRegressions),
+    path('call-mlr-coefficient-analysis/', callMlrCoefficientAnalysis),
+    path('call-mlr-partial-regressions/', callMlrPartialRegressions),
     path('call-mlr-individual/', callMlrIndividualPrediction),
+    path('call-ridge-coefficient-analysis/', callRidgeCoefficientAnalysis),
+    path('call-ridge-partial-regressions/', callRidgePartialRegressions),
+    path('call-ridge-individual/', callRidgeIndividualPrediction),
+    path('call-ridge-custom-coefficient-analysis/', callRidgeCustomCoefficientAnalysis),
+    path('call-ridge-custom-partial-regressions/', callRidgeCustomPartialRegressions),
+    path('call-custom-ridge-individual/', callRidgeCustomIndividualPrediction),
 ]
