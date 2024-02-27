@@ -12,7 +12,6 @@ export const AlphaSelectorInputFormSchema = () => {
         description: "Input a number greater than 0",
       },
     },
-    required: ["alpha"],
   };
   return schema;
 };

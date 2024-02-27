@@ -28,6 +28,7 @@ function PenaltyModelPage({
   GeneralInfoCard,
   ChooseDataCard,
   PredictorSelectionInfoCard,
+  AboutAlphaCard,
 }) {
   // TODO too many usestates! use redux instead
   const [columns, setColumns] = useState(null);
@@ -209,16 +210,20 @@ function PenaltyModelPage({
       return (
         <Container fluid>
           <Row>
-            <Col sm={8} className="mt-3">
-              {/* <CustomForestPlotChart coefInfo={coefAnalysis} /> */}
-              <CustomForestPlotChart
-                coefs={coefs}
-                customcoefs={customCoefs}
-                showCustomCoefs={showCustomCoefs}
-                setShowCustomCoefs={setShowCustomCoefs}
-              />
+            <Col sm={8} className="mt-2">
+              <div className="mt-3">
+                <CustomForestPlotChart
+                  coefs={coefs}
+                  customcoefs={customCoefs}
+                  showCustomCoefs={showCustomCoefs}
+                  setShowCustomCoefs={setShowCustomCoefs}
+                />
+              </div>
+              <div className="mt-3 mb-2">
+                <PredictorSelectionInfoCard />
+              </div>
             </Col>
-            <Col>
+            <Col sm={4} className="mt-2">
               <div className="mb-3 mt-3">
                 <ChoosePredictorsCard
                   onSubmit={handleDataFromPredictorsSelectorForm}
@@ -230,17 +235,7 @@ function PenaltyModelPage({
                 schema={AlphaSelectorInputFormSchema()}
               />
               <div className="mt-3">
-                <ChooseAlphaCard
-                  onSubmit={handleDataFromAlphaSelectorForm}
-                  schema={AlphaSelectorInputFormSchema()}
-                />
-              </div>
-            </Col>
-          </Row>
-          <Row>
-            <Col md={8}>
-              <div className="mb-3">
-                <PredictorSelectionInfoCard />
+                <AboutAlphaCard />
               </div>
             </Col>
           </Row>

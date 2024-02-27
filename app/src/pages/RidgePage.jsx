@@ -2,6 +2,7 @@ import MlrGeneralInfoCard from "../components/mlr/infoCards/MlrGeneralInfoCard";
 import MlrChooseDataCard from "../components/mlr/infoCards/MlrChooseDataCard";
 import MlrPredictorSelectionInfoCard from "../components/mlr/infoCards/PredictorSelectionInfoCard";
 import MlrPartialRegressionInfoCard from "../components/mlr/infoCards/MlrPartialRegressionInfoCard";
+import AlphaInfoCard from "../components/ridge/infoCards/AlphaInfoCard";
 
 import PenaltyModelPage from "../components/pageTemplates/PenaltyModelPage/PenaltyModelPage";
 import { ChoosePredictorsFormSchema } from "../formSchemas/Mlr/ChoosePredictorsFormSchema";
@@ -23,6 +24,7 @@ function RidgePage() {
       GeneralInfoCard={MlrGeneralInfoCard}
       ChooseDataCard={MlrChooseDataCard}
       PredictorSelectionInfoCard={MlrPredictorSelectionInfoCard}
+      AboutAlphaCard={AlphaInfoCard}
     />
   );
 }

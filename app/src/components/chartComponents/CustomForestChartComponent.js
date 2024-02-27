@@ -149,9 +149,9 @@ const CustomForestPlotChart = ({
             height="400px"
             data={coefData}
             options={{
-              title: "Comparison of Two Sets",
+              title: "Standardized Slope (ΔY/Δsd(X))",
               hAxis: { title: "Variables" },
-              vAxis: { title: "Estimates" },
+              vAxis: { title: "Standardized Slope" },
               legend: "none",
               seriesType: "scatter",
               series: customSeries,
