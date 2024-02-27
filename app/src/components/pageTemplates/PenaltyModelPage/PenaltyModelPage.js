@@ -3,7 +3,7 @@ import { Container, Row, Col, Card } from "react-bootstrap";
 import Papa from "papaparse";
 import MultipleModelFileUploadComponent from "../../fileUploadComponents/MultipleModelFileUploadComponent";
 import Header from "../../common/Header";
-import ForestPlotChart from "../../chartComponents/ForestChartComponent";
+import CustomForestPlotChart from "../../chartComponents/CustomForestChartComponent";
 import ChoosePredictorsCard from "../../common/ChoosePredictorsCard";
 import PartialRegressionsChartComponent from "../../chartComponents/PartialRegressionsChartComponent";
 import PaginationComponent from "../../common/PaginationComponent";
@@ -18,6 +18,8 @@ import {
   processAndSetFinalPredictors,
   processAndSetInitialPredictors,
 } from "./PenaltyModelPageUtils";
+import ChooseAlphaCard from "../../common/ChooseAlphaCard";
+import { AlphaSelectorInputFormSchema } from "../../../formSchemas/AlphaSelectorInputFormSchema";
 
 function PenaltyModelPage({
   Endpoints,
@@ -32,13 +34,16 @@ function PenaltyModelPage({
   const [file, setFile] = useState(null);
   const [fileData, setFileData] = useState(null);
 
+  const [showCustomCoefs, setShowCustomCoefs] = useState(false);
+  const [customCoefs, setCustomCoefs] = useState(null);
+  const [alphaVal, setAlphaVal] = useState(null);
   const [partialRegressions, setPartialRegressions] = useState(null);
 
   const [initialPredictors, setInitialPredictors] = useState(null);
   const [finalPredictors, setFinalPredictors] = useState(null);
   const [finalPredictorsObject, setFinalPredictorsObject] = useState(null);
 
-  const [coefAnalysis, setCoefAnalysis] = useState(null);
+  const [coefs, setCoefs] = useState(null);
 
   const [response, setResponse] = useState(null);
 
@@ -68,11 +73,32 @@ function PenaltyModelPage({
         file,
         initialPredictors,
         response,
-        setCoefAnalysis,
-        Endpoints
+        setCoefs,
+        Endpoints.COEFFICIENT_ANALYSIS_URL
       );
     }
   }, [response, initialPredictors]);
+
+  useEffect(() => {
+    if (alphaVal) {
+      callCoefficientAnalysis(
+        file,
+        initialPredictors,
+        response,
+        setCustomCoefs,
+        Endpoints.CUSTOM_COEFFICIENT_ANALYSIS_URL,
+        alphaVal
+      );
+    }
+  }, [alphaVal]);
+
+  useEffect(() => {
+    if (customCoefs) {
+      console.log(customCoefs);
+      console.log("------------");
+      console.log(coefs);
+    }
+  }, [customCoefs]);
 
   useEffect(() => {
     if (finalPredictors) {
@@ -109,6 +135,10 @@ function PenaltyModelPage({
 
   const handleDataFromPredictorsSelectorForm = (data) => {
     processAndSetFinalPredictors(data, initialPredictors, setFinalPredictors);
+  };
+
+  const handleDataFromAlphaSelectorForm = (data) => {
+    setAlphaVal(data.alpha);
   };
 
   const handleDataFromPredictionForm = (data) => {
@@ -175,12 +205,18 @@ function PenaltyModelPage({
           </Row>
         </Container>
       );
-    } else if (coefAnalysis) {
+    } else if (coefs) {
       return (
         <Container fluid>
           <Row>
             <Col sm={8} className="mt-3">
-              <ForestPlotChart coefInfo={coefAnalysis} />
+              {/* <CustomForestPlotChart coefInfo={coefAnalysis} /> */}
+              <CustomForestPlotChart
+                coefs={coefs}
+                customcoefs={customCoefs}
+                showCustomCoefs={showCustomCoefs}
+                setShowCustomCoefs={setShowCustomCoefs}
+              />
             </Col>
             <Col>
               <div className="mb-3 mt-3">
@@ -189,6 +225,20 @@ function PenaltyModelPage({
                   schema={ChoosePredictorsFormSchema(initialPredictors)}
                 />
               </div>
+              <ChooseAlphaCard
+                onSubmit={handleDataFromAlphaSelectorForm}
+                schema={AlphaSelectorInputFormSchema()}
+              />
+              <div className="mt-3">
+                <ChooseAlphaCard
+                  onSubmit={handleDataFromAlphaSelectorForm}
+                  schema={AlphaSelectorInputFormSchema()}
+                />
+              </div>
+            </Col>
+          </Row>
+          <Row>
+            <Col md={8}>
               <div className="mb-3">
                 <PredictorSelectionInfoCard />
               </div>

@@ -7,9 +7,11 @@ import PenaltyModelPage from "../components/pageTemplates/PenaltyModelPage/Penal
 import { ChoosePredictorsFormSchema } from "../formSchemas/Mlr/ChoosePredictorsFormSchema";
 
 const Endpoints = {
-  COEFFICIENT_ANALYSIS_URL: "/mlr-gateway/call-mlr-coefficient-analysis",
-  PARTIAL_REGRESSIONS_URL: "/mlr-gateway/call-mlr-partial-regressions",
-  INDIVIDUAL_PREDICTION_URL: "/mlr-gateway/call-mlr-individual",
+  COEFFICIENT_ANALYSIS_URL: "/ridge-gateway/call-ridge-coefficient-analysis",
+  CUSTOM_COEFFICIENT_ANALYSIS_URL:
+    "/ridge-gateway/call-ridge-custom-coefficient-analysis",
+  PARTIAL_REGRESSIONS_URL: "/ridge-gateway/call-ridge-partial-regressions",
+  INDIVIDUAL_PREDICTION_URL: "/ridge-gateway/call-ridge-individual",
 };
 
 function RidgePage() {

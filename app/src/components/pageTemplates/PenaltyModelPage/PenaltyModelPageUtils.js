@@ -90,8 +90,9 @@ export const callCoefficientAnalysis = async (
   file,
   initialPredictors,
   response,
-  setCoefAnalysis,
-  Endpoints
+  setCoefs,
+  Endpoint,
+  alphaVal
 ) => {
   let predictorsRaw = [];
 
@@ -101,29 +102,24 @@ export const callCoefficientAnalysis = async (
   formData.append("csv-file", file);
   formData.append("response", response);
   formData.append("predictors", predictorsRaw);
+  if (alphaVal) {
+    formData.append("alpha_value", alphaVal);
+  }
 
-  fetch(
-    `${process.env.REACT_APP_API_URL}${Endpoints.COEFFICIENT_ANALYSIS_URL}`,
-    {
-      method: "POST",
-      body: formData,
-    }
-  )
+  fetch(`${process.env.REACT_APP_API_URL}${Endpoint}`, {
+    method: "POST",
+    body: formData,
+  })
     .then((response) => response.json())
     .then((data) => {
       let coefInfo = data.result;
       let predictorKeys = Object.keys(coefInfo);
       let processedCoefInfo = predictorKeys
-        .filter((key) => key !== "coef")
+        .filter((key) => key !== "coef" && key != "intercept")
         .map((key) => {
-          return [
-            key,
-            parseFloat(coefInfo[key].coefficient),
-            parseFloat(coefInfo[key].lower),
-            parseFloat(coefInfo[key].upper),
-          ];
+          return [key, parseFloat(coefInfo[key])];
         });
-      setCoefAnalysis(processedCoefInfo);
+      setCoefs(processedCoefInfo);
     })
     .catch((error) => console.error("Error fetching data:", error));
 };
