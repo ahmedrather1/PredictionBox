@@ -10,13 +10,13 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { Response } from 'express';
 import { ApiGatewayService } from '../api-gateway.service';
 
-@Controller('slr-gateway')
-export class SlrGatewayController {
+@Controller('ridge-gateway')
+export class RidgeGatewayController {
   constructor(private ApiGatewayService: ApiGatewayService) {}
 
-  @Post('call-sample-slr')
+  @Post('call-ridge-coefficient-analysis')
   @UseInterceptors(FileInterceptor('csv-file'))
-  async forwardToCallSampleSlr(
+  async forwardToCallRidgeCoefAnalysis(
     @Body() body: any,
     @UploadedFile() file: Express.Multer.File,
     @Res() res: Response,
@@ -25,7 +25,7 @@ export class SlrGatewayController {
       const data = await this.ApiGatewayService.forwardRequest(
         file,
         body,
-        'call-sample-slr/',
+        'call-ridge-coefficient-analysis/',
       );
       res.send(data);
     } catch (error) {
@@ -35,9 +35,9 @@ export class SlrGatewayController {
     }
   }
 
-  @Post('call-custom-slr')
+  @Post('call-ridge-partial-regressions')
   @UseInterceptors(FileInterceptor('csv-file'))
-  async forwardToCallCustomSlr(
+  async forwardToCallRidgePartialRegressions(
     @Body() body: any,
     @UploadedFile() file: Express.Multer.File,
     @Res() res: Response,
@@ -46,7 +46,7 @@ export class SlrGatewayController {
       const data = await this.ApiGatewayService.forwardRequest(
         file,
         body,
-        'call-custom-slr/',
+        'call-ridge-partial-regressions/',
       );
       res.send(data);
     } catch (error) {
@@ -56,9 +56,9 @@ export class SlrGatewayController {
     }
   }
 
-  @Post('call-custom-slr-individual')
+  @Post('call-ridge-individual')
   @UseInterceptors(FileInterceptor('csv-file'))
-  async forwardToCallCustomSlrIndividual(
+  async forwardToCallRidgeIndividual(
     @Body() body: any,
     @UploadedFile() file: Express.Multer.File,
     @Res() res: Response,
@@ -67,7 +67,7 @@ export class SlrGatewayController {
       const data = await this.ApiGatewayService.forwardRequest(
         file,
         body,
-        'call-custom-slr-individual/',
+        'call-ridge-individual/',
       );
       res.send(data);
     } catch (error) {
@@ -77,9 +77,9 @@ export class SlrGatewayController {
     }
   }
 
-  @Post('call-sample-slr-individual')
+  @Post('call-ridge-custom-coefficient-analysis')
   @UseInterceptors(FileInterceptor('csv-file'))
-  async forwardToCallSampleSlrIndividual(
+  async forwardToCallRidgeCustomCoefficientAnalysis(
     @Body() body: any,
     @UploadedFile() file: Express.Multer.File,
     @Res() res: Response,
@@ -88,7 +88,49 @@ export class SlrGatewayController {
       const data = await this.ApiGatewayService.forwardRequest(
         file,
         body,
-        'call-sample-slr-individual/',
+        'call-ridge-custom-coefficient-analysis/',
+      );
+      res.send(data);
+    } catch (error) {
+      res
+        .status(error.response?.status || 500)
+        .send(error.response?.data || error);
+    }
+  }
+
+  @Post('call-ridge-custom-partial-regressions')
+  @UseInterceptors(FileInterceptor('csv-file'))
+  async forwardToCallRidgeCustomPartialRegressions(
+    @Body() body: any,
+    @UploadedFile() file: Express.Multer.File,
+    @Res() res: Response,
+  ) {
+    try {
+      const data = await this.ApiGatewayService.forwardRequest(
+        file,
+        body,
+        'call-ridge-custom-partial-regressions/',
+      );
+      res.send(data);
+    } catch (error) {
+      res
+        .status(error.response?.status || 500)
+        .send(error.response?.data || error);
+    }
+  }
+
+  @Post('call-custom-ridge-individual')
+  @UseInterceptors(FileInterceptor('csv-file'))
+  async forwardToCallRidgeCustomIndividual(
+    @Body() body: any,
+    @UploadedFile() file: Express.Multer.File,
+    @Res() res: Response,
+  ) {
+    try {
+      const data = await this.ApiGatewayService.forwardRequest(
+        file,
+        body,
+        'call-custom-ridge-individual/',
       );
       res.send(data);
     } catch (error) {

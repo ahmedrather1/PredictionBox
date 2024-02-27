@@ -16,7 +16,7 @@ export class MlrGatewayController {
 
   @Post('call-mlr-coefficient-analysis')
   @UseInterceptors(FileInterceptor('csv-file'))
-  async forwardToCallSampleKnn(
+  async forwardToCallMlrCoefAnalysis(
     @Body() body: any,
     @UploadedFile() file: Express.Multer.File,
     @Res() res: Response,
@@ -37,7 +37,7 @@ export class MlrGatewayController {
 
   @Post('call-mlr-partial-regressions')
   @UseInterceptors(FileInterceptor('csv-file'))
-  async forwardToCallCustomKnn(
+  async forwardToCallMlrPartialRegressions(
     @Body() body: any,
     @UploadedFile() file: Express.Multer.File,
     @Res() res: Response,
@@ -58,7 +58,7 @@ export class MlrGatewayController {
 
   @Post('call-mlr-individual')
   @UseInterceptors(FileInterceptor('csv-file'))
-  async forwardToCallCustomKnnIndividual(
+  async forwardToCallMlrIndividual(
     @Body() body: any,
     @UploadedFile() file: Express.Multer.File,
     @Res() res: Response,
