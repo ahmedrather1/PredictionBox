@@ -1,14 +1,20 @@
 import pandas as pd
 import numpy as np
-from sklearn.linear_model import RidgeCV
+from sklearn.linear_model import Ridge
 from sklearn.preprocessing import StandardScaler
-from statsmodels.api import add_constant
 from commonutils.utils.RemoveOutliers import remove_outliers
 from slr.slr.slrModel import sampleSlrModel
 
 
-def partialRegressions(file, predictorsString, response):
+def customPartialRegressions(file, predictorsString, response, alpha_value_str):
     data = pd.read_csv(file)
+
+    try:
+        alpha_value = float(alpha_value_str)
+        if alpha_value < 0:
+            raise ValueError("alpha_value must be non-negative")
+    except ValueError as e:
+        raise ValueError("alpha_value must be a valid number that is non-negative")
 
     try:
         predictors = predictorsString.split(',')
@@ -29,28 +35,23 @@ def partialRegressions(file, predictorsString, response):
     X = data[predictors]
     y = data[response]
 
-    scaler = StandardScaler()
-    X_scaled = scaler.fit_transform(X)
-    y_scaled = scaler.fit_transform(y.values.reshape(-1, 1)).flatten()
-
-    alphas = np.logspace(-6, 6, 13)
-    
-    ridge_cv = RidgeCV(alphas=alphas, store_cv_values=True)
-    ridge_cv.fit(X_scaled, y_scaled)
-    
-    optimal_alpha = ridge_cv.alpha_
+    scaler_X = StandardScaler()
+    scaler_y = StandardScaler()
+    X_scaled = scaler_X.fit_transform(X)
+    y_scaled = scaler_y.fit_transform(y.values.reshape(-1, 1)).flatten()
 
     partialRegressionsData = {}
 
     for predictor in predictors:
-        X_other_predictors_scaled = np.delete(X_scaled, predictors.index(predictor), axis=1)
+        idx = predictors.index(predictor)
+        X_other_predictors_scaled = np.delete(X_scaled, idx, axis=1)
         
-        ridge_y = RidgeCV(alphas=[optimal_alpha])
+        ridge_y = Ridge(alpha=alpha_value)
         ridge_y.fit(X_other_predictors_scaled, y_scaled)
         yResiduals = y_scaled - ridge_y.predict(X_other_predictors_scaled)
         
-        X_target_predictor_scaled = X_scaled[:, predictors.index(predictor)].reshape(-1, 1)
-        ridge_x = RidgeCV(alphas=[optimal_alpha])
+        X_target_predictor_scaled = X_scaled[:, idx].reshape(-1, 1)
+        ridge_x = Ridge(alpha=alpha_value)
         ridge_x.fit(X_other_predictors_scaled, X_target_predictor_scaled)
         predictorResiduals = X_target_predictor_scaled.flatten() - ridge_x.predict(X_other_predictors_scaled).flatten()
         predictorResiduals2d = predictorResiduals.reshape(-1, 1)

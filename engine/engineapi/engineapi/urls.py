@@ -36,6 +36,7 @@ from ridge.views import callRidgePartialRegressions
 from ridge.views import callRidgeIndividualPrediction
 
 from ridge.views import callRidgeCustomCoefficientAnalysis
+from ridge.views import callRidgeCustomPartialRegressions
 
 urlpatterns = [
     path('', root_view),
@@ -54,4 +55,5 @@ urlpatterns = [
     path('call-ridge-partial-regressions/', callRidgePartialRegressions),
     path('call-ridge-individual/', callRidgeIndividualPrediction),
     path('call-ridge-custom-coefficient-analysis/', callRidgeCustomCoefficientAnalysis),
+    path('call-ridge-custom-partial-regressions/', callRidgeCustomPartialRegressions),
 ]

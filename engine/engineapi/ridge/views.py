@@ -7,6 +7,7 @@ from ridge.ridge.PartialRegressions import partialRegressions
 from ridge.ridge.ridgeIndividualPrediction import ridgeIndividualPrediction
 
 from ridge.customRidge.CustomCoefficientAnalysis import customCoefficientAnalysis
+from ridge.customRidge.CustomPartialRegressions import customPartialRegressions
 
 
 @api_view(['POST'])
@@ -67,6 +68,22 @@ def callRidgeCustomCoefficientAnalysis(request):
 
     try:
         results = customCoefficientAnalysis(file, predictorsString, response, alpha_value_str)
+    except Exception as e:
+        errorMessage = str(e)
+        return JsonResponse({'error': errorMessage}, status=400)
+    return JsonResponse({'result': results})
+
+@api_view(['POST'])
+def callRidgeCustomPartialRegressions(request):
+    file = request.FILES.get('csv-file')
+    predictorsString = request.data.get('predictors')
+    response = request.data.get('response')
+    alpha_value_str = request.data.get('alpha_value')
+    if not file:
+        return JsonResponse({'error': 'No file uploaded'}, status=400)
+
+    try:
+        results = customPartialRegressions(file, predictorsString, response, alpha_value_str)
     except Exception as e:
         errorMessage = str(e)
         return JsonResponse({'error': errorMessage}, status=400)
