@@ -1,12 +1,19 @@
 import pandas as pd
-from sklearn.linear_model import RidgeCV
-import json
+from sklearn.linear_model import Ridge
 from commonutils.utils.RemoveOutliers import remove_outliers
 import numpy as np
+import json
 
 
-def ridgeIndividualPrediction(file, predictorsString, response, dataPointRaw):
+def ridgeCustomIndividualPrediction(file, predictorsString, response, alpha_value_str, dataPointRaw):
     data = pd.read_csv(file)
+
+    try:
+        alpha_value = float(alpha_value_str)
+        if alpha_value < 0:
+            raise ValueError("alpha_value must be non-negative")
+    except ValueError as e:
+        raise ValueError("alpha_value must be a valid number that is non-negative")
 
     try:
         predictors = predictorsString.split(',')
@@ -32,10 +39,8 @@ def ridgeIndividualPrediction(file, predictorsString, response, dataPointRaw):
     X = data[predictors]
     y = data[response]
 
-    alphas = np.logspace(-6, 6, 13)
-
-    ridge_cv = RidgeCV(alphas=alphas, store_cv_values=True)
-    ridge_cv.fit(X, y)
+    ridge = Ridge(alpha=alpha_value)
+    ridge.fit(X, y)
 
     dataPointDf = pd.DataFrame([dataPoint])
     missingPredictors = set(predictors) - set(dataPointDf.columns)
@@ -43,6 +48,6 @@ def ridgeIndividualPrediction(file, predictorsString, response, dataPointRaw):
     if missingPredictors:
         raise KeyError(f"Data point is missing predictors: {missingPredictors}")
     
-    prediction = ridge_cv.predict(dataPointDf)
+    prediction = ridge.predict(dataPointDf)
 
     return prediction[0]
