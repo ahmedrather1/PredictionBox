@@ -120,7 +120,7 @@ function PenaltyModelPage({
         finalPredictors,
         response,
         setPartialRegressions,
-        Endpoints
+        Endpoints.PARTIAL_REGRESSIONS_URL
       );
     }
   }, [finalPredictors, response]);

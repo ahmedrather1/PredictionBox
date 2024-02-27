@@ -66,24 +66,23 @@ export const callPartialRegressions = async (
   finalPredictors,
   response,
   setPartialRegressions,
-  Endpoints
+  Endpoint
 ) => {
-  const formData = new FormData();
-  formData.append("csv-file", file);
-  formData.append("predictors", finalPredictors);
-  formData.append("response", response);
-  fetch(
-    `${process.env.REACT_APP_API_URL}${Endpoints.PARTIAL_REGRESSIONS_URL}`,
-    {
+  if (finalPredictors.length > 0) {
+    const formData = new FormData();
+    formData.append("csv-file", file);
+    formData.append("predictors", finalPredictors);
+    formData.append("response", response);
+    fetch(`${process.env.REACT_APP_API_URL}${Endpoint}`, {
       method: "POST",
       body: formData,
-    }
-  )
-    .then((response) => response.json())
-    .then((data) => {
-      setPartialRegressions(data);
     })
-    .catch((error) => console.error("Error fetching data:", error));
+      .then((response) => response.json())
+      .then((data) => {
+        setPartialRegressions(data);
+      })
+      .catch((error) => console.error("Error fetching data:", error));
+  }
 };
 
 export const callCoefficientAnalysis = async (

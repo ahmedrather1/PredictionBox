@@ -29,6 +29,9 @@ def partialRegressions(file, predictorsString, response):
     X = data[predictors]
     y = data[response]
 
+    print(predictors)
+    print(response)
+
     scaler = StandardScaler()
     X_scaled = scaler.fit_transform(X)
     y_scaled = scaler.fit_transform(y.values.reshape(-1, 1)).flatten()
