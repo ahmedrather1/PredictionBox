@@ -40,7 +40,7 @@ const PartialRegressionsChartComponent = ({
     generateSeries(headers);
 
     setCombinedData(updatedCombinedData);
-  }, [predictor]);
+  }, [predictor, raw, regressed]);
 
   const chartDataSets = {
     scatter: {
