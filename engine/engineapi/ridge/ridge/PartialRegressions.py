@@ -43,16 +43,20 @@ def partialRegressions(file, predictorsString, response):
     partialRegressionsData = {}
 
     for predictor in predictors:
-        X_other_predictors_scaled = np.delete(X_scaled, predictors.index(predictor), axis=1)
-        
-        ridge_y = RidgeCV(alphas=[optimal_alpha])
-        ridge_y.fit(X_other_predictors_scaled, y_scaled)
-        yResiduals = y_scaled - ridge_y.predict(X_other_predictors_scaled)
-        
-        X_target_predictor_scaled = X_scaled[:, predictors.index(predictor)].reshape(-1, 1)
-        ridge_x = RidgeCV(alphas=[optimal_alpha])
-        ridge_x.fit(X_other_predictors_scaled, X_target_predictor_scaled)
-        predictorResiduals = X_target_predictor_scaled.flatten() - ridge_x.predict(X_other_predictors_scaled).flatten()
+        if len(predictors) > 1:
+            X_other_predictors_scaled = np.delete(X_scaled, predictors.index(predictor), axis=1)
+            ridge_y = RidgeCV(alphas=[optimal_alpha])
+            ridge_y.fit(X_other_predictors_scaled, y_scaled)
+            yResiduals = y_scaled - ridge_y.predict(X_other_predictors_scaled)
+            
+            X_target_predictor_scaled = X_scaled[:, predictors.index(predictor)].reshape(-1, 1)
+            ridge_x = RidgeCV(alphas=[optimal_alpha])
+            ridge_x.fit(X_other_predictors_scaled, X_target_predictor_scaled)
+            predictorResiduals = X_target_predictor_scaled.flatten() - ridge_x.predict(X_other_predictors_scaled).flatten()
+        else:
+            yResiduals = y_scaled
+            predictorResiduals = X_scaled.flatten()
+
         predictorResiduals2d = predictorResiduals.reshape(-1, 1)
 
         xRaw = predictorResiduals.tolist()
