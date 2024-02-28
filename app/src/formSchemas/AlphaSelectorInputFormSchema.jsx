@@ -1,4 +1,5 @@
-export const AlphaSelectorInputFormSchema = () => {
+export const AlphaSelectorInputFormSchema = (alphaVal) => {
+  console.log("from schema", alphaVal);
   const schema = {
     $schema: "http://json-schema.org/draft-07/schema#",
     title: "Alpha Input Form",

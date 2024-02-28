@@ -41,6 +41,9 @@ function PenaltyModelPage({
   const [alphaVal, setAlphaVal] = useState(null);
   const [partialRegressions, setPartialRegressions] = useState(null);
 
+  const [partialRegressionsCustom, setPartialRegressionsCustom] =
+    useState(null);
+
   const [showCustomModel, setShowCustomModel] = useState(false);
 
   const [initialPredictors, setInitialPredictors] = useState(null);
@@ -97,14 +100,6 @@ function PenaltyModelPage({
   }, [alphaVal]);
 
   useEffect(() => {
-    if (customCoefs) {
-      console.log(customCoefs);
-      console.log("------------");
-      console.log(coefs);
-    }
-  }, [customCoefs]);
-
-  useEffect(() => {
     if (finalPredictors) {
       generatePredictionFormSchema(
         columns,
@@ -117,12 +112,27 @@ function PenaltyModelPage({
   }, [finalPredictors]);
 
   useEffect(() => {
+    if (alphaVal && finalPredictors) {
+      callPartialRegressions(
+        file,
+        finalPredictors,
+        response,
+        setPartialRegressionsCustom,
+        alphaVal,
+        Endpoints.CUSTOM_PARTIAL_REGRESSIONS_URL
+      );
+    }
+  }, [alphaVal]);
+
+  useEffect(() => {
     if (finalPredictors && response) {
+      setAlphaVal(null);
       callPartialRegressions(
         file,
         finalPredictors,
         response,
         setPartialRegressions,
+        null,
         Endpoints.PARTIAL_REGRESSIONS_URL
       );
     }
@@ -163,15 +173,31 @@ function PenaltyModelPage({
         <Container fluid>
           <Row>
             <Col sm={8} className="mt-3">
-              <PartialRegressionsCharts
-                partialRegressions={partialRegressions}
-                currentPage={currentPage}
-                chartsPerPage={chartsPerPage}
-                response={response}
-                setShowCustomModel={setShowCustomModel}
-                showCustomModel={showCustomModel}
-                variant={"RIDGE"}
-              />
+              {!showCustomModel && (
+                <PartialRegressionsCharts
+                  partialRegressions={partialRegressions}
+                  currentPage={currentPage}
+                  chartsPerPage={chartsPerPage}
+                  response={response}
+                  setShowCustomModel={setShowCustomModel}
+                  showCustomModel={showCustomModel}
+                  alphaVal={alphaVal}
+                  variant={"RIDGE"}
+                />
+              )}
+              {showCustomModel && (
+                <PartialRegressionsCharts
+                  partialRegressions={partialRegressionsCustom}
+                  currentPage={currentPage}
+                  chartsPerPage={chartsPerPage}
+                  response={response}
+                  setShowCustomModel={setShowCustomModel}
+                  showCustomModel={showCustomModel}
+                  alphaVal={alphaVal}
+                  variant={"RIDGE"}
+                />
+              )}
+
               <PaginationComponent
                 currentPage={currentPage}
                 itemCount={Object.keys(partialRegressions).length}
@@ -183,7 +209,7 @@ function PenaltyModelPage({
               <div className="mt-3">
                 <ChooseAlphaCard
                   onSubmit={handleDataFromAlphaSelectorForm}
-                  schema={AlphaSelectorInputFormSchema()}
+                  schema={AlphaSelectorInputFormSchema(alphaVal)}
                 />
               </div>
               <div className="mb-3 mt-3">

@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PartialRegressionsChartComponent from "../chartComponents/PartialRegressionsChartComponent";
-import { Card, Button } from "react-bootstrap";
+import { Card, Button, OverlayTrigger, Popover } from "react-bootstrap";
 
 const PartialRegressionsCharts = ({
   partialRegressions,
@@ -8,12 +8,27 @@ const PartialRegressionsCharts = ({
   chartsPerPage,
   response,
   variant,
+  alphaVal,
   showCustomModel,
   setShowCustomModel,
 }) => {
   const handleToggleCustomModel = () => {
     setShowCustomModel((shown) => !shown);
   };
+
+  useEffect(() => console.log(partialRegressions));
+
+  const alphaValPopover = (
+    <Popover id="popover-alphaVal-undefined">
+      <Popover.Header as="h3">
+        {"Set a custom alpha value first!"}
+      </Popover.Header>
+      <Popover.Body>
+        Use the <strong>Choose your Alpha Value</strong> section to define an
+        alpha value.
+      </Popover.Body>
+    </Popover>
+  );
 
   return (
     <>
@@ -28,12 +43,23 @@ const PartialRegressionsCharts = ({
         >
           {variant === "RIDGE" && (
             <div style={{ textAlign: "center", padding: "10px 0" }}>
-              <Button
-                variant={showCustomModel ? "outline-primary" : "primary"}
-                onClick={handleToggleCustomModel}
+              <OverlayTrigger
+                placement="right"
+                trigger="hover"
+                overlay={alphaVal === null ? alphaValPopover : <></>}
               >
-                {showCustomModel ? "Hide Custom Model" : "Show Custom Model"}
-              </Button>
+                <span>
+                  <Button
+                    variant={showCustomModel ? "outline-primary" : "primary"}
+                    onClick={handleToggleCustomModel}
+                    disabled={alphaVal === null}
+                  >
+                    {showCustomModel
+                      ? "Hide Custom Model"
+                      : "Show Custom Model"}
+                  </Button>
+                </span>
+              </OverlayTrigger>
             </div>
           )}
           {Object.keys(partialRegressions)
@@ -42,6 +68,12 @@ const PartialRegressionsCharts = ({
               let predictorsAccountedFor = Object.keys(
                 partialRegressions
               ).filter((item) => item !== key);
+
+              console.log("------------------------------------");
+              console.log(partialRegressions);
+
+              console.log("------------------------------------");
+
               const raw = partialRegressions[key]["raw"];
               const regressed = partialRegressions[key]["regressed"];
               return (

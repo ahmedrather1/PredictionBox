@@ -88,7 +88,7 @@ def callRidgeCustomPartialRegressions(request):
     except Exception as e:
         errorMessage = str(e)
         return JsonResponse({'error': errorMessage}, status=400)
-    return JsonResponse({'result': results})
+    return JsonResponse(results)
 
 @api_view(['POST'])
 def callRidgeCustomIndividualPrediction(request):

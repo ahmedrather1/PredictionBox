@@ -66,6 +66,7 @@ export const callPartialRegressions = async (
   finalPredictors,
   response,
   setPartialRegressions,
+  alphaVal,
   Endpoint
 ) => {
   if (finalPredictors.length > 0) {
@@ -73,6 +74,9 @@ export const callPartialRegressions = async (
     formData.append("csv-file", file);
     formData.append("predictors", finalPredictors);
     formData.append("response", response);
+    if (alphaVal) {
+      formData.append("alpha_value", alphaVal);
+    }
     fetch(`${process.env.REACT_APP_API_URL}${Endpoint}`, {
       method: "POST",
       body: formData,
