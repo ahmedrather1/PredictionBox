@@ -27,6 +27,7 @@ function RidgePage() {
       ChooseDataCard={MlrChooseDataCard}
       PredictorSelectionInfoCard={MlrPredictorSelectionInfoCard}
       AboutAlphaCard={AlphaInfoCard}
+      Variant={"RIDGE"}
     />
   );
 }

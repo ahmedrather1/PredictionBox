@@ -29,6 +29,7 @@ function PenaltyModelPage({
   ChooseDataCard,
   PredictorSelectionInfoCard,
   AboutAlphaCard,
+  Variant,
 }) {
   // TODO too many usestates! use redux instead
   const [columns, setColumns] = useState(null);
@@ -182,7 +183,8 @@ function PenaltyModelPage({
                   setShowCustomModel={setShowCustomModel}
                   showCustomModel={showCustomModel}
                   alphaVal={alphaVal}
-                  variant={"RIDGE"}
+                  variant={Variant}
+                  modelType={"standard"}
                 />
               )}
               {showCustomModel && (
@@ -194,7 +196,8 @@ function PenaltyModelPage({
                   setShowCustomModel={setShowCustomModel}
                   showCustomModel={showCustomModel}
                   alphaVal={alphaVal}
-                  variant={"RIDGE"}
+                  variant={Variant}
+                  modelType={"custom"}
                 />
               )}
 

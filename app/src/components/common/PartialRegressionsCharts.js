@@ -11,6 +11,7 @@ const PartialRegressionsCharts = ({
   alphaVal,
   showCustomModel,
   setShowCustomModel,
+  modelType,
 }) => {
   const handleToggleCustomModel = () => {
     setShowCustomModel((shown) => !shown);
@@ -69,11 +70,6 @@ const PartialRegressionsCharts = ({
                 partialRegressions
               ).filter((item) => item !== key);
 
-              console.log("------------------------------------");
-              console.log(partialRegressions);
-
-              console.log("------------------------------------");
-
               const raw = partialRegressions[key]["raw"];
               const regressed = partialRegressions[key]["regressed"];
               return (
@@ -83,6 +79,7 @@ const PartialRegressionsCharts = ({
                   response={response}
                   predictorsAccountedFor={predictorsAccountedFor}
                   predictor={key}
+                  modelType={modelType}
                 />
               );
             })}

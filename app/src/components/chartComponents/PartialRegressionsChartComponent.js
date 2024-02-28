@@ -7,6 +7,7 @@ const PartialRegressionsChartComponent = ({
   response,
   predictorsAccountedFor,
   predictor,
+  modelType,
 }) => {
   const [combinedData, setCombinedData] = useState(null);
   const [customSeries, setCustomSeries] = useState(null);
@@ -76,6 +77,14 @@ const PartialRegressionsChartComponent = ({
       " controlling for " +
       controlledPredictors;
 
+    if (modelType === "custom") {
+      mainTitle = "Custom Alpha: " + mainTitle;
+    }
+
+    if (modelType === "standard") {
+      mainTitle = "Cross Validated Alpha: " + mainTitle;
+    }
+
     setXtitle(titleX);
     setYtitle(titleY);
     setTitle(mainTitle);
@@ -106,8 +115,6 @@ const PartialRegressionsChartComponent = ({
       }
     });
 
-    console.log("---------chartdata regressed--------", data);
-
     sortedXValues.forEach((targetX) => {
       let targetIndexes = [];
 
@@ -124,8 +131,6 @@ const PartialRegressionsChartComponent = ({
         data.push(row);
       });
     });
-
-    console.log("---------chartdata raw--------", data);
 
     return data;
   };
