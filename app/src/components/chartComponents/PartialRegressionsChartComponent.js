@@ -14,7 +14,6 @@ const PartialRegressionsChartComponent = ({
   const [xTitle, setXtitle] = useState("");
   const [yTitle, setYtitle] = useState("");
   const [title, setTitle] = useState("");
-  console.log("rendering chart with key, ", predictor);
 
   const generateSeries = (headers) => {
     let genSeries = {};

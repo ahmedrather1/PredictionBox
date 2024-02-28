@@ -200,13 +200,15 @@ function PenaltyModelPage({
                   modelType={"custom"}
                 />
               )}
-
               <PaginationComponent
                 currentPage={currentPage}
                 itemCount={Object.keys(partialRegressions).length}
                 itemsPerPage={chartsPerPage}
                 onPageChange={setCurrentPage}
               />
+              <div className="mt-3">
+                <FinalPlotsInfoCard />
+              </div>
             </Col>
             <Col>
               <div className="mt-3">
@@ -224,13 +226,6 @@ function PenaltyModelPage({
                 />
               </div>
             </Col>
-          </Row>
-          <Row>
-            <Container>
-              <Col md={8}>
-                <FinalPlotsInfoCard />
-              </Col>
-            </Container>
           </Row>
         </Container>
       );
