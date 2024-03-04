@@ -45,15 +45,15 @@ const CustomForestPlotChart = ({
     }
 
     allVariables.forEach((variable) => {
-      const coefValue = coefs.find((coef) => coef[0] === variable)?.[1] || null;
+      const coefValue = coefs.find((coef) => coef[0] === variable)?.[1] || 0;
       let rowData = [variable, coefValue];
 
       if (showCustomCoefs) {
         const customCoefValue =
-          customcoefs.find((coef) => coef[0] === variable)?.[1] || null;
+          customcoefs.find((coef) => coef[0] === variable)?.[1] || 0;
         rowData.push(customCoefValue);
       }
-
+      console.log(rowData);
       data.push(rowData);
     });
 
