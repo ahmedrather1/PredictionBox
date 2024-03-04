@@ -1,8 +1,8 @@
-import RidgeGeneralInfoCard from "../components/ridge/infoCards/RidgeGeneralInfoCard";
-import RidgeChooseDataCard from "../components/ridge/infoCards/RidgeChooseDataCard";
+import LassoGeneralInfoCard from "../components/lasso/infoCards/LassoGeneralInfoCard";
+import LassoChooseDataCard from "../components/lasso/infoCards/LassoChooseDataCard";
 import MlrPredictorSelectionInfoCard from "../components/mlr/infoCards/PredictorSelectionInfoCard";
-import RidgePartialRegressionInfoCard from "../components/ridge/infoCards/RidgePartialRegressionInfoCard";
-import AlphaInfoCard from "../components/ridge/infoCards/AlphaInfoCard";
+import LassoPartialRegressionInfoCard from "../components/lasso/infoCards/LassoPartialRegressionInfoCard";
+import AlphaInfoCard from "../components/lasso/infoCards/AlphaInfoCard";
 
 import PenaltyModelPage from "../components/pageTemplates/PenaltyModelPage/PenaltyModelPage";
 import { ChoosePredictorsFormSchema } from "../formSchemas/Mlr/ChoosePredictorsFormSchema";
@@ -24,12 +24,12 @@ function LassoPage() {
     <PenaltyModelPage
       Endpoints={Endpoints}
       ChoosePredictorsFormSchema={ChoosePredictorsFormSchema}
-      FinalPlotsInfoCard={RidgePartialRegressionInfoCard}
-      GeneralInfoCard={RidgeGeneralInfoCard}
-      ChooseDataCard={RidgeChooseDataCard}
+      FinalPlotsInfoCard={LassoPartialRegressionInfoCard}
+      GeneralInfoCard={LassoGeneralInfoCard}
+      ChooseDataCard={LassoChooseDataCard}
       PredictorSelectionInfoCard={MlrPredictorSelectionInfoCard}
       AboutAlphaCard={AlphaInfoCard}
-      Variant={"RIDGE"}
+      Variant={"LASSO"}
     />
   );
 }
