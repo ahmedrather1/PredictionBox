@@ -9,7 +9,7 @@ from mlr.predictions.mlrIndividualPrediction import mlrIndividualPrediction
 
 
 @api_view(['POST'])
-def callCoefficientAnalysis(request):
+def callMlrCoefficientAnalysis(request):
     file = request.FILES.get('csv-file')
     predictorsString = request.data.get('predictors')
     response = request.data.get('response')
@@ -24,7 +24,7 @@ def callCoefficientAnalysis(request):
     return JsonResponse({'result': results})
 
 @api_view(['POST'])
-def callPartialRegressions(request):
+def callMlrPartialRegressions(request):
     file = request.FILES.get('csv-file')
     predictorsString = request.data.get('predictors')
     response = request.data.get('response')

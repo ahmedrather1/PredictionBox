@@ -45,6 +45,18 @@
   border-color: #3c5248;
 }
 
+.btn-outline-primary {
+  color: #6b9080;
+  border-color: #6b9080;
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary:focus,
+.btn-outline-primary:active {
+  background-color: #3c5248;
+  border-color: #3c5248;
+}
+
 .app-container {
   background-color: #f2f2f2; /* Your desired color */
   min-height: 100vh; /* 100% of the viewport height */

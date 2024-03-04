@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Chart } from "react-google-charts";
-import { Card } from "react-bootstrap";
 
 const PartialRegressionsChartComponent = ({
   raw,
@@ -8,13 +7,13 @@ const PartialRegressionsChartComponent = ({
   response,
   predictorsAccountedFor,
   predictor,
+  modelType,
 }) => {
   const [combinedData, setCombinedData] = useState(null);
   const [customSeries, setCustomSeries] = useState(null);
   const [xTitle, setXtitle] = useState("");
   const [yTitle, setYtitle] = useState("");
   const [title, setTitle] = useState("");
-  console.log("rendering chart with key, ", predictor);
 
   const generateSeries = (headers) => {
     let genSeries = {};
@@ -41,7 +40,7 @@ const PartialRegressionsChartComponent = ({
     generateSeries(headers);
 
     setCombinedData(updatedCombinedData);
-  }, [predictor]);
+  }, [predictor, raw, regressed]);
 
   const chartDataSets = {
     scatter: {
@@ -77,6 +76,14 @@ const PartialRegressionsChartComponent = ({
       " controlling for " +
       controlledPredictors;
 
+    if (modelType === "custom") {
+      mainTitle = "Custom Alpha: " + mainTitle;
+    }
+
+    if (modelType === "standard") {
+      mainTitle = "Cross Validated Alpha: " + mainTitle;
+    }
+
     setXtitle(titleX);
     setYtitle(titleY);
     setTitle(mainTitle);
@@ -107,8 +114,6 @@ const PartialRegressionsChartComponent = ({
       }
     });
 
-    console.log("---------chartdata regressed--------", data);
-
     sortedXValues.forEach((targetX) => {
       let targetIndexes = [];
 
@@ -126,50 +131,37 @@ const PartialRegressionsChartComponent = ({
       });
     });
 
-    console.log("---------chartdata raw--------", data);
-
     return data;
   };
 
   return (
-    <Card style={{ height: "76vh" }}>
-      <Card.Body
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          height: "100%",
-          overflow: "auto",
+    <div style={{ flexGrow: 1, width: "100%", height: "100%" }}>
+      <Chart
+        width="100%"
+        height="100%"
+        chartType="ComboChart"
+        loader={<div>Loading Chart</div>}
+        data={combinedData}
+        options={{
+          title: `${title}`,
+          titleTextStyle: {
+            color: "black",
+            fontSize: 12,
+            fontName: "Arial",
+            bold: true,
+            italic: false,
+          },
+          series: customSeries,
+          hAxis: {
+            title: xTitle,
+          },
+          vAxis: {
+            title: yTitle,
+          },
+          interpolateNulls: true,
         }}
-      >
-        <div style={{ flexGrow: 1, width: "100%", height: "100%" }}>
-          <Chart
-            width="100%"
-            height="100%"
-            chartType="ComboChart"
-            loader={<div>Loading Chart</div>}
-            data={combinedData}
-            options={{
-              title: `${title}`,
-              titleTextStyle: {
-                color: "black",
-                fontSize: 12,
-                fontName: "Arial",
-                bold: true,
-                italic: false,
-              },
-              series: customSeries,
-              hAxis: {
-                title: xTitle,
-              },
-              vAxis: {
-                title: yTitle,
-              },
-              interpolateNulls: true,
-            }}
-          />
-        </div>
-      </Card.Body>
-    </Card>
+      />
+    </div>
   );
 };
 

@@ -21,17 +21,6 @@ const AboutKnnText = () => {
       houses in your dataset and averages their prices to estimate the price of
       the new house. <br />
       <br />
-      You can either use the demo data provided in our simulator to see KNN
-      regression in action or upload your own data for a more tailored
-      experience. If you choose to upload data, please ensure it's in a CSV file
-      format. Each column in your file should contain only numeric data, as KNN
-      uses these numerical values to calculate the 'distance' between points.
-      Non-numeric columns will be ignored to ensure the accuracy of the
-      regression analysis. This KNN regression simulator is an excellent tool
-      for those looking to understand how KNN can be applied to predict
-      numerical outcomes. Whether you're a student, a budding data scientist, or
-      simply curious about machine learning, this simulator provides a hands-on
-      experience to explore and learn from.
     </p>
   );
 };

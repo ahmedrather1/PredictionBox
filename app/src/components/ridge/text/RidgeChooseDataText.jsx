@@ -1,19 +1,19 @@
 import React from "react";
 
 // TODO use react listgroup stuff instead of html
-const SlrChooseDataText = () => {
+const RidgeChooseDataText = () => {
   return (
     <p>
-      You can either use the demo data provided in our simulator to see Simple
-      Linear regression in action or upload your own data for a more tailored
+      You can either use the demo data provided in our simulator to see multiple
+      linear regression in action or upload your own data for a more tailored
       experience.
       <br />
       <br /> <strong>If you choose to upload data</strong>:
       <ul>
         <li>Please ensure the data is in a CSV file format.</li>
         <li>
-          Each column in your file should contain only numeric data, as simple
-          linear regression uses these numerical values to establish a linear
+          Each column in your file should contain only numeric data, as ridge
+          regression uses these numerical values to establish a linear
           relationship between the independent and dependent variables.
         </li>
         <li>
@@ -35,4 +35,4 @@ const SlrChooseDataText = () => {
   );
 };
 
-export default SlrChooseDataText;
+export default RidgeChooseDataText;
