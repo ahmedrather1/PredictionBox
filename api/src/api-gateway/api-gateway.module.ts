@@ -10,7 +10,13 @@ import { LassoGatewayController } from './lasso-gateway/lasso-gateway.controller
 
 @Module({
   imports: [HttpModule, ConfigModule],
-  controllers: [KnnGatewayController, SlrGatewayController, MlrGatewayController, RidgeGatewayController, LassoGatewayController],
+  controllers: [
+    KnnGatewayController,
+    SlrGatewayController,
+    MlrGatewayController,
+    RidgeGatewayController,
+    LassoGatewayController,
+  ],
   providers: [ApiGatewayService],
 })
 export class ApiGatewayModule {}
