@@ -31,7 +31,6 @@ def lassoIndividualPrediction(file, predictorsString, response, dataPointRaw):
     X = data[predictors]
     y = data[response]
 
-    # Lasso can benefit from feature scaling, but it's not strictly necessary unless features are on very different scales.
     alphas = np.logspace(-6, 6, 13)
 
     lasso_cv = LassoCV(alphas=alphas, cv=5, max_iter=10000, random_state=0)
