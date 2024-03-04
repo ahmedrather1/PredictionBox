@@ -44,6 +44,8 @@ from lasso.views import callLassoPartialRegressions
 from lasso.views import callLassoIndividualPrediction
 
 
+
+
 urlpatterns = [
     path('', root_view),
     path('call-sample-knn/', callSampleKnnFull),
