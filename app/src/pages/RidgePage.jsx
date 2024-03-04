@@ -1,7 +1,7 @@
-import MlrGeneralInfoCard from "../components/mlr/infoCards/MlrGeneralInfoCard";
-import MlrChooseDataCard from "../components/mlr/infoCards/MlrChooseDataCard";
+import RidgeGeneralInfoCard from "../components/ridge/infoCards/RidgeGeneralInfoCard";
+import RidgeChooseDataCard from "../components/ridge/infoCards/RidgeChooseDataCard";
 import MlrPredictorSelectionInfoCard from "../components/mlr/infoCards/PredictorSelectionInfoCard";
-import MlrPartialRegressionInfoCard from "../components/mlr/infoCards/MlrPartialRegressionInfoCard";
+import RidgePartialRegressionInfoCard from "../components/ridge/infoCards/RidgePartialRegressionInfoCard";
 import AlphaInfoCard from "../components/ridge/infoCards/AlphaInfoCard";
 
 import PenaltyModelPage from "../components/pageTemplates/PenaltyModelPage/PenaltyModelPage";
@@ -24,9 +24,9 @@ function RidgePage() {
     <PenaltyModelPage
       Endpoints={Endpoints}
       ChoosePredictorsFormSchema={ChoosePredictorsFormSchema}
-      FinalPlotsInfoCard={MlrPartialRegressionInfoCard}
-      GeneralInfoCard={MlrGeneralInfoCard}
-      ChooseDataCard={MlrChooseDataCard}
+      FinalPlotsInfoCard={RidgePartialRegressionInfoCard}
+      GeneralInfoCard={RidgeGeneralInfoCard}
+      ChooseDataCard={RidgeChooseDataCard}
       PredictorSelectionInfoCard={MlrPredictorSelectionInfoCard}
       AboutAlphaCard={AlphaInfoCard}
       Variant={"RIDGE"}
