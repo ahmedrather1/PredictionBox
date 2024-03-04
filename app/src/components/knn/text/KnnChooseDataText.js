@@ -23,6 +23,12 @@ const KnnChooseDataText = () => {
           The first row of your data should contain the names corresponding to
           the data in your columns.
         </li>
+        <li>
+          <strong>
+            Outliers within your data will be removed according to the IQR rule
+            to obtain more accurate predictions.
+          </strong>
+        </li>
       </ul>
     </p>
   );
