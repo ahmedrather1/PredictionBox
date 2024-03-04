@@ -32,7 +32,7 @@ const MultipleParameterIndividualPredictionCard = ({
                 </Card>
               </div>
             )}
-            {customPrediction && (
+            {!isNaN(customPrediction?.predictedY) && (
               <div className="d-flex justify-content-center">
                 <Card>
                   <Card.Body>

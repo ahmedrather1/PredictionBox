@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
-import Papa from "papaparse";
 import MultipleModelFileUploadComponent from "../../fileUploadComponents/MultipleModelFileUploadComponent";
 import Header from "../../common/Header";
 import CustomForestPlotChart from "../../chartComponents/CustomForestChartComponent";
@@ -156,7 +155,9 @@ function PenaltyModelPage({
   };
 
   const handleDataFromAlphaSelectorForm = (data) => {
-    setAlphaVal(data.alpha);
+    if (data?.alpha) {
+      setAlphaVal(data.alpha);
+    }
   };
 
   useEffect(() => {

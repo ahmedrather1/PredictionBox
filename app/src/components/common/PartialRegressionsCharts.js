@@ -49,7 +49,13 @@ const PartialRegressionsCharts = ({
               >
                 <span>
                   <Button
-                    variant={showCustomModel ? "outline-primary" : "primary"}
+                    variant={
+                      alphaVal === null
+                        ? "outline-dark"
+                        : showCustomModel
+                        ? "outline-primary"
+                        : "primary"
+                    }
                     onClick={handleToggleCustomModel}
                     disabled={alphaVal === null}
                   >
