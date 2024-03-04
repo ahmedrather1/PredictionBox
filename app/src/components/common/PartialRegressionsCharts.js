@@ -17,8 +17,6 @@ const PartialRegressionsCharts = ({
     setShowCustomModel((shown) => !shown);
   };
 
-  useEffect(() => console.log(partialRegressions));
-
   const alphaValPopover = (
     <Popover id="popover-alphaVal-undefined">
       <Popover.Header as="h3">

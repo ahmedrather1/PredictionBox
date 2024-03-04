@@ -24,7 +24,7 @@ const PaginationComponent = ({
   return (
     <div className="d-flex justify-content-center my-3">
       <Button
-        variant="primary"
+        variant={currentPage !== 0 ? "primary" : "secondary"}
         onClick={handlePrevious}
         disabled={currentPage === 0}
       >
@@ -35,7 +35,7 @@ const PaginationComponent = ({
         Chart {currentPage + 1} of {totalPages}{" "}
       </span>
       <Button
-        variant="primary"
+        variant={currentPage < totalPages - 1 ? "primary" : "secondary"}
         onClick={handleNext}
         disabled={currentPage >= totalPages - 1}
       >
