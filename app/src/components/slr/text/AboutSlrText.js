@@ -17,16 +17,6 @@ const AboutSlrText = () => {
       generally lead to higher exam scores, and if so, how much of an increase
       in scores you might expect for each additional hour of study.
       <br />
-      <br /> In this simulator, you have the option to either use demo data or
-      upload your own data for analysis. If you choose to upload your data,
-      please ensure it is in a CSV (Comma-Separated Values) file format. This
-      file should consist of columns with only numeric data. If any of your
-      columns contain non-numeric data, such as text or dates, these columns
-      will be ignored in the analysis. This is because our linear regression
-      model can only interpret and process numerical values. By ensuring your
-      data is properly formatted, you'll get the most accurate and meaningful
-      results from the simulation.
-      <br />
     </p>
   );
 };

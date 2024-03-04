@@ -119,7 +119,7 @@ const CustomForestPlotChart = ({
                 <Popover id={`popover-positioned-right`}>
                   <Popover.Header as="h3">{`Set a custom alpha value first!`}</Popover.Header>
                   <Popover.Body>
-                    Use the <strong>Set Custom Parameters</strong> section
+                    Use the <strong>Choose your Alpha Value</strong> section
                   </Popover.Body>
                 </Popover>
               }

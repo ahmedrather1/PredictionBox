@@ -6,7 +6,7 @@ const ChooseAlphaCard = ({ onSubmit, schema }) => {
   return (
     <Card>
       <Card.Body>
-        <Card.Title>Choose your Alpha Value (Optional) </Card.Title>
+        <Card.Title>Custom Model: Choose your Alpha Value</Card.Title>
         <CustomForm onSubmit={onSubmit} schema={schema} />
       </Card.Body>
     </Card>
