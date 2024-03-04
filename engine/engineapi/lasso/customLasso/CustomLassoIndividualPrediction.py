@@ -1,11 +1,11 @@
 import pandas as pd
-from sklearn.linear_model import Ridge
+from sklearn.linear_model import LassoCV
 from commonutils.utils.RemoveOutliers import remove_outliers
 import numpy as np
 import json
 
 
-def ridgeCustomIndividualPrediction(file, predictorsString, response, alpha_value_str, dataPointRaw):
+def lassoCustomIndividualPrediction(file, predictorsString, response, alpha_value_str, dataPointRaw):
     data = pd.read_csv(file)
 
     try:
@@ -39,8 +39,8 @@ def ridgeCustomIndividualPrediction(file, predictorsString, response, alpha_valu
     X = data[predictors]
     y = data[response]
 
-    ridge = Ridge(alpha=alpha_value)
-    ridge.fit(X, y)
+    lasso_cv = LassoCV(alphas=[alpha_value], cv=5, max_iter=10000)
+    lasso_cv.fit(X, y)
 
     dataPointDf = pd.DataFrame([dataPoint])
     missingPredictors = set(predictors) - set(dataPointDf.columns)
@@ -48,6 +48,6 @@ def ridgeCustomIndividualPrediction(file, predictorsString, response, alpha_valu
     if missingPredictors:
         raise KeyError(f"Data point is missing predictors: {missingPredictors}")
     
-    prediction = ridge.predict(dataPointDf)
+    prediction = lasso_cv.predict(dataPointDf)
 
     return prediction[0]

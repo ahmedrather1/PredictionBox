@@ -1,6 +1,6 @@
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
-from sklearn.linear_model import Ridge
+from sklearn.linear_model import Lasso
 import numpy as np
 from commonutils.utils.RemoveOutliers import remove_outliers
 
@@ -32,10 +32,10 @@ def customCoefficientAnalysis(file, predictorsString, response, alpha_value_str)
     scaler = StandardScaler()
     X_scaled = scaler.fit_transform(X)
 
-    ridge = Ridge(alpha=alpha_value)
-    ridge.fit(X_scaled, y)
+    lasso = Lasso(alpha=alpha_value)
+    lasso.fit(X_scaled, y)
     
-    coefficients = {'intercept': ridge.intercept_}
+    coefficients = {'intercept': lasso.intercept_}
     for i, predictor in enumerate(predictors):
-        coefficients[predictor] = ridge.coef_[i]
+        coefficients[predictor] = lasso.coef_[i]
     return coefficients

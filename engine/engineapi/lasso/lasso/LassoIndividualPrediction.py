@@ -33,7 +33,7 @@ def lassoIndividualPrediction(file, predictorsString, response, dataPointRaw):
 
     alphas = np.logspace(-6, 6, 13)
 
-    lasso_cv = LassoCV(alphas=alphas, cv=5, max_iter=10000, random_state=0)
+    lasso_cv = LassoCV(alphas=alphas, cv=5, max_iter=10000)
     lasso_cv.fit(X, y)
 
     dataPointDf = pd.DataFrame([dataPoint])

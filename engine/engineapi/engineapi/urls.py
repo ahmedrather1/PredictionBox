@@ -42,8 +42,9 @@ from ridge.views import callRidgeCustomIndividualPrediction
 from lasso.views import callLassoCoefficientAnalysis
 from lasso.views import callLassoPartialRegressions
 from lasso.views import callLassoIndividualPrediction
-
-
+from lasso.views import callLassoCustomCoefficientAnalysis
+from lasso.views import callLassoCustomPartialRegressions
+from lasso.views import callLassoCustomIndividualPrediction
 
 
 urlpatterns = [
@@ -68,5 +69,8 @@ urlpatterns = [
     path('call-lasso-coefficient-analysis/', callLassoCoefficientAnalysis),
     path('call-lasso-partial-regressions/', callLassoPartialRegressions),
     path('call-lasso-individual/', callLassoIndividualPrediction),
+    path('call-lasso-custom-coefficient-analysis/', callLassoCustomCoefficientAnalysis),
+    path('call-lasso-custom-partial-regressions/', callLassoCustomPartialRegressions),
+    path('call-custom-lasso-individual/', callLassoCustomIndividualPrediction),
 
 ]
