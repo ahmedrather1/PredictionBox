@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Card, Container, Row, Col } from "react-bootstrap";
 import CustomForm from "../common/CustomForm";
 
@@ -6,7 +6,9 @@ const MultipleParameterIndividualPredictionCard = ({
   onSubmit,
   schema,
   individualPrediction,
+  customPrediction,
   response,
+  titles,
 }) => {
   return (
     <Card>
@@ -17,17 +19,28 @@ const MultipleParameterIndividualPredictionCard = ({
             <CustomForm onSubmit={onSubmit} schema={schema} />
           </Row>
           <Row>
-            {individualPrediction && (
+            {!isNaN(individualPrediction?.predictedY) && (
               <div className="d-flex justify-content-center my-3">
                 <Card className="mt-2">
                   <Card.Body>
                     <Card.Title style={{ fontSize: "12px" }}>
-                      Your Model's Prediction
+                      {titles.standard}
                     </Card.Title>
-                    <Row>
-                      {response + " = "}
-                      {individualPrediction.predictedY}
-                    </Row>
+                    {response + " = "}
+                    {individualPrediction.predictedY}
+                  </Card.Body>
+                </Card>
+              </div>
+            )}
+            {customPrediction && (
+              <div className="d-flex justify-content-center">
+                <Card>
+                  <Card.Body>
+                    <Card.Title style={{ fontSize: "12px" }}>
+                      {titles.custom}
+                    </Card.Title>
+                    {response + " = "}
+                    {customPrediction.predictedY}
                   </Card.Body>
                 </Card>
               </div>

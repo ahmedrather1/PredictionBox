@@ -151,7 +151,9 @@ function MultipleModelPage({
                   onSubmit={handleDataFromPredictionForm}
                   schema={predictionInputFormSchema}
                   individualPrediction={individualPrediction}
+                  customPrediction={null}
                   response={response}
+                  titles={{ standard: "Your Model's Prediction" }}
                 />
               </div>
             </Col>

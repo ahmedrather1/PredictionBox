@@ -1,5 +1,5 @@
 import { MultipleParameterPredictionInputFormSchema } from "../../../formSchemas/MultipleParameterPredictionInputFormSchema";
-
+import { CustomMultipleParameterInputSchema } from "../../../formSchemas/CustomMultipleParameterInputSchema";
 export const generatePredictionFormSchema = async (
   columns,
   response,
@@ -132,8 +132,9 @@ export const callIndividualPrediction = async (
   finalPredictors,
   response,
   predictorsFullSorted,
+  alphaVal,
   setIndividualPrediction,
-  Endpoints
+  Endpoint
 ) => {
   const formData = new FormData();
 
@@ -142,13 +143,14 @@ export const callIndividualPrediction = async (
   formData.append("response", response);
   formData.append("datapoint", JSON.stringify(predictorsFullSorted));
 
-  fetch(
-    `${process.env.REACT_APP_API_URL}${Endpoints.INDIVIDUAL_PREDICTION_URL}`,
-    {
-      method: "POST",
-      body: formData,
-    }
-  )
+  if (alphaVal) {
+    formData.append("alpha_value", alphaVal);
+  }
+
+  fetch(`${process.env.REACT_APP_API_URL}${Endpoint}`, {
+    method: "POST",
+    body: formData,
+  })
     .then((response) => response.json())
     .then((data) => {
       setIndividualPrediction({

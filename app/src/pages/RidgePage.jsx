@@ -15,6 +15,8 @@ const Endpoints = {
   CUSTOM_PARTIAL_REGRESSIONS_URL:
     "/ridge-gateway/call-ridge-custom-partial-regressions",
   INDIVIDUAL_PREDICTION_URL: "/ridge-gateway/call-ridge-individual",
+  CUSTOM_INDIVIDUAL_PREDICTION_URL:
+    "/ridge-gateway/call-custom-ridge-individual",
 };
 
 function RidgePage() {

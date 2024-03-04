@@ -56,6 +56,9 @@ function PenaltyModelPage({
   const [response, setResponse] = useState(null);
 
   const [individualPrediction, setIndividualPrediction] = useState(null);
+  const [customIndividualPrediction, setCustomIndividualPrediction] =
+    useState(null);
+  const [dataPointRaw, setDataPointRaw] = useState(null);
 
   const [predictionInputFormSchema, setPredictionInputFormSchema] =
     useState(null);
@@ -156,15 +159,34 @@ function PenaltyModelPage({
     setAlphaVal(data.alpha);
   };
 
+  useEffect(() => {
+    if (alphaVal && dataPointRaw) {
+      handleDataFromPredictionForm(dataPointRaw);
+    }
+  }, [alphaVal, dataPointRaw]);
+
   const handleDataFromPredictionForm = (data) => {
+    setDataPointRaw(data);
     let predictorsFullSorted = buildDataPoint(data, finalPredictorsObject);
+    if (alphaVal) {
+      callIndividualPrediction(
+        file,
+        finalPredictors,
+        response,
+        predictorsFullSorted,
+        alphaVal,
+        setCustomIndividualPrediction,
+        Endpoints.CUSTOM_INDIVIDUAL_PREDICTION_URL
+      );
+    }
     callIndividualPrediction(
       file,
       finalPredictors,
       response,
       predictorsFullSorted,
+      null,
       setIndividualPrediction,
-      Endpoints
+      Endpoints.INDIVIDUAL_PREDICTION_URL
     );
   };
 
@@ -222,7 +244,12 @@ function PenaltyModelPage({
                   onSubmit={handleDataFromPredictionForm}
                   schema={predictionInputFormSchema}
                   individualPrediction={individualPrediction}
+                  customPrediction={customIndividualPrediction}
                   response={response}
+                  titles={{
+                    standard: "Cross Validated Alpha Prediction",
+                    custom: "Custom Alpha Prediction",
+                  }}
                 />
               </div>
             </Col>
