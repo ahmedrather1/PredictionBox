@@ -7,6 +7,7 @@ import KnnPage from "./pages/KnnPage";
 import SlrPage from "./pages/SlrPage";
 import MlrPage from "./pages/MlrPage";
 import RidgePage from "./pages/RidgePage";
+import LassoPage from "./pages/LassoPage";
 
 function App() {
   return (
@@ -17,7 +18,7 @@ function App() {
           <Route path="/knn" element={<KnnPage />} />
           <Route path="/slr" element={<SlrPage />} />
           <Route path="/mlr" element={<MlrPage />} />
-          <Route path="/lasso" element={<ComingSoonPage />} />
+          <Route path="/lasso" element={<LassoPage />} />
           <Route path="/ridge" element={<RidgePage />} />
         </Routes>
       </Router>

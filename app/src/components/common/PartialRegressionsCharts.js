@@ -40,7 +40,7 @@ const PartialRegressionsCharts = ({
             overflow: "auto",
           }}
         >
-          {variant === "RIDGE" && (
+          {(variant === "RIDGE" || variant === "LASSO") && (
             <div style={{ textAlign: "center", padding: "10px 0" }}>
               <OverlayTrigger
                 placement="right"

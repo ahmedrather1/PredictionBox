@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from engineapi.views import root_view
+
 from knn.views import callSampleKnnFull
 from knn.views import callCustomKnnFull
 from knn.views import callSampleKnnIndividual
@@ -34,10 +35,17 @@ from mlr.views import callMlrIndividualPrediction
 from ridge.views import callRidgeCoefficientAnalysis
 from ridge.views import callRidgePartialRegressions
 from ridge.views import callRidgeIndividualPrediction
-
 from ridge.views import callRidgeCustomCoefficientAnalysis
 from ridge.views import callRidgeCustomPartialRegressions
 from ridge.views import callRidgeCustomIndividualPrediction
+
+from lasso.views import callLassoCoefficientAnalysis
+from lasso.views import callLassoPartialRegressions
+from lasso.views import callLassoIndividualPrediction
+from lasso.views import callLassoCustomCoefficientAnalysis
+from lasso.views import callLassoCustomPartialRegressions
+from lasso.views import callLassoCustomIndividualPrediction
+
 
 urlpatterns = [
     path('', root_view),
@@ -58,4 +66,11 @@ urlpatterns = [
     path('call-ridge-custom-coefficient-analysis/', callRidgeCustomCoefficientAnalysis),
     path('call-ridge-custom-partial-regressions/', callRidgeCustomPartialRegressions),
     path('call-custom-ridge-individual/', callRidgeCustomIndividualPrediction),
+    path('call-lasso-coefficient-analysis/', callLassoCoefficientAnalysis),
+    path('call-lasso-partial-regressions/', callLassoPartialRegressions),
+    path('call-lasso-individual/', callLassoIndividualPrediction),
+    path('call-lasso-custom-coefficient-analysis/', callLassoCustomCoefficientAnalysis),
+    path('call-lasso-custom-partial-regressions/', callLassoCustomPartialRegressions),
+    path('call-custom-lasso-individual/', callLassoCustomIndividualPrediction),
+
 ]
