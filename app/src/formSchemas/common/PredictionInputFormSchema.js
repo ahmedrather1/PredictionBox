@@ -4,7 +4,7 @@ export const PredictionInputFormSchema = (customParameters) => {
     title: "Custom Parameter Input",
     oneOf: [
       {
-        title: "Sample Model", // Title for the first option
+        title: "Sample Model",
         properties: {
           predictorSample: {
             type: "integer",
@@ -15,7 +15,7 @@ export const PredictionInputFormSchema = (customParameters) => {
         required: ["predictorSample"],
       },
       {
-        title: "Your Custom Model", // Title for the second option
+        title: "Your Custom Model",
         properties: {
           predictorCustom: {
             type: "integer",
