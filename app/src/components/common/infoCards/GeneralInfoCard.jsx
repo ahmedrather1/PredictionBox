@@ -4,7 +4,7 @@ import { Card } from "react-bootstrap";
 // duplicated component with generalInfoCard, TODO fix this
 const GeneralInfoCard = ({ title, Text }) => {
   return (
-    <Card>
+    <Card className="custom-card-shadow">
       <Card.Body>
         <Card.Title className="text-center">
           <strong> {title}</strong>

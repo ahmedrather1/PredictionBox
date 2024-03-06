@@ -241,15 +241,29 @@ const ChartComponent = ({
             options={{
               title: `${predictor} vs ${response}`,
               titleTextStyle: {
-                color: "black",
+                color: "pink",
                 fontSize: 20,
                 fontName: "Arial",
                 bold: true,
                 italic: false,
               },
+              backgroundColor: "#f8f9fa",
               series: customSeries,
               hAxis: {
                 title: predictor,
+                titleTextStyle: {
+                  color: "#e0440e", // Change vertical axis title color
+                  fontSize: 18, // Optional: change the font size
+                  italic: true, // Optional: make the text italic
+                },
+                textStyle: {
+                  color: "#E91E63", // Sets the color of hAxis labels
+                  fontSize: 12, // Optional: Adjusts the font size
+                  fontName: "Arial", // Optional: Changes the font
+                },
+                baselineColor: "green",
+                // Changes the horizontal axis line color
+                gridlines: { color: "blue" },
               },
               vAxis: {
                 title: response,

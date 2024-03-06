@@ -7,7 +7,7 @@ function Header() {
   return (
     <>
       <Container fluid>
-        <Navbar expand="sm" style={{ backgroundColor: "#f2f2f2" }}>
+        <Navbar expand="sm" className="custom-navbar">
           <Navbar.Brand href="/">
             {" "}
             <img src={sandbox} width={40} height={40} />

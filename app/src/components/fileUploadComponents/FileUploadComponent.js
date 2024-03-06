@@ -64,7 +64,7 @@ const FileUploadComponent = ({
           <Col md={4}>
             <Row>
               <div className="mb-3 mt-3">
-                <Card>
+                <Card className="custom-card-shadow">
                   <Card.Body>
                     <Card.Title className="text-center">
                       Choose Demo Data
@@ -80,7 +80,7 @@ const FileUploadComponent = ({
             </Row>
             <Row>
               <div className="">
-                <Card>
+                <Card className="custom-card-shadow">
                   <Card.Body>
                     <Card.Title className="text-center">
                       Upload Your own File

@@ -2,16 +2,28 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import HomePage from "./pages/HomePage";
-import ComingSoonPage from "./pages/ComingSoonPage";
 import KnnPage from "./pages/KnnPage";
 import SlrPage from "./pages/SlrPage";
 import MlrPage from "./pages/MlrPage";
 import RidgePage from "./pages/RidgePage";
 import LassoPage from "./pages/LassoPage";
 
+import styled from "styled-components";
+
+const Container = styled.div`
+  height: 100vh;
+  background-image: linear-gradient(
+    to bottom,
+    #121212,
+    #222222,
+    #272727,
+    #2e2e2e
+  );
+`;
+
 function App() {
   return (
-    <div className="app-container">
+    <div className="plain-bg">
       <Router>
         <Routes>
           <Route path="/" element={<HomePage />} />

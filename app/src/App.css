@@ -29,25 +29,74 @@
 }
 
 .btn-primary {
-  background-color: #6b9080;
-  border-color: #6b9080;
+  background-color: #a955c2;
+  border-color: #a955c2;
 }
 
 .btn-primary:hover,
 .btn-primary:focus,
 .btn-primary:active {
-  background-color: #3c5248;
-  border-color: #3c5248;
+  background-color: #a955c2;
+  border-color: #a955c2;
 }
 
 .btn-primary:focus:active {
-  background-color: #3c5248;
-  border-color: #3c5248;
+  background-color: #a955c2;
+  border-color: #a955c2;
 }
 
 .btn-outline-primary {
-  color: #6b9080;
-  border-color: #6b9080;
+  color: #a955c2;
+  border-color: #a955c2;
+}
+
+h1 {
+  background: -webkit-linear-gradient(
+    50deg,
+    #a955c2 30%,
+    #8f62c1 50%,
+    #2596be 70%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 8rem;
+}
+
+.card,
+.card * {
+  color: #ffffff;
+  background-color: #343434;
+}
+
+.custom-card-shadow {
+  border: 1px solid #a955c2;
+}
+.custom-navbar,
+.custom-navbar .navbar-brand,
+.custom-navbar .navbar-nav .nav-link {
+  color: #ffffff;
+}
+
+.plain-bg {
+  background-image: linear-gradient(rgb(34, 34, 34), rgb(34, 34, 34));
+}
+
+.purple-text {
+  color: #a955c2; /* Purple */
+}
+
+.scroll-container {
+  scroll-snap-type: y proximity;
+  overflow-y: scroll;
+  height: 100vh;
+}
+
+.snap-row {
+  scroll-snap-align: start;
+}
+
+.title-mt {
+  margin-top: 9rem; /* or any value that suits your design */
 }
 
 .btn-outline-primary:hover,
@@ -77,5 +126,18 @@ html {
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+/* Adjust text size for smaller screens */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 4rem; /* Adjust as needed */
+  }
+}
+
+@media (max-width: 576px) {
+  h1 {
+    font-size: 3rem; /* Adjust as needed */
   }
 }
