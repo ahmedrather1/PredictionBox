@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Container, Row, Col, Card } from "react-bootstrap";
+import { Container, Row, Col, Button } from "react-bootstrap";
 import ChartComponent from "../../chartComponents/ChartComponent";
 import { PredictionInputFormSchema } from "../../../formSchemas/common/PredictionInputFormSchema";
 import CustomParameterCard from "../../common/CustomParameterCard";
@@ -216,6 +216,22 @@ function ModelPage({
   return (
     <div>
       <Header />
+      <Row
+        className="justify-content-md-center text-center mb-4 mt-0"
+        style={{ flex: "0 1 auto" }}
+      >
+        <Col
+          xs={12}
+          style={{ height: "5vh", backgroundColor: "#a4c3b2" }}
+          className="d-flex justify-content-center align-items-center mt-0"
+        >
+          <div className="d-flex flex-column align-items-center">
+            <h3>
+              <strong>KNN</strong>
+            </h3>
+          </div>
+        </Col>
+      </Row>
       <>{renderContent()}</>
     </div>
   );
