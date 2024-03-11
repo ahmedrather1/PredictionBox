@@ -58,6 +58,12 @@ const PartialRegressionsCharts = ({
                     }
                     onClick={handleToggleCustomModel}
                     disabled={alphaVal === null}
+                    style={{ 
+                      margin: "10px", 
+                      backgroundColor: showCustomModel ? "#2596be" : "transparent", 
+                      borderColor: "#2596be",
+                      color: showCustomModel ? "black" : "#2596be",  
+                   }}
                   >
                     {showCustomModel
                       ? "Hide Custom Model"
@@ -84,6 +90,7 @@ const PartialRegressionsCharts = ({
                   predictorsAccountedFor={predictorsAccountedFor}
                   predictor={key}
                   modelType={modelType}
+                  showCustomModel={showCustomModel}
                 />
               );
             })}

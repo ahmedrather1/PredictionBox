@@ -105,7 +105,12 @@ const CustomForestPlotChart = ({
               checked={showCustomCoefs}
               disabled={false}
               onChange={(e) => setShowCustomCoefs(e.currentTarget.checked)}
-              style={{ margin: "10px" }}
+              style={{ 
+                margin: "10px", 
+                backgroundColor: showCustomCoefs ? "#2596be" : "transparent", 
+                borderColor: "#2596be",
+                color: showCustomCoefs ? "black" : "#2596be",  
+             }}
             >
               {showCustomCoefs
                 ? "Hide Custom Analysis"

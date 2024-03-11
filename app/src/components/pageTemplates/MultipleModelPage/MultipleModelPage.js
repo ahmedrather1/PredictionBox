@@ -169,7 +169,12 @@ function MultipleModelPage({
       );
     } else if (coefAnalysis) {
       return (
-        <Container fluid>
+        <Container fluid    
+        style={{
+          height: "100vh",
+          display: "flex",
+          flexDirection: "column",
+        }}>
           <Row>
             <Col sm={8} className="mt-3">
               <ForestPlotChart coefInfo={coefAnalysis} />

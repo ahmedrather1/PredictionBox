@@ -8,6 +8,7 @@ const PartialRegressionsChartComponent = ({
   predictorsAccountedFor,
   predictor,
   modelType,
+  showCustomModel
 }) => {
   const [combinedData, setCombinedData] = useState(null);
   const [customSeries, setCustomSeries] = useState(null);
@@ -54,7 +55,7 @@ const PartialRegressionsChartComponent = ({
       type: "line",
       options: {
         lineWidth: 2,
-        color: "#2596be",
+        color: showCustomModel? "#2596be": "#a955c2",
       },
     },
   };
@@ -146,7 +147,7 @@ const PartialRegressionsChartComponent = ({
           title: `${title}`,
           titleTextStyle: {
             color: "#2596be",
-            fontSize: title.length > 100 ? 20 : 30,
+            fontSize: title.length > 90 ? 20 : 15,
             fontName: "Arial",
             bold: true,
             italic: false,
