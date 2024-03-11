@@ -164,11 +164,14 @@ const ChartComponent = ({
           <ToggleButton
             id="toggle-scatter"
             type="checkbox"
-            variant="outline-primary"
             checked={showScatterPlot}
             onChange={(e) => setShowScatterPlot(e.currentTarget.checked)}
-            style={{ margin: "10px" }}
-          >
+            style={{ 
+              margin: "10px", 
+              backgroundColor: showScatterPlot ? "white" : "transparent", 
+              borderColor: "white",
+              color: showScatterPlot ? "black" : "white", 
+            }}          >
             {showScatterPlot ? "Hide Original Data" : "Show Original Data"}
           </ToggleButton>
           <ToggleButton
@@ -177,7 +180,12 @@ const ChartComponent = ({
             variant="outline-danger"
             checked={showSamplePrediction}
             onChange={(e) => setShowSamplePrediction(e.currentTarget.checked)}
-            style={{ margin: "10px" }}
+            style={{ 
+              margin: "10px", 
+              backgroundColor: showSamplePrediction ? "#2596be" : "transparent", 
+              borderColor: "#2596be",
+              color: showSamplePrediction ? "black" : "#2596be",  
+            }}
           >
             {showSamplePrediction
               ? "Hide Sample Prediction"
@@ -192,7 +200,12 @@ const ChartComponent = ({
               checked={showCustomPrediction}
               disabled={false}
               onChange={(e) => setShowCustomPrediction(e.currentTarget.checked)}
-              style={{ margin: "10px" }}
+              style={{ 
+                margin: "10px", 
+                backgroundColor: showCustomPrediction ? "#a955c2" : "transparent", 
+                borderColor: "#a955c2",
+                color: showCustomPrediction ? "black" : "#a955c2",  
+             }}
             >
               {showCustomPrediction
                 ? "Hide Custom Prediction"
@@ -221,7 +234,11 @@ const ChartComponent = ({
                   onChange={(e) =>
                     setShowCustomPrediction(e.currentTarget.checked)
                   }
-                  style={{ margin: "10px" }}
+                  style={{               
+                    margin: "10px", 
+                    backgroundColor: showCustomPrediction ? "#a955c2" : "transparent", 
+                    borderColor: "#a955c2",
+                    color: showCustomPrediction ? "black" : "#a955c2",   }}
                 >
                   {showCustomPrediction
                     ? "Hide Custom Prediction"
