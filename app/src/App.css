@@ -62,15 +62,17 @@ h1 {
   font-size: 8rem;
 }
 
-.card,
-.card * {
-  color: #ffffff;
-  background-color: #343434;
+.card {
+  background-color: #343434; /* dark grey background */
+  color:#fff
 }
 
-.custom-card-shadow {
-  border: 1px solid #a955c2;
+
+.card .MuiInputBase-root::before {
+  border-bottom: 1px solid #fff;
 }
+
+
 .custom-navbar,
 .custom-navbar .navbar-brand,
 .custom-navbar .navbar-nav .nav-link {
