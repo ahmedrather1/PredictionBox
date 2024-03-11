@@ -59,14 +59,14 @@ const MultipleModelFileUploadComponent = ({
     }}>
       <Row>
         <Col md={8}>
-          <div className="mb-3 mt-3">
+        <div className="mb-3 mt-3 animate__animated animate__fadeInLeft">
             <ChooseDataCard />
           </div>
         </Col>
         {!columns && (
           <Col md={4}>
             <Row>
-              <div className="mb-3 mt-3">
+            <div className={"mb-3 mt-3 animate__animated animate__fadeInRight"} >
                 <Card>
                   <Card.Body>
                     <Card.Title className="text-center">
@@ -82,7 +82,7 @@ const MultipleModelFileUploadComponent = ({
               </div>
             </Row>
             <Row>
-              <div className="">
+            <div className="animate__animated animate__fadeInRight">
                 <Card>
                   <Card.Body>
                     <Card.Title className="text-center">
@@ -116,7 +116,7 @@ const MultipleModelFileUploadComponent = ({
         )}
         {columns && (
           <Col md={4}>
-            <div className="mb-3 mt-3">
+            <div className="mb-3 mt-3 animate__animated animate__fadeInRight">
               <Card>
                 <Card.Body>
                   <Card.Title>Choose Your Response (Y Variable)</Card.Title>
@@ -131,7 +131,7 @@ const MultipleModelFileUploadComponent = ({
         )}
       </Row>
       <div className="mb-3">
-        <Row className="mt-3">
+      <Row className="mt-3 animate__animated animate__fadeInUp">
           <GeneralInfoCard />
         </Row>
       </div>

@@ -196,7 +196,7 @@ function PenaltyModelPage({
       return (
         <Container fluid>
           <Row>
-            <Col sm={8} className="mt-3">
+            <Col sm={8} className="mt-4 animate__animated animate__fadeInLeft">
               {!showCustomModel && (
                 <PartialRegressionsCharts
                   partialRegressions={partialRegressions}
@@ -229,11 +229,11 @@ function PenaltyModelPage({
                 itemsPerPage={chartsPerPage}
                 onPageChange={setCurrentPage}
               />
-              <div className="mt-3">
+              <div className="mt-3 animate__animated animate__fadeInUp">
                 <FinalPlotsInfoCard />
               </div>
             </Col>
-            <Col>
+            <Col className="mt-3 animate__animated animate__fadeInRight">
               <div className="mt-3">
                 <ChooseAlphaCard
                   onSubmit={handleDataFromAlphaSelectorForm}
@@ -262,7 +262,7 @@ function PenaltyModelPage({
         <Container fluid>
           <Row>
             <Col sm={8} className="mt-2">
-              <div className="mt-3">
+              <div className="mt-3 animate__animated animate__fadeInLeft">
                 <CustomForestPlotChart
                   coefs={coefs}
                   customcoefs={customCoefs}
@@ -270,22 +270,24 @@ function PenaltyModelPage({
                   setShowCustomCoefs={setShowCustomCoefs}
                 />
               </div>
-              <div className="mt-3 mb-2">
+              <div className="mt-3 mb-2  animate__animated animate__fadeInUp">
                 <PredictorSelectionInfoCard />
               </div>
             </Col>
             <Col sm={4} className="mt-2">
-              <div className="mb-3 mt-3">
+              <div className="mb-3 mt-3  animate__animated animate__fadeInRight">
                 <ChoosePredictorsCard
                   onSubmit={handleDataFromPredictorsSelectorForm}
                   schema={ChoosePredictorsFormSchema(initialPredictors)}
                 />
               </div>
+              <div className="animate__animated animate__fadeInRight">
               <ChooseAlphaCard
                 onSubmit={handleDataFromAlphaSelectorForm}
                 schema={AlphaSelectorInputFormSchema()}
               />
-              <div className="mt-3">
+              </div>
+              <div className="mt-3 animate__animated animate__fadeInUp">
                 <AboutAlphaCard />
               </div>
             </Col>

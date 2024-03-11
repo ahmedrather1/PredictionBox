@@ -32,7 +32,6 @@ const FileUploadComponent = ({
   };
 
   const handleSubmitDemoData = async (data) => {
-    console.log(data);
     if (data.Dataset) {
       let datasetName = data.Dataset;
       console.log(datasetName);
@@ -62,17 +61,17 @@ const FileUploadComponent = ({
     }}>
       <Row>
         <Col md={8}>
-          <div className="mb-3 mt-3">
+          <div className="mb-3 mt-3 animate__animated animate__fadeInLeft">
             <ChooseDataCard />
           </div>
         </Col>
         {!columns && (
-          <Col md={4}>
+          <Col md={4} >
             <Row>
-              <div className="mb-3 mt-3">
+            <div className={"mb-3 mt-3 animate__animated animate__fadeInRight"} >
                 <Card className="custom-card-shadow">
                   <Card.Body>
-                    <Card.Title className="text-center">
+                    <Card.Title className="text-center ">
                       Choose Demo Data
                     </Card.Title>
 
@@ -85,7 +84,7 @@ const FileUploadComponent = ({
               </div>
             </Row>
             <Row>
-              <div className="">
+              <div className="animate__animated animate__fadeInRight">
                 <Card className="custom-card-shadow">
                   <Card.Body>
                     <Card.Title className="text-center">
@@ -119,7 +118,7 @@ const FileUploadComponent = ({
         )}
         {columns && (
           <Col md={4}>
-            <div className="mb-3 mt-3">
+            <div className="mb-3 mt-3 animate__animated animate__fadeInRight">
               <Card>
                 <Card.Body>
                   <Card.Title>
@@ -136,7 +135,7 @@ const FileUploadComponent = ({
         )}
       </Row>
       <div className="mb-3">
-        <Row className="mt-3">
+        <Row className="mt-3 animate__animated animate__fadeInUp">
           <GeneralInfoCard />
         </Row>
       </div>

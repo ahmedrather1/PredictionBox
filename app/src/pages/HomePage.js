@@ -5,6 +5,7 @@ import Header from "../components/common/Header";
 import linegraph from "../images/linegraph.png";
 import gears from "../images/gears.png";
 import laptop from "../images/laptop.png";
+import 'animate.css';
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -30,7 +31,7 @@ const HomePage = () => {
           style={{ flex: "0 1 auto" }}
         >
           <div className="d-flex flex-column align-items-center">
-            <h1>
+            <h1 className="animate__animated animate__bounce">
               <strong>PredictionBox</strong>
             </h1>
             <p class="purple-text">
