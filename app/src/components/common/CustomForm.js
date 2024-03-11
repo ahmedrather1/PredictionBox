@@ -11,8 +11,6 @@ const CustomForm = ({ schema, onSubmit }) => {
     onSubmit(data);
   };
 
- 
-
   return (
       <div className="form-container">
         <form onSubmit={handleSubmit}>
@@ -22,7 +20,6 @@ const CustomForm = ({ schema, onSubmit }) => {
             renderers={materialRenderers}
             cells={materialCells}
             onChange={({ data }) => setData(data)}
-            // validationMode={data? "ValidateAndHide"}
           />
           <Button type="submit" variant="outlined" className="mt-2 ">
             Submit
