@@ -67,6 +67,9 @@ h1 {
   color:#fff
 }
 
+.google-visualization-tooltip {
+  background-color: #383838 !important; /* Tooltip background color */
+}
 
 .card .MuiInputBase-root::before {
   border-bottom: 1px solid #fff;

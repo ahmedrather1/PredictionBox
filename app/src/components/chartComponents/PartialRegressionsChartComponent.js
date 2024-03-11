@@ -47,14 +47,14 @@ const PartialRegressionsChartComponent = ({
       type: "scatter",
       options: {
         pointSize: 1,
-        color: "blue",
+        color: "white",
       },
     },
     samplePrediction: {
       type: "line",
       options: {
         lineWidth: 2,
-        color: "red",
+        color: "#2596be",
       },
     },
   };
@@ -145,18 +145,47 @@ const PartialRegressionsChartComponent = ({
         options={{
           title: `${title}`,
           titleTextStyle: {
-            color: "black",
-            fontSize: 12,
+            color: "#2596be",
+            fontSize: title.length > 100 ? 20 : 30,
             fontName: "Arial",
             bold: true,
             italic: false,
           },
+          backgroundColor: "#343434",
           series: customSeries,
           hAxis: {
             title: xTitle,
+            titleTextStyle: {
+              color: "#2596be",
+              fontSize: 18, 
+              italic: true,
+            },
+            textStyle: {
+              color: "#a955c2", 
+              fontSize: 12, 
+              fontName: "Arial", 
+            },
+            baselineColor: "transparent",
+            gridlines: { color: "#484848" },
           },
           vAxis: {
             title: yTitle,
+            titleTextStyle: {
+              color: "#2596be", 
+              fontSize: 18, 
+              italic: true, 
+            },
+            textStyle: {
+              color: "#a955c2", 
+              fontSize: 12, 
+              fontName: "Arial", 
+            },
+            gridlines: { color: "#484848" },
+          },
+          legend: {
+            textStyle: {
+              color: 'fff', // Here you change the legend text color
+            }
           },
           interpolateNulls: true,
         }}

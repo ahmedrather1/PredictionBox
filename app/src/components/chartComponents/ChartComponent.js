@@ -64,7 +64,7 @@ const ChartComponent = ({
       type: "scatter",
       options: {
         pointSize: 1,
-        color: "blue",
+        color: "white",
         visibleInLegend: showScatterPlot,
       },
     },
@@ -72,7 +72,7 @@ const ChartComponent = ({
       type: "line",
       options: {
         lineWidth: 2,
-        color: "red",
+        color: "#2596be",
         visibleInLegend: showSamplePrediction,
       },
     },
@@ -80,7 +80,7 @@ const ChartComponent = ({
       type: "line",
       options: {
         lineWidth: 2,
-        color: "green",
+        color: "#a955c2",
         visibleInLegend: showCustomPrediction,
       },
     },
@@ -241,33 +241,54 @@ const ChartComponent = ({
             options={{
               title: `${predictor} vs ${response}`,
               titleTextStyle: {
-                color: "pink",
-                fontSize: 20,
+                color: "#2596be",
+                fontSize: 30,
                 fontName: "Arial",
                 bold: true,
                 italic: false,
               },
-              backgroundColor: "#f8f9fa",
+              backgroundColor: "#343434",
               series: customSeries,
               hAxis: {
                 title: predictor,
                 titleTextStyle: {
-                  color: "#e0440e", // Change vertical axis title color
-                  fontSize: 18, // Optional: change the font size
-                  italic: true, // Optional: make the text italic
+                  color: "#2596be",
+                  fontSize: 18, 
+                  italic: true,
                 },
                 textStyle: {
-                  color: "#E91E63", // Sets the color of hAxis labels
-                  fontSize: 12, // Optional: Adjusts the font size
-                  fontName: "Arial", // Optional: Changes the font
+                  color: "#a955c2", 
+                  fontSize: 12, 
+                  fontName: "Arial", 
                 },
-                baselineColor: "green",
-                // Changes the horizontal axis line color
-                gridlines: { color: "blue" },
+                baselineColor: "transparent",
+                gridlines: { color: "#484848" },
               },
               vAxis: {
                 title: response,
+                titleTextStyle: {
+                  color: "#2596be", 
+                  fontSize: 18, 
+                  italic: true, 
+                },
+                textStyle: {
+                  color: "#a955c2", 
+                  fontSize: 12, 
+                  fontName: "Arial", 
+                },
+                gridlines: { color: "#484848" },
               },
+              legend: {
+                textStyle: {
+                  color: 'fff', // Here you change the legend text color
+                }
+              },
+              // TODO customize this later
+              // tooltip: { textStyle: {
+              //   color: 'white', 
+              //   fontName: 'Arial',
+              //   fontSize: 10,
+              // },isHtml: true },
               interpolateNulls: true,
             }}
           />
