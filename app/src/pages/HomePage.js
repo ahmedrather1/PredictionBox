@@ -23,7 +23,7 @@ const HomePage = () => {
           display: "flex",
           flexDirection: "column",
         }}
-        className=" scroll-container mt-0 pt-0"
+        className=" mt-0 pt-0"
       >
         <Row
           className="justify-content-md-center text-center mb-4 title-mt"

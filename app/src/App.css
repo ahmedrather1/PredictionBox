@@ -90,11 +90,6 @@ h1 {
   color: #a955c2; /* Purple */
 }
 
-.scroll-container {
-  scroll-snap-type: y proximity;
-  overflow-y: scroll;
-  height: 100vh;
-}
 
 .snap-row {
   scroll-snap-align: start;

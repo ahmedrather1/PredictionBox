@@ -80,6 +80,20 @@ const CustomForm = ({ schema, onSubmit }) => {
           },
         },
       },
+      MuiAutocomplete: {
+        styleOverrides: {
+          paper: {
+            backgroundColor: '#555555', 
+          },
+          listbox: {
+            backgroundColor: '#555555', 
+          },
+          option: {
+            color: 'white', 
+
+          },
+        },
+      },
     },
   });
   

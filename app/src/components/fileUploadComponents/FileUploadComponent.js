@@ -53,7 +53,12 @@ const FileUploadComponent = ({
   };
 
   return (
-    <Container>
+    <Container
+    style={{
+      height: "100vh",
+      display: "flex",
+      flexDirection: "column",
+    }}>
       <Row>
         <Col md={8}>
           <div className="mb-3 mt-3">
