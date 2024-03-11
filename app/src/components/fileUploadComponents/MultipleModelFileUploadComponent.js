@@ -84,7 +84,7 @@ const MultipleModelFileUploadComponent = ({
                 <Card>
                   <Card.Body>
                     <Card.Title className="text-center">
-                      Upload Your own File
+                      Upload Your Own File
                     </Card.Title>
                     <Container>
                       <Row>

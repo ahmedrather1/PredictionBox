@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Container, Row, Col, Card, Button } from "react-bootstrap";
+import { Container, Row, Col, Card } from "react-bootstrap";
+import Button from '@mui/material/Button';
 import CustomForm from "../common/CustomForm";
 import { DemoDataSelectorSchema } from "../../formSchemas/common/DemoDataSelectorSchema";
 import { PredictorResponseSelectorSchema } from "../../formSchemas/common/PredictorResponseSelectorSchema";
@@ -88,7 +89,7 @@ const FileUploadComponent = ({
                 <Card className="custom-card-shadow">
                   <Card.Body>
                     <Card.Title className="text-center">
-                      Upload Your own File
+                      Upload Your Own File
                     </Card.Title>
                     <Container>
                       <Row>
@@ -103,6 +104,7 @@ const FileUploadComponent = ({
                           <Button
                             type="submit"
                             onClick={handleSubmitUploadedFile}
+                            variant="outlined"
                           >
                             Submit
                           </Button>

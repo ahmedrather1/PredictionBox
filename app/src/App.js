@@ -7,22 +7,13 @@ import SlrPage from "./pages/SlrPage";
 import MlrPage from "./pages/MlrPage";
 import RidgePage from "./pages/RidgePage";
 import LassoPage from "./pages/LassoPage";
-
-import styled from "styled-components";
-
-const Container = styled.div`
-  height: 100vh;
-  background-image: linear-gradient(
-    to bottom,
-    #121212,
-    #222222,
-    #272727,
-    #2e2e2e
-  );
-`;
+import { ThemeProvider } from '@mui/material/styles';
+import { customTheme } from "./CustomMUITheme";
 
 function App() {
   return (
+    <ThemeProvider theme={customTheme}>
+
     <div className="plain-bg">
       <Router>
         <Routes>
@@ -35,6 +26,8 @@ function App() {
         </Routes>
       </Router>
     </div>
+    </ThemeProvider>
+
   );
 }
 
