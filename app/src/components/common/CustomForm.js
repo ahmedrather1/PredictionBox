@@ -34,6 +34,7 @@ const CustomForm = ({ schema, onSubmit }) => {
             '&::before': {
               borderBottom: '1px solid #fff', 
             },
+            marginTop:'16px',
           },
         },
       },
@@ -68,7 +69,14 @@ const CustomForm = ({ schema, onSubmit }) => {
             '&.Mui-selected': {
               color: '#2596be',
             },
-            marginBottom: '8px'
+            paddingBottom: '20px'
+          },
+        },
+      },
+      MuiFormControl: {
+        styleOverrides: {
+          root: {
+            marginTop: '10px', // Adjust this value as needed to add space at the top
           },
         },
       },
