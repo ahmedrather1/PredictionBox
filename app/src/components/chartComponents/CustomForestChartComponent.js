@@ -122,8 +122,8 @@ const CustomForestPlotChart = ({
               trigger="hover"
               overlay={
                 <Popover id={`popover-positioned-right`}>
-                  <Popover.Header as="h3">{`Set a custom alpha value first!`}</Popover.Header>
-                  <Popover.Body>
+                  <Popover.Header as="h3" style={{ backgroundColor: '#404040', color: '#fff' }}>{`Set a custom alpha value first!`}</Popover.Header>
+                  <Popover.Body style={{ backgroundColor: '#555555', color: '#fff' }}>
                     Use the <strong>Choose your Alpha Value</strong> section
                   </Popover.Body>
                 </Popover>
@@ -137,7 +137,12 @@ const CustomForestPlotChart = ({
                   checked={showCustomCoefs}
                   disabled={true}
                   onChange={(e) => setShowCustomCoefs(e.currentTarget.checked)}
-                  style={{ margin: "10px" }}
+                  style={{ 
+                    margin: "10px", 
+                    backgroundColor: showCustomCoefs ? "#2596be" : "transparent", 
+                    borderColor: "#2596be",
+                    color: showCustomCoefs ? "black" : "#2596be",  
+                 }}
                 >
                   {showCustomCoefs
                     ? "Hide Custom Analysis"

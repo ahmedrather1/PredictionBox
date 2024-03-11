@@ -217,8 +217,8 @@ const ChartComponent = ({
               trigger="hover"
               overlay={
                 <Popover id={`popover-positioned-right`}>
-                  <Popover.Header as="h3">{`Set some custom parameters first!`}</Popover.Header>
-                  <Popover.Body>
+                  <Popover.Header as="h3" style={{ backgroundColor: '#404040', color: '#fff' }}>{`Set some custom parameters first!`}</Popover.Header>
+                  <Popover.Body style={{ backgroundColor: '#555555', color: '#fff' }}>
                     Use the <strong>Set Custom Parameters</strong> section
                   </Popover.Body>
                 </Popover>

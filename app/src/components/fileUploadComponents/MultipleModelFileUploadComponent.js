@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Container, Row, Col, Card, Button } from "react-bootstrap";
+import { Container, Row, Col, Card } from "react-bootstrap";
+import Button from '@mui/material/Button';
+
 import CustomForm from "../common/CustomForm";
 import { DemoDataSelectorSchema } from "../../formSchemas/common/DemoDataSelectorSchema";
 import { ResponseSelectorSchema } from "../../formSchemas/common/ResponseSelectorSchema";
@@ -99,6 +101,7 @@ const MultipleModelFileUploadComponent = ({
                           <Button
                             type="submit"
                             onClick={handleSubmitUploadedFile}
+                            variant="outlined"
                           >
                             Submit
                           </Button>

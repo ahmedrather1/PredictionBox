@@ -23,7 +23,7 @@ const MultipleParameterIndividualPredictionCard = ({
               <div className="d-flex justify-content-center my-3">
                 <Card className="mt-2">
                   <Card.Body>
-                    <Card.Title style={{ fontSize: "12px" }}>
+                    <Card.Title style={{ fontSize: "12px", color:"#2596be" }}>
                       {titles.standard}
                     </Card.Title>
                     {response + " = "}
@@ -36,7 +36,7 @@ const MultipleParameterIndividualPredictionCard = ({
               <div className="d-flex justify-content-center">
                 <Card>
                   <Card.Body>
-                    <Card.Title style={{ fontSize: "12px" }}>
+                    <Card.Title style={{ fontSize: "12px" , color:"#a955c2"}}>
                       {titles.custom}
                     </Card.Title>
                     {response + " = "}
