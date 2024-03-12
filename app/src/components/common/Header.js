@@ -15,14 +15,14 @@ function Header() {
   return (
     <>
       <Container fluid>
-        <Navbar expand="sm" className="custom-navbar">
+        <Navbar expand="sm" className="custom-navbar" variant="dark">
           <Navbar.Brand href="/">
             {" "}
             <img src={sandbox} width={40} height={40} />
           </Navbar.Brand>
           <Navbar.Brand href="/" className="gradienttitle">PredictionBox</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
+          <Navbar.Collapse id="basic-navbar-nav" style={{color: "#fff"}}>
             <Nav className="me-auto">
             <Nav.Link href="knn" style={getNavLinkClass("/knn")}>KNN</Nav.Link>
             <Nav.Link href="slr" style={getNavLinkClass("/slr")}>SLR</Nav.Link>
