@@ -1,9 +1,8 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { EdgesGeometry, LineBasicMaterial, LineSegments } from 'three';
 import { Text } from '@react-three/drei';
 
-const RotatingCube = () => {
+export const RotatingCube = () => {
     const meshRef = useRef();
     const [rotationSteps, setRotationSteps] = useState([
       { axis: 'y', angle: Math.PI / 2 }, // 90 degrees about Y
@@ -51,47 +50,43 @@ const RotatingCube = () => {
     <group ref={meshRef}>
       <mesh ref={meshRef}>
         <boxGeometry args={[3, 3, 3]} />
-        <meshStandardMaterial color="#909090" />
+        <meshStandardMaterial color="#fff" />
       </mesh>
       {/* Adjusted positions and rotations for the text on each side of the cube */}
-      <Text position={[0, 0, 1.01]} rotation={[0, 0, 0]} fontSize={0.25} color="black" anchorX="center" anchorY="middle">
-        Front
+      <Text position={[0, 0, 1.51]} rotation={[0, 0, 0]} fontSize={0.4} color="#2596be" anchorX="center" anchorY="middle">
+        PredictionBox
       </Text>
-      <Text position={[0, -0.5, 1.01]} rotation={[0, 0, 0]} fontSize={0.1} color="black" anchorX="center" anchorY="middle">
+      <Text position={[0, 0, -1.51]} rotation={[0, Math.PI, 0]} fontSize={0.5} color="#2596be" anchorX="center" anchorY="middle">
+        KNN
+      </Text>
+      <Text position={[0, -0.5, -1.51]} rotation={[0, Math.PI, 0]} fontSize={0.15} color="#a955c2" anchorX="center" anchorY="middle">
         See More
       </Text>
-      <Text position={[0, 0, -1.01]} rotation={[0, Math.PI, 0]} fontSize={0.25} color="black" anchorX="center" anchorY="middle">
-        Back
+      <Text position={[1.51, 0, 0]} rotation={[0, Math.PI / 2, 0]} fontSize={0.5} color="#2596be" anchorX="center" anchorY="middle">
+        SLR
       </Text>
-      <Text position={[0, -0.5, -1.01]} rotation={[0, Math.PI, 0]} fontSize={0.1} color="black" anchorX="center" anchorY="middle">
+      <Text position={[1.51, -0.5, 0]} rotation={[0, Math.PI / 2, 0]} fontSize={0.15} color="#a955c2" anchorX="center" anchorY="middle">
         See More
       </Text>
-      <Text position={[1.01, 0, 0]} rotation={[0, Math.PI / 2, 0]} fontSize={0.25} color="black" anchorX="center" anchorY="middle">
-        Right
+      <Text position={[-1.51, 0, 0]} rotation={[0, -Math.PI / 2, 0]} fontSize={0.5} color="#2596be" anchorX="center" anchorY="middle">
+        MLR
       </Text>
-      <Text position={[1.01, -0.5, 0]} rotation={[0, Math.PI / 2, 0]} fontSize={0.1} color="black" anchorX="center" anchorY="middle">
-        See More
-      </Text>
-      <Text position={[-1.01, 0, 0]} rotation={[0, -Math.PI / 2, 0]} fontSize={0.25} color="black" anchorX="center" anchorY="middle">
-        Left
-      </Text>
-      <Text position={[-1.01, -0.5, 0]} rotation={[0, -Math.PI/2, 0]} fontSize={0.1} color="black" anchorX="center" anchorY="middle">
+      <Text position={[-1.51, -0.5, 0]} rotation={[0, -Math.PI/2, 0]} fontSize={0.15} color="#a955c2" anchorX="center" anchorY="middle">
         See More
       </Text>  
-      <Text position={[0, 1.01, 0]} rotation={[-Math.PI / 2, 0, Math.PI / 2]} fontSize={0.25} color="black" anchorX="center" anchorY="middle">
-        Top
+      <Text position={[0, 1.51, 0]} rotation={[-Math.PI / 2, 0, Math.PI / 2]} fontSize={0.5} color="#2596be" anchorX="center" anchorY="middle">
+        RIDGE
       </Text>
-      <Text position={[0.5, 1.01, 0]} rotation={[-Math.PI / 2, 0, Math.PI / 2]} fontSize={0.1} color="black" anchorX="center" anchorY="middle">
+      <Text position={[0.5, 1.51, 0]} rotation={[-Math.PI / 2, 0, Math.PI / 2]} fontSize={0.15} color="#a955c2" anchorX="center" anchorY="middle">
         See More
       </Text>     
-      <Text position={[0, -1.01, 0]} rotation={[Math.PI / 2, 0, -Math.PI / 2]} fontSize={0.25} color="black" anchorX="center" anchorY="middle">
-        Bottom
+      <Text position={[0, -1.51, 0]} rotation={[Math.PI / 2, 0, -Math.PI / 2]} fontSize={0.5} color="#2596be" anchorX="center" anchorY="middle">
+        LASSO
       </Text>
-      <Text position={[-0.5, -1.01, 0]} rotation={[Math.PI / 2, 0, -Math.PI / 2]} fontSize={0.1} color="black" anchorX="center" anchorY="middle">
+      <Text position={[-0.5, -1.51, 0]} rotation={[Math.PI / 2, 0, -Math.PI / 2]} fontSize={0.15} color="#a955c2" anchorX="center" anchorY="middle">
         See More
       </Text>
     </group>
   );
 };
 
-export default RotatingCube;
