@@ -50,6 +50,11 @@
   border-color: #a955c2;
 }
 
+body {
+  background : #A0C5E8
+}
+
+
 h1 {
   background: -webkit-linear-gradient(
     50deg,
@@ -74,12 +79,12 @@ h1 {
 }
 
 .card {
-  background-color: #343434; /* dark grey background */
+  background-color: #343434; 
   color:#fff
 }
 
 .google-visualization-tooltip {
-  background-color: #383838 !important; /* Tooltip background color */
+  background-color: #383838 !important;
 }
 
 .card .MuiInputBase-root::before {
@@ -98,7 +103,7 @@ h1 {
 }
 
 .purple-text {
-  color: #a955c2; /* Purple */
+  color: #a955c2;
 }
 
 
@@ -107,7 +112,7 @@ h1 {
 }
 
 .title-mt {
-  margin-top: 9rem; /* or any value that suits your design */
+  margin-top: 9rem; 
 }
 
 .btn-outline-primary:hover,
@@ -118,14 +123,14 @@ h1 {
 }
 
 .app-container {
-  background-color: #f2f2f2; /* Your desired color */
-  min-height: 100vh; /* 100% of the viewport height */
+  background-color: #f2f2f2; 
+  min-height: 100vh; 
   margin: 0;
   padding: 0;
 }
 
 html {
-  background-color: #f2f2f2; /* Replace #yourColor with your actual color hex code */
+  background-color: rgb(34, 34, 34); 
   height: 100%;
   margin: 0;
   padding: 0;
@@ -140,15 +145,14 @@ html {
   }
 }
 
-/* Adjust text size for smaller screens */
 @media (max-width: 768px) {
   h1 {
-    font-size: 4rem; /* Adjust as needed */
+    font-size: 4rem;
   }
 }
 
 @media (max-width: 576px) {
   h1 {
-    font-size: 3rem; /* Adjust as needed */
+    font-size: 3rem; 
   }
 }

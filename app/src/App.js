@@ -13,7 +13,6 @@ import { customTheme } from "./CustomMUITheme";
 function App() {
   return (
     <ThemeProvider theme={customTheme}>
-
     <div className="plain-bg">
       <Router>
         <Routes>

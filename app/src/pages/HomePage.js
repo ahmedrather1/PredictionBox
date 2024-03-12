@@ -24,22 +24,24 @@ const HomePage = () => {
           display: "flex",
           flexDirection: "column",
         }}
-        className=" mt-0 pt-0"
+        className=" mt-5 pt-0"
       >
         <Row
           className="justify-content-md-center text-center mb-4 title-mt"
           style={{ flex: "0 1 auto" }}
         >
           <div className="d-flex flex-column align-items-center">
-            <h1 className="animate__animated animate__bounce">
+            <h1 className="animate__animated animate__fadeInDown">
               <strong>PredictionBox</strong>
             </h1>
+            <div className="animate__animated animate__fadeInUp">
             <p class="purple-text">
               A Beginner-Friendly Machine Learning Sandbox
             </p>
             <Button variant="primary" onClick={redirectToKnnPage}>
               Try the K-Nearest-Neighbors Model
             </Button>
+          </div>
           </div>
         </Row>
         {/* <Row className="snap-row">
