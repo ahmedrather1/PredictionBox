@@ -21,7 +21,7 @@ const IndividualPredictionCard = ({
               {sampleIndividualPrediction && (
                 <Card className="mt-2">
                   <Card.Body>
-                    <Card.Title style={{ fontSize: "12px" }}>
+                    <Card.Title style={{ fontSize: "12px", color:"#2596be"}}>
                       Sample Model Prediction
                     </Card.Title>
                     <Row>
@@ -41,7 +41,7 @@ const IndividualPredictionCard = ({
                 <Card className="mt-2">
                   <div style={{ justifyContent: "center" }}>
                     <Card.Body>
-                      <Card.Title style={{ fontSize: "12px" }}>
+                      <Card.Title style={{ fontSize: "12px", color:"#a955c2" }}>
                         Custom Model Prediction
                       </Card.Title>
                       <Card.Text>

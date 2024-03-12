@@ -130,8 +130,9 @@ function MultipleModelPage({
     if (partialRegressions) {
       return (
         <Container fluid>
-          <Row>
-            <Col sm={8} className="mt-3">
+          <Row className="mt-3">
+            <Col sm={8} className="mt-3 ">
+            <div className="animate__animated animate__fadeInLeft">
               <PartialRegressionsCharts
                 partialRegressions={partialRegressions}
                 currentPage={currentPage}
@@ -144,8 +145,9 @@ function MultipleModelPage({
                 itemsPerPage={chartsPerPage}
                 onPageChange={setCurrentPage}
               />
+              </div>
             </Col>
-            <Col>
+            <Col className="animate__animated animate__fadeInRight">
               <div className="mb-3 mt-3">
                 <MultipleParameterIndividualPredictionCard
                   onSubmit={handleDataFromPredictionForm}
@@ -160,7 +162,7 @@ function MultipleModelPage({
           </Row>
           <Row>
             <Container>
-              <Col md={8}>
+              <Col md={8} className="animate__animated animate__fadeInUp">
                 <FinalPlotsInfoCard />
               </Col>
             </Container>
@@ -169,19 +171,24 @@ function MultipleModelPage({
       );
     } else if (coefAnalysis) {
       return (
-        <Container fluid>
+        <Container fluid    
+        style={{
+          height: "100vh",
+          display: "flex",
+          flexDirection: "column",
+        }}>
           <Row>
-            <Col sm={8} className="mt-3">
+            <Col sm={8} className="mt-3 animate__animated animate__fadeInLeft" >
               <ForestPlotChart coefInfo={coefAnalysis} />
             </Col>
             <Col>
-              <div className="mb-3 mt-3">
+              <div className="mb-3 mt-3 animate__animated animate__fadeInRight">
                 <ChoosePredictorsCard
                   onSubmit={handleDataFromPredictorsSelectorForm}
                   schema={ChoosePredictorsFormSchema(initialPredictors)}
                 />
               </div>
-              <div className="mb-3">
+              <div className="mb-3 animate__animated animate__fadeInRight">
                 <PredictorSelectionInfoCard />
               </div>
             </Col>

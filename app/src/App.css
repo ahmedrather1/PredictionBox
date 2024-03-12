@@ -29,25 +29,90 @@
 }
 
 .btn-primary {
-  background-color: #6b9080;
-  border-color: #6b9080;
+  background-color: #a955c2;
+  border-color: #a955c2;
 }
 
 .btn-primary:hover,
 .btn-primary:focus,
 .btn-primary:active {
-  background-color: #3c5248;
-  border-color: #3c5248;
+  background-color: #a955c2;
+  border-color: #a955c2;
 }
 
 .btn-primary:focus:active {
-  background-color: #3c5248;
-  border-color: #3c5248;
+  background-color: #a955c2;
+  border-color: #a955c2;
 }
 
 .btn-outline-primary {
-  color: #6b9080;
-  border-color: #6b9080;
+  color: #a955c2;
+  border-color: #a955c2;
+}
+
+body {
+  background : #A0C5E8
+}
+
+
+h1 {
+  background: -webkit-linear-gradient(
+    50deg,
+    #a955c2 30%,
+    #8f62c1 50%,
+    #2596be 70%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 8rem;
+}
+
+.gradienttitle {
+  background: -webkit-linear-gradient(
+    50deg,
+    #a955c2 30%,
+    #8f62c1 50%,
+    #2596be 70%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.card {
+  background-color: #343434; 
+  color:#fff
+}
+
+.google-visualization-tooltip {
+  background-color: #383838 !important;
+}
+
+.card .MuiInputBase-root::before {
+  border-bottom: 1px solid #fff;
+}
+
+
+.custom-navbar,
+.custom-navbar .navbar-brand,
+.custom-navbar .navbar-nav .nav-link {
+  color: #ffffff;
+}
+
+.plain-bg {
+  background-image: linear-gradient(rgb(34, 34, 34), rgb(34, 34, 34));
+}
+
+.purple-text {
+  color: #a955c2;
+}
+
+
+.snap-row {
+  scroll-snap-align: start;
+}
+
+.title-mt {
+  margin-top: 9rem; 
 }
 
 .btn-outline-primary:hover,
@@ -58,14 +123,14 @@
 }
 
 .app-container {
-  background-color: #f2f2f2; /* Your desired color */
-  min-height: 100vh; /* 100% of the viewport height */
+  background-color: #f2f2f2; 
+  min-height: 100vh; 
   margin: 0;
   padding: 0;
 }
 
 html {
-  background-color: #f2f2f2; /* Replace #yourColor with your actual color hex code */
+  background-color: rgb(34, 34, 34); 
   height: 100%;
   margin: 0;
   padding: 0;
@@ -77,5 +142,17 @@ html {
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 4rem;
+  }
+}
+
+@media (max-width: 576px) {
+  h1 {
+    font-size: 3rem; 
   }
 }

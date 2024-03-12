@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Container, Row, Col, Card, Button } from "react-bootstrap";
+import { Container, Row, Col, Card } from "react-bootstrap";
+import Button from '@mui/material/Button';
 import CustomForm from "../common/CustomForm";
 import { DemoDataSelectorSchema } from "../../formSchemas/common/DemoDataSelectorSchema";
 import { PredictorResponseSelectorSchema } from "../../formSchemas/common/PredictorResponseSelectorSchema";
@@ -31,7 +32,6 @@ const FileUploadComponent = ({
   };
 
   const handleSubmitDemoData = async (data) => {
-    console.log(data);
     if (data.Dataset) {
       let datasetName = data.Dataset;
       console.log(datasetName);
@@ -53,20 +53,25 @@ const FileUploadComponent = ({
   };
 
   return (
-    <Container>
+    <Container
+    style={{
+      height: "100vh",
+      display: "flex",
+      flexDirection: "column",
+    }}>
       <Row>
         <Col md={8}>
-          <div className="mb-3 mt-3">
+          <div className="mb-3 mt-3 animate__animated animate__fadeInLeft">
             <ChooseDataCard />
           </div>
         </Col>
         {!columns && (
-          <Col md={4}>
+          <Col md={4} >
             <Row>
-              <div className="mb-3 mt-3">
-                <Card>
+            <div className={"mb-3 mt-3 animate__animated animate__fadeInRight"} >
+                <Card className="custom-card-shadow">
                   <Card.Body>
-                    <Card.Title className="text-center">
+                    <Card.Title className="text-center ">
                       Choose Demo Data
                     </Card.Title>
 
@@ -79,11 +84,11 @@ const FileUploadComponent = ({
               </div>
             </Row>
             <Row>
-              <div className="">
-                <Card>
+              <div className="animate__animated animate__fadeInRight">
+                <Card className="custom-card-shadow">
                   <Card.Body>
                     <Card.Title className="text-center">
-                      Upload Your own File
+                      Upload Your Own File
                     </Card.Title>
                     <Container>
                       <Row>
@@ -98,6 +103,7 @@ const FileUploadComponent = ({
                           <Button
                             type="submit"
                             onClick={handleSubmitUploadedFile}
+                            variant="outlined"
                           >
                             Submit
                           </Button>
@@ -112,7 +118,7 @@ const FileUploadComponent = ({
         )}
         {columns && (
           <Col md={4}>
-            <div className="mb-3 mt-3">
+            <div className="mb-3 mt-3 animate__animated animate__fadeInRight">
               <Card>
                 <Card.Body>
                   <Card.Title>
@@ -129,7 +135,7 @@ const FileUploadComponent = ({
         )}
       </Row>
       <div className="mb-3">
-        <Row className="mt-3">
+        <Row className="mt-3 animate__animated animate__fadeInUp">
           <GeneralInfoCard />
         </Row>
       </div>

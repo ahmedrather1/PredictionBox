@@ -8,6 +8,7 @@ const PartialRegressionsChartComponent = ({
   predictorsAccountedFor,
   predictor,
   modelType,
+  showCustomModel
 }) => {
   const [combinedData, setCombinedData] = useState(null);
   const [customSeries, setCustomSeries] = useState(null);
@@ -47,14 +48,14 @@ const PartialRegressionsChartComponent = ({
       type: "scatter",
       options: {
         pointSize: 1,
-        color: "blue",
+        color: "white",
       },
     },
     samplePrediction: {
       type: "line",
       options: {
         lineWidth: 2,
-        color: "red",
+        color: showCustomModel? "#2596be": "#a955c2",
       },
     },
   };
@@ -145,18 +146,47 @@ const PartialRegressionsChartComponent = ({
         options={{
           title: `${title}`,
           titleTextStyle: {
-            color: "black",
-            fontSize: 12,
+            color: "#2596be",
+            fontSize: title.length > 90 ? 20 : 15,
             fontName: "Arial",
             bold: true,
             italic: false,
           },
+          backgroundColor: "#343434",
           series: customSeries,
           hAxis: {
             title: xTitle,
+            titleTextStyle: {
+              color: "#2596be",
+              fontSize: 18, 
+              italic: true,
+            },
+            textStyle: {
+              color: "#a955c2", 
+              fontSize: 12, 
+              fontName: "Arial", 
+            },
+            baselineColor: "transparent",
+            gridlines: { color: "#484848" },
           },
           vAxis: {
             title: yTitle,
+            titleTextStyle: {
+              color: "#2596be", 
+              fontSize: 18, 
+              italic: true, 
+            },
+            textStyle: {
+              color: "#a955c2", 
+              fontSize: 12, 
+              fontName: "Arial", 
+            },
+            gridlines: { color: "#484848" },
+          },
+          legend: {
+            textStyle: {
+              color: 'fff', // Here you change the legend text color
+            }
           },
           interpolateNulls: true,
         }}

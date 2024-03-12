@@ -1,10 +1,7 @@
-import React from "react";
-import { JsonForms } from "@jsonforms/react";
-import {
-  materialRenderers,
-  materialCells,
-} from "@jsonforms/material-renderers";
-import { Button } from "react-bootstrap";
+import React from 'react';
+import { JsonForms } from '@jsonforms/react';
+import { materialRenderers, materialCells } from '@jsonforms/material-renderers';
+import Button from '@mui/material/Button';
 
 const CustomForm = ({ schema, onSubmit }) => {
   const [data, setData] = React.useState({});
@@ -15,18 +12,20 @@ const CustomForm = ({ schema, onSubmit }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <JsonForms
-        schema={schema}
-        data={data}
-        renderers={materialRenderers}
-        cells={materialCells}
-        onChange={({ data }) => setData(data)}
-      />
-      <Button type="submit" className="mt-2">
-        Submit
-      </Button>
-    </form>
+      <div className="form-container">
+        <form onSubmit={handleSubmit}>
+          <JsonForms
+            schema={schema}
+            data={data}
+            renderers={materialRenderers}
+            cells={materialCells}
+            onChange={({ data }) => setData(data)}
+          />
+          <Button type="submit" variant="outlined" className="mt-2 ">
+            Submit
+          </Button>
+        </form>
+      </div>
   );
 };
 

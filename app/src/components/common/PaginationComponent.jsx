@@ -30,7 +30,7 @@ const PaginationComponent = ({
       >
         Previous
       </Button>
-      <span className="mx-2 align-self-center">
+      <span style={{ color: 'white' }} className="mx-2 align-self-center">
         {" "}
         Chart {currentPage + 1} of {totalPages}{" "}
       </span>

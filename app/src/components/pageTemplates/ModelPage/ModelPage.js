@@ -159,9 +159,9 @@ function ModelPage({
   const renderContent = () => {
     if (samplePrediction && originalData) {
       return (
-        <Container fluid>
+        <Container fluid >
           <Row>
-            <Col sm={8} className="mt-3">
+            <Col sm={8} className="mt-3 animate__animated animate__fadeInLeft">
               <ChartComponent
                 samplePrediction={samplePrediction}
                 originalData={originalData}
@@ -172,7 +172,7 @@ function ModelPage({
                 response={response}
               />
             </Col>
-            <Col>
+            <Col className="animate__animated animate__fadeInRight">
               <div className="mb-3 mt-3">
                 <CustomParameterCard
                   onSubmit={handleDataFromParameterInputForm}
@@ -191,7 +191,7 @@ function ModelPage({
           </Row>
           <Row>
             <Container>
-              <Col md={8}>
+              <Col md={8} className="animate__animated animate__fadeInUp">
                 <CustomParameterInfoCard />
               </Col>
             </Container>

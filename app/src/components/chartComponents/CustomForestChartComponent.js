@@ -13,8 +13,8 @@ const CustomForestPlotChart = ({
   const [customSeries, setCustomSeries] = useState(null);
 
   useEffect(() => {
-    const headers = ["Variable", "Coefs"];
-    if (showCustomCoefs) headers.push("CustomCoefs");
+    const headers = ["Variable", "Cross Validated Alpha"];
+    if (showCustomCoefs) headers.push("Custom Alpha");
     generateSeries(headers);
     combineData(headers, coefs, showCustomCoefs, customcoefs);
   }, [showCoefs, showCustomCoefs, coefs, customcoefs]);
@@ -22,12 +22,12 @@ const CustomForestPlotChart = ({
   const generateSeries = (headers) => {
     let genSeries = {};
     headers.forEach((header, i) => {
-      if (header === "Coefs") {
+      if (header === "Cross Validated Alpha") {
         genSeries[i - 1] = {
           ...chartDataSets.coefs.options,
           type: "scatter",
         };
-      } else if (header === "CustomCoefs") {
+      } else if (header === "Custom Alpha") {
         genSeries[i - 1] = {
           ...chartDataSets.customCoefs.options,
           type: "scatter",
@@ -65,7 +65,7 @@ const CustomForestPlotChart = ({
       type: "scatter",
       options: {
         pointSize: 5,
-        color: "blue",
+        color: "a955c2",
         visibleInLegend: showCoefs,
       },
     },
@@ -73,7 +73,7 @@ const CustomForestPlotChart = ({
       type: "scatter",
       options: {
         pointSize: 5,
-        color: "green",
+        color: "2596be",
         visibleInLegend: showCustomCoefs,
       },
     },
@@ -105,7 +105,12 @@ const CustomForestPlotChart = ({
               checked={showCustomCoefs}
               disabled={false}
               onChange={(e) => setShowCustomCoefs(e.currentTarget.checked)}
-              style={{ margin: "10px" }}
+              style={{ 
+                margin: "10px", 
+                backgroundColor: showCustomCoefs ? "#2596be" : "transparent", 
+                borderColor: "#2596be",
+                color: showCustomCoefs ? "black" : "#2596be",  
+             }}
             >
               {showCustomCoefs
                 ? "Hide Custom Analysis"
@@ -117,8 +122,8 @@ const CustomForestPlotChart = ({
               trigger="hover"
               overlay={
                 <Popover id={`popover-positioned-right`}>
-                  <Popover.Header as="h3">{`Set a custom alpha value first!`}</Popover.Header>
-                  <Popover.Body>
+                  <Popover.Header as="h3" style={{ backgroundColor: '#404040', color: '#fff' }}>{`Set a custom alpha value first!`}</Popover.Header>
+                  <Popover.Body style={{ backgroundColor: '#555555', color: '#fff' }}>
                     Use the <strong>Choose your Alpha Value</strong> section
                   </Popover.Body>
                 </Popover>
@@ -132,7 +137,12 @@ const CustomForestPlotChart = ({
                   checked={showCustomCoefs}
                   disabled={true}
                   onChange={(e) => setShowCustomCoefs(e.currentTarget.checked)}
-                  style={{ margin: "10px" }}
+                  style={{ 
+                    margin: "10px", 
+                    backgroundColor: showCustomCoefs ? "#2596be" : "transparent", 
+                    borderColor: "#2596be",
+                    color: showCustomCoefs ? "black" : "#2596be",  
+                 }}
                 >
                   {showCustomCoefs
                     ? "Hide Custom Analysis"
@@ -150,9 +160,51 @@ const CustomForestPlotChart = ({
             data={coefData}
             options={{
               title: "Standardized Slope (ΔY/Δsd(X))",
-              hAxis: { title: "Variables" },
-              vAxis: { title: "Standardized Slope" },
-              legend: "none",
+              titleTextStyle: {
+                color: "#2596be",
+                fontSize: 30,
+                fontName: "Arial",
+                bold: true,
+                italic: false,
+              },
+              backgroundColor: "#343434",
+              hAxis: {
+                title: "Variables",
+                titleTextStyle: {
+                  color: "#2596be",
+                  fontSize: 18, 
+                  italic: true,
+                },
+                textStyle: {
+                  color: "#a955c2", 
+                  fontSize: 12, 
+                  fontName: "Arial", 
+                },
+                baselineColor: "transparent",
+                gridlines: { color: "#484848" },
+              },
+              vAxis: {
+                title: "Standardized Slope",
+                minValue: -1,
+                maxValue: 1,
+                titleTextStyle: {
+                  color: "#2596be", 
+                  fontSize: 18, 
+                  italic: true, 
+                },
+                textStyle: {
+                  color: "#a955c2", 
+                  fontSize: 12, 
+                  fontName: "Arial", 
+                },
+                baselineColor: "white",
+                gridlines: { color: "#484848" },
+              },
+              legend: {
+                textStyle: {
+                  color: 'fff', // Here you change the legend text color
+                }
+              },
               seriesType: "scatter",
               series: customSeries,
             }}

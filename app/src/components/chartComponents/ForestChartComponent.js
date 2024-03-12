@@ -16,22 +16,55 @@ const ForestPlotChart = ({ coefInfo }) => {
 
   const options = {
     title: "Standardized Slope (ΔY/Δsd(X))",
+    titleTextStyle: {
+      color: "#2596be",
+      fontSize: 30,
+      fontName: "Arial",
+      bold: true,
+      italic: false,
+    },
+    backgroundColor: "#343434",
+
     hAxis: {
       title: "Variables",
+      titleTextStyle: {
+        color: "#2596be",
+        fontSize: 18, 
+        italic: true,
+      },
+      textStyle: {
+        color: "#a955c2", 
+        fontSize: 12, 
+        fontName: "Arial", 
+      },
+      baselineColor: "transparent",
+      gridlines: { color: "#484848" },
     },
     vAxis: {
       title: "Standardized Slope",
       minValue: -1,
       maxValue: 1,
+      titleTextStyle: {
+        color: "#2596be", 
+        fontSize: 18, 
+        italic: true, 
+      },
+      textStyle: {
+        color: "#a955c2", 
+        fontSize: 12, 
+        fontName: "Arial", 
+      },
+      baselineColor: "white",
+      gridlines: { color: "#484848" },
     },
     legend: "none",
     series: {
-      0: { type: "scatter", color: "red", pointSize: 5 },
+      0: { type: "scatter", color: "#a955c2", pointSize: 5 },
     },
     intervals: { style: "bars", color: "black" },
     interval: {
-      i0: { style: "bars", lineWidth: 2, barWidth: 0 },
-      i1: { style: "bars", lineWidth: 2, barWidth: 0 },
+      i0: { style: "bars", lineWidth: 2, barWidth: 0, color: "#2596be",},
+      i1: { style: "bars", lineWidth: 2, barWidth: 0, color: "#2596be", },
     },
   };
 
