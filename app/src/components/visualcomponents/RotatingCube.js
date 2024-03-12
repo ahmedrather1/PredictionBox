@@ -50,7 +50,7 @@ const RotatingCube = () => {
   return (
     <group ref={meshRef}>
       <mesh ref={meshRef}>
-        <boxGeometry args={[2, 2, 2]} />
+        <boxGeometry args={[3, 3, 3]} />
         <meshStandardMaterial color="#909090" />
       </mesh>
       {/* Adjusted positions and rotations for the text on each side of the cube */}

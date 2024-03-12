@@ -129,6 +129,26 @@ h1 {
   padding: 0;
 }
 
+/* Responsive flex container */
+.flex-container {
+  display: flex;
+  flex-direction: row; /* Default layout */
+  align-items: center;
+}
+
+@media (max-width: 992px) {
+  .flex-container {
+    flex-direction: column; /* Stack elements vertically on smaller screens */
+  }
+
+  .flex-container > Canvas {
+    width: 100%; /* Adjust the width to take the full container width */
+    margin-right: 0; /* Remove the margin on the right */
+  }
+}
+
+
+
 html {
   background-color: rgb(34, 34, 34); 
   height: 100%;

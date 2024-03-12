@@ -45,13 +45,51 @@ const HomePage = () => {
             </div>
           </div>
         </Row>
-        <Row style={{ flex: "0 1 auto", height: "100vh" }}>
-
-          <Canvas shadows>
-            <ambientLight />
-            <pointLight position={[10, 10, 10]} />
-            <RotatingCube />
-          </Canvas>
+        <Row style={{ flex: "0 1 auto", height: "100vh", color: "#fff" }}>
+          <h1>about</h1>
+          <h3>
+            Upload your data and receive instant, insightful sample predictions.
+            Discover the hidden stories and potential in your data through our
+            predictive analysis.
+          </h3>
+          <Container fluid>
+            <Row className="mr-3 justify-content-center align-items-center">
+              <Card style={{ width: "80%", height: "60%" }} className="mt-5">
+                <Card.Body>
+                  <div
+                    className="flex-container"
+                    style={{ display: "flex", alignItems: "center" }}
+                  >
+                    <Canvas
+                      shadows
+                      style={{
+                        height: "600px",
+                        width: "600px",
+                      }}
+                    >
+                      <ambientLight />
+                      <pointLight position={[10, 10, 10]} />
+                      <RotatingCube />
+                    </Canvas>
+                    <Card style={{ flex: 1 }}>
+                      <Card.Body>
+                        <Card.Title>Card Title</Card.Title>
+                        <Card.Subtitle className="mb-2 text-muted">
+                          Card Subtitle
+                        </Card.Subtitle>
+                        <Card.Text>
+                          Some quick example text to build on the card title and
+                          make up the bulk of the card's content.
+                        </Card.Text>
+                        <Card.Link href="#">Card Link</Card.Link>
+                        <Card.Link href="#">Another Link</Card.Link>
+                      </Card.Body>
+                    </Card>
+                  </div>
+                </Card.Body>
+              </Card>
+            </Row>
+          </Container>
         </Row>
       </Container>
     </>
