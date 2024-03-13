@@ -10,7 +10,7 @@ const HomePage = () => {
   const navigate = useNavigate();
 
   const redirectToKnnPage = () => {
-    navigate("/knn"); // Use the path you want to redirect to
+    navigate("/knn"); 
   };
 
   return (
@@ -45,7 +45,7 @@ const HomePage = () => {
             className="d-flex justify-content-center align-items-end"
             style={{ flex: "1" }}
           >
-            <FaArrowDown size={50} color="#2596be"  style={{position:"absolute", top:"90%"}} className="animate__animated animate__pulse animate__infinite infinite"></FaArrowDown>/>
+            <FaArrowDown size={50} color="#2596be"  style={{position:"absolute", top:"90%"}} className="animate__animated animate__pulse animate__infinite infinite"/>
           </div>
         </Row>
         <Row
