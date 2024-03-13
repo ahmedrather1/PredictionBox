@@ -56,7 +56,7 @@ const FileUploadComponent = ({
   return (
     <Container
       style={{
-        height: "100vh",
+        marginTop:"7rem",
         display: "flex",
         flexDirection: "column",
       }}
@@ -75,10 +75,10 @@ const FileUploadComponent = ({
         <Col md={8}>
           {!columns && (
             <>
-              <Card className="animate__animated animate__fadeInLeft">
+              <Card className="animate__animated animate__fadeInLeft mb-3">
                 <Card.Title className="text-center mt-3 animate__animated animate__fadeInUp">
                   {" "}
-                  <h2>Choose your Data!</h2>
+                  <h2 style={{color:"#a955c2"}}>Choose your Data!</h2>
                 </Card.Title>
                 <div className="animate__animated animate__fadeInUp">
                 <Card.Subtitle className="text-center ">
@@ -147,7 +147,7 @@ const FileUploadComponent = ({
                 </Card.Body>
               </Card>
               {showDataUploadCard && (
-                <div className="mb-3 mt-3 animate__animated animate__fadeInLeft">
+                <div className="mb-3 mt-3 animate__animated animate__fadeInUp">
                   <ChooseDataCard />
                 </div>
               )}
