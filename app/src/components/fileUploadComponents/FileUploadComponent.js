@@ -75,12 +75,13 @@ const FileUploadComponent = ({
         <Col md={8}>
           {!columns && (
             <>
-              <Card>
-                <Card.Title className="text-center mt-3">
+              <Card className="animate__animated animate__fadeInLeft">
+                <Card.Title className="text-center mt-3 animate__animated animate__fadeInUp">
                   {" "}
                   <h2>Choose your Data!</h2>
                 </Card.Title>
-                <Card.Subtitle className="text-center">
+                <div className="animate__animated animate__fadeInUp">
+                <Card.Subtitle className="text-center ">
                   {" "}
                   Click{" "}
                   <span
@@ -91,11 +92,11 @@ const FileUploadComponent = ({
                   </span>{" "}
                   to see data upload instructions
                 </Card.Subtitle>
+                </div>
                 <Card.Body>
                   <Row className="justify-content-md-center">
-                    <div className="d-flex justify-content-center mb-3 animate__animated animate__fadeInRight">
+                    <div className="d-flex justify-content-center mb-3 animate__animated animate__fadeInUp">
                       <Card
-                        className="custom-card-shadow"
                         style={{ minWidth: "80%", backgroundColor: "#454545" }}
                       >
                         <Card.Body>
@@ -111,9 +112,8 @@ const FileUploadComponent = ({
                     </div>
                   </Row>
                   <Row className="justify-content-md-center">
-                    <div className="mb-3 d-flex justify-content-center animate__animated animate__fadeInRight">
+                    <div className="mb-3 d-flex justify-content-center animate__animated animate__fadeInUp">
                       <Card
-                        className="custom-card-shadow"
                         style={{ minWidth: "80%", backgroundColor: "#454545" }}
                       >
                         <Card.Body>
@@ -147,37 +147,46 @@ const FileUploadComponent = ({
                 </Card.Body>
               </Card>
               {showDataUploadCard && (
-            <div className="mb-3 mt-3 animate__animated animate__fadeInLeft">
-              <ChooseDataCard />
-            </div>
-          )}
+                <div className="mb-3 mt-3 animate__animated animate__fadeInLeft">
+                  <ChooseDataCard />
+                </div>
+              )}
             </>
+          )}
+          {columns && (
+            <Card>
+              <Card.Title className="text-center mt-3">
+                {" "}
+                <h2>Choose Predictor and Response</h2>
+              </Card.Title>
+              <Card.Subtitle className="text-center">
+                The predictor is the X Variable, and the response is the Y
+                variable
+              </Card.Subtitle>
+              <Card.Body>
+                <Row className="justify-content-md-center">
+                  <div className="d-flex justify-content-center mb-3 animate__animated animate__fadeInUp">
+                    <Card
+                      style={{ minWidth: "80%", backgroundColor: "#454545" }}
+                    >
+                      <Card.Body>
+                        <CustomForm
+                          schema={PredictorResponseSelectorSchema(columns)}
+                          onSubmit={handleDataFromPredictorResponseSelector}
+                        />
+                      </Card.Body>
+                    </Card>
+                  </div>
+                </Row>
+              </Card.Body>
+            </Card>
           )}
         </Col>
         <Col md={4}>
-
           <div className="mb-3 animate__animated animate__fadeInUp">
             <GeneralInfoCard />
           </div>
         </Col>
-
-        {columns && (
-          <Col md={4}>
-            <div className="mb-3 mt-3 animate__animated animate__fadeInRight">
-              <Card>
-                <Card.Body>
-                  <Card.Title>
-                    Choose Your Predictor (X variable) and Response (Y Variable)
-                  </Card.Title>
-                  <CustomForm
-                    schema={PredictorResponseSelectorSchema(columns)}
-                    onSubmit={handleDataFromPredictorResponseSelector}
-                  />
-                </Card.Body>
-              </Card>
-            </div>
-          </Col>
-        )}
       </Row>
     </Container>
   );
