@@ -51,9 +51,8 @@
 }
 
 body {
-  background : #A0C5E8
+  background: #a0c5e8;
 }
-
 
 h1 {
   background: -webkit-linear-gradient(
@@ -79,8 +78,8 @@ h1 {
 }
 
 .card {
-  background-color: #343434; 
-  color:#fff
+  background-color: #343434;
+  color: #fff;
 }
 
 .google-visualization-tooltip {
@@ -90,7 +89,6 @@ h1 {
 .card .MuiInputBase-root::before {
   border-bottom: 1px solid #fff;
 }
-
 
 .custom-navbar,
 .custom-navbar .navbar-brand,
@@ -106,13 +104,12 @@ h1 {
   color: #a955c2;
 }
 
-
 .snap-row {
   scroll-snap-align: start;
 }
 
 .title-mt {
-  margin-top: 9rem; 
+  margin-top: 9rem;
 }
 
 .btn-outline-primary:hover,
@@ -123,34 +120,31 @@ h1 {
 }
 
 .app-container {
-  background-color: #f2f2f2; 
-  min-height: 100vh; 
+  background-color: #f2f2f2;
+  min-height: 100vh;
   margin: 0;
   padding: 0;
 }
 
-/* Responsive flex container */
 .flex-container {
   display: flex;
-  flex-direction: row; /* Default layout */
+  flex-direction: row;
   align-items: center;
 }
 
-@media (max-width: 992px) {
+@media (max-width: 1200px) {
   .flex-container {
     flex-direction: column; /* Stack elements vertically on smaller screens */
   }
 
   .flex-container > Canvas {
-    width: 100%; /* Adjust the width to take the full container width */
-    margin-right: 0; /* Remove the margin on the right */
+    width: 100%;
+    margin-right: 0;
   }
 }
 
-
-
 html {
-  background-color: rgb(34, 34, 34); 
+  background-color: rgb(34, 34, 34);
   height: 100%;
   margin: 0;
   padding: 0;
@@ -173,6 +167,6 @@ html {
 
 @media (max-width: 576px) {
   h1 {
-    font-size: 3rem; 
+    font-size: 3rem;
   }
 }

@@ -44,16 +44,27 @@ const HomePage = () => {
             </div>
           </div>
         </Row>
-        <Row style={{ flex: "0 1 auto", height: "100vh", color: "#fff" }}>
+        <Row
+          style={{
+            flex: "0 1 auto",
+            height: "100vh",
+            color: "#fff",
+            textAlign: "center",
+          }}
+        >
           <h1>about</h1>
           <h3>
-            Upload your data and receive instant, insightful sample predictions.
-            Discover the hidden stories and potential in your data through our
+            Upload your data and receive instant, insightful sample predictions
+            from any of our models.
+          </h3>
+          <h3>Customize any model to fine tune your predictions.</h3>
+          <h3>
+            Discover the hidden stories and potential in your data through
             predictive analysis.
           </h3>
           <Container fluid>
             <Row className="mr-3 justify-content-center align-items-center">
-            <RotatingCubeCard/>
+              <RotatingCubeCard />
             </Row>
           </Container>
         </Row>
