@@ -28,7 +28,7 @@ const RotatingCubeCard = () => {
   }, []);
 
   return (
-    <Card style={{ width: "80%", height: "60%" }} className="mt-2">
+    <Card style={{ width: "80%", height: "60%", backgroundColor:"#404040" }} className="mt-2">
       <Card.Body>
         <div
           className="flex-container"
@@ -56,7 +56,7 @@ const RotatingCubeCard = () => {
 
           <Card
             key={currentSelection.title}
-            style={{ flex: 1, background: "#454545" }}
+            style={{ flex: 1, background: "#505050" }}
             className="animate__animated animate__fadeInUp"
           >
             <Card.Body>

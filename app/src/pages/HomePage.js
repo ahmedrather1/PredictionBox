@@ -2,12 +2,10 @@ import React from "react";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/common/Header";
-import linegraph from "../images/linegraph.png";
-import gears from "../images/gears.png";
-import laptop from "../images/laptop.png";
 import "animate.css";
-import { Canvas } from "@react-three/fiber";
 import RotatingCubeCard from "../components/visualcomponents/RotatingCubeCard";
+import { MdKeyboardArrowDown } from "react-icons/md"; // Importing the arrow icon
+import TypeWriterCard from "../components/visualcomponents/TypewriterCard";
 const HomePage = () => {
   const navigate = useNavigate();
 
@@ -43,35 +41,74 @@ const HomePage = () => {
               </Button>
             </div>
           </div>
+          <div
+            className="d-flex justify-content-center align-items-end"
+            style={{ flex: "0" }}
+          >
+            <MdKeyboardArrowDown size={30} />
+          </div>
         </Row>
         <Row
           style={{
             flex: "0 1 auto",
-            height: "100vh",
             color: "#fff",
             textAlign: "center",
+            backgroundColor: "#303030",
           }}
         >
-          <h1>about</h1>
+          <h1 className="mt-3">about</h1>
           <h3>
             Upload your data and receive instant, insightful sample predictions
             from any of our models.
           </h3>
           <h3>Customize any model to fine tune your predictions.</h3>
-          <h3>
+          <h3 className="mb-5">
             Discover the hidden stories and potential in your data through
             predictive analysis.
           </h3>
           <Container fluid>
-            <Row className="mr-3 justify-content-center align-items-center">
+            <Row className="mb-5 justify-content-center align-items-center">
               <RotatingCubeCard />
             </Row>
           </Container>
+        </Row>
+        <Row
+          className="mt-5"
+          style={{
+            flex: "0 1 auto",
+            color: "#fff",
+            textAlign: "center",
+            height:"100vh"
+          }}
+        >
+          <h1>Powered by Scikit-Learn</h1>
+          <Row>
+          <Col sm={4}>
+            <h3>
+              Upload your data and receive instant, insightful sample
+              predictions from any of our models.
+            </h3>
+            <h3>Customize any model to fine tune your predictions.</h3>
+            <h3>
+              Discover the hidden stories and potential in your data through
+              predictive analysis.
+            </h3>
+          </Col>
+          <Col sm={8}>
+            <Container fluid>
+              <Row className="mr-3 mb-5 justify-content-center align-items-center">
+                <TypeWriterCard/>
+              </Row>
+            </Container>
+          </Col>
+          </Row>
+
         </Row>
       </Container>
     </>
   );
 };
+
 
 export default HomePage;
 
