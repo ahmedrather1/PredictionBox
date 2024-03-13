@@ -139,7 +139,10 @@ h1 {
 .info-card {
   height: 30rem;
   max-width: 80%;
-  margin-bottom: 25px;
+  margin-bottom: 30px;
+  margin-top: 5px;
+  margin-left: 3px;
+  margin-right: 3px;
   display: inline-block;
   overflow: auto;
   justify-content: space-between
@@ -157,8 +160,15 @@ h1 {
   height: 70%;
   overflow-y: auto; 
   flex-grow: 1; 
-
 }
+
+/* .shadow-card-purple {
+  box-shadow: 0px 0px 8px #a955c2; 
+}
+
+.shadow-card-blue {
+  box-shadow: 0px 0px 8px #2596be;
+} */
 
 @media (max-width: 768px) {
   .typewriter-card {
@@ -172,11 +182,8 @@ h1 {
   }
 
   .demodatacard {
-
     width: 90%;
   }
-
-
 }
 
 @media (max-width: 1200px) {

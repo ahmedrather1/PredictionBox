@@ -76,7 +76,7 @@ const FileUploadComponent = ({
         <Col md={8}>
           {!columns && (
             <>
-              <Card className="animate__animated animate__fadeInLeft mb-3">
+              <Card className="shadow-card-purple animate__animated animate__fadeInLeft mb-3" style={{marginTop: "5px"}}>
                 <Card.Title className="text-center mt-3 animate__animated animate__fadeInUp">
                   {" "}
                   <h2 style={{color:"#a955c2"}}>Choose your Data!</h2>
@@ -156,7 +156,7 @@ const FileUploadComponent = ({
             </>
           )}
           {columns && (
-            <Card>
+            <Card className="shadow-card-purple">
               <Card.Title className="text-center mt-3">
                 {" "}
                 <h2>Choose Predictor and Response</h2>

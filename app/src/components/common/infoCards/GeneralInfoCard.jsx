@@ -15,13 +15,13 @@ const GeneralInfoCard = ({ title, Text }) => {
               className="text-center"
             >
               <Card
-                className="info-card"
+                className="info-card shadow-card-blue"
               > 
                 
                 <Card.Title className="info-card-title">
                   <strong style={{color:"#61dafb"}}>{title}</strong>
                 </Card.Title>
-                <Card.Body className="info-card-body">
+                <Card.Body className="info-card-body ">
                   {Text[key]}
                 </Card.Body>
               </Card>
