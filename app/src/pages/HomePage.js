@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Header from "../components/common/Header";
 import "animate.css";
 import RotatingCubeCard from "../components/visualcomponents/RotatingCubeCard";
-import { MdKeyboardArrowDown } from "react-icons/md"; // Importing the arrow icon
+import { FaArrowDown } from "react-icons/fa";
 import TypeWriterCard from "../components/visualcomponents/TypewriterCard";
 const HomePage = () => {
   const navigate = useNavigate();
@@ -43,9 +43,9 @@ const HomePage = () => {
           </div>
           <div
             className="d-flex justify-content-center align-items-end"
-            style={{ flex: "0" }}
+            style={{ flex: "1" }}
           >
-            <MdKeyboardArrowDown size={30} />
+            <FaArrowDown size={50} color="#2596be"  style={{position:"absolute", top:"90%"}} className="animate__animated animate__pulse animate__infinite infinite"></FaArrowDown>/>
           </div>
         </Row>
         <Row
@@ -56,15 +56,14 @@ const HomePage = () => {
             backgroundColor: "#303030",
           }}
         >
-          <h1 className="mt-3">about</h1>
+          <h1 className="mt-3">About</h1>
           <h3>
             Upload your data and receive instant, insightful sample predictions
             from any of our models.
           </h3>
           <h3>Customize any model to fine tune your predictions.</h3>
           <h3 className="mb-5">
-            Discover the hidden stories and potential in your data through
-            predictive analysis.
+            Visualize your data using interactive charts.
           </h3>
           <Container fluid>
             <Row className="mb-5 justify-content-center align-items-center">
@@ -73,7 +72,7 @@ const HomePage = () => {
           </Container>
         </Row>
         <Row
-          className="mt-5"
+          className="mt-5 justify-content-center"
           style={{
             flex: "0 1 auto",
             color: "#fff",
@@ -81,20 +80,18 @@ const HomePage = () => {
             height:"100vh"
           }}
         >
-          <h1>Powered by Scikit-Learn</h1>
+          <h1>Behind the Scenes</h1>
           <Row>
-          <Col sm={4}>
-            <h3>
-              Upload your data and receive instant, insightful sample
-              predictions from any of our models.
+          <Col sm={4} >
+            <h3 className="mb-3">
+            PredictionBox leverages the power of Scikit-Learn and Statsmodels libraries to enable model generation.
             </h3>
-            <h3>Customize any model to fine tune your predictions.</h3>
+            <h3 className="mb-3"> Statistical techniques are employed to intelligently optimize model parameters, ensuring highly accurate predictions.</h3>
             <h3>
-              Discover the hidden stories and potential in your data through
-              predictive analysis.
+              The platform provides the flexibility to customize model parameters, allowing for a personalized experience tailored to specific data needs.
             </h3>
           </Col>
-          <Col sm={8}>
+          <Col sm={8} className="mb-5 pb-5">
             <Container fluid>
               <Row className="mr-3 mb-5 justify-content-center align-items-center">
                 <TypeWriterCard/>
@@ -102,7 +99,6 @@ const HomePage = () => {
             </Container>
           </Col>
           </Row>
-
         </Row>
       </Container>
     </>

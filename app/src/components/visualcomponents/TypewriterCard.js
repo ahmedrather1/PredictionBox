@@ -12,11 +12,10 @@ const TypeWriterCard = () => {
         height: "60%",
         backgroundColor: "#404040",
         color:"#00ff41",
-        fontSize:"1.8rem",
         textAlign: "left",
         fontFamily: "'Source Code Pro', monospace"
       }}
-      className="mt-2"
+      className="mt-2 typewriter-card"
     >
       <Card.Body>
         <Typewriter

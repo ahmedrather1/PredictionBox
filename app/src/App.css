@@ -132,6 +132,16 @@ h1 {
   align-items: center;
 }
 
+.typewriter-card {
+  font-size: 1.8rem; /* Default font size */
+}
+
+@media (max-width: 768px) {
+  .typewriter-card {
+    font-size: 1rem; /* Smaller font size on small screens */
+  }
+}
+
 @media (max-width: 1200px) {
   .flex-container {
     flex-direction: column; /* Stack elements vertically on smaller screens */
