@@ -58,12 +58,12 @@ const HomePage = () => {
         >
           <h1 className="mt-3">About</h1>
           <h3>
-            Upload your data and receive instant, insightful sample predictions
+            <span style={{color:"#a955c2"}}>Upload your data</span> and receive instant, insightful sample predictions
             from any of our models.
           </h3>
-          <h3>Customize any model to fine tune your predictions.</h3>
+          <h3><span style={{color:"#a955c2"}}>Customize any model</span> to fine tune your predictions.</h3>
           <h3 className="mb-5">
-            Visualize your data using interactive charts.
+          <span style={{color:"#a955c2"}}>Visualize your Data</span> using interactive charts.
           </h3>
           <Container fluid>
             <Row className="mb-5 justify-content-center align-items-center">
@@ -84,11 +84,11 @@ const HomePage = () => {
           <Row>
           <Col sm={4} >
             <h3 className="mb-3">
-            PredictionBox leverages the power of Scikit-Learn and Statsmodels libraries to enable model generation.
+            PredictionBox leverages the power of <span style={{color:"#2596be"}}>Scikit-Learn and Statsmodels</span> libraries to enable model generation.
             </h3>
-            <h3 className="mb-3"> Statistical techniques are employed to intelligently optimize model parameters, ensuring highly accurate predictions.</h3>
+            <h3 className="mb-3"> Statistical techniques are used to optimize sample model parameters, ensuring  <span style={{color:"#2596be"}}>highly accurate predictions.</span>  </h3>
             <h3>
-              The platform provides the flexibility to customize model parameters, allowing for a personalized experience tailored to specific data needs.
+              The platform provides the flexibility to <span style={{color:"#2596be"}}>customize model parameters</span> , allowing for a personalized experience tailored to specific data needs.
             </h3>
           </Col>
           <Col sm={8} className="mb-5 pb-5">
