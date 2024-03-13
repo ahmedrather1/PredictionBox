@@ -4,11 +4,7 @@ import React from "react";
 const KnnChooseDataText = () => {
   return (
     <p>
-      You can either use the demo data provided in our simulator to see KNN
-      regression in action or upload your own data for a more tailored
-      experience.
-      <br />
-      <br /> <strong>If you choose to upload data</strong>:
+      <strong>If you choose to upload data</strong>:
       <ul>
         <li>Please ensure the data is in a CSV file format.</li>
         <li>

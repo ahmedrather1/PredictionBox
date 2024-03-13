@@ -21,6 +21,7 @@ function ModelPage({
   CustomParameterInfoCard,
   GeneralInfoCard,
   ChooseDataCard,
+  ModelName
 }) {
   // TODO use a reducer, too many usestates!
   const [columns, setColumns] = useState(null);
@@ -208,6 +209,7 @@ function ModelPage({
           }
           GeneralInfoCard={GeneralInfoCard}
           ChooseDataCard={ChooseDataCard}
+          ModelName={ModelName}
         />
       );
     }

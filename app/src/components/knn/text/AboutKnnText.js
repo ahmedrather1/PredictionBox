@@ -1,5 +1,3 @@
-import React from "react";
-
 export const AboutKnnText = {
   paragraph1:
     "K Nearest Neighbors (KNN) is a versatile algorithm in machine learning, commonly used for both classification and regression tasks. While KNN can be adept at classifying items into categories, our simulator is specifically designed to demonstrate its capabilities in regression.",

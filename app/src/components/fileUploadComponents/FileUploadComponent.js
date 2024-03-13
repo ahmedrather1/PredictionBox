@@ -12,6 +12,7 @@ const FileUploadComponent = ({
   handleDataFromPredictorResponseSelector,
   GeneralInfoCard,
   ChooseDataCard,
+  ModelName,
 }) => {
   const [currentFile, setCurrentFile] = useState(null);
   const [isDemoData, setIsDemoData] = useState(null);
@@ -56,7 +57,7 @@ const FileUploadComponent = ({
   return (
     <Container
       style={{
-        marginTop:"7rem",
+        marginTop:"4rem",
         display: "flex",
         flexDirection: "column",
       }}
@@ -68,8 +69,8 @@ const FileUploadComponent = ({
           textAlign: "center",
         }}
       >
-        {" "}
-        K Nearest Neighbors
+        {ModelName}
+      
       </h1>
       <Row>
         <Col md={8}>
@@ -85,7 +86,7 @@ const FileUploadComponent = ({
                   {" "}
                   Click{" "}
                   <span
-                    style={{ cursor: "pointer", textDecoration: "underline" }}
+                    style={{ cursor: "pointer", textDecoration: "underline", color:"#61dafb" }}
                     onClick={() => setShowDataUploadCard(!showDataUploadCard)}
                   >
                     here
@@ -97,6 +98,7 @@ const FileUploadComponent = ({
                   <Row className="justify-content-md-center">
                     <div className="d-flex justify-content-center mb-3 animate__animated animate__fadeInUp">
                       <Card
+                        className="demodatacard"
                         style={{ minWidth: "80%", backgroundColor: "#454545" }}
                       >
                         <Card.Body>
