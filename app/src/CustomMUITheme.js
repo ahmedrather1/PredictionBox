@@ -5,11 +5,20 @@ export const customTheme = createTheme({
     MuiButton: {
       styleOverrides: {
         root: {
-          color: '#a955c2',
-          borderBottom: '1px solid #fff',
+          color: '#fff', // Set text color to white
+          backgroundColor: '#a955c2', // Set background color to solid #a955c2
+          padding: '6px 30px',
+          '&:hover': {
+            backgroundColor: '#963db3', // Optional: Darken the button on hover for a subtle effect
+          },
         },
         outlined: {
-          borderColor: '#a955c2', 
+          borderColor: '#a955c2',
+          color: '#a955c2', // Set text color to #a955c2 for consistency or to #fff for white text in outlined buttons
+          '&:hover': {
+            backgroundColor: '#a955c2', // Change background on hover for outlined button, if desired
+            color: '#fff', // Change text color on hover to white, if desired
+          },
         },
       },
     },

@@ -122,22 +122,36 @@ const MultipleModelFileUploadComponent = ({
                           </Card.Title>
                           <Container>
                             <Row>
+                            <div
+                                style={{
+                                  display: "flex",
+                                  justifyContent: "center",
+                                  marginTop: "8px",
+                                  marginLeft: "30px",
+                                }}
+                              >
                               <input
                                 type="file"
                                 className="mt-2"
                                 onChange={handleFileChange}
                               />
+                              </div>
                             </Row>
                             <Row className="mt-3">
-                              <Col md={3}>
+                              <div
+                                style={{
+                                  display: "flex",
+                                  justifyContent: "center",
+                                  marginTop: "8px",
+                                }}
+                              >
                                 <Button
                                   type="submit"
                                   onClick={handleSubmitUploadedFile}
-                                  variant="outlined"
                                 >
                                   Submit
                                 </Button>
-                              </Col>
+                                </div>
                             </Row>
                           </Container>
                         </Card.Body>

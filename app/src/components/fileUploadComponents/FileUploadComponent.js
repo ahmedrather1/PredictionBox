@@ -57,7 +57,7 @@ const FileUploadComponent = ({
   return (
     <Container
       style={{
-        marginTop:"4rem",
+        marginTop: "4rem",
         display: "flex",
         flexDirection: "column",
       }}
@@ -70,29 +70,35 @@ const FileUploadComponent = ({
         }}
       >
         {ModelName}
-      
       </h1>
       <Row>
         <Col md={8}>
           {!columns && (
             <>
-              <Card className="shadow-card-purple animate__animated animate__fadeInLeft mb-3" style={{marginTop: "5px"}}>
+              <Card
+                className="shadow-card-purple animate__animated animate__fadeInLeft mb-3"
+                style={{ marginTop: "5px" }}
+              >
                 <Card.Title className="text-center mt-3 animate__animated animate__fadeInUp">
                   {" "}
-                  <h2 style={{color:"#a955c2"}}>Choose your Data!</h2>
+                  <h2 style={{ color: "#a955c2" }}>Choose your Data!</h2>
                 </Card.Title>
                 <div className="animate__animated animate__fadeInUp">
-                <Card.Subtitle className="text-center ">
-                  {" "}
-                  Click{" "}
-                  <span
-                    style={{ cursor: "pointer", textDecoration: "underline", color:"#61dafb" }}
-                    onClick={() => setShowDataUploadCard(!showDataUploadCard)}
-                  >
-                    here
-                  </span>{" "}
-                  to see data upload instructions
-                </Card.Subtitle>
+                  <Card.Subtitle className="text-center ">
+                    {" "}
+                    Click{" "}
+                    <span
+                      style={{
+                        cursor: "pointer",
+                        textDecoration: "underline",
+                        color: "#61dafb",
+                      }}
+                      onClick={() => setShowDataUploadCard(!showDataUploadCard)}
+                    >
+                      here
+                    </span>{" "}
+                    to see data upload instructions
+                  </Card.Subtitle>
                 </div>
                 <Card.Body>
                   <Row className="justify-content-md-center">
@@ -124,22 +130,36 @@ const FileUploadComponent = ({
                           </Card.Title>
                           <Container>
                             <Row>
+                            <div
+                                style={{
+                                  display: "flex",
+                                  justifyContent: "center",
+                                  marginTop: "8px",
+                                  marginLeft: "30px",
+                                }}
+                              >
                               <input
                                 type="file"
                                 className="mt-2"
                                 onChange={handleFileChange}
                               />
+                              </div>
                             </Row>
                             <Row className="mt-3">
-                              <Col md={3}>
+                              <div
+                                style={{
+                                  display: "flex",
+                                  justifyContent: "center",
+                                  marginTop: "8px",
+                                }}
+                              >
                                 <Button
                                   type="submit"
                                   onClick={handleSubmitUploadedFile}
-                                  variant="outlined"
                                 >
                                   Submit
                                 </Button>
-                              </Col>
+                              </div>
                             </Row>
                           </Container>
                         </Card.Body>
@@ -159,17 +179,19 @@ const FileUploadComponent = ({
             <Card className="shadow-card-purple" style={{ minHeight: "90%" }}>
               <Card.Title className="text-center mt-4">
                 {" "}
-                <h2 style={{color:"#a955c2"}}>Choose Predictor and Response</h2>
+                <h2 style={{ color: "#a955c2" }}>
+                  Choose Predictor and Response
+                </h2>
               </Card.Title>
               <Card.Subtitle className="text-center">
                 The predictor is the X Variable, and the response is the Y
                 variable
               </Card.Subtitle>
-              <Card.Body style={{marginTop:"3rem"}}>
+              <Card.Body style={{ marginTop: "3rem" }}>
                 <Row className="justify-content-md-center">
                   <div className="d-flex justify-content-center mb-3 animate__animated animate__fadeInUp">
                     <Card
-                      style={{ minWidth: "80%", backgroundColor: "#454545"}}
+                      style={{ minWidth: "80%", backgroundColor: "#454545" }}
                     >
                       <Card.Body>
                         <CustomForm

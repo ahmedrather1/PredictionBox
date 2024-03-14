@@ -133,7 +133,7 @@ h1 {
 }
 
 .typewriter-card {
-  font-size: 1.8rem; /* Default font size */
+  font-size: 1.8rem; 
 }
 
 .info-card {
@@ -150,7 +150,7 @@ h1 {
 
 .info-card-title {
   margin-top: 2rem;
-  flex-shrink: 0; /* Prevent the title from shrinking */
+  flex-shrink: 0; 
 }
 
 .info-card-body {
@@ -176,7 +176,7 @@ h1 {
 
 .info-card-title {
   margin-top: 2rem;
-  flex-shrink: 0; /* Prevent the title from shrinking */
+  flex-shrink: 0; 
 }
 
 .info-card-body {
@@ -188,66 +188,53 @@ h1 {
   flex-grow: 1; 
 }
 
-
-/* .shadow-card-purple {
-  box-shadow: 0px 0px 8px #a955c2; 
-}
-
-.shadow-card-blue {
-  box-shadow: 0px 0px 8px #2596be;
-} */
-
-/* Adjust the bottom property based on your needs */
 .carousel-param-info .carousel-control-prev, .carousel-param-info .carousel-control-next {
-  bottom: -230px; /* Example value; adjust as needed */
+  bottom: -230px; 
 }
 
-/* Optional: Define a fixed height for the carousel items */
 .carousel-param-info .carousel-item {
-  height: 280px; /* Example fixed height; adjust as needed */
+  height: 280px;
 }
 
-/* Adjust the bottom property based on your needs */
 .carousel-param-info-small .carousel-control-prev, .carousel-param-info-small .carousel-control-next {
-  bottom: -150px; /* Example value; adjust as needed */
+  bottom: -150px; 
 }
 
-/* Optional: Define a fixed height for the carousel items */
 .carousel-param-info-small .carousel-item {
-  height: 200px; /* Example fixed height; adjust as needed */
+  height: 200px;
 }
 
 .param-info-card-body {
-  max-height: 130px; /* Adjust based on your content and design */
-  overflow-y: auto; /* Enables vertical scrolling */
+  max-height: 130px; 
+  overflow-y: auto; 
 }
 
 .param-info-card-small-body {
-  max-height: 80px; /* Adjust based on your content and design */
-  overflow-y: auto; /* Enables vertical scrolling */
+  max-height: 80px; 
+  overflow-y: auto; 
 }
 
 @media (max-width: 768px) {
   .typewriter-card {
-    font-size: 1rem; /* Smaller font size on small screens */
+    font-size: 1rem; 
   }
 
   .info-card-title {
     margin-top: 1rem;
     margin-bottom: 1rem;
-    font-size: 1rem; /* Adjust the font size as needed */
+    font-size: 1rem; 
   }
 
   .param-info-card-title {
     margin-top: 1rem;
     margin-bottom: 1rem;
-    font-size: 1rem; /* Adjust the font size as needed */
+    font-size: 1rem; 
   }
 
   .param-info-card-small-title {
     margin-top: 1rem;
     margin-bottom: 1rem;
-    font-size: 1rem; /* Adjust the font size as needed */
+    font-size: 1rem; 
   }
 
   .demodatacard {
@@ -257,7 +244,7 @@ h1 {
 
 @media (max-width: 1200px) {
   .flex-container {
-    flex-direction: column; /* Stack elements vertically on smaller screens */
+    flex-direction: column; 
   }
 
   .flex-container > Canvas {
@@ -265,13 +252,13 @@ h1 {
     margin-right: 0;
   }
   .info-card {
-    height: auto !important; /* Remove the fixed height for small screens */
+    height: auto !important; 
   }
   .param-info-card {
-    height: auto !important; /* Remove the fixed height for small screens */
+    height: auto !important; 
   }
   .param-info-card-small {
-    height: auto !important; /* Remove the fixed height for small screens */
+    height: auto !important; 
   }
 }
 
