@@ -1,14 +1,35 @@
 import React from "react";
-import { Card } from "react-bootstrap";
+import { Card, Carousel, Row } from "react-bootstrap";
 
 const CustomParameterInfoCard = ({ title, Text }) => {
   return (
-    <Card className="mt-3 mb-4">
-      <Card.Body>
-        <Card.Title>{title}</Card.Title>
-        <Text />
-      </Card.Body>
-    </Card>
+      <Carousel
+        data-bs-theme="light"
+        interval={null}
+        className="carousel-param-info"
+      >
+        {Object.keys(Text).map((key, index) => {
+          return (
+            <Carousel.Item
+              key={index}
+              className="text-center"
+            >
+              <Card
+                className="param-info-card shadow-card-blue"
+                style={{height:"100%"}}
+              > 
+                
+                <Card.Title className="param-info-card-title mt-4">
+                  <strong style={{color:"#61dafb"}}>{title}</strong>
+                </Card.Title>
+                <Card.Body className="text-center param-info-card-body">
+                  {Text[key]}
+                </Card.Body>
+              </Card>
+            </Carousel.Item>
+          );
+        })}
+      </Carousel>
   );
 };
 

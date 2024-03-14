@@ -21,7 +21,7 @@ function ModelPage({
   CustomParameterInfoCard,
   GeneralInfoCard,
   ChooseDataCard,
-  ModelName
+  ModelName,
 }) {
   // TODO use a reducer, too many usestates!
   const [columns, setColumns] = useState(null);
@@ -160,7 +160,9 @@ function ModelPage({
   const renderContent = () => {
     if (samplePrediction && originalData) {
       return (
-        <Container fluid >
+        <Container fluid>
+          <h1 style={{fontSize:"4rem", textAlign:"center"}}>{ModelName}</h1>
+
           <Row>
             <Col sm={8} className="mt-3 animate__animated animate__fadeInLeft">
               <ChartComponent
@@ -188,15 +190,11 @@ function ModelPage({
                   customIndividualPrediction={customIndividualPrediction}
                 />
               </div>
+              <CustomParameterInfoCard />
             </Col>
           </Row>
-          <Row>
-            <Container>
-              <Col md={8} className="animate__animated animate__fadeInUp">
-                <CustomParameterInfoCard />
-              </Col>
-            </Container>
-          </Row>
+
+          
         </Container>
       );
     } else {

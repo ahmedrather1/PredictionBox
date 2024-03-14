@@ -162,6 +162,32 @@ h1 {
   flex-grow: 1; 
 }
 
+/* .param-info-card {
+  height: 16rem;
+  max-width: 100%;
+  margin-top: 5px;
+  display: inline-block;
+  overflow: auto;
+  justify-content: space-between
+  
+}
+
+.param-info-card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 70%;
+  width: 80%;
+  overflow-y: auto; 
+  flex-grow: 1; 
+}
+
+.param-info-card-title {
+  margin-top: 1rem;
+} */
+
+
 /* .shadow-card-purple {
   box-shadow: 0px 0px 8px #a955c2; 
 }
@@ -170,12 +196,34 @@ h1 {
   box-shadow: 0px 0px 8px #2596be;
 } */
 
+/* Adjust the bottom property based on your needs */
+.carousel-param-info .carousel-control-prev, .carousel-param-info .carousel-control-next {
+  bottom: -230px; /* Example value; adjust as needed */
+}
+
+/* Optional: Define a fixed height for the carousel items */
+.carousel-param-info .carousel-item {
+  height: 280px; /* Example fixed height; adjust as needed */
+}
+
+.param-info-card-body {
+  max-height: 130px; /* Adjust based on your content and design */
+  overflow-y: auto; /* Enables vertical scrolling */
+}
+
+
 @media (max-width: 768px) {
   .typewriter-card {
     font-size: 1rem; /* Smaller font size on small screens */
   }
 
   .info-card-title {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-size: 1rem; /* Adjust the font size as needed */
+  }
+
+  .param-info-card-title {
     margin-top: 1rem;
     margin-bottom: 1rem;
     font-size: 1rem; /* Adjust the font size as needed */
@@ -196,6 +244,9 @@ h1 {
     margin-right: 0;
   }
   .info-card {
+    height: auto !important; /* Remove the fixed height for small screens */
+  }
+  .param-info-card {
     height: auto !important; /* Remove the fixed height for small screens */
   }
 }
