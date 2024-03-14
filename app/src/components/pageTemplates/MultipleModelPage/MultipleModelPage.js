@@ -28,6 +28,7 @@ function MultipleModelPage({
   GeneralInfoCard,
   ChooseDataCard,
   PredictorSelectionInfoCard,
+  ModelName,
 }) {
   // TODO too many usestates! use redux instead
   const [columns, setColumns] = useState(null);
@@ -125,27 +126,30 @@ function MultipleModelPage({
     );
   };
 
-  // TODO extract into smaller components
   const renderContent = () => {
     if (partialRegressions) {
       return (
         <Container fluid>
-          <Row>
-            <Col sm={8} className="mt-3">
-              <PartialRegressionsCharts
-                partialRegressions={partialRegressions}
-                currentPage={currentPage}
-                chartsPerPage={chartsPerPage}
-                response={response}
-              />
-              <PaginationComponent
-                currentPage={currentPage}
-                itemCount={Object.keys(partialRegressions).length}
-                itemsPerPage={chartsPerPage}
-                onPageChange={setCurrentPage}
-              />
+          <h1 style={{ fontSize: "4rem", textAlign: "center" }}>{ModelName}</h1>
+
+          <Row className="mt-3">
+            <Col sm={8} className="mt-3 ">
+              <div className="animate__animated animate__fadeInLeft">
+                <PartialRegressionsCharts
+                  partialRegressions={partialRegressions}
+                  currentPage={currentPage}
+                  chartsPerPage={chartsPerPage}
+                  response={response}
+                />
+                <PaginationComponent
+                  currentPage={currentPage}
+                  itemCount={Object.keys(partialRegressions).length}
+                  itemsPerPage={chartsPerPage}
+                  onPageChange={setCurrentPage}
+                />
+              </div>
             </Col>
-            <Col>
+            <Col className="animate__animated animate__fadeInRight">
               <div className="mb-3 mt-3">
                 <MultipleParameterIndividualPredictionCard
                   onSubmit={handleDataFromPredictionForm}
@@ -156,32 +160,34 @@ function MultipleModelPage({
                   titles={{ standard: "Your Model's Prediction" }}
                 />
               </div>
+              <FinalPlotsInfoCard />
             </Col>
-          </Row>
-          <Row>
-            <Container>
-              <Col md={8}>
-                <FinalPlotsInfoCard />
-              </Col>
-            </Container>
           </Row>
         </Container>
       );
     } else if (coefAnalysis) {
       return (
-        <Container fluid>
+        <Container
+          fluid
+          style={{
+            height: "100vh",
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          <h1 style={{ fontSize: "4rem", textAlign: "center" }}>{ModelName}</h1>
           <Row>
-            <Col sm={8} className="mt-3">
+            <Col sm={8} className="mt-3 animate__animated animate__fadeInLeft">
               <ForestPlotChart coefInfo={coefAnalysis} />
             </Col>
             <Col>
-              <div className="mb-3 mt-3">
+              <div className="mb-3 mt-3 animate__animated animate__fadeInRight">
                 <ChoosePredictorsCard
                   onSubmit={handleDataFromPredictorsSelectorForm}
                   schema={ChoosePredictorsFormSchema(initialPredictors)}
                 />
               </div>
-              <div className="mb-3">
+              <div className="mb-3 animate__animated animate__fadeInRight">
                 <PredictorSelectionInfoCard />
               </div>
             </Col>
@@ -196,6 +202,7 @@ function MultipleModelPage({
           handleDataFromResponseSelector={handleDataFromResponseSelector}
           GeneralInfoCard={GeneralInfoCard}
           ChooseDataCard={ChooseDataCard}
+          ModelName={ModelName}
         />
       );
     }

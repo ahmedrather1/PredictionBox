@@ -29,25 +29,87 @@
 }
 
 .btn-primary {
-  background-color: #6b9080;
-  border-color: #6b9080;
+  background-color: #a955c2;
+  border-color: #a955c2;
 }
 
 .btn-primary:hover,
 .btn-primary:focus,
 .btn-primary:active {
-  background-color: #3c5248;
-  border-color: #3c5248;
+  background-color: #a955c2;
+  border-color: #a955c2;
 }
 
 .btn-primary:focus:active {
-  background-color: #3c5248;
-  border-color: #3c5248;
+  background-color: #a955c2;
+  border-color: #a955c2;
 }
 
 .btn-outline-primary {
-  color: #6b9080;
-  border-color: #6b9080;
+  color: #a955c2;
+  border-color: #a955c2;
+}
+
+body {
+  background: #a0c5e8;
+}
+
+h1 {
+  background: -webkit-linear-gradient(
+    50deg,
+    #a955c2 30%,
+    #8f62c1 50%,
+    #2596be 70%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 8rem;
+}
+
+.gradienttitle {
+  background: -webkit-linear-gradient(
+    50deg,
+    #a955c2 30%,
+    #8f62c1 50%,
+    #2596be 70%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.card {
+  background-color: #343434;
+  color: #fff;
+}
+
+.google-visualization-tooltip {
+  background-color: #383838 !important;
+}
+
+.card .MuiInputBase-root::before {
+  border-bottom: 1px solid #fff;
+}
+
+.custom-navbar,
+.custom-navbar .navbar-brand,
+.custom-navbar .navbar-nav .nav-link {
+  color: #ffffff;
+}
+
+.plain-bg {
+  background-image: linear-gradient(rgb(34, 34, 34), rgb(34, 34, 34));
+}
+
+.purple-text {
+  color: #a955c2;
+}
+
+.snap-row {
+  scroll-snap-align: start;
+}
+
+.title-mt {
+  margin-top: 9rem;
 }
 
 .btn-outline-primary:hover,
@@ -58,14 +120,150 @@
 }
 
 .app-container {
-  background-color: #f2f2f2; /* Your desired color */
-  min-height: 100vh; /* 100% of the viewport height */
+  background-color: #f2f2f2;
+  min-height: 100vh;
   margin: 0;
   padding: 0;
 }
 
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.typewriter-card {
+  font-size: 1.8rem; 
+}
+
+.info-card {
+  height: 30rem;
+  max-width: 80%;
+  margin-bottom: 30px;
+  margin-top: 5px;
+  margin-left: 3px;
+  margin-right: 3px;
+  display: inline-block;
+  overflow: auto;
+  justify-content: space-between
+}
+
+.info-card-title {
+  margin-top: 2rem;
+  flex-shrink: 0; 
+}
+
+.info-card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 70%;
+  overflow-y: auto; 
+  flex-grow: 1; 
+}
+
+.info-card {
+  height: 30rem;
+  max-width: 80%;
+  margin-bottom: 30px;
+  margin-top: 5px;
+  margin-left: 3px;
+  margin-right: 3px;
+  display: inline-block;
+  overflow: auto;
+  justify-content: space-between
+}
+
+.info-card-title {
+  margin-top: 2rem;
+  flex-shrink: 0; 
+}
+
+.info-card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 70%;
+  overflow-y: auto; 
+  flex-grow: 1; 
+}
+
+.carousel-param-info .carousel-control-prev, .carousel-param-info .carousel-control-next {
+  bottom: -230px; 
+}
+
+.carousel-param-info .carousel-item {
+  height: 280px;
+}
+
+.carousel-param-info-small .carousel-control-prev, .carousel-param-info-small .carousel-control-next {
+  bottom: -150px; 
+}
+
+.carousel-param-info-small .carousel-item {
+  height: 200px;
+}
+
+.param-info-card-body {
+  max-height: 130px; 
+  overflow-y: auto; 
+}
+
+.param-info-card-small-body {
+  max-height: 80px; 
+  overflow-y: auto; 
+}
+
+@media (max-width: 768px) {
+  .typewriter-card {
+    font-size: 1rem; 
+  }
+
+  .info-card-title {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-size: 1rem; 
+  }
+
+  .param-info-card-title {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-size: 1rem; 
+  }
+
+  .param-info-card-small-title {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-size: 1rem; 
+  }
+
+  .demodatacard {
+    width: 90%;
+  }
+}
+
+@media (max-width: 1200px) {
+  .flex-container {
+    flex-direction: column; 
+  }
+
+  .flex-container > Canvas {
+    width: 100%;
+    margin-right: 0;
+  }
+  .info-card {
+    height: auto !important; 
+  }
+  .param-info-card {
+    height: auto !important; 
+  }
+  .param-info-card-small {
+    height: auto !important; 
+  }
+}
+
 html {
-  background-color: #f2f2f2; /* Replace #yourColor with your actual color hex code */
+  background-color: rgb(34, 34, 34);
   height: 100%;
   margin: 0;
   padding: 0;
@@ -77,5 +275,17 @@ html {
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 4rem;
+  }
+}
+
+@media (max-width: 576px) {
+  h1 {
+    font-size: 3rem;
   }
 }

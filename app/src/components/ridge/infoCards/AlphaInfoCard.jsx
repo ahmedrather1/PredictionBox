@@ -1,10 +1,10 @@
 import React from "react";
-import GeneralInfoCard from "../../common/infoCards/GeneralInfoCard";
 import AboutAlphaText from "../text/AboutAlphaText";
+import CustomParameterInfoCardSmall from "../../common/infoCards/CustomParameterInfoCardSmall";
 
 const AlphaInfoCard = () => {
   let title = "About Alpha";
-  return <GeneralInfoCard title={title} Text={AboutAlphaText} />;
+  return <CustomParameterInfoCardSmall title={title} Text={AboutAlphaText} />;
 };
 
 export default AlphaInfoCard;

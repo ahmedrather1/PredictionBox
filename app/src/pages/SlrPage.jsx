@@ -25,6 +25,7 @@ function SlrPage() {
       CustomParameterInfoCard={SlrCustomParameterInfoCard}
       GeneralInfoCard={SlrGeneralInfoCard}
       ChooseDataCard={SlrChooseDataCard}
+      ModelName={"Simple Linear Regression"}
     />
   );
 }

@@ -4,7 +4,7 @@ import {
   materialRenderers,
   materialCells,
 } from "@jsonforms/material-renderers";
-import { Button } from "react-bootstrap";
+import Button from "@mui/material/Button";
 
 const CustomForm = ({ schema, onSubmit }) => {
   const [data, setData] = React.useState({});
@@ -15,18 +15,28 @@ const CustomForm = ({ schema, onSubmit }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <JsonForms
-        schema={schema}
-        data={data}
-        renderers={materialRenderers}
-        cells={materialCells}
-        onChange={({ data }) => setData(data)}
-      />
-      <Button type="submit" className="mt-2">
-        Submit
-      </Button>
-    </form>
+    <div className="form-container">
+      <form onSubmit={handleSubmit}>
+        <JsonForms
+          schema={schema}
+          data={data}
+          renderers={materialRenderers}
+          cells={materialCells}
+          onChange={({ data }) => setData(data)}
+        />
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginTop: "8px",
+          }}
+        >
+          <Button type="submit" className="mt-2 ">
+            Submit
+          </Button>
+        </div>
+      </form>
+    </div>
   );
 };
 

@@ -1,6 +1,6 @@
 import LassoGeneralInfoCard from "../components/lasso/infoCards/LassoGeneralInfoCard";
 import LassoChooseDataCard from "../components/lasso/infoCards/LassoChooseDataCard";
-import MlrPredictorSelectionInfoCard from "../components/mlr/infoCards/PredictorSelectionInfoCard";
+import RidgePredictorSelectionInfoCard from "../components/ridge/infoCards/RidgePredictorSelectionInfoCard";
 import LassoPartialRegressionInfoCard from "../components/lasso/infoCards/LassoPartialRegressionInfoCard";
 import AlphaInfoCard from "../components/lasso/infoCards/AlphaInfoCard";
 
@@ -27,9 +27,10 @@ function LassoPage() {
       FinalPlotsInfoCard={LassoPartialRegressionInfoCard}
       GeneralInfoCard={LassoGeneralInfoCard}
       ChooseDataCard={LassoChooseDataCard}
-      PredictorSelectionInfoCard={MlrPredictorSelectionInfoCard}
+      PredictorSelectionInfoCard={RidgePredictorSelectionInfoCard}
       AboutAlphaCard={AlphaInfoCard}
       Variant={"LASSO"}
+      ModelName={"LASSO Regression"}
     />
   );
 }

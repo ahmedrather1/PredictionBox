@@ -64,7 +64,7 @@ const ChartComponent = ({
       type: "scatter",
       options: {
         pointSize: 1,
-        color: "blue",
+        color: "white",
         visibleInLegend: showScatterPlot,
       },
     },
@@ -72,7 +72,7 @@ const ChartComponent = ({
       type: "line",
       options: {
         lineWidth: 2,
-        color: "red",
+        color: "#2596be",
         visibleInLegend: showSamplePrediction,
       },
     },
@@ -80,7 +80,7 @@ const ChartComponent = ({
       type: "line",
       options: {
         lineWidth: 2,
-        color: "green",
+        color: "#a955c2",
         visibleInLegend: showCustomPrediction,
       },
     },
@@ -144,7 +144,7 @@ const ChartComponent = ({
   };
 
   return (
-    <Card style={{ height: "76vh" }}>
+    <Card style={{ height: "80vh" }}>
       <Card.Body
         style={{
           display: "flex",
@@ -164,11 +164,14 @@ const ChartComponent = ({
           <ToggleButton
             id="toggle-scatter"
             type="checkbox"
-            variant="outline-primary"
             checked={showScatterPlot}
             onChange={(e) => setShowScatterPlot(e.currentTarget.checked)}
-            style={{ margin: "10px" }}
-          >
+            style={{ 
+              margin: "10px", 
+              backgroundColor: showScatterPlot ? "white" : "transparent", 
+              borderColor: "white",
+              color: showScatterPlot ? "black" : "white", 
+            }}          >
             {showScatterPlot ? "Hide Original Data" : "Show Original Data"}
           </ToggleButton>
           <ToggleButton
@@ -177,7 +180,12 @@ const ChartComponent = ({
             variant="outline-danger"
             checked={showSamplePrediction}
             onChange={(e) => setShowSamplePrediction(e.currentTarget.checked)}
-            style={{ margin: "10px" }}
+            style={{ 
+              margin: "10px", 
+              backgroundColor: showSamplePrediction ? "#2596be" : "transparent", 
+              borderColor: "#2596be",
+              color: showSamplePrediction ? "black" : "#2596be",  
+            }}
           >
             {showSamplePrediction
               ? "Hide Sample Prediction"
@@ -192,7 +200,12 @@ const ChartComponent = ({
               checked={showCustomPrediction}
               disabled={false}
               onChange={(e) => setShowCustomPrediction(e.currentTarget.checked)}
-              style={{ margin: "10px" }}
+              style={{ 
+                margin: "10px", 
+                backgroundColor: showCustomPrediction ? "#a955c2" : "transparent", 
+                borderColor: "#a955c2",
+                color: showCustomPrediction ? "black" : "#a955c2",  
+             }}
             >
               {showCustomPrediction
                 ? "Hide Custom Prediction"
@@ -204,8 +217,8 @@ const ChartComponent = ({
               trigger="hover"
               overlay={
                 <Popover id={`popover-positioned-right`}>
-                  <Popover.Header as="h3">{`Set some custom parameters first!`}</Popover.Header>
-                  <Popover.Body>
+                  <Popover.Header as="h3" style={{ backgroundColor: '#404040', color: '#fff' }}>{`Set some custom parameters first!`}</Popover.Header>
+                  <Popover.Body style={{ backgroundColor: '#555555', color: '#fff' }}>
                     Use the <strong>Set Custom Parameters</strong> section
                   </Popover.Body>
                 </Popover>
@@ -221,7 +234,11 @@ const ChartComponent = ({
                   onChange={(e) =>
                     setShowCustomPrediction(e.currentTarget.checked)
                   }
-                  style={{ margin: "10px" }}
+                  style={{               
+                    margin: "10px", 
+                    backgroundColor: showCustomPrediction ? "#a955c2" : "transparent", 
+                    borderColor: "#a955c2",
+                    color: showCustomPrediction ? "black" : "#a955c2",   }}
                 >
                   {showCustomPrediction
                     ? "Hide Custom Prediction"
@@ -241,19 +258,54 @@ const ChartComponent = ({
             options={{
               title: `${predictor} vs ${response}`,
               titleTextStyle: {
-                color: "black",
-                fontSize: 20,
+                color: "#2596be",
+                fontSize: 30,
                 fontName: "Arial",
                 bold: true,
                 italic: false,
               },
+              backgroundColor: "#343434",
               series: customSeries,
               hAxis: {
                 title: predictor,
+                titleTextStyle: {
+                  color: "#2596be",
+                  fontSize: 18, 
+                  italic: true,
+                },
+                textStyle: {
+                  color: "#a955c2", 
+                  fontSize: 12, 
+                  fontName: "Arial", 
+                },
+                baselineColor: "transparent",
+                gridlines: { color: "#484848" },
               },
               vAxis: {
                 title: response,
+                titleTextStyle: {
+                  color: "#2596be", 
+                  fontSize: 18, 
+                  italic: true, 
+                },
+                textStyle: {
+                  color: "#a955c2", 
+                  fontSize: 12, 
+                  fontName: "Arial", 
+                },
+                gridlines: { color: "#484848" },
               },
+              legend: {
+                textStyle: {
+                  color: 'fff', // Here you change the legend text color
+                }
+              },
+              // TODO customize this later
+              // tooltip: { textStyle: {
+              //   color: 'white', 
+              //   fontName: 'Arial',
+              //   fontSize: 10,
+              // },isHtml: true },
               interpolateNulls: true,
             }}
           />
