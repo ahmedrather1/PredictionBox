@@ -28,6 +28,7 @@ function MultipleModelPage({
   GeneralInfoCard,
   ChooseDataCard,
   PredictorSelectionInfoCard,
+  ModelName
 }) {
   // TODO too many usestates! use redux instead
   const [columns, setColumns] = useState(null);
@@ -203,6 +204,7 @@ function MultipleModelPage({
           handleDataFromResponseSelector={handleDataFromResponseSelector}
           GeneralInfoCard={GeneralInfoCard}
           ChooseDataCard={ChooseDataCard}
+          ModelName={ModelName}
         />
       );
     }

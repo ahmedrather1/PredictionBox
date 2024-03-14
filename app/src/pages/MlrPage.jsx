@@ -21,6 +21,7 @@ function MlrPage() {
       GeneralInfoCard={MlrGeneralInfoCard}
       ChooseDataCard={MlrChooseDataCard}
       PredictorSelectionInfoCard={MlrPredictorSelectionInfoCard}
+      ModelName={"Multiple Linear Regression"}
     />
   );
 }
