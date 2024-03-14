@@ -11,7 +11,7 @@ const IndividualPredictionCard = ({
   return (
     <Card>
       <Card.Body>
-        <Card.Title>Get a Prediction</Card.Title>
+        <Card.Title style={{ color:"#a955c2", fontSize: "26px", textAlign:"center", marginBottom:"1rem"}}>Get a Prediction</Card.Title>
         <Container>
           <Row>
             <CustomForm onSubmit={onSubmit} schema={schema} />

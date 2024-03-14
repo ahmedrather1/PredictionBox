@@ -164,7 +164,7 @@ function ModelPage({
           <h1 style={{fontSize:"4rem", textAlign:"center"}}>{ModelName}</h1>
 
           <Row>
-            <Col sm={8} className="mt-3 animate__animated animate__fadeInLeft">
+            <Col md={8} className="mt-3 animate__animated animate__fadeInLeft">
               <ChartComponent
                 samplePrediction={samplePrediction}
                 originalData={originalData}

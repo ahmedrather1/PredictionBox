@@ -144,7 +144,7 @@ const ChartComponent = ({
   };
 
   return (
-    <Card style={{ height: "76vh" }}>
+    <Card style={{ height: "80vh" }}>
       <Card.Body
         style={{
           display: "flex",
