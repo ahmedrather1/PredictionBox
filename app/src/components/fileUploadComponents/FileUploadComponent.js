@@ -156,20 +156,20 @@ const FileUploadComponent = ({
             </>
           )}
           {columns && (
-            <Card className="shadow-card-purple">
-              <Card.Title className="text-center mt-3">
+            <Card className="shadow-card-purple" style={{ minHeight: "90%" }}>
+              <Card.Title className="text-center mt-4">
                 {" "}
-                <h2>Choose Predictor and Response</h2>
+                <h2 style={{color:"#a955c2"}}>Choose Predictor and Response</h2>
               </Card.Title>
               <Card.Subtitle className="text-center">
                 The predictor is the X Variable, and the response is the Y
                 variable
               </Card.Subtitle>
-              <Card.Body>
+              <Card.Body style={{marginTop:"3rem"}}>
                 <Row className="justify-content-md-center">
                   <div className="d-flex justify-content-center mb-3 animate__animated animate__fadeInUp">
                     <Card
-                      style={{ minWidth: "80%", backgroundColor: "#454545" }}
+                      style={{ minWidth: "80%", backgroundColor: "#454545"}}
                     >
                       <Card.Body>
                         <CustomForm
