@@ -218,7 +218,7 @@ h1 {
 }
 
 .param-info-card-body {
-  max-height: 80px; /* Adjust based on your content and design */
+  max-height: 130px; /* Adjust based on your content and design */
   overflow-y: auto; /* Enables vertical scrolling */
 }
 

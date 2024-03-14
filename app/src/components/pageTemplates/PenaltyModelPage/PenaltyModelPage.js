@@ -29,7 +29,7 @@ function PenaltyModelPage({
   PredictorSelectionInfoCard,
   AboutAlphaCard,
   Variant,
-  ModelName
+  ModelName,
 }) {
   // TODO too many usestates! use redux instead
   const [columns, setColumns] = useState(null);
@@ -230,9 +230,6 @@ function PenaltyModelPage({
                 itemsPerPage={chartsPerPage}
                 onPageChange={setCurrentPage}
               />
-              <div className="mt-3 animate__animated animate__fadeInUp">
-                <FinalPlotsInfoCard />
-              </div>
             </Col>
             <Col className="mt-3 animate__animated animate__fadeInRight">
               <div className="mt-3">
@@ -253,6 +250,9 @@ function PenaltyModelPage({
                     custom: "Custom Alpha Prediction",
                   }}
                 />
+                <div className="mt-3 animate__animated animate__fadeInUp">
+                  <FinalPlotsInfoCard />
+                </div>
               </div>
             </Col>
           </Row>
@@ -272,7 +272,6 @@ function PenaltyModelPage({
                   setShowCustomCoefs={setShowCustomCoefs}
                 />
               </div>
-
             </Col>
             <Col sm={4} className="">
               <div className="mb-3 mt-3  animate__animated animate__fadeInRight">
@@ -282,13 +281,13 @@ function PenaltyModelPage({
                 />
               </div>
               <div className="animate__animated animate__fadeInRight">
-              <ChooseAlphaCard
-                onSubmit={handleDataFromAlphaSelectorForm}
-                schema={AlphaSelectorInputFormSchema()}
-              />
+                <ChooseAlphaCard
+                  onSubmit={handleDataFromAlphaSelectorForm}
+                  schema={AlphaSelectorInputFormSchema()}
+                />
               </div>
               <div className="mt-3 animate__animated animate__fadeInUp">
-              <PredictorSelectionInfoCard />
+                <PredictorSelectionInfoCard />
               </div>
               <div className="mt-3 mb-2  animate__animated animate__fadeInUp">
                 <AboutAlphaCard />
