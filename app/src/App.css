@@ -51,9 +51,8 @@
 }
 
 body {
-  background : #A0C5E8
+  background: #a0c5e8;
 }
-
 
 h1 {
   background: -webkit-linear-gradient(
@@ -79,8 +78,8 @@ h1 {
 }
 
 .card {
-  background-color: #343434; 
-  color:#fff
+  background-color: #343434;
+  color: #fff;
 }
 
 .google-visualization-tooltip {
@@ -90,7 +89,6 @@ h1 {
 .card .MuiInputBase-root::before {
   border-bottom: 1px solid #fff;
 }
-
 
 .custom-navbar,
 .custom-navbar .navbar-brand,
@@ -106,13 +104,12 @@ h1 {
   color: #a955c2;
 }
 
-
 .snap-row {
   scroll-snap-align: start;
 }
 
 .title-mt {
-  margin-top: 9rem; 
+  margin-top: 9rem;
 }
 
 .btn-outline-primary:hover,
@@ -123,14 +120,150 @@ h1 {
 }
 
 .app-container {
-  background-color: #f2f2f2; 
-  min-height: 100vh; 
+  background-color: #f2f2f2;
+  min-height: 100vh;
   margin: 0;
   padding: 0;
 }
 
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.typewriter-card {
+  font-size: 1.8rem; 
+}
+
+.info-card {
+  height: 30rem;
+  max-width: 80%;
+  margin-bottom: 30px;
+  margin-top: 5px;
+  margin-left: 3px;
+  margin-right: 3px;
+  display: inline-block;
+  overflow: auto;
+  justify-content: space-between
+}
+
+.info-card-title {
+  margin-top: 2rem;
+  flex-shrink: 0; 
+}
+
+.info-card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 70%;
+  overflow-y: auto; 
+  flex-grow: 1; 
+}
+
+.info-card {
+  height: 30rem;
+  max-width: 80%;
+  margin-bottom: 30px;
+  margin-top: 5px;
+  margin-left: 3px;
+  margin-right: 3px;
+  display: inline-block;
+  overflow: auto;
+  justify-content: space-between
+}
+
+.info-card-title {
+  margin-top: 2rem;
+  flex-shrink: 0; 
+}
+
+.info-card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 70%;
+  overflow-y: auto; 
+  flex-grow: 1; 
+}
+
+.carousel-param-info .carousel-control-prev, .carousel-param-info .carousel-control-next {
+  bottom: -230px; 
+}
+
+.carousel-param-info .carousel-item {
+  height: 280px;
+}
+
+.carousel-param-info-small .carousel-control-prev, .carousel-param-info-small .carousel-control-next {
+  bottom: -150px; 
+}
+
+.carousel-param-info-small .carousel-item {
+  height: 200px;
+}
+
+.param-info-card-body {
+  max-height: 130px; 
+  overflow-y: auto; 
+}
+
+.param-info-card-small-body {
+  max-height: 80px; 
+  overflow-y: auto; 
+}
+
+@media (max-width: 768px) {
+  .typewriter-card {
+    font-size: 1rem; 
+  }
+
+  .info-card-title {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-size: 1rem; 
+  }
+
+  .param-info-card-title {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-size: 1rem; 
+  }
+
+  .param-info-card-small-title {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-size: 1rem; 
+  }
+
+  .demodatacard {
+    width: 90%;
+  }
+}
+
+@media (max-width: 1200px) {
+  .flex-container {
+    flex-direction: column; 
+  }
+
+  .flex-container > Canvas {
+    width: 100%;
+    margin-right: 0;
+  }
+  .info-card {
+    height: auto !important; 
+  }
+  .param-info-card {
+    height: auto !important; 
+  }
+  .param-info-card-small {
+    height: auto !important; 
+  }
+}
+
 html {
-  background-color: rgb(34, 34, 34); 
+  background-color: rgb(34, 34, 34);
   height: 100%;
   margin: 0;
   padding: 0;
@@ -153,6 +286,6 @@ html {
 
 @media (max-width: 576px) {
   h1 {
-    font-size: 3rem; 
+    font-size: 3rem;
   }
 }

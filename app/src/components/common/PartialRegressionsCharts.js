@@ -19,10 +19,13 @@ const PartialRegressionsCharts = ({
 
   const alphaValPopover = (
     <Popover id="popover-alphaVal-undefined">
-      <Popover.Header as="h3">
+      <Popover.Header
+        as="h3"
+        style={{ backgroundColor: "#404040", color: "#fff" }}
+      >
         {"Set a custom alpha value first!"}
       </Popover.Header>
-      <Popover.Body>
+      <Popover.Body style={{ backgroundColor: "#555555", color: "#fff" }}>
         Use the <strong>Choose your Alpha Value</strong> section to define an
         alpha value.
       </Popover.Body>
@@ -58,12 +61,14 @@ const PartialRegressionsCharts = ({
                     }
                     onClick={handleToggleCustomModel}
                     disabled={alphaVal === null}
-                    style={{ 
-                      margin: "10px", 
-                      backgroundColor: showCustomModel ? "#2596be" : "transparent", 
+                    style={{
+                      margin: "10px",
+                      backgroundColor: showCustomModel
+                        ? "#2596be"
+                        : "transparent",
                       borderColor: "#2596be",
-                      color: showCustomModel ? "black" : "#2596be",  
-                   }}
+                      color: showCustomModel ? "black" : "#2596be",
+                    }}
                   >
                     {showCustomModel
                       ? "Hide Custom Model"

@@ -28,6 +28,7 @@ function MultipleModelPage({
   GeneralInfoCard,
   ChooseDataCard,
   PredictorSelectionInfoCard,
+  ModelName,
 }) {
   // TODO too many usestates! use redux instead
   const [columns, setColumns] = useState(null);
@@ -125,26 +126,27 @@ function MultipleModelPage({
     );
   };
 
-  // TODO extract into smaller components
   const renderContent = () => {
     if (partialRegressions) {
       return (
         <Container fluid>
+          <h1 style={{ fontSize: "4rem", textAlign: "center" }}>{ModelName}</h1>
+
           <Row className="mt-3">
             <Col sm={8} className="mt-3 ">
-            <div className="animate__animated animate__fadeInLeft">
-              <PartialRegressionsCharts
-                partialRegressions={partialRegressions}
-                currentPage={currentPage}
-                chartsPerPage={chartsPerPage}
-                response={response}
-              />
-              <PaginationComponent
-                currentPage={currentPage}
-                itemCount={Object.keys(partialRegressions).length}
-                itemsPerPage={chartsPerPage}
-                onPageChange={setCurrentPage}
-              />
+              <div className="animate__animated animate__fadeInLeft">
+                <PartialRegressionsCharts
+                  partialRegressions={partialRegressions}
+                  currentPage={currentPage}
+                  chartsPerPage={chartsPerPage}
+                  response={response}
+                />
+                <PaginationComponent
+                  currentPage={currentPage}
+                  itemCount={Object.keys(partialRegressions).length}
+                  itemsPerPage={chartsPerPage}
+                  onPageChange={setCurrentPage}
+                />
               </div>
             </Col>
             <Col className="animate__animated animate__fadeInRight">
@@ -158,27 +160,24 @@ function MultipleModelPage({
                   titles={{ standard: "Your Model's Prediction" }}
                 />
               </div>
+              <FinalPlotsInfoCard />
             </Col>
-          </Row>
-          <Row>
-            <Container>
-              <Col md={8} className="animate__animated animate__fadeInUp">
-                <FinalPlotsInfoCard />
-              </Col>
-            </Container>
           </Row>
         </Container>
       );
     } else if (coefAnalysis) {
       return (
-        <Container fluid    
-        style={{
-          height: "100vh",
-          display: "flex",
-          flexDirection: "column",
-        }}>
+        <Container
+          fluid
+          style={{
+            height: "100vh",
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          <h1 style={{ fontSize: "4rem", textAlign: "center" }}>{ModelName}</h1>
           <Row>
-            <Col sm={8} className="mt-3 animate__animated animate__fadeInLeft" >
+            <Col sm={8} className="mt-3 animate__animated animate__fadeInLeft">
               <ForestPlotChart coefInfo={coefAnalysis} />
             </Col>
             <Col>
@@ -203,6 +202,7 @@ function MultipleModelPage({
           handleDataFromResponseSelector={handleDataFromResponseSelector}
           GeneralInfoCard={GeneralInfoCard}
           ChooseDataCard={ChooseDataCard}
+          ModelName={ModelName}
         />
       );
     }

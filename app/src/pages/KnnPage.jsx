@@ -26,6 +26,7 @@ function KnnPage() {
       CustomParameterInfoCard={KnnCustomParameterInfoCard}
       GeneralInfoCard={KnnGeneralInfoCard}
       ChooseDataCard={KnnChooseDataCard}
+      ModelName={"K Nearest Neighbors"}
     />
   );
 }

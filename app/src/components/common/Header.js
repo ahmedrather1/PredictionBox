@@ -31,7 +31,7 @@ function Header() {
               <Nav.Link href="lasso" style={getNavLinkClass("/lasso")}>LASSO</Nav.Link>
             </Nav>
             <Nav className="mr-auto">
-              <Nav.Link href="https://github.com/ahmedrather1/messwithml">
+              <Nav.Link href="https://github.com/ahmedrather1/messwithml" target="_blank">
                 Github
               </Nav.Link>
             </Nav>
