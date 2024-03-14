@@ -4,8 +4,12 @@ import AboutPredictorSelectionText from "../text/AboutPredictorSelectionText";
 
 const RidgePredictorSelectionInfoCard = () => {
   let title = "About this Chart";
-  return <CustomParameterInfoCardSmall title={title} Text={AboutPredictorSelectionText} />;
-  
+  return (
+    <CustomParameterInfoCardSmall
+      title={title}
+      Text={AboutPredictorSelectionText}
+    />
+  );
 };
 
 export default RidgePredictorSelectionInfoCard;

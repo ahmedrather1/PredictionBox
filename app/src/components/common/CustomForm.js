@@ -31,7 +31,6 @@ const CustomForm = ({ schema, onSubmit }) => {
             marginTop: "8px",
           }}
         >
-          {" "}
           <Button type="submit" className="mt-2 ">
             Submit
           </Button>

@@ -28,7 +28,10 @@ const RotatingCubeCard = () => {
   }, []);
 
   return (
-    <Card style={{ width: "80%", height: "60%", backgroundColor:"#404040" }} className="mt-2">
+    <Card
+      style={{ width: "80%", height: "60%", backgroundColor: "#404040" }}
+      className="mt-2"
+    >
       <Card.Body>
         <div
           className="flex-container"

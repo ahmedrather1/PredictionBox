@@ -196,6 +196,7 @@ function PenaltyModelPage({
     if (partialRegressions) {
       return (
         <Container fluid>
+          <h1 style={{ fontSize: "4rem", textAlign: "center" }}>{ModelName}</h1>
           <Row>
             <Col sm={8} className="mt-4 animate__animated animate__fadeInLeft">
               {!showCustomModel && (

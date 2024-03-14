@@ -130,7 +130,7 @@ const FileUploadComponent = ({
                           </Card.Title>
                           <Container>
                             <Row>
-                            <div
+                              <div
                                 style={{
                                   display: "flex",
                                   justifyContent: "center",
@@ -138,11 +138,11 @@ const FileUploadComponent = ({
                                   marginLeft: "30px",
                                 }}
                               >
-                              <input
-                                type="file"
-                                className="mt-2"
-                                onChange={handleFileChange}
-                              />
+                                <input
+                                  type="file"
+                                  className="mt-2"
+                                  onChange={handleFileChange}
+                                />
                               </div>
                             </Row>
                             <Row className="mt-3">

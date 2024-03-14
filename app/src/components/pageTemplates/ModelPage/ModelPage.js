@@ -161,7 +161,7 @@ function ModelPage({
     if (samplePrediction && originalData) {
       return (
         <Container fluid>
-          <h1 style={{fontSize:"4rem", textAlign:"center"}}>{ModelName}</h1>
+          <h1 style={{ fontSize: "4rem", textAlign: "center" }}>{ModelName}</h1>
 
           <Row>
             <Col md={8} className="mt-3 animate__animated animate__fadeInLeft">
@@ -193,8 +193,6 @@ function ModelPage({
               <CustomParameterInfoCard />
             </Col>
           </Row>
-
-          
         </Container>
       );
     } else {

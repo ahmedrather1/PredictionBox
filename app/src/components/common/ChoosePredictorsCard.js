@@ -14,7 +14,7 @@ const ChoosePredictorsCard = ({ onSubmit, schema }) => {
             marginBottom: "1rem",
           }}
         >
-          Choose your Predictors{" "}
+          Choose your Predictors
         </Card.Title>
         <CustomForm onSubmit={onSubmit} schema={schema} />
       </Card.Body>

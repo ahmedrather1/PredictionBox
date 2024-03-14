@@ -6,12 +6,12 @@ import { QuickModelInfo } from "./QuickModelInfo";
 export const RotatingCube = ({ setCurrentSelection }) => {
   const meshRef = useRef();
   const [rotationSteps, setRotationSteps] = useState([
-    { axis: "y", angle: Math.PI / 2 }, // 90 degrees about Y
-    { axis: "y", angle: Math.PI / 2 }, // Another 90 degrees about Y
-    { axis: "y", angle: Math.PI / 2 }, // Another 90 degrees about Y
-    { axis: "x", angle: Math.PI / 2 }, // 90 degrees about X
-    { axis: "x", angle: Math.PI }, // 180 degrees about X
-    { axis: "x", angle: Math.PI / 2, nextAxis: "y", nextAngle: Math.PI / 2 }, // Rotate 90 degrees about X then Y
+    { axis: "y", angle: Math.PI / 2 },
+    { axis: "y", angle: Math.PI / 2 },
+    { axis: "y", angle: Math.PI / 2 },
+    { axis: "x", angle: Math.PI / 2 },
+    { axis: "x", angle: Math.PI },
+    { axis: "x", angle: Math.PI / 2, nextAxis: "y", nextAngle: Math.PI / 2 },
   ]);
   const [currentStep, setCurrentStep] = useState(0);
   const [rotation, setRotation] = useState({ x: 0, y: 0 });
@@ -36,7 +36,8 @@ export const RotatingCube = ({ setCurrentSelection }) => {
           setCurrentStep((currentStep + 1) % rotationSteps.length);
         }
       },
-      currentStep === 0 ? 4000 : 2000
+      // maybe make first step slower?
+      currentStep === 0 ? 3000 : 3000
     );
 
     return () => clearTimeout(timer);

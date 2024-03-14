@@ -27,12 +27,8 @@ function RidgePage() {
       FinalPlotsInfoCard={RidgePartialRegressionInfoCard}
       GeneralInfoCard={RidgeGeneralInfoCard}
       ChooseDataCard={RidgeChooseDataCard}
-
-
       PredictorSelectionInfoCard={RidgePredictorSelectionInfoCard}
       AboutAlphaCard={AlphaInfoCard}
-
-      
       Variant={"RIDGE"}
       ModelName={"Regularized Linear Regression"}
     />
