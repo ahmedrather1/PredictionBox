@@ -1,8 +1,8 @@
 import RidgeGeneralInfoCard from "../components/ridge/infoCards/RidgeGeneralInfoCard";
 import RidgeChooseDataCard from "../components/ridge/infoCards/RidgeChooseDataCard";
-import MlrPredictorSelectionInfoCard from "../components/mlr/infoCards/PredictorSelectionInfoCard";
 import RidgePartialRegressionInfoCard from "../components/ridge/infoCards/RidgePartialRegressionInfoCard";
 import AlphaInfoCard from "../components/ridge/infoCards/AlphaInfoCard";
+import RidgePredictorSelectionInfoCard from "../components/ridge/infoCards/RidgePredictorSelectionInfoCard";
 
 import PenaltyModelPage from "../components/pageTemplates/PenaltyModelPage/PenaltyModelPage";
 import { ChoosePredictorsFormSchema } from "../formSchemas/Mlr/ChoosePredictorsFormSchema";
@@ -27,9 +27,14 @@ function RidgePage() {
       FinalPlotsInfoCard={RidgePartialRegressionInfoCard}
       GeneralInfoCard={RidgeGeneralInfoCard}
       ChooseDataCard={RidgeChooseDataCard}
-      PredictorSelectionInfoCard={MlrPredictorSelectionInfoCard}
+
+
+      PredictorSelectionInfoCard={RidgePredictorSelectionInfoCard}
       AboutAlphaCard={AlphaInfoCard}
+
+      
       Variant={"RIDGE"}
+      ModelName={"Regularized Linear Regression"}
     />
   );
 }

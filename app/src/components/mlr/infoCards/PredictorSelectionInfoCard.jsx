@@ -4,7 +4,8 @@ import AboutPredictorSelectionText from "../text/AboutPredictorSelectionText";
 
 const MlrPredictorSelectionInfoCard = () => {
   let title = "About this Chart";
-  return <CustomParameterInfoCard title={title} Text={AboutPredictorSelectionText} />;
+ return <CustomParameterInfoCard title={title} Text={AboutPredictorSelectionText} />;
+  
 };
 
 export default MlrPredictorSelectionInfoCard;

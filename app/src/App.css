@@ -162,30 +162,31 @@ h1 {
   flex-grow: 1; 
 }
 
-/* .param-info-card {
-  height: 16rem;
-  max-width: 100%;
+.info-card {
+  height: 30rem;
+  max-width: 80%;
+  margin-bottom: 30px;
   margin-top: 5px;
+  margin-left: 3px;
+  margin-right: 3px;
   display: inline-block;
   overflow: auto;
   justify-content: space-between
-  
 }
 
-.param-info-card-body {
+.info-card-title {
+  margin-top: 2rem;
+  flex-shrink: 0; /* Prevent the title from shrinking */
+}
+
+.info-card-body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
   height: 70%;
-  width: 80%;
   overflow-y: auto; 
   flex-grow: 1; 
 }
-
-.param-info-card-title {
-  margin-top: 1rem;
-} */
 
 
 /* .shadow-card-purple {
@@ -206,11 +207,25 @@ h1 {
   height: 280px; /* Example fixed height; adjust as needed */
 }
 
+/* Adjust the bottom property based on your needs */
+.carousel-param-info-small .carousel-control-prev, .carousel-param-info-small .carousel-control-next {
+  bottom: -150px; /* Example value; adjust as needed */
+}
+
+/* Optional: Define a fixed height for the carousel items */
+.carousel-param-info-small .carousel-item {
+  height: 200px; /* Example fixed height; adjust as needed */
+}
+
 .param-info-card-body {
-  max-height: 130px; /* Adjust based on your content and design */
+  max-height: 80px; /* Adjust based on your content and design */
   overflow-y: auto; /* Enables vertical scrolling */
 }
 
+.param-info-card-small-body {
+  max-height: 80px; /* Adjust based on your content and design */
+  overflow-y: auto; /* Enables vertical scrolling */
+}
 
 @media (max-width: 768px) {
   .typewriter-card {
@@ -224,6 +239,12 @@ h1 {
   }
 
   .param-info-card-title {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-size: 1rem; /* Adjust the font size as needed */
+  }
+
+  .param-info-card-small-title {
     margin-top: 1rem;
     margin-bottom: 1rem;
     font-size: 1rem; /* Adjust the font size as needed */
@@ -247,6 +268,9 @@ h1 {
     height: auto !important; /* Remove the fixed height for small screens */
   }
   .param-info-card {
+    height: auto !important; /* Remove the fixed height for small screens */
+  }
+  .param-info-card-small {
     height: auto !important; /* Remove the fixed height for small screens */
   }
 }

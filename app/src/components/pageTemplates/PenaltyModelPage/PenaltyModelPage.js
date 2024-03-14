@@ -29,6 +29,7 @@ function PenaltyModelPage({
   PredictorSelectionInfoCard,
   AboutAlphaCard,
   Variant,
+  ModelName
 }) {
   // TODO too many usestates! use redux instead
   const [columns, setColumns] = useState(null);
@@ -260,8 +261,9 @@ function PenaltyModelPage({
     } else if (coefs) {
       return (
         <Container fluid>
+          <h1 style={{ fontSize: "4rem", textAlign: "center" }}>{ModelName}</h1>
           <Row>
-            <Col sm={8} className="mt-2">
+            <Col sm={8} className="">
               <div className="mt-3 animate__animated animate__fadeInLeft">
                 <CustomForestPlotChart
                   coefs={coefs}
@@ -270,11 +272,9 @@ function PenaltyModelPage({
                   setShowCustomCoefs={setShowCustomCoefs}
                 />
               </div>
-              <div className="mt-3 mb-2  animate__animated animate__fadeInUp">
-                <PredictorSelectionInfoCard />
-              </div>
+
             </Col>
-            <Col sm={4} className="mt-2">
+            <Col sm={4} className="">
               <div className="mb-3 mt-3  animate__animated animate__fadeInRight">
                 <ChoosePredictorsCard
                   onSubmit={handleDataFromPredictorsSelectorForm}
@@ -288,6 +288,9 @@ function PenaltyModelPage({
               />
               </div>
               <div className="mt-3 animate__animated animate__fadeInUp">
+              <PredictorSelectionInfoCard />
+              </div>
+              <div className="mt-3 mb-2  animate__animated animate__fadeInUp">
                 <AboutAlphaCard />
               </div>
             </Col>
@@ -302,6 +305,7 @@ function PenaltyModelPage({
           handleDataFromResponseSelector={handleDataFromResponseSelector}
           GeneralInfoCard={GeneralInfoCard}
           ChooseDataCard={ChooseDataCard}
+          ModelName={ModelName}
         />
       );
     }
