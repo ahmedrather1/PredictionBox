@@ -19,5 +19,8 @@ export const processFileColumns = async (fileData, setColumns) => {
       cols.push(col);
     }
   });
-  setColumns(cols);
+  if (cols.length > 0){
+    setColumns(cols);
+  }
+  
 };
