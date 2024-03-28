@@ -6,6 +6,7 @@ import "animate.css";
 import RotatingCubeCard from "../components/visualcomponents/RotatingCubeCard";
 import { FaArrowDown } from "react-icons/fa";
 import TypeWriterCard from "../components/visualcomponents/TypewriterCard";
+import ReactGA from "react-ga"
 
 // TODO make the styling method consistent!
 const HomePage = () => {
@@ -14,6 +15,10 @@ const HomePage = () => {
   const redirectToKnnPage = () => {
     navigate("/knn");
   };
+
+  useEffect(() => {
+    ReactGA.pageview(window.location.pathname)
+  }, [])
 
   return (
     <>
