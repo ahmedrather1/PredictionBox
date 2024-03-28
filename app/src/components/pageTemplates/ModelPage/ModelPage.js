@@ -13,7 +13,7 @@ import {
   callSampleModelFull,
   callSampleModelIndividual,
 } from "./ModelPageUtils";
-import ReactGA from "react-ga"
+import ReactGA from "react-ga4"
 
 function ModelPage({
   Endpoints,
@@ -53,7 +53,7 @@ function ModelPage({
     useState(null);
 
   useEffect(() => {
-    ReactGA.pageview(window.location.pathname)
+    ReactGA.send({ hitType: "pageview", page: window.location.pathname, title: ModelName });
   }, [])
 
   useEffect(() => {
