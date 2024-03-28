@@ -9,8 +9,11 @@ import RidgePage from "./pages/RidgePage";
 import LassoPage from "./pages/LassoPage";
 import { ThemeProvider } from '@mui/material/styles';
 import { customTheme } from "./CustomMUITheme";
+import ReactGA from "react-ga4"
 
 function App() {
+  ReactGA.initialize(process.env.REACT_APP_GA_TRACKING_ID)
+
   return (
     <ThemeProvider theme={customTheme}>
     <div className="plain-bg">

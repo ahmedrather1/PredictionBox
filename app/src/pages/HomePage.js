@@ -1,4 +1,4 @@
-import React from "react";
+import {React, useEffect} from "react";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/common/Header";
@@ -6,6 +6,7 @@ import "animate.css";
 import RotatingCubeCard from "../components/visualcomponents/RotatingCubeCard";
 import { FaArrowDown } from "react-icons/fa";
 import TypeWriterCard from "../components/visualcomponents/TypewriterCard";
+import ReactGA from "react-ga4"
 
 // TODO make the styling method consistent!
 const HomePage = () => {
@@ -14,6 +15,10 @@ const HomePage = () => {
   const redirectToKnnPage = () => {
     navigate("/knn");
   };
+
+  useEffect(() => {
+    ReactGA.send({ hitType: "pageview", page: window.location.pathname, title: "Home" });
+  }, [])
 
   return (
     <>

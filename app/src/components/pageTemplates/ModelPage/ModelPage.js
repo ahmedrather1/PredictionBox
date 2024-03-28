@@ -13,6 +13,7 @@ import {
   callSampleModelFull,
   callSampleModelIndividual,
 } from "./ModelPageUtils";
+import ReactGA from "react-ga4"
 
 function ModelPage({
   Endpoints,
@@ -50,6 +51,10 @@ function ModelPage({
     useState(null);
   const [customParameterInputFormSchema, setCustomParameterInputFormSchema] =
     useState(null);
+
+  useEffect(() => {
+    ReactGA.send({ hitType: "pageview", page: window.location.pathname, title: ModelName });
+  }, [])
 
   useEffect(() => {
     if (file) {
