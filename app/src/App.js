@@ -13,7 +13,6 @@ import ReactGA from "react-ga4"
 
 function App() {
   ReactGA.initialize(process.env.REACT_APP_GA_TRACKING_ID)
-  console.log("tracking -- ", process.env.REACT_APP_GA_TRACKING_ID)
 
   return (
     <ThemeProvider theme={customTheme}>
