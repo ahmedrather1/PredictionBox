@@ -10,7 +10,7 @@ import PaginationComponent from "../../common/PaginationComponent";
 import MultipleParameterIndividualPredictionCard from "../../individualPredictionCards/MultipleParameterIndividualPredictionCard";
 import { parseFile, processFileColumns } from "../CommonUtils/ParseFile";
 import PartialRegressionsCharts from "../../common/PartialRegressionsCharts";
-import ReactGA from "react-ga"
+import ReactGA from "react-ga4"
 
 import {
   buildDataPoint,
@@ -55,7 +55,7 @@ function MultipleModelPage({
   const chartsPerPage = 1;
 
   useEffect(() => {
-    ReactGA.pageview(window.location.pathname)
+    ReactGA.send({ hitType: "pageview", page: window.location.pathname, title: ModelName });
   }, [])
 
   useEffect(() => {

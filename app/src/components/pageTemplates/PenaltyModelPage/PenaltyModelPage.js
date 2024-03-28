@@ -19,7 +19,7 @@ import {
 import ChooseAlphaCard from "../../common/ChooseAlphaCard";
 import { AlphaSelectorInputFormSchema } from "../../../formSchemas/AlphaSelectorInputFormSchema";
 import PartialRegressionsCharts from "../../common/PartialRegressionsCharts";
-import ReactGA from "react-ga"
+import ReactGA from "react-ga4"
 
 function PenaltyModelPage({
   Endpoints,
@@ -68,7 +68,7 @@ function PenaltyModelPage({
   const chartsPerPage = 1;
 
   useEffect(() => {
-    ReactGA.pageview(window.location.pathname)
+    ReactGA.send({ hitType: "pageview", page: window.location.pathname, title: ModelName });
   }, [])
 
   useEffect(() => {
